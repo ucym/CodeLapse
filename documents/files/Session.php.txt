@@ -77,6 +77,8 @@ class Roose_Session
     /**
      * セッション変数から値を取得します。
      * 
+     * @param string|null $name 取得するセッション変数のキー
+     * @param mixed|null $default 指定されたキーが存在しない時のデフォルト値
      * @see Roose_Arr::get() Roose_Arr::getメソッド
      */ 
     public static function get($name = null, $default = null)
@@ -85,6 +87,9 @@ class Roose_Session
     }
     
     /**
+     * セッション変数に値を設定します。
+     * 
+     * @param $name 
      * @see Roose_Arr::set() Roose_Arr::setメソッド
      */ 
     public static function set($name, $value = null)

@@ -75,7 +75,7 @@ class Roose_Autoloader
     public static function regist()
     {
         // 第三引数は PHP 5.3.0以上で有効
-        spl_autoload_register(array('Roose_AutoLoader', 'load'), true, true);
+        spl_autoload_register(array('Roose_Autoloader', 'load'), true);//, true);
     }
     
     /**
@@ -85,6 +85,7 @@ class Roose_Autoloader
      */
     public static function load($class)
     {
+        
         // 要求されたクラスがクラスの別名として登録されていれば
         // 別名クラスを生成
         if (isset(self::$aliases[$class])) {

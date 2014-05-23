@@ -1,23 +1,12 @@
 <?php
 /**
  * ファイル操作関数をラップするクラス
- * （開いたファイルはデストラクタで自動的にクローズされます。）
- *
- * Overview:
- *     #get_pointer
- *     #get_filename
- *     #empty_contents
- *     #put_contents
- *     #get_contents
- *     #write
- *     #append
- *     #readline
- *     #tell
- *     #get_postion
- *     #seek
- *     #set_position
- *     #rewind
- *     #is_end
+ * （開いたファイルは自動的にクローズされます。）
+ *  
+ *    Example:
+ *        $file = new Roose_File('path/to/open/file');
+ *        $file->append('hello world');
+ *        echo $file->getContents(); // -> "hello world"
  */
 class Roose_File
 {
@@ -40,15 +29,24 @@ class Roose_File
 
     /**
      * @param string $filename オープンするファイル名を指定します。
-     * @param string $createfile ファイルが存在しない場合に作成するか指定します。
-     * @param string $openMode ファイルのモードを指定します。このパラメータを設定した場合 $createfileパラメータの内容は無視されます。
+     * @param boolean|null $createfile (optional) ファイルが存在しない場合に作成するか指定します。
+     *     標準はtrueです。
+     * @param string|null $openMode (optional) ファイルのモードを指定します。
+     *     このパラメータを設定した場合 $createfileパラメータの内容は無視されます。
      */
     public function __construct($filename, $createfile = true, $openMode = null)
     {
+        if ($openMode === null) {
+            $openMode = ($createfile === true ? 'c+b' : 'r+b');
+        }
+        
         $this->filename = $filename;
-        $this->pointer = fopen($filename, $openMode != null ? $openMode : ($createfile === true ? 'c+b' : 'r+b'));
+        $this->pointer = fopen($filename, $openMode);
     }
-
+    
+    /**
+     * @ignore
+     */ 
     public function __destruct()
     {
         try {
@@ -58,8 +56,7 @@ class Roose_File
 
     /**
      * より高度な操作のために、このインスタンスのファイルポインタを取得します。
-     *
-     * @return {resource}
+     * @return resource
      */
     public function getPointer()
     {

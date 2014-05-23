@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">29</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">24</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-321919222"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1092735471"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-321919222" class="accordion-body collapse in">
+            <div id="namespace-1092735471" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -171,22 +171,11 @@
 
                     <h1><small>\</small>Roose_File</h1>
                     <p><em>ファイル操作関数をラップするクラス
-（開いたファイルはデストラクタで自動的にクローズされます。）</em></p>
-                    <p>Overview:</p>
-<pre><code>#get_pointer
-#get_filename
-#empty_contents
-#put_contents
-#get_contents
-#write
-#append
-#readline
-#tell
-#get_postion
-#seek
-#set_position
-#rewind
-#is_end</code></pre>
+（開いたファイルは自動的にクローズされます。）</em></p>
+                    <p>Example:</p>
+<pre><code>   $file = new Roose_File('path/to/open/file');
+   $file-&gt;append('hello world');
+   echo $file-&gt;getContents(); // -&gt; "hello world"</code></pre>
 
                     <section id="summary">
                         <h2>Summary</h2>
@@ -204,7 +193,6 @@
                         <section class="row-fluid public">
                             <section class="span4">
                                                                     <a href="../classes/Roose_File.html#method___construct" class="">__construct()</a><br />
-                                                                    <a href="../classes/Roose_File.html#method___destruct" class="">__destruct()</a><br />
                                                                     <a href="../classes/Roose_File.html#method_getPointer" class="">getPointer()</a><br />
                                                                     <a href="../classes/Roose_File.html#method_lock" class="">lock()</a><br />
                                                                     <a href="../classes/Roose_File.html#method_unlock" class="">unlock()</a><br />
@@ -471,7 +459,7 @@
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(string <span class="argument">$filename</span>, string <span class="argument">$createfile</span>, string <span class="argument">$openMode</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">__construct(string <span class="argument">$filename</span>, boolean|null <span class="argument">$createfile</span>, string|null <span class="argument">$openMode</span>)</pre>
                 <p><em></em></p>
                 
 
@@ -483,47 +471,18 @@
                                 <td><p>オープンするファイル名を指定します。</p></td>
                             </tr>
                                                     <tr>
-                                <td>string</td>
+                                <td>boolean|null</td>
                                 <td>$createfile </td>
-                                <td><p>ファイルが存在しない場合に作成するか指定します。</p></td>
+                                <td><p>(optional) ファイルが存在しない場合に作成するか指定します。</p>
+<pre><code>標準はtrueです。</code></pre></td>
                             </tr>
                                                     <tr>
-                                <td>string</td>
+                                <td>string|null</td>
                                 <td>$openMode </td>
-                                <td><p>ファイルのモードを指定します。このパラメータを設定した場合 $createfileパラメータの内容は無視されます。</p></td>
+                                <td><p>(optional) ファイルのモードを指定します。</p>
+<pre><code>このパラメータを設定した場合 $createfileパラメータの内容は無視されます。</code></pre></td>
                             </tr>
                                             </table>
-                
-                
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___destruct" name="method___destruct" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">__destruct()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__destruct()</pre>
-                <p><em></em></p>
-                
-
                 
                 
                             </article>
@@ -551,14 +510,14 @@
             <article class="method">
                 <h3 class="public ">getPointer()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getPointer() : \{resource}</pre>
+                <pre class="signature" style="margin-right: 54px;">getPointer() : resource</pre>
                 <p><em>より高度な操作のために、このインスタンスのファイルポインタを取得します。</em></p>
                 
 
                 
                 
                                     <h4>Returns</h4>
-                    \{resource}
+                    resource
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1297,7 +1256,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 16th, 2014 at 22:05.
+                    on May 23rd, 2014 at 13:07.
                 </section>
             </section>
         </section>

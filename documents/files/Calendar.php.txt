@@ -18,19 +18,23 @@ class Roose_Calender implements Iterator
      * @param int|null $year （任意）生成するカレンダーの年
      * @param int|null $month （任意）生成するカレンダーの月
      */ 
-    public function __constructor(int $year = null, int $month = null)
+    public function __constructor(int $from_year = null, int $from_month = null, $from_day = null)
     {
         $basetime = $this->basetime = new DateTime();
         
-        if ($year === null) {
-            $year = $basetime->format('Y')|0;
+        if ($from_year === null) {
+            $from_year = $basetime->format('Y')|0;
         }
         
-        if ($month === null) {
-            $month = $basetime->format('n')|0;
+        if ($from_month === null) {
+            $from_month = $basetime->format('n')|0;
         }
         
-        $basetime->setDate($year, $month, 1);
+        if ($from_day === null) {
+            $from_day = 1;
+        }
+        
+        $basetime->setDate($from_year, $from_month, $from_day);
     }
     
     /**
