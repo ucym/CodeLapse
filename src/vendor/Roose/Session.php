@@ -1,0 +1,107 @@
+<?php
+/**
+ * セッション操作を行うクラス。
+ * 
+ * @package Roose
+ * @author うちやま
+ * @since PHP 5.2.17
+ * @version 1.0.0
+ */ 
+class Roose_Session
+{
+    private static $session;
+
+    private function __construct()
+    {
+        session_start();
+        $this->session = &$_SESSION;
+    }
+
+    /**
+     * Sessionクラスのインスタンスを生成、もしくは取得します。
+     * @return Roose_Session
+     */
+    private static function &getInstance()
+    {
+        if (isset(self::$instance) === false)
+        {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * セッションを開始します。
+     * @private
+     */
+    public static function start()
+    {
+        self::getInstance();
+    }
+    
+    /**
+     * セッションを破棄します。
+     * @return boolean 成功した時に TRUEを、失敗した時にFalseを返します。
+     */
+    public static function destroy()
+    {
+        return session_destroy();
+    }
+
+    /**
+     * セッションIDを再生成します。
+     * @param boolean $delete_old_session (optional) 現在のセッションを破棄するか指定します。標準はfalseです。
+     * @return void
+     */ 
+    public static function regenerateId($delete_old_session = false)
+    {
+        self::getInstance();
+        return session_regenerate_id($delete_old_session);
+    }
+    
+    /**
+     * セッション名を取得、設定します。
+     * 
+     * 第一引数に値が渡されなかった時、現在のセッション名を返します。
+     * 
+     * @link http://jp2.php.net/manual/ja/function.session-name.php session_name関数
+     * @param string|null $name (optional) 新しいセッション名
+     */ 
+    public static function name($name = null)
+    {
+        self::getInstance();
+        return $name === null ? session_name() : session_name($name);
+    }
+    
+    /**
+     * セッション変数から値を取得します。
+     * 
+     * @param string|null $name 取得するセッション変数のキー
+     * @param mixed|null $default 指定されたキーが存在しない時のデフォルト値
+     * @see Roose_Arr::get() Roose_Arr::getメソッド
+     */ 
+    public static function get($name = null, $default = null)
+    {
+        return Roose_Arr::get(self::getInstance()->session, $name, $default);
+    }
+    
+    /**
+     * セッション変数に値を設定します。
+     * 
+     * @param $name 
+     * @see Roose_Arr::set() Roose_Arr::setメソッド
+     */ 
+    public static function set($name, $value = null)
+    {
+        return Roose_Arr::set(self::getInstance()->session, $name, $value);
+    }
+    
+    /**
+     * @see Roose_Arr::delete() Roose_Arr::deleteメソッド
+     */ 
+    public static function delete($path = null)
+    {
+        return Roose_Arr::delete(self::getInstance()->session, $path);
+    }
+}

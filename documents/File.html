@@ -1,0 +1,924 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/default.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script></head><body><script type="text/javascript">
+          $(document).ready(function()
+          {
+            $(".filetree").treeview({
+              animated: "fast",
+              collapsed: true,
+              persist: "cookie"
+            });
+          });
+
+          function jq_escape(myid)
+          {
+            return '#' + myid.replace(/(#|\$|:|\.|\(|\))/g, '\\$1');
+          }
+
+          function applySearchHash()
+          {
+            hashes = document.location.hash.substr(1, document.location.hash.length);
+            if (hashes != "")
+            {
+              hashes = hashes.split('/');
+              $.each(hashes, function(index, hash)
+              {
+                node = $(jq_escape(hash));
+                switch (node[0].nodeName)
+                {
+                  case 'DIV':
+                    tabs = node.parents('.tabs');
+                    $(tabs[0]).tabs('select', '#' + hash)
+                    break;
+                  case 'A':
+                    window.scrollTo(0, node.offset().top);
+                    break;
+                }
+              });
+            }
+          }
+
+          jQuery(function()
+          {
+            jQuery(".tabs").tabs();
+            applySearchHash();
+          });
+        </script><div id="maincontainer"><div id="header"><h1>API Documentation<img src="images/top-stopper.png"></img></h1></div><ul xmlns="" id="menu">
+<li><a href="graph.html">Class diagram</a></li>
+<li><a href="markers.html">TODO / Markers</a></li>
+<li><a href="parse_markers.html">Errors</a></li>
+</ul>
+<div id="content_container"><div xmlns="" id="content">
+<h1>File.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> |</div>
+<a name="classes"></a><h2>Classes</h2>
+<div id="Roose_File" class="class">
+<h3>Roose_File</h3>
+<div class="properties">
+<h1>Properties</h1>
+<label class="property-key">Extends</label><div class="property-value">
+         </div>
+<label class="property-key">Implements</label><div class="property-value"> 
+      </div>
+<label class="property-key">Abstract</label><div class="property-value">No 
+      </div>
+<label class="property-key">Final</label><div class="property-value">No 
+      </div>
+</div>
+<h4>Description</h4>
+<em>ファイル操作関数をラップするクラス
+（開いたファイルはデストラクタで自動的にクローズされます。）</em><br>Overview:
+    #get_pointer
+    #get_filename
+    #empty_contents
+    #put_contents
+    #get_contents
+    #write
+    #append
+    #readline
+    #tell
+    #get_postion
+    #seek
+    #set_position
+    #rewind
+    #is_end<br><div id="methods_Roose_File">
+<h4>Methods</h4>
+<a style="font-style: italic;" href="#Roose_File::__construct()">__construct</a>,
+      <a style="font-style: italic;" href="#Roose_File::__destruct()">__destruct</a>,
+      <a style="font-style: italic;" href="#Roose_File::append()">append</a>,
+      <a style="font-style: italic;" href="#Roose_File::clearContents()">clearContents</a>,
+      <a style="font-style: italic;" href="#Roose_File::getContents()">getContents</a>,
+      <a style="font-style: italic;" href="#Roose_File::getContentsAsArray()">getContentsAsArray</a>,
+      <a style="font-style: italic;" href="#Roose_File::getFilename()">getFilename</a>,
+      <a style="font-style: italic;" href="#Roose_File::getPointer()">getPointer</a>,
+      <a style="font-style: italic;" href="#Roose_File::getPosition()">getPosition</a>,
+      <a style="font-style: italic;" href="#Roose_File::isEnd()">isEnd</a>,
+      <a style="font-style: italic;" href="#Roose_File::lock()">lock</a>,
+      <a style="font-style: italic;" href="#Roose_File::putContents()">putContents</a>,
+      <a style="font-style: italic;" href="#Roose_File::readline()">readline</a>,
+      <a style="font-style: italic;" href="#Roose_File::rewind()">rewind</a>,
+      <a style="font-style: italic;" href="#Roose_File::seek()">seek</a>,
+      <a style="font-style: italic;" href="#Roose_File::setPosition()">setPosition</a>,
+      <a style="font-style: italic;" href="#Roose_File::tell()">tell</a>,
+      <a style="font-style: italic;" href="#Roose_File::unlock()">unlock</a>,
+      <a style="font-style: italic;" href="#Roose_File::write()">write</a>,
+      <div class="method">
+<a id="Roose_File::__construct()"></a><h3>__construct<span class="nb-faded-text">(
+          string
+             
+            $filename,
+          string
+             
+            $createfile
+            = true,
+          string
+             
+            $openMode
+            = null,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">n/a</span>
+</h3>
+<h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$filename</td>
+<td style="white-space: normal;">string</td>
+<td><p>オープンするファイル名を指定します。</p></td>
+<td></td>
+</tr>
+<tr>
+<td>$createfile</td>
+<td style="white-space: normal;">string</td>
+<td><p>ファイルが存在しない場合に作成するか指定します。</p></td>
+<td>true</td>
+</tr>
+<tr>
+<td>$openMode</td>
+<td style="white-space: normal;">string</td>
+<td><p>ファイルのモードを指定します。このパラメータを設定した場合 $createfileパラメータの内容は無視されます。</p></td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>n/a</td>
+<td>n/a</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::__destruct()"></a><h3>__destruct<span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">n/a</span>
+</h3>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>n/a</td>
+<td>n/a</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::append()"></a><h3>append<span class="nb-faded-text">(
+          string
+             
+            $string,
+          int
+             
+            $length
+            = null,
+          boolean
+             
+            $seektoend
+            = false,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">n/a</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルにテキストを追記します。</em><br><h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$string</td>
+<td style="white-space: normal;">string</td>
+<td><p>書き込む文字列</p></td>
+<td></td>
+</tr>
+<tr>
+<td>$length</td>
+<td style="white-space: normal;">int</td>
+<td><p>書き込む長さ</p></td>
+<td>null</td>
+</tr>
+<tr>
+<td>$seektoend</td>
+<td style="white-space: normal;">boolean</td>
+<td><p>TRUE が指定された場合、ファイルポインタをファイルの終端に移動します。</p></td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>n/a</td>
+<td>n/a</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::clearContents()"></a><h3>clearContents<span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">boolean</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルの内容をすべて消去します。</em><br><h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>boolean</td>
+<td>成功した場合に TRUE を、失敗した場合に FALSE を返します。</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::getContents()"></a><h3>getContents<span class="nb-faded-text">(
+          int
+             
+            $offset
+            = -1,
+          int
+             
+            $maxlen
+            = null,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">mixed</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルの内容をテキストとして取得します。</em><br><h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$offset</td>
+<td style="white-space: normal;">int</td>
+<td><p>読み込みを開始するオフセット位置</p></td>
+<td>-1</td>
+</tr>
+<tr>
+<td>$maxlen</td>
+<td style="white-space: normal;">int</td>
+<td><p>読み込むデータの最大バイト数</p></td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>mixed</td>
+<td>読み込んだデータを返します。失敗した場合に FALSE を返します。</td>
+</tr></tbody>
+</table>
+<h4>Tags</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>link</td>
+<td><a href="http://www.php.net/manual/ja/function.file-get-contents.php"><small>flie_get_contents関数</small></a></td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::getContentsAsArray()"></a><h3>getContentsAsArray<span class="nb-faded-text">(
+          boolean
+             
+            $rmNl
+            = false,
+          int
+             
+            $offset
+            = -1,
+          int
+             
+            $maxlen
+            = null,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">mixed</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルの内容を一行ごとに分割した配列として取得します。</em><br><h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$rmNl</td>
+<td style="white-space: normal;">boolean</td>
+<td><p>trueを指定されると行末の改行コードを除去します。</p></td>
+<td>false</td>
+</tr>
+<tr>
+<td>$offset</td>
+<td style="white-space: normal;">int</td>
+<td><p>読み込みを開始するオフセット位置</p></td>
+<td>-1</td>
+</tr>
+<tr>
+<td>$maxlen</td>
+<td style="white-space: normal;">int</td>
+<td><p>読み込むデータの最大バイト数</p></td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>mixed</td>
+<td>読み込んだデータを返します。失敗した場合に FALSE を返します。</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::getFilename()"></a><h3>getFilename<span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">\{string}</span>
+</h3>
+<h4>Description</h4>
+<em>このインスタンスが担当しているファイルの名前を取得します。</em><br><h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>\{string}</td>
+<td></td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::getPointer()"></a><h3>getPointer<span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">\{resource}</span>
+</h3>
+<h4>Description</h4>
+<em>より高度な操作のために、このインスタンスのファイルポインタを取得します。</em><br><h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>\{resource}</td>
+<td></td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::getPosition()"></a><h3>getPosition<span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">mixed</span>
+</h3>
+<h4>Description</h4>
+<em>tellメソッドの別名</em><br><h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>mixed</td>
+<td>ファイルポインタの位置を整数値で返します。エラーが起こった場合 FALSE を返します。</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::isEnd()"></a><h3>isEnd<span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">boolean</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルポインタがファイル終端に達しているかどうかを調べます。</em><br><h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>boolean</td>
+<td></td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::lock()"></a><h3>lock<span class="nb-faded-text">(
+          
+             
+            $exclusion
+            = false,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">boolean</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルをロックします。<br>
+成功した場合にTRUEを、失敗した場合はFALSEを返します。</em><br><h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody><tr>
+<td>$exclusion</td>
+<td style="white-space: normal;">n/a</td>
+<td></td>
+<td>false</td>
+</tr></tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>boolean</td>
+<td></td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::putContents()"></a><h3>putContents<span class="nb-faded-text">(
+          
+             
+            $string,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">boolean</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルにテキストを出力します。<br>
+（それまでのファイルの内容は削除されます。）</em><br><h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody><tr>
+<td>$string</td>
+<td style="white-space: normal;">n/a</td>
+<td></td>
+<td></td>
+</tr></tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>boolean</td>
+<td>成功時に TRUEを、失敗した時に FALSEを返します。</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::readline()"></a><h3>readline<span class="nb-faded-text">(
+          int
+             
+            $length
+            = null,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">mixed</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルから一行取得します。</em><br><h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody><tr>
+<td>$length</td>
+<td style="white-space: normal;">int</td>
+<td><p>最大の読み出し長</p></td>
+<td>null</td>
+</tr></tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>mixed</td>
+<td>読み込みに成功した時に行の内容を、失敗した時にFALSEを返します。</td>
+</tr></tbody>
+</table>
+<h4>Tags</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>link</td>
+<td><a href="http://www.php.net/manual/ja/function.fgets.php"><small>fgets関数</small></a></td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::rewind()"></a><h3>rewind<span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">boolean</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルポインタをファイルの先頭へ移動します。</em><br><h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>boolean</td>
+<td>成功すると TRUE を返し、そうでなければ FALSE を返します。</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::seek()"></a><h3>seek<span class="nb-faded-text">(
+          int
+             
+            $offset,
+          int
+             
+            $whence
+            = self::SEEK_SET,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">boolean</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルポインタを移動します。
+(http://www.php.net/manual/ja/function.fseek.php)</em><br><small>whenceの値について
+ - whence の値は以下のようになります。
+ -   File::SEEK_SET - 位置を offset バイト目に設定する
+ -   File::SEEK_ADD - 現在の位置に offset を加えた位置に設定する
+ -   File::SEEK_END - ファイル終端に offset を加えた位置に設定する
+
+ - ファイルの終端から数えた位置に移動するには、$whenceを File::SEEK_END として、負の値をoffsetに渡す方法があります。</small><br><h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$offset</td>
+<td style="white-space: normal;">int</td>
+<td><p>ファイルポインタの位置。</p></td>
+<td></td>
+</tr>
+<tr>
+<td>$whence</td>
+<td style="white-space: normal;">int</td>
+<td><p>ファイルポインタの位置の計算方法。</p></td>
+<td>self::SEEK_SET</td>
+</tr>
+</tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>boolean</td>
+<td>成功すると TRUE を返し、そうでなければ FALSE を返します。</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::setPosition()"></a><h3>setPosition<span class="nb-faded-text">(
+          int
+             
+            $offset,
+          int
+             
+            $whence
+            = self::SEEK_SET,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">boolean</span>
+</h3>
+<h4>Description</h4>
+<em>seekメソッドの別名</em><br><h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$offset</td>
+<td style="white-space: normal;">int</td>
+<td><p>ファイルポインタの位置。</p></td>
+<td></td>
+</tr>
+<tr>
+<td>$whence</td>
+<td style="white-space: normal;">int</td>
+<td><p>ファイルポインタの位置の計算方法。</p></td>
+<td>self::SEEK_SET</td>
+</tr>
+</tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>boolean</td>
+<td>成功すると TRUE を返し、そうでなければ FALSE を返します。</td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::tell()"></a><h3>tell<span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">mixed</span>
+</h3>
+<h4>Description</h4>
+<em>現在のファイルポインタの位置を取得します。</em><br><h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>mixed</td>
+<td>ファイルポインタの位置を整数値で返します。エラーが起こった場合 FALSE を返します。</td>
+</tr></tbody>
+</table>
+<h4>Tags</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>link</td>
+<td><a href="http://www.php.net/manual/ja/function.ftell.php"><small>ftell関数</small></a></td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::unlock()"></a><h3>unlock<span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">\{boolean}</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルのロックを解除します。<br>
+成功した場合にTRUEを、失敗した場合はFALSEを返します。</em><br><h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>\{boolean}</td>
+<td></td>
+</tr></tbody>
+</table>
+</div>
+<div class="method">
+<a id="Roose_File::write()"></a><h3>write<span class="nb-faded-text">(
+          string
+             
+            $string,
+          int
+             
+            $length
+            = null,
+          
+          )
+        </span>
+        :
+        <span class="nb-faded-text">mixed</span>
+</h3>
+<h4>Description</h4>
+<em>ファイルにテキストを書き込みます。</em><br><h4>Arguments</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>$string</td>
+<td style="white-space: normal;">string</td>
+<td><p>書き込む文字列</p></td>
+<td></td>
+</tr>
+<tr>
+<td>$length</td>
+<td style="white-space: normal;">int</td>
+<td><p>書き込む長さ</p></td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<h4>Return value</h4>
+<table>
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>mixed</td>
+<td>成功した時に書き込んだバイト数、失敗時に FALSE を返します</td>
+</tr></tbody>
+</table>
+<h4>Tags</h4>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td>link</td>
+<td><a href="http://www.php.net/manual/ja/function.fwrite.php"><small>fwrite関数</small></a></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div id="properties_Roose_File">
+<h4>Properties</h4>
+<a href="#Roose_File::%24filename">$filename</a>,
+      <a href="#Roose_File::%24pointer">$pointer</a>,
+      <div class="method">
+<a id="Roose_File::$filename"></a><h3>
+<span class="nb-faded-text"> 
+          private 
+          </span>$filename
+          =
+          null</h3>
+<em>ファイルパス</em><br><small></small><br><br>
+</div>
+<div class="method">
+<a id="Roose_File::$pointer"></a><h3>
+<span class="nb-faded-text"> 
+          private 
+          </span>$pointer
+          =
+          null</h3>
+<em>ファイルのポインタ</em><br><small></small><br><br>
+</div>
+</div>
+<div id="constants_Roose_File">
+<h4>Constants</h4>
+<a id="Roose_File::SEEK_ADD"></a><div class="constant">
+<h3>
+<span class="nb-faded-text"> 
+        </span>SEEK_ADD<span class="nb-faded-text">
+         = SEEK_CUR</span>
+</h3>
+<em></em><br><small></small><br><br>
+</div>
+<a id="Roose_File::SEEK_END"></a><div class="constant">
+<h3>
+<span class="nb-faded-text"> 
+        </span>SEEK_END<span class="nb-faded-text">
+         = SEEK_END</span>
+</h3>
+<em></em><br><small></small><br><br>
+</div>
+<a id="Roose_File::SEEK_SET"></a><div class="constant">
+<h3>
+<span class="nb-faded-text"> 
+        </span>SEEK_SET<span class="nb-faded-text">
+         = SEEK_SET</span>
+</h3>
+<em></em><br><small></small><br><br>
+</div>
+</div>
+<div style="clear: both"></div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://www.phpdoc.org">phpDocumentor 2.4.0
+</a>.</small></div><div id="index"><div class="padder"><input id="search_box"></input><div class="section">
+<h1>Namespaces</h1>
+<ul id="namespaces-" class="filetree"><li class="closed">
+<span class="folder">global</span><ul></ul>
+</li></ul>
+</div><div class="section">
+<h1>Packages</h1>
+<ul id="packages-" class="filetree">
+<li class="closed">
+<span class="folder">Roose</span><ul id="packages_Roose" class="filetree"><li class="closed"><span class="class"><a href="Arr.html#Roose_Arr">Roose_Arr</a><br><small></small></span></li></ul>
+</li>
+<li class="closed">
+<span class="folder">global</span><ul id="packages_global" class="filetree"></ul>
+</li>
+</ul>
+</div>
+</div></div><div id="footer"><div class="padder"></div></div></div></body></html>
