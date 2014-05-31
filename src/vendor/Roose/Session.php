@@ -9,7 +9,16 @@
  */ 
 class Roose_Session
 {
+    /**
+     * @private
+     * @var Roose_Session インスタンス
+     */
     private static $instance;
+
+    /**
+     * @private
+     * @var array セッション配列
+     */
     private static $session;
 
     /**
