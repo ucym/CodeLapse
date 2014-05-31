@@ -9,8 +9,13 @@
  */ 
 class Roose_Session
 {
+    private static $instance;
     private static $session;
 
+    /**
+     * @private
+     * @ignore
+     */
     private function __construct()
     {
         session_start();
@@ -19,7 +24,9 @@ class Roose_Session
 
     /**
      * Sessionクラスのインスタンスを生成、もしくは取得します。
+     * @private
      * @return Roose_Session
+     * @ignore
      */
     private static function &getInstance()
     {
@@ -35,13 +42,14 @@ class Roose_Session
      * セッションを開始します。
      * @private
      */
-    public static function start()
+    private static function start()
     {
         self::getInstance();
     }
     
     /**
      * セッションを破棄します。
+     * @link http://www.php.net/manual/ja/function.session-destroy.php session_destroy関数
      * @return boolean 成功した時に TRUEを、失敗した時にFalseを返します。
      */
     public static function destroy()
@@ -61,7 +69,7 @@ class Roose_Session
     }
     
     /**
-     * セッション名を取得、設定します。
+     * セッションキー名を取得、設定します。
      * 
      * 第一引数に値が渡されなかった時、現在のセッション名を返します。
      * 
@@ -98,10 +106,12 @@ class Roose_Session
     }
     
     /**
+     * @param string|null $name 削除するセッション変数のキー
+     *     nullを指定するとセッション変数をクリアします。
      * @see Roose_Arr::delete() Roose_Arr::deleteメソッド
      */ 
-    public static function delete($path = null)
+    public static function delete($name = null)
     {
-        return Roose_Arr::delete(self::getInstance()->session, $path);
+        return Roose_Arr::delete(self::getInstance()->session, $name);
     }
 }
