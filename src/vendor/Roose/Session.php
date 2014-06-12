@@ -27,7 +27,8 @@ class Roose_Session
      */
     private function __construct()
     {
-        session_start();
+        session_status() !== PHP_SESSION_ACTIVE
+            and session_start();
         $this->session = &$_SESSION;
     }
 
