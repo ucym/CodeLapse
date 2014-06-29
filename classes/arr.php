@@ -39,9 +39,11 @@ class Roose_Arr
         
         if (is_array($key)) {
             $ar = array();
+            
             foreach ($key as $v) {
-                $ar[$v] = Roose_Arr::get($array, $v, $default);
+                Arr::set($ar, $v, Roose_Arr::get($array, $v, $default));
             }
+            
             return $ar;
         }
         
