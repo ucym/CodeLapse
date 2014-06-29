@@ -2,17 +2,21 @@
 require 'vendor/Roose/Autoloader.php';
 
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
-define('ROOSE_COREPATH', dirname(__FILE__) . DS . "vendor" . DS);
+defined('ROOSE_COREPATH') or define('ROOSE_COREPATH', dirname(__FILE__) . DS);
+defined('ROOSE_CLASSES') or define('ROOSE_CLASSES', ROOSE_COREPATH . 'classes' .DS);
+
 
 //-- オートローダを初期化
-Roose_Autoloader::setBasePath(ROOSE_COREPATH);
+Roose_Autoloader::addBasePath(ROOSE_CLASSES);
 
 // クラスの別名を設定
 Roose_Autoloader::classAlias(array(
     'Roose_Arr'     => 'Arr',
+    'Roose_Calendar' => 'Calendar',
+    'Roose_Config'  => 'Config',
+    'Roose_Cookie'  => 'Cookie',
     'Roose_File'    => 'File',
     'Roose_Input'   => 'Input',
-    'Roose_Cookie'  => 'Cookie',
     'Roose_Session' => 'Session',
     'Roose_Security'=> 'Security'
 ));
