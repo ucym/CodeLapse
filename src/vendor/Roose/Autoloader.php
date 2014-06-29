@@ -11,18 +11,33 @@ class Roose_Autoloader
     const DS = DIRECTORY_SEPARATOR;
     
     private static $basePath = null;
+    private static $loadPath = array();
     private static $classes = array();
     private static $aliases = array();
     
     /**
      * クラスファイルが保存されているディレクトリへのパスを設定します。
-     * 
      * パスはかならず"/"（windowsの場合は"¥"）で終わっている必要があります。
+     * 
+     *      このメソッドはaddBasePathのエイリアスとなっており、非推奨です。
+     * 
+     * @deprecated
      * @param string $path
      */
     public static function setBasePath($path)
     {
-        self::$basePath = $path;   
+        self::addBasePath($path);
+    }
+    
+    /**
+     * クラスファイルが保存されているディレクトリへのパスを登録します。
+     * @param string $path
+     */
+    public static function addBasePath($path)
+    {
+        if (in_array($path, self::$loadPath) === false) {
+            self::$loadPath[] = $path;
+        }
     }
     
     /**
@@ -103,13 +118,20 @@ class Roose_Autoloader
         }
         
         // "!="は意図的にこうしてます
-        $basePath = self::$basePath != null ?
-                        self::$basePath . self::DS
-                      : dirname(__FILE__) . self::DS;
-        
-        // クラス名のアンダースコアをディレクトリに置き換え
-        $class = str_replace('_', self::DS, $class);
-        
-        include $basePath . $class . '.php';
+        foreach (self::$loadPath as $path) {
+            $path .= self::DS;
+            
+            // クラス名を小文字に変換
+            $clazz = strtolower($class);
+            
+            // クラス名のアンダースコアを'/'に置き換え
+            $path .= str_replace('_', self::DS, $clazz);
+
+            if (@ include($path . '.php') !== false and class_exists($class)) {
+                // ファイルとクラスが読み込まれたら探索を止める
+                break;
+            }
+        }
+    
     }
 }
