@@ -31,11 +31,19 @@ class Roose_Autoloader
     
     /**
      * クラスファイルが保存されているディレクトリへのパスを登録します。
-     * @param string $path
+     * @param string|array $path
      */
     public static function addBasePath($path)
     {
-        if (in_array($path, self::$loadPath) === false) {
+        if (is_array($path)) {
+            foreach ($path as $p) {
+                self::addBasePath($p);
+            }
+        }
+        
+        if (is_string($path)
+            and in_array($path, self::$loadPath) === false)
+        {
             self::$loadPath[] = $path;
         }
     }
