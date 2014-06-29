@@ -16,13 +16,13 @@ class Roose_Input {
      */ 
     public static function method()
     {
-    return $_SERVER['REQUEST_METHOD'];
+        return $_SERVER['REQUEST_METHOD'];
     }
     
     /**
      * POSTパラメータの値を取得します。
      * 
-     * @param string $key 取得するパラメータ名
+     * @param string|null $key 取得するパラメータ名
      * @param mixed|null $default パラメータが存在しない時のデフォルト値
      * @return mixed
      */ 
@@ -34,7 +34,7 @@ class Roose_Input {
     /**
      * GETパラメータの値を取得します。
      * 
-     * @param string $key 取得するパラメータ名
+     * @param string|null $key 取得するパラメータ名
      * @param mixed|null $default パラメータが存在しない時のデフォルト値
      * @return mixed
      */ 

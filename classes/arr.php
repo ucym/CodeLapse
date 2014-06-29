@@ -3,16 +3,21 @@
  * nullセーフな配列操作クラス
  * 
  * ドット記法をメインに、配列操作系の便利なメソッドが揃っています。<br>
- * このクラスは Arrクラスとして呼び出すことが可能です。
  * 
  * Example:
- *      $ar = array();
+ * ```php
+ * <?php
+ *  $ar  = array();
  * 
- *      // クッソ長い
- *      Roose_Arr::set($ar, 'element.0', 'value')
- *      
- *      // It's fuckin cool code.
- *      Arr::set($ar, 'element.1', 'value');
+ *  Roose_Arr::set($ar, 'element.0', 'value'); // クッソ長い
+ *  
+ *  Arr::set($ar, 'element.1', 'value'); // It's fuckin cool code.
+ * ```
+ * 
+ * 
+ * ```
+ * このクラスは Arrクラスとして呼び出すことが可能です。`
+ * ```
  * 
  * @package Roose
  * @author うちやま

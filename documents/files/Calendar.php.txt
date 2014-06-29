@@ -104,7 +104,7 @@ class Roose_Calender implements Iterator
     }
 }
 
-
+/*
     $today = new DateTime(); // 今日の日付
     $basetime = new DateTime(); // 表示する日付
 
@@ -146,3 +146,4 @@ $calander = new Roose_Calender();
 foreach ($calander as $day) {
     $day->is_weekday
 }
+*/
