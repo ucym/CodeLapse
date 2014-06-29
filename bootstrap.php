@@ -16,6 +16,7 @@ Roose_Autoloader::classAlias(array(
     'Roose_Calendar' => 'Calendar',
     'Roose_Config'  => 'Config',
     'Roose_Cookie'  => 'Cookie',
+    'Roose_DB'      => 'DB',
     'Roose_File'    => 'File',
     'Roose_Input'   => 'Input',
     'Roose_Session' => 'Session',
