@@ -24,7 +24,7 @@ Roose_Autoloader::classAlias(array(
 
 // クラスのパスを設定
 Roose_Autoloader::addClass(array(
-    'Smarty' => ROOSE_THIRDPARTY . 'smarty'
+    'Smarty' => ROOSE_THIRDPARTY . 'smarty/Smarty.class.php'
 ));
 
 // オートローダを登録
