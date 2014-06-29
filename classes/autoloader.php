@@ -11,9 +11,15 @@ class Roose_Autoloader
     const DS = DIRECTORY_SEPARATOR;
     
     private static $basePath = null;
+    
     private static $loadPath = array();
+    
+    private static $namespaces = array();
+    
     private static $classes = array();
+    
     private static $aliases = array();
+    
     
     /**
      * クラスファイルが保存されているディレクトリへのパスを設定します。
@@ -44,9 +50,30 @@ class Roose_Autoloader
         if (is_string($path)
             and in_array($path, self::$loadPath) === false)
         {
-            self::$loadPath[] = $path;
+            self::$loadPath[] = $path . self::DS;
         }
     }
+    
+    
+    /**
+     * 名前空間（クラス接頭辞）に対応するパスを登録します。
+     * 
+     * - クラス接頭辞
+     *   "Roose_Arr"という名前のクラスの場合、"Roose"がクラス接頭辞となります。
+     *   （クラス名の中で、一番最初に出てくるアンダースコアまでが接頭辞です）
+     * 
+     * @param string $namespace クラス接頭辞名
+     * @param string $path 対応するクラスフォルダ
+     */ 
+    public function addNamespace($namespace, $path)
+    {
+        if (isset(self::$namespaces[$namespace]) or is_dir($path) === false) {
+            return;
+        }
+        
+        self::$namespaces[$namespace] = $path . self::DS;
+    }
+    
     
     /**
      * クラス名と対応するパスを登録します。
@@ -67,6 +94,7 @@ class Roose_Autoloader
             
         self::$classes[$class] = $path;
     }
+    
     
     /**
      * クラスの別名を作成します。
@@ -92,6 +120,7 @@ class Roose_Autoloader
         self::$aliases[$alias] = $original;
     }
     
+    
     /**
      * オートローダをPHPのオートローダスタックへ追加します。
      */
@@ -100,6 +129,7 @@ class Roose_Autoloader
         // 第三引数は PHP 5.3.0以上で有効
         spl_autoload_register(array('Roose_Autoloader', 'load'), true);//, true);
     }
+    
     
     /**
      * クラスの読み込みを行います。
@@ -125,17 +155,38 @@ class Roose_Autoloader
             return;
         }
         
-        // "!="は意図的にこうしてます
+        //-- クラスファイルを検索
+        $namespace = explode('_', $class);
+        $clazz = strtolower($class);
+        
+        // 名前空間が登録されていれば、対応パスを検索
+        if (isset($namespace[1])) {
+            // 名前空間のないクラス名でなければ
+            $namespace = $namespace[0];
+            
+            if (isset(self::$namespaces[$namespace])) {
+                // 検索中のクラスの名前空間が登録されていれば
+                $classname = explode('_', $clazz);
+                array_shift($classname);
+                $classname = implode('/', $classname);
+                
+                $path = self::$namespaces[$namespace];
+                $path .= $classname . '.php';
+                
+                if ((include $path) !== false and class_exists($class)) {
+                    // クラスが見つかれば処理終了
+                    return;
+                }
+            }
+        }
+        
+        //-- 登録された読み込みパスから検索
         foreach (self::$loadPath as $path) {
-            $path .= self::DS;
-            
-            // クラス名を小文字に変換
-            $clazz = strtolower($class);
-            
             // クラス名のアンダースコアを'/'に置き換え
             $path .= str_replace('_', self::DS, $clazz);
-
-            if (@ include($path . '.php') !== false and class_exists($class)) {
+            $path .= '.php';
+            
+            if ((include $path) !== false and class_exists($class)) {
                 // ファイルとクラスが読み込まれたら探索を止める
                 break;
             }
