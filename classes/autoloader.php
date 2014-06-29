@@ -2,6 +2,8 @@
 /**
  * クラスオートローダ
  * 
+ * クラス名とファイルパスの紐付けなどを行います。
+ * 
  * @link http://www.infiniteloop.co.jp/docs/psr/psr-1-basic-coding-standard.html PSR-1の日本語訳（非公式）
  * @author うちやま
  * @since PHP 5.2

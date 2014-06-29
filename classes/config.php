@@ -1,9 +1,12 @@
 <?php
 /**
- * 設定ファイルの読み込み / 設定の取得を行います。
+ * 設定ファイルの読み込み・設定の取得を行います。
+ * 
+ * 設定ファイルは以下の用例の"dbconfig.php"のように、
+ * phpコード開始後、すぐに配列をreturnする形式のものでなければいけません。
  * 
  * Example:
- *      //-- /dbconfig.php
+ *      //-- ./dbconfig.php
  *      <?php
  *          return array(
  *              'host'  => 'localhost',
@@ -11,7 +14,7 @@
  *              'pass'  => 'password
  *          );
  * 
- *      //-- /app.php
+ *      //-- ./app.php
  *      <?php
  *          require 'bootstrap.php'; // Rooseライブラリの 'bootstrap.php'を読み込む
  * 
@@ -25,7 +28,7 @@
  *          $con = mysqli_connect($host, $user, $pass);
  *      ?>
  * 
- * TODO: 動作テスト
+ * @todo 動作テスト
  * @package Roose
  * @author うちやま
  * @since PHP 5.2.17
@@ -33,7 +36,14 @@
  */
 class Roose_Config
 {
+    /**
+     * @var array 読み込まれた設定データ
+     */ 
     private static $config = array();
+    
+    /**
+     * @var array(string) 設定ファイルの探索先フォルダ
+     */
     private static $paths = array();
     
     /**

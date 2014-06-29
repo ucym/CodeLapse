@@ -2,6 +2,18 @@
 /**
  * nullセーフな配列操作クラス
  * 
+ * ドット記法をメインに、配列操作系の便利なメソッドが揃っています。<br>
+ * このクラスは Arrクラスとして呼び出すことが可能です。
+ * 
+ * Example:
+ *      $ar = array();
+ * 
+ *      // クッソ長い
+ *      Roose_Arr::set($ar, 'element.0', 'value')
+ *      
+ *      // It's fuckin cool code.
+ *      Arr::set($ar, 'element.1', 'value');
+ * 
  * @package Roose
  * @author うちやま
  * @since PHP 5.2.17
@@ -68,6 +80,7 @@ class Roose_Arr
         return isset($pt[$index]) ? $pt[$index] : $default;
     }
 
+
     /**
      * 指定された配列に要素を設定します。
      * 
@@ -123,6 +136,7 @@ class Roose_Arr
         $pt[$index] = $value;
     }
 
+
     /**
      * 配列の指定したインデックスを削除します。
      * 
@@ -170,5 +184,25 @@ class Roose_Arr
         }
 
         unset($pt[$index]);
+    }
+
+
+    /**
+     * array_map関数の入れ子対応版
+     * 
+     * @param array $array 操作するの配列
+     * @param callable $fn 配列を処理する関数
+     */
+    public static function map_recursive(Array $array, $fn)
+    {
+        foreach ($array as $k => $v) {
+            if (is_array($array)) {
+                $array[$k] = self::array_map_recursive($array[$k], $fn);
+            } else {
+                $array[$k] = call_user_func($fn, $v);
+            }
+        }
+        
+        return $array;
     }
 }

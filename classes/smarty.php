@@ -2,13 +2,13 @@
 /**
  * Rooseによる Smartyラッパークラス
  * 
- * HTMLの自動エスケープなどの機能が追加されたSmartyのラッパークラスです。
+ * HTMLの自動エスケープなどの機能が追加されたSmartyのラッパークラスです。<br>
  * このクラスを使用する前に、
- * Roose_Config::loadメソッドで、smartyの設定を読み込むことを推奨します。
+ * Roose_Config::loadメソッドで、smartyの設定を読み込むことを推奨します。<br>
  * そのようにすることで、プロジェクトで一貫した設定を使い回すことができるためです。
  * 
  * 読み込みサンプル
-  *      //-- app/bootstrap.php
+ *      //-- app/bootstrap.php
  *      define('APPPATH', dirname(__FILE__));
  *      
  *      Config::load(APPPATH . '/config/smarty.php', 'smarty');
@@ -20,7 +20,7 @@
  *      <?php
  *          return array(
  *              // string: テンプレートが保存されているディレクトリ
-                'template_dir' => APPPATH . '/templates/',
+ *              'template_dir' => APPPATH . '/templates/',
  *              
  *              // string: コンパイル済みテンプレートを保存するディレクトリ
  *              'compile_dir' => APPPATH . '/tmp/smarty/compiled/,
@@ -48,6 +48,7 @@
 class Roose_Smarty extends Smarty
 {
     /**
+     * @ignore
      * @var array(Roose_Smarty) 生成したインスタンス
      */ 
     private static $instances = array();
@@ -55,6 +56,7 @@ class Roose_Smarty extends Smarty
     
     /**
      * 与えられた文字列を安全なHTML文字列に変換します。
+     * 
      * @ignore
      * @param string $str
      */
@@ -213,7 +215,7 @@ class Roose_Smarty extends Smarty
      * 
      * @param string|array $key テンプレート内の変数名
      * @param mixed $value 割り当てる値 / オブジェクト
-     * @param boolean (optional) 値を自動的エスケープするか。デフォルト値はtrue
+     * @param boolean $filtering (optional) 値を自動的エスケープするか。デフォルト値はtrue
      * @return Roose_Smarty
      */
     public function set($key, $value = null, $filtering = true)
