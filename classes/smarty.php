@@ -122,7 +122,7 @@ class Roose_Smarty extends Smarty
     /**
      * @var array smartyに割り当てられた値
      */ 
-    private $assign = array();
+    private $_assign = array();
     
     /**
      * @param array $config Smartyの設定
@@ -156,8 +156,8 @@ class Roose_Smarty extends Smarty
         parent::clear_all_assign();
         
         // 再割り当て
-        foreach (array_keys($this->assign) as $k) {
-            parent::assign_by_ref($k, $this->assign[$k]);
+        foreach (array_keys($this->_assign) as $k) {
+            parent::assign_by_ref($k, $this->_assign[$k]);
         }
         
         return parent::fetch($template, $cache_id, $compile_id);
@@ -203,8 +203,10 @@ class Roose_Smarty extends Smarty
      */
     public function clear_all_assign()
     {
-        unset($this->assign);
-        $this->assign = array();
+        unset($this->_assign);
+        $this->_assign = array();
+        
+        parent::clear_all_assign();
         
         return $this;
     }
@@ -228,7 +230,7 @@ class Roose_Smarty extends Smarty
             }
         }
         
-        Arr::set($this->assign, $key, $value);
+        Arr::set($this->_assign, $key, $value);
         return $this;
     }
     
@@ -240,6 +242,6 @@ class Roose_Smarty extends Smarty
      */
     public function get($key = null, $default = null)
     {
-        return Arr::get($this->assign, $key, $default);
+        return Arr::get($this->_assign, $key, $default);
     }
 }
