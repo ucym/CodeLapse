@@ -137,8 +137,7 @@ class Roose_Config
                 // 設定が読み込まれていなければ、ファイルを探して読み込む
                 foreach (self::$paths as $path) {
                     $path = $path . $ns . '.php';
-                    
-                    file_exists($path)) and self::load($path, $ns);
+                    file_exists($path) and self::load($path, $ns);
                 }
             }
         }
