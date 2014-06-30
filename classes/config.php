@@ -138,10 +138,7 @@ class Roose_Config
                 foreach (self::$paths as $path) {
                     $path = $path . $ns . '.php';
                     
-                    if (file_exists($path)) {
-                        self::load($path, $ns);
-                        break;
-                    }
+                    file_exists($path)) and self::load($path, $ns);
                 }
             }
         }
