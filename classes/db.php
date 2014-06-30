@@ -56,7 +56,7 @@ class Roose_DB
         $pass = $conf['password'];
         $dbname = $conf['database'];
 
-        $instance = new DBConnection($host, $user, $pass);
+        $instance = new Roose_DB_Connection($host, $user, $pass);
         $instance->_con_name = $connection_name;
         $instance->use_db($dbname);
 
