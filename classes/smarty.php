@@ -45,7 +45,7 @@
  * @since PHP 5.2.17
  * @version 1.0.0
  */ 
-class Roose_Smarty extends Smarty
+class Roose_Smarty
 {
     /**
      * @ignore
@@ -121,25 +121,32 @@ class Roose_Smarty extends Smarty
     
     /**
      * @var array smartyに割り当てられた値
-     */ 
+     */
     private $_assign = array();
     
     /**
-     * @param array $config Smartyの設定
+     * @var Smarty smartyインスタンス
      */ 
+    private $_smarty;
+    
+    /**
+     * @param array $config Smartyの設定
+     */
     public function __construct($config = array())
     {
-        parent::__construct();
+        $sm = new Smarty();
         
         // 設定ファイルを読み込む
         $conf = Roose_Config::get('smarty');
         array_merge($conf, $config);
         
-        $this->template_dir = Arr::get($conf, 'template_dir') . DS;
-        $this->compile_dir  = Arr::get($conf, 'compile_dir') . DS;
-        $this->config_dir   = Arr::get($conf, 'config_dir') . DS;
-        $this->cache_dir    = Arr::get($conf, 'cache_dir') . DS;
-        $this->caching      = Arr::get($conf, 'caching', true);
+        $sm->template_dir = Arr::get($conf, 'template_dir') . DS;
+        $sm->compile_dir  = Arr::get($conf, 'compile_dir') . DS;
+        $sm->config_dir   = Arr::get($conf, 'config_dir') . DS;
+        $sm->cache_dir    = Arr::get($conf, 'cache_dir') . DS;
+        $sm->caching      = Arr::get($conf, 'caching', true);
+        
+        $this->_smarty = $sm;
     }
     
     
@@ -153,14 +160,14 @@ class Roose_Smarty extends Smarty
     public function fetch($template, $cache_id = null, $compile_id = null)
     {
         // 変数割り当てを一旦解除
-        parent::clear_all_assign();
+        $this->_smarty->clear_all_assign();
         
         // 再割り当て
         foreach (array_keys($this->_assign) as $k) {
-            parent::assign_by_ref($k, $this->_assign[$k]);
+            $this->_smarty->assign_by_ref($k, $this->_assign[$k]);
         }
         
-        return parent::fetch($template, $cache_id, $compile_id);
+        return $this->_smarty->fetch($template, $cache_id, $compile_id);
     }
     
     
@@ -173,7 +180,7 @@ class Roose_Smarty extends Smarty
      */
     public function display($template, $cache_id = null, $compile_id = null)
     {
-        echo $this->fetch($template, $cache_id, $compile_id);
+        echo $this->_smarty->fetch($template, $cache_id, $compile_id);
     }
     
     
@@ -191,7 +198,7 @@ class Roose_Smarty extends Smarty
      * @ignore
      * @return Roose_Smarty
      */
-    public function assign_by_ref($key, $value)
+    public function assign_by_ref($key, & $value)
     {
         return $this->set($key, $value, false);
     }
@@ -206,7 +213,7 @@ class Roose_Smarty extends Smarty
         unset($this->_assign);
         $this->_assign = array();
         
-        parent::clear_all_assign();
+        $this->_smarty->clear_all_assign();
         
         return $this;
     }
