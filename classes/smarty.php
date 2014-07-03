@@ -160,11 +160,11 @@ class Roose_Smarty
     public function fetch($template, $cache_id = null, $compile_id = null)
     {
         // 変数割り当てを一旦解除
-        $this->_smarty->clear_all_assign();
+        $this->_smarty->clearAllAssign();
         
         // 再割り当て
         foreach (array_keys($this->_assign) as $k) {
-            $this->_smarty->assign_by_ref($k, $this->_assign[$k]);
+            $this->_smarty->assignByRef($k, $this->_assign[$k]);
         }
         
         return $this->_smarty->fetch($template, $cache_id, $compile_id);
@@ -180,7 +180,7 @@ class Roose_Smarty
      */
     public function display($template, $cache_id = null, $compile_id = null)
     {
-        echo $this->_smarty->fetch($template, $cache_id, $compile_id);
+        echo $this->fetch($template, $cache_id, $compile_id);
     }
     
     
@@ -198,7 +198,7 @@ class Roose_Smarty
      * @ignore
      * @return Roose_Smarty
      */
-    public function assign_by_ref($key, & $value)
+    public function assignByRef($key, & $value)
     {
         return $this->set($key, $value, false);
     }
@@ -213,7 +213,7 @@ class Roose_Smarty
         unset($this->_assign);
         $this->_assign = array();
         
-        $this->_smarty->clear_all_assign();
+        $this->_smarty->clearAllAssign();
         
         return $this;
     }
