@@ -31,43 +31,50 @@ class Roose_DB
      */
     public static function instance($connection_name = null)
     {
-        if (self::$_config === null) {
-            self::$_config = Roose_Config::get('db');
-        }
-        
-        $connection_name === null
-            and $connection_name = 'default';
-        
-        // Check is defined in dbconfig.php
-        if (array_key_exists($connection_name, self::$_config) === false)
-        {
-            throw new OutOfBoundsException('Undefined Database host : ' . $connection_name);
-        }
-        
-        // Check already constructed
-        if (isset(self::$_connections[$connection_name])) {
-            return self::$_connections[$connection_name];
-        }
-        
-        // Create new instance from config
-        $conf = Roose_Arr::get(self::$_config, $connection_name);
-        
-        if ($conf === null) {
-            throw new Exception('接続設定が定義されていません。(' . $connection_name . ')');
-        }
-        
-        $host = Roose_Arr::get($conf, 'host');
-        $user = Roose_Arr::get($conf, 'user');
-        $pass = Roose_Arr::get($conf, 'password');
-        $dbname = Roose_Arr::get($conf, 'database');
+        if (class_exists('Roose_Config')) {
+            if (self::$_config === null) {
+                self::$_config = Roose_Config::get('db', array());
+            }
 
-        $instance = new Roose_DB_Connection($host, $user, $pass);
-        $instance->_con_name = $connection_name;
-        is_string($dbname) and $instance->use_db($dbname);
+            $connection_name === null
+                and $connection_name = 'default';
 
-        self::$_connections[$connection_name] = $instance;
+            // Check is defined in dbconfig.php
+            if (array_key_exists($connection_name, self::$_config) === false)
+            {
+                throw new OutOfBoundsException('Undefined Database host : ' . $connection_name);
+            }
+
+            // Check already constructed
+            if (isset(self::$_connections[$connection_name])) {
+                return self::$_connections[$connection_name];
+            }
+
+            // Create new instance from config
+            $conf = Roose_Arr::get(self::$_config, $connection_name);
+
+            if ($conf === null) {
+                throw new Exception('接続設定が定義されていません。(' . $connection_name . ')');
+            }
         
-        return $instance;
+            $host = Roose_Arr::get($conf, 'host');
+            $user = Roose_Arr::get($conf, 'user');
+            $pass = Roose_Arr::get($conf, 'password');
+            $dbname = Roose_Arr::get($conf, 'database');
+
+            $instance = new Roose_DB_Connection($host, $user, $pass);
+            $instance->_con_name = $connection_name;
+            is_string($dbname) and $instance->use_db($dbname);
+
+            self::$_connections[$connection_name] = $instance;
+            
+            return $instance;
+        } else {
+            throw new Exception(
+                'Roose_Configクラスが存在しないため Roose_DB::instanceは利用できません。'.
+                    '代わりに new Roose_DB_Connection(); を利用してください。'
+            );
+        }
     }
     
     /**
