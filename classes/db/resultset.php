@@ -49,8 +49,6 @@ class Roose_DB_Resultset implements Iterator
 //        } else {
             $this->_result = $result;
             $this->next();
-        
-            var_dump($this);
 //        }
     }
     
