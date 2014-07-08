@@ -13,20 +13,26 @@
  */
 class Roose_DB_Connection
 {
+    /**
+     * コネクション名
+     */
+    private $_con_name = null;
     
-    //
-    // Instance methods
-    //
+    /**
+     * データベースコネクション
+     */
+    private $_con = null;
     
     /**
      * @param string $host ホスト名
      * @param string $user ユーザー名
      * @param string|null $password パスワード
-     */ 
-    public function __construct($host, $user, $password = null)
+     * @param boolean|null $newConnection (optional) 新規コネクションを生成するか
+     */
+    public function __construct($host, $user, $password = null, $newConnection = false)
     {
         $this->_con =
-            @mysql_connect($host, $user, $password)
+            @mysql_connect($host, $user, $password, $newConnection)
                 or die('Connection failed. (' . mysql_error() . ')');
     }
     
@@ -55,7 +61,7 @@ class Roose_DB_Connection
      *
      * @param string $db_name 使用するデータベース名
      */
-    public function use_db($dbname)
+    public function useDb($dbname)
     {
         return mysql_select_db($dbname, $this->_con);
 //            or die('Select db failed. (' . mysql_error() . ')');
@@ -67,6 +73,7 @@ class Roose_DB_Connection
      * @todo 動作確認
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
+     * @return Roose_DB_Resultset|bool
      */
     public function query($sql, $params = null)
     {
@@ -98,7 +105,13 @@ class Roose_DB_Connection
             }
         }
         
-        return mysql_query($sql, $this->_con);
+        $result = mysql_query($sql, $this->_con);
+        
+        if (is_bool($result)) {
+            return $result;
+        } else {
+            return new Roose_DB_Resultset($result);
+        }
     }
     
     /**

@@ -96,7 +96,7 @@ class Roose_Config
         if ($conf !== false) {
             
             if (isset(self::$config[$namespace])) {
-                if ($merge !== true) {
+                if ($merge === true) {
                     array_merge_recursive(self::$config[$namespace], $conf);
                 } else {
                     throw new Exception('名前空間が競合しました: ' . $namespace);
@@ -137,11 +137,7 @@ class Roose_Config
                 // 設定が読み込まれていなければ、ファイルを探して読み込む
                 foreach (self::$paths as $path) {
                     $path = $path . $ns . '.php';
-                    
-                    if (file_exists($path)) {
-                        self::load($path, $ns);
-                        break;
-                    }
+                    file_exists($path) and self::load($path, $ns);
                 }
             }
         }

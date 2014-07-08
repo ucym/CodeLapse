@@ -1,0 +1,8 @@
+<?php
+class Roose_DB_Abstractor
+{
+    public static function connect($type, $host, $user, $password, $new)
+    {
+        if
+    }
+}

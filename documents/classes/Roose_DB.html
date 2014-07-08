@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">47</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">34</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">13</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">13</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1875281804"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1363559358"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1875281804" class="accordion-body collapse in">
+            <div id="namespace-1363559358" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -178,7 +178,68 @@
 
                     <h1><small>\</small>Roose_DB</h1>
                     <p><em>MySQL接続ユーティリティ</em></p>
-                    <p>このクラスは"DB"クラスとして利用可能です。</p>
+                    <p>このクラスはRooseライブラリ環境下（bootstrap.phpを読み込んだ状態）では "DB"クラスとして利用可能です。
+単体ライブラリとして利用しているときは Roose_DBがクラス名になります。</p>
+<pre><code class="language-php">//-- Roose(bootstrap.php)を読み込んだ時
+require 'pathToRoose/bootstrap.php';
+$result = DB::query('SOME SQL QUERY');
+
+//-- db.phpを単体で読み込んだ時
+require 'pathToDb/db.php';
+$con = Roose_DB::instance('hostName', 'user', 'password');
+$result = $con-&gt;query('SOME SQL QUERY');</code></pre>
+<h3>データベース接続からSQL送信までの流れ</h3>
+<h4>db.php を単体で読み込んだ時</h4>
+<pre><code class="language-php">// （例: userid =&gt; lzm, password =&gt; wox#a'zlp）
+$userid = $_POST['userid'];
+$password = $_POST['password'];
+
+// DBと接続する
+$con = Roose_DB::instance('localhost', 'user', 'password');
+
+// クエリを送る
+// 配列に渡した値が、クエリに埋め込まれていることに注目。
+// （送信されるクエリ: SELECT * FROM Users WHERE userid = 'lzm' AND password = 'wox#a\'zlp'）
+$result = $con-&gt;query(
+     'SELECT * FROM Users WHERE userid = :id AND password = :pass',
+     array(':id' =&gt; $userid, ':pass' =&gt; $password)
+);
+
+if ($result-&gt;fetch() !== false) {
+     echo 'ログイン成功';
+} else {
+     echo 'ログイン失敗';
+}
+</code></pre>
+<h4>bootstrap.phpを取り込んだ時</h4>
+<pre><code class="language-php">//!! （事前に "config/db.php"を設定しておく必要があります。）
+
+// （例: userid =&gt; lzm, password =&gt; wox#a'zlp）
+$userid = Input::post('userid');
+$password = Input::post('password');
+
+// クエリを送る
+// 配列に渡した値が、クエリに埋め込まれていることに注目。
+// （送信されるクエリ: SELECT * FROM Users WHERE userid = 'lzm' AND password = 'wox#a\'zlp'）
+$result = DB::query(
+     'SELECT * FROM Users WHERE userid = :id AND password = :pass',
+     array(':id' =&gt; $userid, ':pass' =&gt; $password)
+);
+
+if ($result-&gt;fetch() !== false) {
+     echo 'ログイン成功';
+} else {
+     echo 'ログイン失敗';
+}
+</code></pre>
+<p><strong>取得した結果を全件表示する</strong></p>
+<pre><code class="language-php">//-- Rooseライブラリ使用中の場合を想定
+// SQLの実行結果は $result に入っている
+foreach ($result as $row) {
+     // $rowに一行分のデータが入ってくる
+     print_r($row);
+}
+</code></pre>
 
                     <section id="summary">
                         <h2>Summary</h2>
@@ -196,7 +257,7 @@
                         <section class="row-fluid public">
                             <section class="span4">
                                                                     <a href="../classes/Roose_DB.html#method_instance" class="">instance()</a><br />
-                                                                    <a href="../classes/Roose_DB.html#method_use_db" class="">use_db()</a><br />
+                                                                    <a href="../classes/Roose_DB.html#method_useDb" class="">useDb()</a><br />
                                                                     <a href="../classes/Roose_DB.html#method_query" class="">query()</a><br />
                                                                     <a href="../classes/Roose_DB.html#method_error" class="">error()</a><br />
                                                             </section>
@@ -223,10 +284,7 @@
                                                                     <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/Roose_DB.html#property__config" class="">$_config</a><br />
-                                                                    <a href="../classes/Roose_DB.html#property__connections" class="">$_connections</a><br />
-                                                                    <a href="../classes/Roose_DB.html#property__con" class="">$_con</a><br />
-                                                                    <a href="../classes/Roose_DB.html#property__con_name" class="">$_con_name</a><br />
+                                                                    <em>No private properties found</em>
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -293,111 +351,7 @@
             </div>
 
                         
-                                    <a id="properties" name="properties"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Properties</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__config" name="property__config" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_config</h3>
-                <pre class="signature">$_config : </pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__connections" name="property__connections" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_connections</h3>
-                <pre class="signature">$_connections : </pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__con" name="property__con" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_con</h3>
-                <pre class="signature">$_con : </pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__con_name" name="property__con_name" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_con_name</h3>
-                <pre class="signature">$_con_name : </pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                            
+                        
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -410,17 +364,40 @@
             <article class="method">
                 <h3 class="public ">instance()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">instance( <span class="argument">$connection_name</span>) : \DBConnection</pre>
-                <p><em>指定した接続のコネクションインスタンスを取得します。
-dbconfig.phpの設定を参照します。</em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">instance(string <span class="argument">$connection_name</span>, null|string <span class="argument">$user</span>, null|string <span class="argument">$password</span>, null|boolean <span class="argument">$newConnection</span>) : \DBConnection</pre>
+                <p><em>指定した接続のコネクションインスタンスを取得します。</em></p>
+                <p>パラメータを二つ以上指定した時、<br>
+最初のパラメーターを接続先ホストとして<br>
+続く２つのパラメーターをユーザー名、パスワードとして、データベースに接続します。<br>
+<br>
+パラメータが一つしか指定されない場合、<br>
+接続設定は config/db.phpの設定を参照します。<br>
+config/db.php に接続設定を記述するか<br>
+Configクラスを利用して、db名前空間に接続設定を読み込んでください。<br>
+<br>
+<strong> 単体ライブラリとして利用する場合、ホスト名・ユーザーは必ず指定する必要があります。</strong></p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$connection_name </td>
-                                <td></td>
+                                <td><p>使用する接続名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>null|string</td>
+                                <td>$user </td>
+                                <td><p>(optional) ユーザー名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>null|string</td>
+                                <td>$password </td>
+                                <td><p>(optional) パスワード</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>null|boolean</td>
+                                <td>$newConnection </td>
+                                <td><p>(optional) 接続を新規生成するか指定します</p></td>
                             </tr>
                                             </table>
                 
@@ -428,6 +405,8 @@ dbconfig.phpの設定を参照します。</em></p>
                     <dl>
                                                                             <dt>\OutOfBoundsException</dt>
                             <dd><p>dbconfig.phpに記述されていないコネクション名が指定された時にスローされます。</p></dd>
+                                                    <dt>\InvalidArgumentException</dt>
+                            <dd><p>単体ライブラリとして利用しているときに、ホスト名とユーザー名が指定されない時に発生します。</p></dd>
                                             </dl>
                 
                                     <h4>Returns</h4>
@@ -449,11 +428,11 @@ dbconfig.phpの設定を参照します。</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_use_db" name="method_use_db" class="anchor"></a>
+            <a id="method_useDb" name="method_useDb" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">use_db()</h3>
+                <h3 class="public ">useDb()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">use_db(string <span class="argument">$db_name</span>, string|null <span class="argument">$connection</span>) : boolean</pre>
+                <pre class="signature" style="margin-right: 54px;">useDb(string <span class="argument">$db_name</span>, string|null <span class="argument">$connection</span>) : boolean</pre>
                 <p><em>指定したコネクションで使用するデータベースを指定します。</em></p>
                 
 
@@ -617,7 +596,7 @@ dbconfig.phpの設定を参照します。</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 30th, 2014 at 03:22.
+                    on July 8th, 2014 at 13:12.
                 </section>
             </section>
         </section>
