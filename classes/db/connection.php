@@ -27,11 +27,12 @@ class Roose_DB_Connection
      * @param string $host ホスト名
      * @param string $user ユーザー名
      * @param string|null $password パスワード
+     * @param boolean|null $newConnection (optional) 新規コネクションを生成するか
      */
-    public function __construct($host, $user, $password = null)
+    public function __construct($host, $user, $password = null, $newConnection = false)
     {
         $this->_con =
-            @mysql_connect($host, $user, $password)
+            @mysql_connect($host, $user, $password, $newConnection)
                 or die('Connection failed. (' . mysql_error() . ')');
     }
     

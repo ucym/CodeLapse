@@ -2,7 +2,80 @@
 /**
  * MySQL接続ユーティリティ
  * 
- * このクラスは"DB"クラスとして利用可能です。
+ * このクラスはRooseライブラリ環境下（bootstrap.phpを読み込んだ状態）では "DB"クラスとして利用可能です。
+ * 単体ライブラリとして利用しているときは Roose_DBがクラス名になります。
+ * 
+ * ```php
+ * //-- Roose(bootstrap.php)を読み込んだ時
+ * require 'pathToRoose/bootstrap.php';
+ * $result = DB::query('SOME SQL QUERY');
+ * 
+ * //-- db.phpを単体で読み込んだ時
+ * require 'pathToDb/db.php';
+ * $con = Roose_DB::instance('hostName', 'user', 'password');
+ * $result = $con->query('SOME SQL QUERY');
+ * ```
+ * 
+ * ### データベース接続からSQL送信までの流れ
+ * #### db.php を単体で読み込んだ時
+ * ```php
+ * // （例: userid => lzm, password => wox#a'zlp）
+ * $userid = $_POST['userid'];
+ * $password = $_POST['password'];
+ * 
+ * // DBと接続する
+ * $con = Roose_DB::instance('localhost', 'user', 'password');
+ * 
+ * // クエリを送る
+ * // 配列に渡した値が、クエリに埋め込まれていることに注目。
+ * // （送信されるクエリ: SELECT * FROM Users WHERE userid = 'lzm' AND password = 'wox#a\'zlp'）
+ * $result = $con->query(
+ *      'SELECT * FROM Users WHERE userid = :id AND password = :pass',
+ *      array(':id' => $userid, ':pass' => $password)
+ * );
+ * 
+ * if ($result->fetch() !== false) {
+ *      echo 'ログイン成功';
+ * } else { 
+ *      echo 'ログイン失敗';
+ * }
+ * 
+ * ```
+ * 
+ * #### bootstrap.phpを取り込んだ時
+ * ```php
+ * //!! （事前に "config/db.php"を設定しておく必要があります。）
+ * 
+ * // （例: userid => lzm, password => wox#a'zlp）
+ * $userid = Input::post('userid');
+ * $password = Input::post('password');
+ * 
+ * // クエリを送る
+ * // 配列に渡した値が、クエリに埋め込まれていることに注目。
+ * // （送信されるクエリ: SELECT * FROM Users WHERE userid = 'lzm' AND password = 'wox#a\'zlp'）
+ * $result = DB::query(
+ *      'SELECT * FROM Users WHERE userid = :id AND password = :pass',
+ *      array(':id' => $userid, ':pass' => $password)
+ * );
+ * 
+ * if ($result->fetch() !== false) {
+ *      echo 'ログイン成功';
+ * } else { 
+ *      echo 'ログイン失敗';
+ * }
+ * 
+ * ```
+ * 
+ * **取得した結果を全件表示する**
+ * ```php
+ * //-- Rooseライブラリ使用中の場合を想定
+ * // SQLの実行結果は $result に入っている
+ * foreach ($result as $row) {
+ *      // $rowに一行分のデータが入ってくる
+ *      print_r($row);
+ * }
+ * 
+ * ```
  * 
  * @todo コメント書く
  * @todo 実装チェック
@@ -15,22 +88,74 @@
  */
 class Roose_DB
 {
+    /**
+     * 読み込んだ設定情報
+     * @ignore
+     */ 
     private static $_config = null;
+    
+    /**
+     * 接続設定ごとのコネクションインスタンス
+     * @ignore
+     */
     private static $_connections = array();
     
-    private $_con = null;
-    private $_con_name = null;
     
     /**
      * 指定した接続のコネクションインスタンスを取得します。
-     * dbconfig.phpの設定を参照します。
-     *
+     * 
+     * パラメータを二つ以上指定した時、<br>
+     * 最初のパラメーターを接続先ホストとして<br>
+     * 続く２つのパラメーターをユーザー名、パスワードとして、データベースに接続します。<br>
+     * <br>
+     * パラメータが一つしか指定されない場合、<br>
+     * 接続設定は config/db.phpの設定を参照します。<br>
+     * config/db.php に接続設定を記述するか<br>
+     * Configクラスを利用して、db名前空間に接続設定を読み込んでください。<br>
+     * <br>
+     * ** 単体ライブラリとして利用する場合、ホスト名・ユーザーは必ず指定する必要があります。**
+     * 
+     * @param string $connection_name 使用する接続名
+     * @param null|string $user (optional) ユーザー名
+     * @param null|string $password (optional) パスワード
+     * @param null|boolean $newConnection (optional) 接続を新規生成するか指定します
      * @return DBConnection DBConnectionインスタンス
      * @throw OutOfBoundsException
      *      dbconfig.phpに記述されていないコネクション名が指定された時にスローされます。
+     * @throw InvalidArgumentException
+     *      単体ライブラリとして利用しているときに、ホスト名とユーザー名が指定されない時に発生します。
      */
-    public static function instance($connection_name = null)
+    public static function instance($connection_name = null, $user = null, $password = null, $newConnection = false)
     {
+        $newConnection = !!$newConnection;
+        
+        if (func_num_args() > 2) {
+            $host = $connection_name;
+            
+            // 仮の接続名を生成
+            $connection_name = implode(':', array($host, $user, md5($password)));
+            
+            // 既存のコネクションがあれば、そちらを返す。
+            // （接続を新規生成するときを除いて）
+            if ($newConnection == false and isset(self::$_connections[$connection_name]))
+            {
+                return　self::$_connections[$connection_name];
+            }
+            
+            // 接続を新規生成する
+            $instance = new Roose_DB_Connection($host, $user, $pass, true);
+            
+            // 接続インスタンスを保持
+            // ただし、新規生成したコネクションは保持しない。
+            //  - 共用しても良いコネクションなら新規生成しないだろうと想定して
+            if ($newConnection == false)
+            {
+                self::$_connections[$connection_name] = $instance;
+            }
+            
+            return $instance;
+        }
+        
         if (class_exists('Roose_Config')) {
             if (self::$_config === null) {
                 self::$_config = Roose_Config::get('db', array());
@@ -39,28 +164,30 @@ class Roose_DB
             $connection_name === null
                 and $connection_name = 'default';
 
-            // Check is defined in dbconfig.php
             if (array_key_exists($connection_name, self::$_config) === false)
             {
+                // 接続設定に指定されたコネクション用の設定がなければ
+                // 例外を投げる
                 throw new OutOfBoundsException('Undefined Database host : ' . $connection_name);
             }
 
-            // Check already constructed
             if (isset(self::$_connections[$connection_name])) {
+                // 指定されたコネクションがすでに生成されていたら
+                // そのコネクションを返す。
                 return self::$_connections[$connection_name];
             }
 
-            // Create new instance from config
+            // 新しいコネクションを生成する
             $conf = Roose_Arr::get(self::$_config, $connection_name);
 
             if ($conf === null) {
                 throw new Exception('接続設定が定義されていません。(' . $connection_name . ')');
             }
         
-            $host = Roose_Arr::get($conf, 'host');
-            $user = Roose_Arr::get($conf, 'user');
-            $pass = Roose_Arr::get($conf, 'password');
-            $dbname = Roose_Arr::get($conf, 'database');
+            $host = isset($conf['host']) ? $conf['host'] : null;
+            $user = isset($conf['user']) ? $conf['user'] : null;
+            $pass = isset($conf['password']) ? $conf['password'] : null;
+            $dbname = isset($conf['database']) ? $conf['database'] : null;
 
             $instance = new Roose_DB_Connection($host, $user, $pass);
             $instance->_con_name = $connection_name;
@@ -70,9 +197,9 @@ class Roose_DB
             
             return $instance;
         } else {
-            throw new Exception(
-                'Roose_Configクラスが存在しないため Roose_DB::instanceは利用できません。'.
-                    '代わりに new Roose_DB_Connection(); を利用してください。'
+            throw new InvalidArgumentException(
+                '単体ライブラリとして利用されているので、接続名から接続を生成することはできません。' .
+                'ホスト名とユーザー名を指定してください。'
             );
         }
     }
@@ -97,7 +224,7 @@ class Roose_DB
      * @param string|null $connection コネクション名。指定されない場合、defaultコネクションを利用します。
      * @return boolean
      */
-    public static function use_db($db_name, $connection = null)
+    public static function useDb($db_name, $connection = null)
     {
         return self::instance($connection)->use_db($db_name);
     }
@@ -124,4 +251,10 @@ class Roose_DB
     {
         return self::instance($connection)->error();
     }
+    
+    
+    /**
+     * @ignore
+     */ 
+    private function __construct() {}
 }
