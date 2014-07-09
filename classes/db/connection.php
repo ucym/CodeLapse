@@ -14,11 +14,6 @@
 class Roose_DB_Connection
 {
     /**
-     * コネクション名
-     */
-    private $_con_name = null;
-    
-    /**
      * データベースコネクション
      */
     private $_con = null;

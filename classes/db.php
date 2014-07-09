@@ -190,7 +190,6 @@ class Roose_DB
             $dbname = isset($conf['database']) ? $conf['database'] : null;
 
             $instance = new Roose_DB_Connection($host, $user, $pass);
-            $instance->_con_name = $connection_name;
             is_string($dbname) and $instance->use_db($dbname);
 
             self::$_connections[$connection_name] = $instance;
