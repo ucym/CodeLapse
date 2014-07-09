@@ -97,7 +97,8 @@ class Roose_Config
             
             if (isset(self::$config[$namespace])) {
                 if ($merge === true) {
-                    array_merge_recursive(self::$config[$namespace], $conf);
+                    self::$config[$namespace] =
+                        array_merge_recursive(self::$config[$namespace], $conf);
                 } else {
                     throw new Exception('名前空間が競合しました: ' . $namespace);
                 }
