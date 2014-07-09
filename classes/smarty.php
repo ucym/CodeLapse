@@ -231,7 +231,7 @@ class Roose_Smarty
     {
         if ($filtering !== false) {
             if (is_array($key)) {
-                $key = Roose_Arr::map_recursive($key, array('Roose_Smarty', 'toSafeString'));
+                $key = Roose_Arr::mapRecursive($key, array('Roose_Smarty', 'toSafeString'));
             } else {
                 $value = self::toSafeString($value);
             }

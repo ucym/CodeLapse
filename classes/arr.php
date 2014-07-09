@@ -198,7 +198,7 @@ class Roose_Arr
      * @param array $array 操作するの配列
      * @param callable $fn 配列を処理する関数
      */
-    public static function map_recursive(Array $array, $fn)
+    public static function mapRecursive(Array $array, $fn)
     {
         foreach ($array as $k => $v) {
             if (is_array($array)) {
