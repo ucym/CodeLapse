@@ -212,7 +212,7 @@ class Roose_DB
      */
     public static function _disconnected($con)
     {
-        foreach (self::$connections as $k => $v) {
+        foreach (self::$_connections as $k => $v) {
             if ($v === $con) {
                 unset(self::$_connections[$k]);
                 break;
