@@ -131,15 +131,14 @@ class Roose_DB_Resultset implements Iterator
      */
     public function fetch()
     {
+        $ret = false;
         $i = $this->_cursor + 1;
         
-        if (isset($this->_plaindata[$this->_cursor])) {
-            $ret = $this->_plaindata[$this->_cursor];
+        if (isset($this->_plaindata[$i]))  {
+            $ret = $this->_plaindata[$i];
         } else {
-            if (isset($this->_plaindata[$i]) === false) {
-                $ret = mysql_fetch_array($this->_result, MYSQL_ASSOC);
-                $this->_plaindata[] = $ret;
-            }
+            $ret = mysql_fetch_array($this->_result, MYSQL_ASSOC);
+            $this->_plaindata[$i] = $ret;
         }
         
         $this->_cursor++;
