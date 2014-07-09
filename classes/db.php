@@ -190,7 +190,7 @@ class Roose_DB
             $dbname = isset($conf['database']) ? $conf['database'] : null;
 
             $instance = new Roose_DB_Connection($host, $user, $pass);
-            is_string($dbname) and $instance->use_db($dbname);
+            is_string($dbname) and $instance->useDb($dbname); // 使用するデータベースを選択する
 
             self::$_connections[$connection_name] = $instance;
             
@@ -202,6 +202,7 @@ class Roose_DB
             );
         }
     }
+    
     
     /**
      * 指定されたコネクション名の切断の通知を受けます。
@@ -216,6 +217,7 @@ class Roose_DB
         }
     }
     
+    
     /**
      * 指定したコネクションで使用するデータベースを指定します。
      *
@@ -225,8 +227,9 @@ class Roose_DB
      */
     public static function useDb($db_name, $connection = null)
     {
-        return self::instance($connection)->use_db($db_name);
+        return self::instance($connection)->useDb($db_name);
     }
+    
     
     /**
      * 指定したコネクション上でクエリーを実行します。
@@ -239,6 +242,18 @@ class Roose_DB
     {
         return self::instance($connection)->query($sql, $params);
     }
+    
+    
+    /**
+     * コネクションで使用する文字コードを設定します。
+     * @param string $charset 文字コード
+     * @return boolean
+     */
+    public static function setCharset($charset, $connection = null)
+    {
+        return self::instance
+    }
+    
     
     /**
      * 指定したコネクション上で、最近発生したエラーの内容を取得します。
@@ -254,6 +269,6 @@ class Roose_DB
     
     /**
      * @ignore
-     */ 
+     */
     private function __construct() {}
 }

@@ -109,6 +109,17 @@ class Roose_DB_Connection
         }
     }
     
+    
+    /**
+     * コネクションで使用する文字コードを設定します。
+     * @param string $charset 文字コード
+     * @return boolean
+     */
+    public function setCharset($charset)
+    {
+        return mysql_set_charset($charset, $this->_con);
+    }
+    
     /**
      * 最近発生したエラーの内容を取得します。
      * @param string|null $connection 接続名。指定されない場合、defaultコネクションを利用します。
