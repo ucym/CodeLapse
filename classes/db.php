@@ -143,7 +143,7 @@ class Roose_DB
             }
             
             // 接続を新規生成する
-            $instance = new Roose_DB_Connection($host, $user, $pass, true);
+            $instance = new Roose_DB_Connection($host, $user, $password, true);
             
             // 接続インスタンスを保持
             // ただし、新規生成したコネクションは保持しない。
