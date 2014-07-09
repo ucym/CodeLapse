@@ -151,7 +151,7 @@ class Roose_DB_Connection
      * トランザクションを終了し、実行結果をコミットします。
      * @return boolean
      */
-    public static function commit($connection = null)
+    public function commit($connection = null)
     {
         $result = false;
         
@@ -170,7 +170,7 @@ class Roose_DB_Connection
      * トランザクションを中止し、行った処理をすべて無効化します。
      * @return boolean
      */
-    public static function rollback($connection = null)
+    public function rollback($connection = null)
     {
         $result = false;
         
@@ -189,7 +189,7 @@ class Roose_DB_Connection
      * 指定したコネクションがトランザクション中か調べます。
      * @return boolean
      */
-    public static function inTransaction($connection = null)
+    public function inTransaction($connection = null)
     {
         return $this->_inTransaction;
     }
