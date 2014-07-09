@@ -251,7 +251,7 @@ class Roose_DB
      */
     public static function setCharset($charset, $connection = null)
     {
-        return self::instance
+        return self::instance;
     }
     
     
