@@ -197,7 +197,7 @@ class Roose_DB_Resultset implements Iterator
      */
     public function free()
     {
-        $this->result !== null
+        $this->_result !== null
             and mysql_free_result($this->_result);
         
         unset($this->_result);
