@@ -208,12 +208,15 @@ class Roose_DB
      * 指定されたコネクション名の切断の通知を受けます。
      * 
      * @ignore
-     * @param string $con_name コネクション名
+     * @param Roose_DB_Connection $con コネクションオブジェクト
      */
-    public static function _disconnected($con_name)
+    public static function _disconnected($con)
     {
-        if (array_key_exists($con_name, self::$_connections)) {
-            unset(self::$_connections[$con_name]);
+        foreach (self::$connections as $k => $v) {
+            if ($v === $con) {
+                unset(self::$_connections[$k]);
+                break;
+            }
         }
     }
     

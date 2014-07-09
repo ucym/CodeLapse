@@ -44,11 +44,11 @@ class Roose_DB_Connection
      */
     public function disconnect()
     {
-        $this->_con_name !== null
-            and DB::_disconnected($this->_con_name);
-        
         $this->_con !== null
-            and mysql_close($this->_con);
+            and mysql_close($this->_con)
+            and DB::_disconnected($this);
+        
+        $this->_con = null;
     }
     
     /**
