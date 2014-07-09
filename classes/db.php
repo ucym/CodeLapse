@@ -259,6 +259,46 @@ class Roose_DB
     
     
     /**
+     * トランザクションを開始します。
+     * @return boolean
+     */
+    public static function startTransaction($connection = null)
+    {
+        return self::instance($connection)->startTransaction();
+    }
+    
+    
+    /**
+     * トランザクションを終了し、実行結果をコミットします。
+     * @return boolean
+     */
+    public static function commit($connection = null)
+    {
+        return self::instance($connection)->commit();
+    }
+    
+    
+    /**
+     * トランザクションを中止し、行った処理をすべて無効化します。
+     * @return boolean
+     */
+    public static function rollback($connection = null)
+    {
+        return self::instance($connection)->rollback();
+    }
+    
+    
+    /**
+     * 指定したコネクションがトランザクション中か調べます。
+     * @return boolean
+     */
+    public static function inTransaction($connection = null)
+    {
+        return self::instance($connection)->inTransaction();
+    }
+    
+    
+    /**
      * 指定したコネクション上で、最近発生したエラーの内容を取得します。
      * 
      * @param string|null $connection 接続名。指定されない場合、defaultコネクションを利用します。

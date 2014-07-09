@@ -15,8 +15,17 @@ class Roose_DB_Connection
 {
     /**
      * データベースコネクション
+     * @var resource
      */
     private $_con = null;
+    
+    
+    /**
+     * トランザクション中かどうかを示します。
+     * @var boolean
+     */
+    private $_inTransaction = false;
+    
     
     /**
      * @param string $host ホスト名
@@ -31,6 +40,7 @@ class Roose_DB_Connection
                 or die('Connection failed. (' . mysql_error() . ')');
     }
     
+    
     /**
      * @ignore
      */ 
@@ -38,6 +48,7 @@ class Roose_DB_Connection
     {
         $this->disconnect();
     }
+    
     
     /**
      * このコネクションを切断します。
@@ -119,6 +130,70 @@ class Roose_DB_Connection
     {
         return mysql_set_charset($charset, $this->_con);
     }
+    
+    
+    /**
+     * トランザクションを開始します。
+     * @return boolean
+     */
+    public function startTransaction($connection = null)
+    {
+        $result = $this->query('START TRANSACTION');
+        
+        // トランザクションの開始に成功したら状態を変更する
+        $result and $this->_inTransaction = true;
+        
+        return $result;
+    }
+    
+    
+    /**
+     * トランザクションを終了し、実行結果をコミットします。
+     * @return boolean
+     */
+    public static function commit($connection = null)
+    {
+        $result = false;
+        
+        if ($this->_inTransaction) {
+            $result = $this->query('COMMIT');
+            
+            // コミットが完了したら状態を変更する
+            $result and $this->_inTransaction = false;
+        }
+        
+        return $result;
+    }
+    
+    
+    /**
+     * トランザクションを中止し、行った処理をすべて無効化します。
+     * @return boolean
+     */
+    public static function rollback($connection = null)
+    {
+        $result = false;
+        
+        if ($this->_inTransaction) {
+            $result = $this->query('ROLLBACK');
+            
+            // ロールバックが成功したら状態を切り替える
+            $result and $this->_inTransaction = false;
+        }
+        
+        return $result;
+    }
+    
+    
+    /**
+     * 指定したコネクションがトランザクション中か調べます。
+     * @return boolean
+     */
+    public static function inTransaction($connection = null)
+    {
+        return $this->_inTransaction;
+    }
+    
     
     /**
      * 最近発生したエラーの内容を取得します。
