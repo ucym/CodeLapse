@@ -175,7 +175,8 @@ class Roose_Autoloader
                 $path = self::$namespaces[$namespace];
                 $path .= $classname . '.php';
                 
-                if ((@ include $path) !== false and class_exists($class)) {
+                
+                if (file_exists($path) and (include $path) !== false and class_exists($class)) {
                     // クラスが見つかれば処理終了
                     return;
                 }
@@ -188,7 +189,7 @@ class Roose_Autoloader
             $path .= str_replace('_', self::DS, $clazz);
             $path .= '.php';
             
-            if ((@ include $path) !== false and class_exists($class)) {
+            if (file_exists($path) and (include $path) !== false and class_exists($class)) {
                 // ファイルとクラスが読み込まれたら探索を止める
                 break;
             }
