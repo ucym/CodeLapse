@@ -183,7 +183,6 @@ class Roose_DB_Resultset implements Iterator
 
             case self::FETCH_ASSOC :
                 foreach ($this as $k => $v) {
-                    var_dump($v);
                     $result[$k] = $v;
                 }
                 break;
