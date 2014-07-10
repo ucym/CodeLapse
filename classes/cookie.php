@@ -20,7 +20,7 @@ class Roose_Cookie
      */
     public static function get($name, $default = null)
     {
-        return Arr::get($_COOKIE, $name, $default);
+        return isset($_COOKIE[$name]) ? $_COOKIE[$name] : $default;
     }
 
     /**
@@ -45,4 +45,5 @@ class Roose_Cookie
     {
         self::set($name, '', time() - 1);
     }
+
 }
