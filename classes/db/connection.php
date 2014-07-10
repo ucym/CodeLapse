@@ -87,22 +87,44 @@ class Roose_DB_Connection
             //-- パラメータが設定されていれば埋め込む
             foreach ($params as $key => $value) {
                 
+                // キーが数値ならば、SQL中の 疑問符プレースホルダを探す
                 if (is_int($key)) {
-                    $ph_pos = strpos($sql, '?');
+                    $ph_pos = mb_strpos($sql, '?');
                     
                     if ($ph_pos !== false) {
-                        $value = sprintf('\'%s\'', mysql_real_escape_string($value, $this->_con));
+
+                        if (is_string($value)) {
+                            $value = sprintf('\'%s\'', mysql_real_escape_string($value, $this->_con));
+                        } else if (is_bool($value)) {
+                            $value = $value ? 'TRUE' : 'FALSE';
+                        } else if (is_null($value)) {
+                            $value = 'NULL';
+                        }
+
                         $sql = substr_replace($sql, $value, $ph_pos, 1);
                     }
                     
                     continue;
                 }
                 
+                // キーが文字列ならば、SQL文中の :**プレースホルダを探す。
                 if (is_string($key)) {
                     $ph_pos = strpos($sql, $key);
                     
+                    if ($key[0] !== ':') {
+                        throw new InvalidArgumentException("不正なプレースホルダがパラメータに含まれています($key)");
+                    }
+
                     if ($ph_pos !== false) {
-                        $value = sprintf('\'%s\'', mysql_real_escape_string($value, $this->_con));
+
+                        if (is_string($value)) {
+                            $value = sprintf('\'%s\'', mysql_real_escape_string($value, $this->_con));
+                        } else if (is_bool($value)) {
+                            $value = $value ? 'TRUE' : 'FALSE';
+                        } else if (is_null($value)) {
+                            $value = 'NULL';
+                        }
+
                         $sql = str_replace($key, $value, $sql);
                     }
                     
