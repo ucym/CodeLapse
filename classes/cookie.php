@@ -9,7 +9,9 @@
  */ 
 class Roose_Cookie
 {
-    //TODO 時間間隔の定数を書く 
+    const T_MINUTES = 60;   // 60
+    const T_HOUR = 3600;    // 60 * 60
+    const T_DAY = 86400;    // 60 * 60 * 24
     
     /**
      * Cookieから値を取得します。
@@ -29,7 +31,7 @@ class Roose_Cookie
      * @link http://jp2.php.net/manual/ja/function.setcookie.php setcookie関数
      * @param string $name クッキー名
      * @param string $value 設定する値
-     * @param int $expire クッキーの有効期間(Unixタイム)
+     * @param int $expire クッキーの有効期限(Unixタイム)
      */
     public static function set($name, $value, $expire)
     {
