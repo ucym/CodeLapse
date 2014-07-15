@@ -60,7 +60,7 @@ class Roose_Smarty
      * @ignore
      * @param string $str
      */
-    private static function toSafeString($str)
+    public static function toSafeString($str)
     {
         if (is_string($str)) {
             return Roose_Security::safeHtml($str, true);
