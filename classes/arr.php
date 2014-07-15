@@ -202,7 +202,7 @@ class Roose_Arr
     {
         foreach ($array as $k => $v) {
             if (is_array($array)) {
-                $array[$k] = self::array_map_recursive($array[$k], $fn);
+                $array[$k] = self::mapRecursive($array[$k], $fn);
             } else {
                 $array[$k] = call_user_func($fn, $v);
             }
