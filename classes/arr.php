@@ -201,7 +201,7 @@ class Roose_Arr
     public static function mapRecursive(Array $array, $fn)
     {
         foreach ($array as $k => $v) {
-            if (is_array($array)) {
+            if (is_array($array[$k])) {
                 $array[$k] = self::mapRecursive($array[$k], $fn);
             } else {
                 $array[$k] = call_user_func($fn, $v);
