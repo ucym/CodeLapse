@@ -19,7 +19,7 @@ class Roose_Session
      * @private
      * @var array セッション配列
      */
-    private static $session;
+    private $session;
 
     /**
      * @private
