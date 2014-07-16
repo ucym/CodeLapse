@@ -22,6 +22,12 @@ class Roose_Cookie
      */
     public static function get($name, $default = null)
     {
+        if (strpos($name, '.') !== false) {
+            // PHPはリクエストを受け取った時、Cookie名に含まれる '.'を'_'に変更する。
+            // この挙動は意図しないバグを生みやすいため、あらかじめ例外とする。
+            throw new InvalidArgumentException('クッキー名にドットを含めることはできません。');
+        }
+
         return isset($_COOKIE[$name]) ? $_COOKIE[$name] : $default;
     }
 
@@ -35,6 +41,12 @@ class Roose_Cookie
      */
     public static function set($name, $value, $expire)
     {
+        if (strpos($name, '.') !== false) {
+            // PHPはリクエストを受け取った時、Cookie名に含まれる '.'を'_'に変更する。
+            // この挙動は意図しないバグを生みやすいため、あらかじめ例外とする。
+            throw new InvalidArgumentException('クッキー名にドットを含めることはできません。');
+        }
+
         setcookie($name, $value, $expire);
     }
     
