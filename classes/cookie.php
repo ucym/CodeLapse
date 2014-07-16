@@ -20,8 +20,12 @@ class Roose_Cookie
      * @param mixed|null $default クッキーが存在しない時のデフォルト値
      * @return mixed
      */
-    public static function get($name, $default = null)
+    public static function get($name = null, $default = null)
     {
+        if ($name === null) {
+            return $_COOKIE;
+        }
+
         if (strpos($name, '.') !== false) {
             // PHPはリクエストを受け取った時、Cookie名に含まれる '.'を'_'に変更する。
             // この挙動は意図しないバグを生みやすいため、あらかじめ例外とする。
