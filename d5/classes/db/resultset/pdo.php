@@ -1,9 +1,8 @@
 <?php
 /**
- * データベースの結果オブジェクト
+ * PDO用 データベース 結果オブジェクト
  *
- * @package Roose\DB\Resultset
- * @author うちやま
+ * @package Roose\DB
  * @since PHP 5.2.17
  * @version 1.0.0
  */

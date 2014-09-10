@@ -1,4 +1,9 @@
 <?php
+/**
+ * PDO データベースコネクションラッパークラス
+ *
+ * @package Roose\DB
+ */
 class Roose_DB_Connection_PDO extends Roose_DB_Connection
 {
     /**

@@ -1,4 +1,9 @@
 <?php
+/**
+ * データベースコネクション抽象化クラス
+ *
+ * @package D5\DB
+ */
 abstract class D5_DB_Connection
 {
     const TYPE_PDO = 1;

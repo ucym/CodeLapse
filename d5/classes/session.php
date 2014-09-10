@@ -1,11 +1,9 @@
 <?php
 /**
  * セッション操作を行うクラス。
- * 
+ *
  * @package D5
- * @since PHP 5.2.17
- * @version 1.0.0
- */ 
+ */
 class D5_Session
 {
     /**
@@ -54,7 +52,7 @@ class D5_Session
     {
         self::getInstance();
     }
-    
+
     /**
      * セッションを破棄します。
      * @link http://www.php.net/manual/ja/function.session-destroy.php session_destroy関数
@@ -69,55 +67,55 @@ class D5_Session
      * セッションIDを再生成します。
      * @param boolean $delete_old_session (optional) 現在のセッションを破棄するか指定します。標準はfalseです。
      * @return void
-     */ 
+     */
     public static function regenerateId($delete_old_session = false)
     {
         self::getInstance();
         return session_regenerate_id($delete_old_session);
     }
-    
+
     /**
      * セッションキー名を取得、設定します。
-     * 
+     *
      * 第一引数に値が渡されなかった時、現在のセッション名を返します。
-     * 
+     *
      * @link http://jp2.php.net/manual/ja/function.session-name.php session_name関数
      * @param string|null $name (optional) 新しいセッション名
-     */ 
+     */
     public static function name($name = null)
     {
         self::getInstance();
         return $name === null ? session_name() : session_name($name);
     }
-    
+
     /**
      * セッション変数から値を取得します。
-     * 
+     *
      * @param string|null $name 取得するセッション変数のキー
      * @param mixed|null $default 指定されたキーが存在しない時のデフォルト値
      * @see D5_Arr::get() D5_Arr::getメソッド
-     */ 
+     */
     public static function get($name = null, $default = null)
     {
         return D5_Arr::get(self::getInstance()->session, $name, $default);
     }
-    
+
     /**
      * セッション変数に値を設定します。
-     * 
-     * @param $name 
+     *
+     * @param $name
      * @see D5_Arr::set() D5_Arr::setメソッド
-     */ 
+     */
     public static function set($name, $value = null)
     {
         return D5_Arr::set(self::getInstance()->session, $name, $value);
     }
-    
+
     /**
      * @param string|null $name 削除するセッション変数のキー
      *     nullを指定するとセッション変数をクリアします。
      * @see D5_Arr::delete() D5_Arr::deleteメソッド
-     */ 
+     */
     public static function delete($name = null)
     {
         return D5_Arr::delete(self::getInstance()->session, $name);

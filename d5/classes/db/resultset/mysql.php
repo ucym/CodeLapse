@@ -1,11 +1,8 @@
 <?php
 /**
- * データベースの結果オブジェクト
+ * MySQL関数用 データベース 結果オブジェクト
  *
- * @package Roose\DB\Resultset
- * @author うちやま
- * @since PHP 5.2.17
- * @version 1.0.0
+ * @package Roose\DB
  */
 class Roose_DB_Resultset_Mysql implements Roose_DB_Resultset
 {

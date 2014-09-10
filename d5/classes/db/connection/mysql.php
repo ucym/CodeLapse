@@ -1,8 +1,8 @@
 <?php
 /**
- * データベースコネクションラッパークラス
+ * MySQL データベースコネクションラッパークラス
  *
- * @package Roose\DB\Connection
+ * @package Roose\DB
  */
 class Roose_DB_Connection_Mysql extends Roose_DB_Connection
 {
@@ -10,6 +10,7 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
     /**
      * マルチバイトに対応したsubstr_replace関数
      *
+     * @see https://gist.github.com/stemar/8287074 mb_substr_replace
      * @param string|array $string 入力文字列
      * @param string $replacement
      */
@@ -41,7 +42,7 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
                 $length = array_pad(array($length), $num, $length);
             }
             // Recursive call
-            return array_map(__FUNCTION__, $string, $replacement, $start, $length);
+            return array_map(array(__CLASS__, __METHOD__), $string, $replacement, $start, $length);
         }
         preg_match_all('/./us', (string)$string, $smatches);
         preg_match_all('/./us', (string)$replacement, $rmatches);

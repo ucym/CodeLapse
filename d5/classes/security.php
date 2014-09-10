@@ -1,11 +1,9 @@
 <?php
 /**
  * セキュリティ系ユーティリティクラス
- * 
+ *
  * @package D5
- * @since PHP 5.2.17
- * @version 1.0.0
- */ 
+ */
 class D5_Security
 {
     /**

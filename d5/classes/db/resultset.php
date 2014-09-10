@@ -4,7 +4,6 @@
  * ドライバーはこのクラスの"_fetch"メソッドのみを実装する必要があります。
  *
  * @package Roose\DB
- * @author うちやま
  * @since PHP 5.2.17
  * @version 1.0.0
  */

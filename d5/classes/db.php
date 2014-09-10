@@ -84,9 +84,6 @@ class D5_DBException extends Exception {}
  * @todo MySQL関数依存からの脱却
  *
  * @package D5
- * @author うちやま
- * @since PHP 5.2.17
- * @version 1.0.0
  */
 class D5_DB
 {
