@@ -1,0 +1,30 @@
+<?php
+/**
+ * データベースの結果オブジェクト
+ *
+ * @package Roose\DB\Resultset
+ * @author うちやま
+ * @since PHP 5.2.17
+ * @version 1.0.0
+ */
+class Roose_DB_Resultset_PDO implements Roose_DB_Resultset
+{
+    protected function & _fetch(& $resultset)
+    {
+        $result = $resultset->fetch();
+        return $result;
+    }
+
+    /**
+     * ResultSetオブジェクトを解放します。
+     */
+    public function free()
+    {
+        $this->_result !== null
+            and $this->_result->closeCursor();
+
+        $this->_result = null;
+
+        parent::free();
+    }
+}

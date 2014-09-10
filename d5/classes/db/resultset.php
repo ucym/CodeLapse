@@ -1,205 +1,263 @@
 <?php
 /**
- * データベースの結果オブジェクト
- * 
- * @todo コメント書く
- * @todo 実装
- * @todo MySQL関数依存からの脱却
- * 
- * @package D5\DB
+ * データベースの結果セットラッパー。
+ * ドライバーはこのクラスの"_fetch"メソッドのみを実装する必要があります。
+ *
+ * @package Roose\DB
+ * @author うちやま
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-class D5_DB_Resultset implements Iterator
+abstract class Roose_DB_Resultset implements Iterator
 {
     const FETCH_BOTH = 1;
     const FETCH_NUM = 2;
     const FETCH_ASSOC = 3;
-    
-    
+
+    // TODO
+    // const FETCH_OBJ = 4;
+
+
     /**
-     * @var resource|mixed データベースから取得したリザルトセット
-     */ 
-    private $_result = null;
-    
+     * 一行分のデータを指定形式へ変換します。
+     *
+     * @param array &$row BOTH形式の行データ
+     * @param int $type Roose_DB_Resultset::FETCH_* のいずれか
+     * @return array 指定形式へ変換された行データ
+     */
+    private static function & _deformRow(& $row, $type)
+    {
+        if ($row === false) {
+            return false;
+        }
+
+        switch ($type) {
+
+            case Roose_DB_Resultset::FETCH_ASSOC:
+                $deformedRow = array();
+
+                foreach ($row as $k => & $v) {
+                    is_string($k) and $deformedRow[$k] = $v;
+                }
+
+                return $deformedRow;
+                break;
+
+            case Roose_DB_Resultset::FETCH_NUM  :
+                $deformedRow = array();
+
+                foreach ($row as $k => & $v) {
+                    is_int($k) and $deformedRow[$k] = $v;
+                }
+
+                return $deformedRow;
+                break;
+
+
+            case Roose_DB_Resultset::FETCH_BOTH :
+            default:
+                return $row;
+        }
+    }
+
+
+    /**
+     * @var mixed データベースから取得したリザルトセット
+     */
+    protected $_result = null;
+
     /**
      * @var int イテレータ用ポインタ
-     */ 
-    private $_itr_index = -1;
-    
+     */
+    protected $_itr_index = -1;
+
     /**
      * @var int fetchメソッド用カウンタ
      */
-    private $_cursor = -1;
-    
+    protected $_cursor = -1;
+
+
     /**
-     * @var array データベースから取得した生の結果データ
+     * @var array データベースから読み込まれた行データ
      */
-    private $_plaindata = array();
-    
-    
+    protected $_fetched_rows = array();
+
+
     /**
-     * @param resource|mixed $result リザルトセット
+     * @param mixed $result リザルトセット
      */
     public function __construct($result)
     {
-//        if (is_resource($result) === false) {
-//            throw new InvalidArgumentException('渡された引数は');
-//        } else {
-            $this->_result = $result;
-            $this->next();
-//        }
+        $this->_result = $result;
+
+        // 最初の行をフェッチ
+        $this->next();
     }
-    
-    
+
+
     /**
      * Iterator実装メソッド
-     * @ignored
-     */
-    public function current()
-    {
-        if (isset($this->_plaindata[$this->_itr_index])) {
-            return $this->_plaindata[$this->_itr_index];
-        }
-        
-        return null;
-    }
-    
-    
-    /**
-     * Iterator実装メソッド
-     * @ignored
-     */
-    public function key()
-    {
-        return $this->_itr_index;
-    }
-    
-    
-    /**
-     * Iterator実装メソッド
-     * @ignored
-     */
-    public function next()
-    {
-        $i = $this->_itr_index + 1;
-        
-        if (isset($this->_plaindata[$i]) === false) {
-            // next data isn't fetched? fetch.
-            $this->_plaindata[] = mysql_fetch_array($this->_result, MYSQL_ASSOC);
-        }
-        
-        $this->_itr_index++;
-    }
-    
-    
-    /**
-     * Iterator実装メソッド
+     * ポインタを巻き戻します。
+     *
+     * @see http://jp2.php.net/manual/ja/class.iterator.php php.net - Iterator
      * @ignored
      */
     public function rewind()
     {
         $this->_itr_index = 0;
     }
-    
-    
+
+
     /**
      * Iterator実装メソッド
+     * 現在位置が有効か調べます。
+     *
+     * @see http://jp2.php.net/manual/ja/class.iterator.php php.net - Iterator
+     * @return boolean
      * @ignored
      */
     public function valid()
     {
-        return
-            isset($this->_plaindata[$this->_itr_index])
-                and $this->_plaindata[$this->_itr_index] !== false;
+        // 結果セットは、末端の行まで到達すると業データではなく、falseを返します。
+        // つまり現在の位置の要素が falseであれば、イテレータは末端へ到達した（＝現在位置は無効である）、と判断します。
+        // また、何らかの原因で現在の位置の要素が取得できない場合も、現在位置は無効である、と判断します。
+        return isset($this->_fetched_rows[$this->_itr_index])
+                and $this->_fetched_rows[$this->_itr_index] !== false;
     }
-    
-    
+
+
     /**
-     * 生のResultSetオブジェクトを取得します。
+     * Iterator実装メソッド
+     * 現在の要素を返します。
+     *
+     * @see http://jp2.php.net/manual/ja/class.iterator.php php.net - Iterator
+     * @return mixed
+     * @ignored
+     */
+    public function current()
+    {
+        if (isset($this->_fetched_rows[$this->_itr_index])) {
+            return $this->_fetched_rows[$this->_itr_index];
+        }
+
+        return null;
+    }
+
+
+    /**
+     * Iterator実装メソッド
+     * 現在のインデックスを返します。
+     *
+     * @see http://jp2.php.net/manual/ja/class.iterator.php php.net - Iterator
+     * @return scalar | null
+     * @ignored
+     */
+    public function key()
+    {
+        return $this->_itr_index;
+    }
+
+
+    /**
+     * Iterator実装メソッド
+     * カーソルをひとつ進めます。
+     *
+     * @see http://jp2.php.net/manual/ja/class.iterator.php php.net - Iterator
+     * @ignored
+     */
+    public function next()
+    {
+        $i = $this->_itr_index + 1;
+
+        if (isset($this->_fetched_rows[$i]) === false) {
+            // 次の行のデータが取り出されていない時、次の行を取り出します。
+            $this->_fetched_rows[$i] = $this->_fetch();
+        }
+
+        $this->_itr_index++;
+    }
+
+
+    /**
+     * プレーンなResultSetオブジェクトを取得します。
+     *
      * @return mixed
      */
     public function getResultSet()
     {
         return $this->_result;
     }
-    
-    
+
     /**
      * 現在のカーソル位置の次のレコードを取得します。
+     * @param int $type (optional) 返されるデータの形式を指定します。
+     *      Roose_DB_Resultset::FETCH_*のいずれかを指定します。
+     * @return mixed 指定された形式の配列もしくはオブジェクトを返します。
+     *      カーソルが最後の行まで到達した時に falseが返されます。
      */
-    public function fetch()
+    public function fetch($type = Roose_DB_Resultset::FETCH_BOTH)
     {
         $ret = false;
-        $i = $this->_cursor + 1;
-        
-        if (isset($this->_plaindata[$i]))  {
-            $ret = $this->_plaindata[$i];
-        } else {
-            $ret = mysql_fetch_array($this->_result, MYSQL_ASSOC);
-            $this->_plaindata[$i] = $ret;
+
+        ++$this->_cursor;
+
+        if (! isset($this->_fetched_rows[$this->_cursor]))  {
+            // 次の行が読み込まれていなければ読み込む
+            $this->_fetched_rows[$this->_cursor] = $this->_fetch();
         }
-        
-        $this->_cursor++;
-        
-        return $ret;
+
+        return self::_deformRow($this->_fetched_rows[$this->_cursor], $type);
     }
-    
-    
+
+
     /**
      * 結果を全件取得します。
+     *
+     * @param int $type 返されるデータの種類を指定します。
+     *      Roose_DB_Resultset::FETCH_*のいずれかを指定します。
      * @return array
      */
-    public function fetchAll($type = self::FETCH_ASSOC)
+    public function & fetchAll($type = self::FETCH_BOTH)
     {
-        $result = array();
-        
-        switch ($type) {
-            case self::FETCH_BOTH :
-                foreach ($this as $k => $row) {
-                    $result[$k] = $row;
-                    
-                    // ASSOCで取得した配列に、番号列を追加する
-                    $i = 0;
-                    foreach ($row as $value) {
-                        $result[$k][$i++] = $value;
-                    }
-                }
-                
-                break;
-                
-            case self::FETCH_NUM :
-                // ASSOCで取得した配列の添え字を番号列に変更
-                foreach ($this as $k => $row) {
-                    $result[$k] = array();
+        $deformedRows = array();
 
-                    $i = 0;
-                    foreach ($row as $value) {
-                        $result[$k][$i++] = $value;
-                    }
-                }
-                break;
-
-            case self::FETCH_ASSOC :
-                foreach ($this as $k => $v) {
-                    $result[$k] = $v;
-                }
-                break;
+        foreach ($this as $k => & $row) {
+            $deformedRows[$k] = self::_deformRow($row, $type);
         }
-        
-        return $result;
+
+        return $deformedRows;
     }
-    
-    
+
+
     /**
      * ResultSetオブジェクトを解放します。
+     *
+     * ドライバに結果セット開放機能がない場合など、
+     * このメソッドは必ずしも実装する必要はありません。
      */
     public function free()
     {
-        $this->_result !== null
-            and mysql_free_result($this->_result);
-        
-        unset($this->_result);
-        unset($this->_plaindata);
+        unset($this->_fetched_rows);
     }
+
+
+    //--------
+    // Abstract methods
+    //--------
+
+    /**
+     * 次の行データを読み込みます。
+     *
+     * **このメソッドは次の行の内容をBOTH形式で返す必要があります。**
+     * fetch, fetchAll, currentメソッドのいずれかがコールされ、次の行のデータが必要になったとき
+     * Roose_DB_Resultsetクラスからコールされます。
+     *
+     * このメソッドは一律にBOTH形式のデータを返すことで,
+     * 他のメソッドが要求されたフェッチ形式(ASSOC, NUM, etc...)にデータを整形することができます。
+     *
+     * @param mixed &$resultset コンストラクタに渡された結果セット
+     * @return array|boolean １行文のBOTH形式の行データ。
+     *      次の行がない場合は falseを返してください。
+     */
+    protected abstract function & _fetch(& $resultset);
 }
