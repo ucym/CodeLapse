@@ -6,12 +6,11 @@
  * @todo 実装
  * @todo MySQL関数依存からの脱却
  * 
- * @package Roose\DB
- * @author うちやま
+ * @package D5\DB
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-class Roose_DB_Resultset implements Iterator
+class D5_DB_Resultset implements Iterator
 {
     const FETCH_BOTH = 1;
     const FETCH_NUM = 2;

@@ -2,17 +2,17 @@
 /**
  * MySQL接続ユーティリティ
  * 
- * このクラスはRooseライブラリ環境下（bootstrap.phpを読み込んだ状態）では "DB"クラスとして利用可能です。
- * 単体ライブラリとして利用しているときは Roose_DBがクラス名になります。
+ * このクラスはD5ライブラリ環境下（bs.phpを読み込んだ状態）では "DB"クラスとして利用可能です。
+ * 単体ライブラリとして利用しているときは D5_DBがクラス名になります。
  * 
  * ```php
- * //-- Roose(bootstrap.php)を読み込んだ時
- * require 'pathToRoose/bootstrap.php';
+ * //-- D5(bs.php)を読み込んだ時
+ * require 'pathTo/D5/bs.php';
  * $result = DB::query('SOME SQL QUERY');
  * 
  * //-- db.phpを単体で読み込んだ時
  * require 'pathToDb/db.php';
- * $con = Roose_DB::instance('hostName', 'user', 'password');
+ * $con = D5_DB::instance('hostName', 'user', 'password');
  * $result = $con->query('SOME SQL QUERY');
  * ```
  * 
@@ -24,7 +24,7 @@
  * $password = $_POST['password'];
  * 
  * // DBと接続する
- * $con = Roose_DB::instance('localhost', 'user', 'password');
+ * $con = D5_DB::instance('localhost', 'user', 'password');
  * 
  * // クエリを送る
  * // 配列に渡した値が、クエリに埋め込まれていることに注目。
@@ -42,7 +42,7 @@
  * 
  * ```
  * 
- * #### bootstrap.phpを取り込んだ時
+ * #### bs.phpを取り込んだ時
  * ```php
  * //!! （事前に "config/db.php"を設定しておく必要があります。）
  * 
@@ -68,7 +68,7 @@
  * 
  * **取得した結果を全件表示する**
  * ```php
- * //-- Rooseライブラリ使用中の場合を想定
+ * //-- D5ライブラリ使用中の場合を想定
  * // SQLの実行結果は $result に入っている
  * foreach ($result as $row) {
  *      // $rowに一行分のデータが入ってくる
@@ -81,12 +81,11 @@
  * @todo 実装チェック
  * @todo MySQL関数依存からの脱却
  * 
- * @package Roose
- * @author うちやま
+ * @package D5
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-class Roose_DB
+class D5_DB
 {
     /**
      * 読み込んだ設定情報
@@ -143,7 +142,7 @@ class Roose_DB
             }
             
             // 接続を新規生成する
-            $instance = new Roose_DB_Connection($host, $user, $password, true);
+            $instance = new D5_DB_Connection($host, $user, $password, true);
             
             // 接続インスタンスを保持
             // ただし、新規生成したコネクションは保持しない。
@@ -156,9 +155,9 @@ class Roose_DB
             return $instance;
         }
         
-        if (class_exists('Roose_Config')) {
+        if (class_exists('D5_Config')) {
             if (self::$_config === null) {
-                self::$_config = Roose_Config::get('db', array());
+                self::$_config = D5_Config::get('db', array());
             }
 
             $connection_name === null
@@ -178,7 +177,7 @@ class Roose_DB
             }
 
             // 新しいコネクションを生成する
-            $conf = Roose_Arr::get(self::$_config, $connection_name);
+            $conf = D5_Arr::get(self::$_config, $connection_name);
 
             if ($conf === null) {
                 throw new Exception('接続設定が定義されていません。(' . $connection_name . ')');
@@ -189,7 +188,7 @@ class Roose_DB
             $pass = isset($conf['password']) ? $conf['password'] : null;
             $dbname = isset($conf['database']) ? $conf['database'] : null;
 
-            $instance = new Roose_DB_Connection($host, $user, $pass);
+            $instance = new D5_DB_Connection($host, $user, $pass);
             is_string($dbname) and $instance->useDb($dbname); // 使用するデータベースを選択する
 
             self::$_connections[$connection_name] = $instance;
@@ -208,7 +207,7 @@ class Roose_DB
      * 指定されたコネクション名の切断の通知を受けます。
      * 
      * @ignore
-     * @param Roose_DB_Connection $con コネクションオブジェクト
+     * @param D5_DB_Connection $con コネクションオブジェクト
      */
     public static function _disconnected($con)
     {

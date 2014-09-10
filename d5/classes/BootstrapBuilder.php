@@ -1,5 +1,5 @@
 <?php
-class Roose_BootstrapBuilder
+class D5_BootstrapBuilder
 {
     public static function alert($m, $type = 'danger')
     {

@@ -2,12 +2,11 @@
 /**
  * リクエストに含まれるパラメータを取得します。（POST, GETなど）
  * 
- * @package Roose
- * @author うちやま
+ * @package D5
  * @since PHP 5.2.17
  * @version 1.0.0
  */ 
-class Roose_Input {
+class D5_Input {
 
     /**
      * リクエストメソッドの種類を取得します。
@@ -29,7 +28,7 @@ class Roose_Input {
      */ 
     public static function post($key = null, $default = null)
     {
-        return Roose_Arr::get($_POST, $key, $default);
+        return D5_Arr::get($_POST, $key, $default);
     }
 
 
@@ -42,7 +41,7 @@ class Roose_Input {
      */ 
     public static function get($key = null, $default = null)
     {
-        return Roose_Arr::get($_GET, $key, $default);
+        return D5_Arr::get($_GET, $key, $default);
     }
 
 
@@ -55,6 +54,6 @@ class Roose_Input {
      */
     public static function server($key = null, $default = null)
     {
-        return Roose_Arr::get($_SERVER, $key, $default);
+        return D5_Arr::get($_SERVER, $key, $default);
     }
 }

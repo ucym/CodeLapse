@@ -2,12 +2,11 @@
 /**
  * セキュリティ系ユーティリティクラス
  * 
- * @package Roose
- * @author うちやま
+ * @package D5
  * @since PHP 5.2.17
  * @version 1.0.0
  */ 
-class Roose_Security
+class D5_Security
 {
     /**
      * 文字列を安全なHTMLへ変換します。

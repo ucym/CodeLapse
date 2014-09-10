@@ -4,11 +4,11 @@
  * （開いたファイルは自動的にクローズされます。）
  *  
  *    Example:
- *        $file = new Roose_File('path/to/open/file');
+ *        $file = new D5_File('path/to/open/file');
  *        $file->append('hello world');
  *        echo $file->getContents(); // -> "hello world"
  */
-class Roose_File
+class D5_File
 {
 
     const SEEK_SET = SEEK_SET;

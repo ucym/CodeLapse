@@ -16,7 +16,7 @@
  * 
  *      //-- ./app.php
  *      <?php
- *          require 'bootstrap.php'; // Rooseライブラリの 'bootstrap.php'を読み込む
+ *          require 'bs.php'; // D5ライブラリの 'bs.php'を読み込む
  * 
  *          // 'db'名前空間に設定ファイル(dbconfig.php)を読み込む
  *          Config::load(dirname(__FILE__) . 'dbconfig.php', 'db');
@@ -29,12 +29,11 @@
  *      ?>
  * 
  * @todo 動作テスト
- * @package Roose
- * @author うちやま
+ * @package D5
  * @since PHP 5.2.17
  * @version 1.0.1
  */
-class Roose_Config
+class D5_Config
 {
     /**
      * @var array 読み込まれた設定データ
@@ -48,7 +47,7 @@ class Roose_Config
     
     /**
      * 設定ファイルの探索先パスを追加します。
-     * Roose_Config::set メソッドで実行時、指定された名前空間が存在しない場合
+     * D5_Config::set メソッドで実行時、指定された名前空間が存在しない場合
      * 登録された探索先パスを探します。
      * 
      * @param string $path 探索先パス
@@ -103,7 +102,7 @@ class Roose_Config
                     throw new Exception('名前空間が競合しました: ' . $namespace);
                 }
             } else {
-                Roose_Arr::set(self::$config, $namespace, $conf);
+                D5_Arr::set(self::$config, $namespace, $conf);
             }
         } else {
             throw new Exception('設定ファイルが読み込めません。(' . $path .')');
@@ -143,6 +142,6 @@ class Roose_Config
             }
         }
         
-        return Roose_Arr::get(self::$config, $key, $default);
+        return D5_Arr::get(self::$config, $key, $default);
     }
 }

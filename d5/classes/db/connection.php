@@ -6,12 +6,11 @@
  * @todo 実装チェック
  * @todo MySQL関数依存からの脱却
  * 
- * @package Roose\DB
- * @author うちやま
+ * @package D5\DB
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-class Roose_DB_Connection
+class D5_DB_Connection
 {
     /**
      * データベースコネクション
@@ -79,7 +78,7 @@ class Roose_DB_Connection
      * @todo 動作確認
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
-     * @return Roose_DB_Resultset|bool
+     * @return D5_DB_Resultset|bool
      */
     public function query($sql, $params = null)
     {
@@ -138,7 +137,7 @@ class Roose_DB_Connection
         if (is_bool($result)) {
             return $result;
         } else {
-            return new Roose_DB_Resultset($result);
+            return new D5_DB_Resultset($result);
         }
     }
     

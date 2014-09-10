@@ -1,8 +1,8 @@
 <?php
 /**
- * Rooseライブラリの初期化処理を担うクラス
+ * D5ライブラリの初期化処理を担うクラス
  */
-class Roose_Core
+class D5_Core
 {
     private static $instance;
 
@@ -23,7 +23,7 @@ class Roose_Core
         }
 
         // コアの設定ファイルを読み込む
-        Roose_Config::addLoadPath(ROOSE_COREPATH . 'config/');
+        D5_Config::addLoadPath(D5_COREPATH . 'config/');
 
         // 出力バッファリングを始める
         ob_start();

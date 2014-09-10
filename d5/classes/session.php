@@ -2,16 +2,15 @@
 /**
  * セッション操作を行うクラス。
  * 
- * @package Roose
- * @author うちやま
+ * @package D5
  * @since PHP 5.2.17
  * @version 1.0.0
  */ 
-class Roose_Session
+class D5_Session
 {
     /**
      * @private
-     * @var Roose_Session インスタンス
+     * @var D5_Session インスタンス
      */
     private static $instance;
 
@@ -34,7 +33,7 @@ class Roose_Session
     /**
      * Sessionクラスのインスタンスを生成、もしくは取得します。
      * @private
-     * @return Roose_Session
+     * @return D5_Session
      * @ignore
      */
     private static function &getInstance()
@@ -96,31 +95,31 @@ class Roose_Session
      * 
      * @param string|null $name 取得するセッション変数のキー
      * @param mixed|null $default 指定されたキーが存在しない時のデフォルト値
-     * @see Roose_Arr::get() Roose_Arr::getメソッド
+     * @see D5_Arr::get() D5_Arr::getメソッド
      */ 
     public static function get($name = null, $default = null)
     {
-        return Roose_Arr::get(self::getInstance()->session, $name, $default);
+        return D5_Arr::get(self::getInstance()->session, $name, $default);
     }
     
     /**
      * セッション変数に値を設定します。
      * 
      * @param $name 
-     * @see Roose_Arr::set() Roose_Arr::setメソッド
+     * @see D5_Arr::set() D5_Arr::setメソッド
      */ 
     public static function set($name, $value = null)
     {
-        return Roose_Arr::set(self::getInstance()->session, $name, $value);
+        return D5_Arr::set(self::getInstance()->session, $name, $value);
     }
     
     /**
      * @param string|null $name 削除するセッション変数のキー
      *     nullを指定するとセッション変数をクリアします。
-     * @see Roose_Arr::delete() Roose_Arr::deleteメソッド
+     * @see D5_Arr::delete() D5_Arr::deleteメソッド
      */ 
     public static function delete($name = null)
     {
-        return Roose_Arr::delete(self::getInstance()->session, $name);
+        return D5_Arr::delete(self::getInstance()->session, $name);
     }
 }

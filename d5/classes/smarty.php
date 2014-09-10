@@ -1,14 +1,14 @@
 <?php
 /**
- * Rooseによる Smartyラッパークラス
+ * D5による Smartyラッパークラス
  * 
  * HTMLの自動エスケープなどの機能が追加されたSmartyのラッパークラスです。<br>
  * このクラスを使用する前に、
- * Roose_Config::loadメソッドで、smartyの設定を読み込むことを推奨します。<br>
+ * D5_Config::loadメソッドで、smartyの設定を読み込むことを推奨します。<br>
  * そのようにすることで、プロジェクトで一貫した設定を使い回すことができるためです。
  * 
  * 読み込みサンプル
- *      //-- app/bootstrap.php
+ *      //-- app/b.php
  *      define('APPPATH', dirname(__FILE__));
  *      
  *      Config::load(APPPATH . '/config/smarty.php', 'smarty');
@@ -37,19 +37,18 @@
  *      
  *      
  *      //-- somefile.php
- *      $smarty = Roose_Smarty::instance();
+ *      $smarty = D5_Smarty::instance();
  *      $smarty-> *do_something*
  * 
- * @package Roose
- * @author うちやま
+ * @package D5
  * @since PHP 5.2.17
  * @version 1.0.0
  */ 
-class Roose_Smarty
+class D5_Smarty
 {
     /**
      * @ignore
-     * @var array(Roose_Smarty) 生成したインスタンス
+     * @var array(D5_Smarty) 生成したインスタンス
      */ 
     private static $instances = array();
     
@@ -63,19 +62,19 @@ class Roose_Smarty
     public static function toSafeString($str)
     {
         if (is_string($str)) {
-            return Roose_Security::safeHtml($str, true);
+            return D5_Security::safeHtml($str, true);
         } else {
             return $str;
         }
     }
     
     /**
-     * Roose_Smartyのインスタンスを取得します。
+     * D5_Smartyのインスタンスを取得します。
      * 
      * @param string $name (optional) 取得するインスタンスの名前。
      *   指定されない場合、'null'を使用します。
-     * @param array $config Roose_Smartyをインスタンス化するときの設定
-     * @return Roose_Smarty
+     * @param array $config D5_Smartyをインスタンス化するときの設定
+     * @return D5_Smarty
      */
     public static function instance($name = null, $config = array())
     {
@@ -96,7 +95,7 @@ class Roose_Smarty
      * @param string|array $key テンプレート内の変数名
      * @param mixed $value 割り当てる値 / オブジェクト
      * @param boolean (optional) 値を自動的エスケープするか。デフォルト値はtrue
-     * @return Roose_Smarty
+     * @return D5_Smarty
      */
     /*
     public static function set($key, $value = null, $filtering = true)
@@ -137,7 +136,7 @@ class Roose_Smarty
         $sm = new Smarty();
         
         // 設定ファイルを読み込む
-        $conf = Roose_Config::get('smarty');
+        $conf = D5_Config::get('smarty');
         array_merge($conf, $config);
         
         $sm->template_dir = Arr::get($conf, 'template_dir') . DS;
@@ -186,7 +185,7 @@ class Roose_Smarty
     
     /**
      * @ignore
-     * @return Roose_Smarty
+     * @return D5_Smarty
      */
     public function assign($key, $value = null, $filtering = true)
     {
@@ -196,7 +195,7 @@ class Roose_Smarty
     
     /**
      * @ignore
-     * @return Roose_Smarty
+     * @return D5_Smarty
      */
     public function assignByRef($key, & $value)
     {
@@ -206,7 +205,7 @@ class Roose_Smarty
     
     /**
      * @ignore
-     * @return Roose_Smarty
+     * @return D5_Smarty
      */
     public function clear_all_assign()
     {
@@ -225,13 +224,13 @@ class Roose_Smarty
      * @param string|array $key テンプレート内の変数名
      * @param mixed $value 割り当てる値 / オブジェクト
      * @param boolean $filtering (optional) 値を自動的エスケープするか。デフォルト値はtrue
-     * @return Roose_Smarty
+     * @return D5_Smarty
      */
     public function set($key, $value = null, $filtering = true)
     {
         if ($filtering !== false) {
             if (is_array($key)) {
-                $key = Roose_Arr::mapRecursive($key, array('Roose_Smarty', 'toSafeString'));
+                $key = D5_Arr::mapRecursive($key, array('D5_Smarty', 'toSafeString'));
             } else {
                 $value = self::toSafeString($value);
             }

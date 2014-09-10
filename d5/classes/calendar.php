@@ -2,13 +2,12 @@
 /**
 * カレンダー生成用クラス。
 *
-* @package Roose
-* @author うちやま
+* @package D5
 * @since PHP 5.2.17
 * @implements Iterator
 * @version 1.0.0
 */ 
-class Roose_Calender implements Iterator
+class D5_Calender implements Iterator
 {
     
     private $basetime = null;
@@ -141,7 +140,7 @@ class Roose_Calender implements Iterator
         'days' => $basetime->format('t')|0
     );
 
-$calander = new Roose_Calender();
+$calander = new D5_Calender();
 
 foreach ($calander as $day) {
     $day->is_weekday
