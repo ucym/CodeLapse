@@ -44,7 +44,7 @@ class D5_Arr
      * @param mixed|null $default 初期値。デフォルト値はnull
      * @return mixed
      */
-    public static function get(Array &$array, $key = null, $default = null)
+    public static function get(Array $array, $key = null, $default = null)
     {
         if ($key === null) {
             // keyがnullなら配列をそのまま返す
@@ -195,9 +195,9 @@ class D5_Arr
      * @param array $array 操作するの配列
      * @param callable $fn 配列を処理する関数
      */
-    public static function mapRecursive(Array $array, $fn)
+    public static function mapRecursive(Array & $array, $fn)
     {
-        foreach ($array as $k => $v) {
+        foreach ($array as $k => & $v) {
             if (is_array($array[$k])) {
                 $array[$k] = self::mapRecursive($array[$k], $fn);
             } else {
