@@ -1,4 +1,4 @@
-# D5 - PHP 5.2.x Library
+# D5 - PHP 5.2.x Library [![Build Status](https://drone.io/bitbucket.org/4af52202f/d5/status.png)](https://drone.io/bitbucket.org/4af52202f/d5/latest)
 
 ## Concept
 - Simple  
