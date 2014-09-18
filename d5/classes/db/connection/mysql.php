@@ -2,9 +2,9 @@
 /**
  * MySQL データベースコネクションラッパークラス
  *
- * @package Roose\DB
+ * @package D5\DB
  */
-class Roose_DB_Connection_Mysql extends Roose_DB_Connection
+class D5_DB_Connection_Mysql extends D5_DB_Connection
 {
 
     /**
@@ -80,7 +80,7 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
         $this->_con = @mysql_connect($host, $user, $password, $newConnection);
 
         if ($this->_con == false) {
-            throw new Roose_DB_Exception('データベースへの接続に失敗しました。(' . mysql_error() . ')', mysql_errno());
+            throw new D5_DB_Exception('データベースへの接続に失敗しました。(' . mysql_error() . ')', mysql_errno());
         }
     }
 
@@ -134,7 +134,7 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
     public function useDB($dbname)
     {
         if (@ mysql_select_db($dbname, $this->_con) === false) {
-            throw new Roose_DB_Exception('データベースの選択に失敗しました。(' . $this->error() . ')', $this->errorCod());
+            throw new D5_DB_Exception('データベースの選択に失敗しました。(' . $this->error() . ')', $this->errorCod());
         }
     }
 
@@ -145,7 +145,7 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
      * @todo 動作確認
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
-     * @return Roose_DB_Resultset|bool
+     * @return D5_DB_Resultset|bool
      */
     public function query($sql, $params = null)
     {
@@ -204,7 +204,7 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
         if (is_bool($result)) {
             return $result;
         } else {
-            return new Roose_DB_Resultset($result);
+            return new D5_DB_Resultset($result);
         }
     }
 
@@ -224,7 +224,7 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
      * トランザクションを開始します。
      * @return boolean
      */
-    public function startTransaction($connection = null)
+    public function startTransaction()
     {
         $result = $this->query('START TRANSACTION');
 
@@ -239,7 +239,7 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
      * トランザクションを終了し、実行結果をコミットします。
      * @return boolean
      */
-    public function commit($connection = null)
+    public function commit()
     {
         if ($this->_inTransaction === false) {
             return false;
@@ -258,10 +258,10 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
      * トランザクションを中止し、行った処理をすべて無効化します。
      * @return boolean
      */
-    public function rollback($connection = null)
+    public function rollback()
     {
         if ($this->_inTransaction === false) {
-            throw new Roose_DB_Exception('トランザクション外でrollbackメソッドが実行されました。')
+            throw new D5_DB_Exception('トランザクション外でrollbackメソッドが実行されました。')
         }
 
         $result = $this->query('ROLLBACK');
@@ -277,7 +277,7 @@ class Roose_DB_Connection_Mysql extends Roose_DB_Connection
      * 指定したコネクションがトランザクション中か調べます。
      * @return boolean
      */
-    public function inTransaction($connection = null)
+    public function inTransaction()
     {
         return $this->_inTransaction;
     }

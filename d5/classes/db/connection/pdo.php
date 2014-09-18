@@ -2,9 +2,9 @@
 /**
  * PDO データベースコネクションラッパークラス
  *
- * @package Roose\DB
+ * @package D5\DB
  */
-class Roose_DB_Connection_PDO extends Roose_DB_Connection
+class D5_DB_Connection_PDO extends D5_DB_Connection
 {
     /**
      * データベースコネクションを生成します。
@@ -19,7 +19,7 @@ class Roose_DB_Connection_PDO extends Roose_DB_Connection
             $this->_con = new PDO('mysql:host=' . $host, $user, $password);
         }
         catch (PDOException $e) {
-            throw new Roose_DBException($e->getMessage(), $e->getCode(), $e);
+            throw new D5_DBException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -79,7 +79,7 @@ class Roose_DB_Connection_PDO extends Roose_DB_Connection
      * @param string $charset 文字コード
      * @return boolean
      */
-    public abstract function setCharset($charset)
+    public function setCharset($charset)
     {
         return !! $this->query('SET NAMES ?', (array) $charset);
     }
@@ -90,7 +90,7 @@ class Roose_DB_Connection_PDO extends Roose_DB_Connection
      *
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
-     * @return Roose_DB_Resultset|bool
+     * @return D5_DB_Resultset|bool
      */
     public function query($sql, $params = null)
     {
@@ -103,7 +103,7 @@ class Roose_DB_Connection_PDO extends Roose_DB_Connection
             return false;
         }
         else {
-            return new Roose_DB_Resultset_PDO($stmt);
+            return new D5_DB_Resultset_PDO($stmt);
         }
     }
 
@@ -131,10 +131,10 @@ class Roose_DB_Connection_PDO extends Roose_DB_Connection
     /**
      * トランザクションを中止し、トランザクション中に行った処理をすべて無効化します。
      *
-     * トランザクション中でない時、Roose_DBExceptionをスローします。
+     * トランザクション中でない時、D5_DBExceptionをスローします。
      *
      * @return boolean
-     * @throw Roose_DBException
+     * @throw D5_DBException
      */
     public function rollback()
     {
@@ -142,7 +142,7 @@ class Roose_DB_Connection_PDO extends Roose_DB_Connection
             return $this->_con->rollback();
         }
         catch (PDOException $e) {
-            throw new Roose_DBException('ロールバックに失敗しました。(' . $e->getMessage() . ')', $e->getCode(), $e);
+            throw new D5_DBException('ロールバックに失敗しました。(' . $e->getMessage() . ')', $e->getCode(), $e);
         }
     }
 

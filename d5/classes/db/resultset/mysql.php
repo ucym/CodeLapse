@@ -4,7 +4,7 @@
  *
  * @package Roose\DB
  */
-class Roose_DB_Resultset_Mysql implements Roose_DB_Resultset
+class D5_DB_Resultset_Mysql extends D5_DB_Resultset
 {
     protected function & _fetch(& $resultset)
     {

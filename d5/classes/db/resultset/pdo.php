@@ -6,7 +6,7 @@
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-class Roose_DB_Resultset_PDO implements Roose_DB_Resultset
+class D5_DB_Resultset_PDO extends D5_DB_Resultset
 {
     protected function & _fetch(& $resultset)
     {

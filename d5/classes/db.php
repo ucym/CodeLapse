@@ -89,7 +89,7 @@ class D5_DB
 {
     const ERR_CONNECTION_FAILED = 100;
 
-    const DEFALT_CONNECTION_NAME = 'default';
+    const DEFAULT_CONNECTION_NAME = 'default';
 
     /**
      * 接続設定ごとのコネクションインスタンス
@@ -118,7 +118,7 @@ class D5_DB
         ! is_string($connectionName)
             and $connectionName = self::DEFAULT_CONNECTION_NAME;
 
-        if (array_key_exists(self::$_connections, $connectionName)) {
+        if (array_key_exists($connectionName, self::$_connections)) {
             return self::$_connections[$connectionName];
         }
 
@@ -200,20 +200,20 @@ class D5_DB
 
             // 同じ名前のコネクションが存在し、
             // 既存のコネクションを利用する場合は、既存のコネクションを返す
-            $already_exists = array_key_exists(self::$_connections, $connectionName);
+            $already_exists = array_key_exists($connectionName, self::$_connections);
             if ($already_exists and $newConnection === false)
             {
                 return self::$_connections[$connectionName];
             }
 
             // 新しい接続を生成
-            $instance = D5_DB_Connection::connect($host, $user, $passwd, $newConnection);
+            $instance = D5_DB_Connection::connect($host, $user, $passwd);
 
             $already_exists === false
                 and self::$_connections[$connectionName] = $instance;
 
             // 実行中で最初に接続したコネクションをデフォルトに設定
-            count(self::$_connections) === 0)
+            count(self::$_connections) === 0
                 and self::$_connections[self::DEFALT_CONNECTION_NAME] = $instance;
 
             return $instance;
@@ -249,7 +249,7 @@ class D5_DB
     public static function errorCode($connection = null)
     {
         return self::instance($connection)->errorCode();
-    };
+    }
 
 
     /**

@@ -7,7 +7,7 @@
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-abstract class Roose_DB_Resultset implements Iterator
+abstract class D5_DB_Resultset implements Iterator
 {
     const FETCH_BOTH = 1;
     const FETCH_NUM = 2;
@@ -170,7 +170,7 @@ abstract class Roose_DB_Resultset implements Iterator
 
         if (isset($this->_fetched_rows[$i]) === false) {
             // 次の行のデータが取り出されていない時、次の行を取り出します。
-            $this->_fetched_rows[$i] = $this->_fetch();
+            $this->_fetched_rows[$i] = $this->_fetch($this->_result);
         }
 
         $this->_itr_index++;
@@ -202,7 +202,7 @@ abstract class Roose_DB_Resultset implements Iterator
 
         if (! isset($this->_fetched_rows[$this->_cursor]))  {
             // 次の行が読み込まれていなければ読み込む
-            $this->_fetched_rows[$this->_cursor] = $this->_fetch();
+            $this->_fetched_rows[$this->_cursor] = $this->_fetch($this->_result);
         }
 
         return self::_deformRow($this->_fetched_rows[$this->_cursor], $type);

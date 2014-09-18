@@ -116,7 +116,7 @@ abstract class D5_DB_Connection
      *
      * @return boolean
      */
-    public abstract function startTransaction($connection = null);
+    public abstract function startTransaction();
 
 
     /**
@@ -124,7 +124,7 @@ abstract class D5_DB_Connection
      *
      * @return boolean
      */
-    public abstract function commit($connection = null);
+    public abstract function commit();
 
 
     /**
@@ -135,7 +135,7 @@ abstract class D5_DB_Connection
      * @return boolean
      * @throw D5_DB_Exception
      */
-    public abstract function rollback($connection = null);
+    public abstract function rollback();
 
 
     /**
@@ -143,7 +143,7 @@ abstract class D5_DB_Connection
      *
      * @return boolean
      */
-    public abstract function inTransaction($connection = null);
+    public abstract function inTransaction();
 
 
     /**
