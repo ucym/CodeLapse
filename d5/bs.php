@@ -12,15 +12,15 @@ D5_Autoloader::addBasePath(D5_CLASSES);
 
 // クラスの別名を設定
 D5_Autoloader::classAlias(array(
-    'D5_Arr'     => 'Arr',
-    'D5_Calendar' => 'Calendar',
-    'D5_Config'  => 'Config',
-    'D5_Cookie'  => 'Cookie',
-    'D5_DB'      => 'DB',
-    'D5_File'    => 'File',
-    'D5_Input'   => 'Input',
-    'D5_Session' => 'Session',
-    'D5_Security'=> 'Security'
+    'Arr'       => 'D5_Arr',
+    'Calendar'  => 'D5_Calendar',
+    'Config'    => 'D5_Config',
+    'Cookie'    => 'D5_Cookie',
+    'DB'        => 'D5_DB',
+    'File'      => 'D5_File',
+    'Input'     => 'D5_Input',
+    'Security'  => 'D5_Security',
+    'Session'   => 'D5_Session'
 ));
 
 // クラスのパスを設定

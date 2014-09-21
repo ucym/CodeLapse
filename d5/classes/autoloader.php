@@ -84,23 +84,25 @@ class D5_Autoloader
 
 
     /**
-     * クラスの別名を作成します。
-     * @param mixed $original オリジナルのクラス名。
-     * 配列が渡された場合、インデックスを$original、値を$aliasとして繰り返し実行します。
-     * @param string $alias クラスの別名
+     * クラスの別名を登録します。
+     *
+     * @param string $alias    クラスの別名
+     *                         配列が渡された場合、添字を$alias、値を$originalとして処理します。
+     * @param mixed  $original オリジナルのクラス名。
      */
-    public static function classAlias($original, $alias = null)
+    public static function classAlias($alias, $original = null)
     {
         // このメソッド内では、別名クラスの生成は行いません。
         // すべての別名クラスを生成してしまうと、そのクラスが利用されなかった場合に
         // クラスの生成コストが無駄になってしまうためです。
         // そのため、該当のクラスが参照された時に、オートローダ内で生成します。
 
-        // $originalが配列の時
-        if (is_array($original)) {
-            foreach ($original as $o => $a) {
-                self::$aliases[$a] = $o;
+        // $aliasが配列の時
+        if (is_array($alias)) {
+            foreach ($alias as $al => $orig) {
+                self::$aliases[$al] = $orig;
             }
+
             return;
         }
 
@@ -125,7 +127,6 @@ class D5_Autoloader
      */
     public static function load($class)
     {
-
         // 要求されたクラスがクラスの別名として登録されていれば
         // 別名クラスを生成
         if (isset(self::$aliases[$class])) {
