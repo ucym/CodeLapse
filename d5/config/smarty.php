@@ -5,6 +5,7 @@
  * アプリケーションの開始時に Config::load で設定の読み込みを行ってください。
  */
 return array(
+    /*
     // string: テンプレートが保存されているディレクトリ
     'template_dir' => null,
     
@@ -22,4 +23,5 @@ return array(
     
     // string: テンプレートファイルの拡張子
     'extension' => 'tpl'
+    */
 );
