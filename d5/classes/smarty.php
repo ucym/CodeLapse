@@ -108,10 +108,10 @@ class D5_Smarty
      * D5_Smartyインスタンス間で共通の変数を設定します。
      *
      * @param string|array $name   変数名、もしくは、変数名 => 値の連想配列
-     * @param mixed        $value  設定する値
-     * @param boolean      $escape エスケープを行うかを指定します。
+     * @param mixed        $value  (optional) 設定する値
+     * @param boolean      $escape (optional)  エスケープを行うかを指定します。デフォルトはtrueです。
      */
-    public static function setInGlobal($name, $value, $escape = true)
+    public static function setInGlobal($name, $value = null, $escape = true)
     {
         if ($escape !== false) {
             if (is_array($name)) {
