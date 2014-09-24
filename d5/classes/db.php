@@ -133,10 +133,6 @@ class D5_DB
             }
         }
 
-        $db_host        = null;
-        $db_user        = null;
-        $db_password    = null;
-
         $config = D5_Config::get('db', array());
 
         if (array_key_exists($connectionName, $config) === false)
@@ -152,13 +148,15 @@ class D5_DB
             throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
         }
 
-        $host = isset($conf['host']) ? $conf['host'] : null;
-        $user = isset($conf['user']) ? $conf['user'] : null;
-        $pass = isset($conf['password']) ? $conf['password'] : null;
-        $dbname = isset($conf['database']) ? $conf['database'] : null;
+        $host   = D5_Arr::get($conf, 'host');
+        $user   = D5_Arr::get($conf, 'user');
+        $pass   = D5_Arr::get($conf, 'password');
+        $dbname = D5_Arr::get($conf, 'database');
+        $charset = D5_Arr::get($conf, 'charset');
 
         $con = self::connect($host, $user, $pass, false, $connectionName);
-        $dbname !== null and $con->useDB($dbname);
+        ! empty($dbname) and $con->useDB($dbname);
+        ! empty($charset) and $con->setCharset($charset);
 
         return $con;
     }
