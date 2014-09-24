@@ -134,7 +134,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
     public function useDB($dbname)
     {
         if (@ mysql_select_db($dbname, $this->_con) === false) {
-            throw new D5_DB_Exception('データベースの選択に失敗しました。(' . $this->error() . ')', $this->errorCod());
+            throw new D5_DB_Exception('データベースの選択に失敗しました。(' . $this->errorMessage() . ')', $this->errorCode());
         }
     }
 
@@ -261,7 +261,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
     public function rollback()
     {
         if ($this->_inTransaction === false) {
-            throw new D5_DB_Exception('トランザクション外でrollbackメソッドが実行されました。')
+            throw new D5_DB_Exception('トランザクション外でrollbackメソッドが実行されました。');
         }
 
         $result = $this->query('ROLLBACK');
