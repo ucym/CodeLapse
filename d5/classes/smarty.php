@@ -73,8 +73,8 @@ class D5_Smarty
      *                        文字列でない場合はエスケープ処理は行われず、無視されます。
      * @return mixed 安全なHTML文字列、もしくは与えられたオブジェクト
      */
-    private static function escapeHelper($str)
-    {
+    public static function escapeHelper($str)
+    { // エスケープ処理時に外部からコールさせるので publicにする
         if (is_string($str)) {
             return stripcslashes(htmlspecialchars($str));
         }
