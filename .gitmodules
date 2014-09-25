@@ -1,0 +1,3 @@
+[submodule "doc"]
+	path = doc
+	url = https://4af52202f@bitbucket.org/4af52202f/d5-doc.git
