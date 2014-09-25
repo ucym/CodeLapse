@@ -204,7 +204,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
         if (is_bool($result)) {
             return $result;
         } else {
-            return new D5_DB_Resultset($result);
+            return new D5_DB_Resultset_Mysql($result);
         }
     }
 
