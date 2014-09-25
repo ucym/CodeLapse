@@ -90,7 +90,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
      */
     public function __destruct()
     {
-        $this->disconnect();
+        mysql_close($this->_con);
     }
 
 
