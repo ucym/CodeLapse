@@ -337,8 +337,6 @@ abstract class D5_DB_CrudModel implements
 
         //-- SQLに埋め込む値を構築
         foreach ($fields as $f) {
-            if (in_array($f, $primaryKey)) continue;
-
             $quotedFields[] = DB::quoteIdentifier($f);
             $placeholders[] = ':' . $f;
             $values[":$f"] = $this->get($f);
@@ -355,7 +353,9 @@ abstract class D5_DB_CrudModel implements
         //-- 実行
         $result = DB::query($sql, $values);
 
-        if ($result === false) {}
+        if ($result === false) {
+            throw new D5_DBException(DB::errorMessage(), DB::errorCode());
+        }
 
         //-- 保存に成功したら主キー値を取得する。
         if (count($primaryKey) === 1 and $result !== false) {

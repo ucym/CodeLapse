@@ -3,7 +3,7 @@
  * データベースの結果セットラッパー。
  * ドライバーはこのクラスの"_fetch"メソッドのみを実装する必要があります。
  *
- * @package Roose\DB
+ * @package D5\DB
  * @since PHP 5.2.17
  * @version 1.0.0
  */
@@ -21,7 +21,7 @@ abstract class D5_DB_Resultset implements Iterator
      * 一行分のデータを指定形式へ変換します。
      *
      * @param array &$row BOTH形式の行データ
-     * @param int $type Roose_DB_Resultset::FETCH_* のいずれか
+     * @param int $type D5_DB_Resultset::FETCH_* のいずれか
      * @return array 指定形式へ変換された行データ
      */
     private static function & _deformRow(& $row, $type)
@@ -32,7 +32,7 @@ abstract class D5_DB_Resultset implements Iterator
 
         switch ($type) {
 
-            case Roose_DB_Resultset::FETCH_ASSOC:
+            case D5_DB_Resultset::FETCH_ASSOC:
                 $deformedRow = array();
 
                 foreach ($row as $k => & $v) {
@@ -42,7 +42,7 @@ abstract class D5_DB_Resultset implements Iterator
                 return $deformedRow;
                 break;
 
-            case Roose_DB_Resultset::FETCH_NUM  :
+            case D5_DB_Resultset::FETCH_NUM  :
                 $deformedRow = array();
 
                 foreach ($row as $k => & $v) {
@@ -53,7 +53,7 @@ abstract class D5_DB_Resultset implements Iterator
                 break;
 
 
-            case Roose_DB_Resultset::FETCH_BOTH :
+            case D5_DB_Resultset::FETCH_BOTH :
             default:
                 return $row;
         }
@@ -190,11 +190,11 @@ abstract class D5_DB_Resultset implements Iterator
     /**
      * 現在のカーソル位置の次のレコードを取得します。
      * @param int $type (optional) 返されるデータの形式を指定します。
-     *      Roose_DB_Resultset::FETCH_*のいずれかを指定します。
+     *      D5_DB_Resultset::FETCH_*のいずれかを指定します。
      * @return mixed 指定された形式の配列もしくはオブジェクトを返します。
      *      カーソルが最後の行まで到達した時に falseが返されます。
      */
-    public function fetch($type = Roose_DB_Resultset::FETCH_BOTH)
+    public function fetch($type = D5_DB_Resultset::FETCH_BOTH)
     {
         $ret = false;
 
@@ -213,7 +213,7 @@ abstract class D5_DB_Resultset implements Iterator
      * 結果を全件取得します。
      *
      * @param int $type 返されるデータの種類を指定します。
-     *      Roose_DB_Resultset::FETCH_*のいずれかを指定します。
+     *      D5_DB_Resultset::FETCH_*のいずれかを指定します。
      * @return array
      */
     public function & fetchAll($type = self::FETCH_BOTH)
@@ -249,7 +249,7 @@ abstract class D5_DB_Resultset implements Iterator
      *
      * **このメソッドは次の行の内容をBOTH形式で返す必要があります。**
      * fetch, fetchAll, currentメソッドのいずれかがコールされ、次の行のデータが必要になったとき
-     * Roose_DB_Resultsetクラスからコールされます。
+     * D5_DB_Resultsetクラスからコールされます。
      *
      * このメソッドは一律にBOTH形式のデータを返すことで,
      * 他のメソッドが要求されたフェッチ形式(ASSOC, NUM, etc...)にデータを整形することができます。

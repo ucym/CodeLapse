@@ -2,7 +2,7 @@
 /**
  * MySQL関数用 データベース 結果オブジェクト
  *
- * @package Roose\DB
+ * @package D5\DB
  */
 class D5_DB_Resultset_Mysql extends D5_DB_Resultset
 {

@@ -2,7 +2,7 @@
 /**
  * PDO用 データベース 結果オブジェクト
  *
- * @package Roose\DB
+ * @package D5\DB
  * @since PHP 5.2.17
  * @version 1.0.0
  */

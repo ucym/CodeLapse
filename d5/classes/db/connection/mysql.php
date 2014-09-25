@@ -80,7 +80,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
         $this->_con = @mysql_connect($host, $user, $password, $newConnection);
 
         if ($this->_con == false) {
-            throw new D5_DB_Exception('データベースへの接続に失敗しました。(' . mysql_error() . ')', mysql_errno());
+            throw new D5_DBException('データベースへの接続に失敗しました。(' . mysql_error() . ')', mysql_errno());
         }
     }
 
@@ -90,7 +90,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
      */
     public function __destruct()
     {
-        $this->disconnect();
+        mysql_close($this->_con);
     }
 
 
@@ -134,7 +134,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
     public function useDB($dbname)
     {
         if (@ mysql_select_db($dbname, $this->_con) === false) {
-            throw new D5_DB_Exception('データベースの選択に失敗しました。(' . $this->errorMessage() . ')', $this->errorCode());
+            throw new D5_DBException('データベースの選択に失敗しました。(' . $this->errorMessage() . ')', $this->errorCode());
         }
     }
 
@@ -204,7 +204,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
         if (is_bool($result)) {
             return $result;
         } else {
-            return new D5_DB_Resultset($result);
+            return new D5_DB_Resultset_Mysql($result);
         }
     }
 
@@ -261,7 +261,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
     public function rollback()
     {
         if ($this->_inTransaction === false) {
-            throw new D5_DB_Exception('トランザクション外でrollbackメソッドが実行されました。');
+            throw new D5_DBException('トランザクション外でrollbackメソッドが実行されました。');
         }
 
         $result = $this->query('ROLLBACK');

@@ -118,7 +118,7 @@ class D5_Smarty
                 $key = D5_Arr::mapRecursive($name, array('D5_Smarty', 'escapeHelper'));
             }
             else {
-                $value = self::toSafeString($value);
+                $value = self::escapeHelper($value);
             }
         }
 
@@ -223,7 +223,7 @@ class D5_Smarty
             if (is_array($key)) {
                 $key = D5_Arr::mapRecursive($key, array('D5_Smarty', 'escapeHelper'));
             } else {
-                $value = self::toSafeString($value);
+                $value = self::escapeHelper($value);
             }
         }
 
