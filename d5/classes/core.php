@@ -26,7 +26,8 @@ class D5_Core
         D5_Config::addLoadPath(D5_COREPATH . 'config/');
 
         // 出力バッファリングを始める
-        ob_start();
+        // （コマンドラインで実行中はバッファリングしない。表示結果が得られなくなってしまうため）
+        PHP_SAPI !== 'cli' and ob_start();
 
         self::$instance = new self();
     }
