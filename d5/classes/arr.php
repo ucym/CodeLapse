@@ -190,6 +190,41 @@ class D5_Arr
 
 
     /**
+     * 配列の中に指定されたキーが存在するか調べます。
+     *
+     * @param array     $array  調べる配列
+     * @param string    $key    調べるキー
+     * @return boolean
+     */
+    public static function has(array & $array, $key)
+    {
+        if (is_numeric($key)) {
+            // keyが数値ならindexが存在するかチェックして適切な値を返す
+            return isset($array[$key]);
+        }
+
+        if (isset($array[$key])) {
+            return true;
+        }
+
+        $path = explode(".", $key);
+        $index = array_pop($path);
+        $pt = &$array;
+
+        // 多次元配列を掘る
+        foreach ($path as $k) {
+            if (isset($pt[$k]) and is_array($pt[$k])) {
+                $pt = &$pt[$k];
+            } else {
+                return false;
+            }
+        }
+
+        return isset($pt[$index]);
+    }
+
+
+    /**
      * array_map関数の入れ子対応版
      *
      * @param array $array 操作するの配列
