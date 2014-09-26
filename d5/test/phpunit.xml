@@ -11,6 +11,7 @@
     <testsuites>
         <testsuite name="default">
             <file>src/arr.php</file>
+            <file>src/form.php</file>
             <file>src/latebinding.php</file>
             <file>src/db/crudmodel.php</file>
         </testsuite>
