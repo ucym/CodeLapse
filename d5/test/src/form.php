@@ -45,7 +45,7 @@ class Test_D5_Form extends PHPUnit_Framework_TestCase
     public function test_parseName()
     {
         ob_start();
-        D5_Form::text('field#text-field.form-control', 'value');
+        D5_Form::text('field #text-field.form-control', 'value');
         $out = ob_get_clean();
 
         $this->assertContains('class="form-control"', $out);
@@ -54,7 +54,7 @@ class Test_D5_Form extends PHPUnit_Framework_TestCase
         //-- エラー処理
         // 数字からはじまる不正なID/クラスを無視するかテストする
         ob_start();
-        D5_Form::text('field#1text.1form-control.valid', 'value');
+        D5_Form::text('field #1text.1form-control.valid', 'value');
         $this->assertContains('class="valid"', $out);
         $this->assertNotContains('1form-control', $out);
         $this->assertNotContains('1text', $out);
