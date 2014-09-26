@@ -55,6 +55,7 @@ class Test_D5_Form extends PHPUnit_Framework_TestCase
         // 数字からはじまる不正なID/クラスを無視するかテストする
         ob_start();
         D5_Form::text('field #1text.1form-control.valid', 'value');
+        $out = ob_get_clean();
         $this->assertContains('class="valid"', $out);
         $this->assertNotContains('1form-control', $out);
         $this->assertNotContains('1text', $out);
