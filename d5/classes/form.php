@@ -52,6 +52,10 @@ class D5_Form
         preg_match_all('/\.([a-zA-Z](?:[\w-]?)+)/', $name, $matched_classes);
         isset($matched_classes[1]) and $attr['class'] = implode(' ', $matched_classes[1]);
 
+        if (! isset($attr['name'])) {
+            throw new Exception('D5_Form フィールド名構文エラー、 フィールド名の直後に半角スペースがあるか確認して下さい。');
+        }
+
         return $attr;
     }
 
@@ -218,7 +222,6 @@ class D5_Form
                             : (array) $userAttr;
 
         // name, id, class, value 属性を取得
-        // (id, classは未実装)
         $names      = self::parseName($name);
         $value      = self::getValue($names['name'], $form);
 
