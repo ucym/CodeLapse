@@ -1,6 +1,6 @@
 <?php
 /**
- * TODO
+ * フォームの生成とフォームへの値の復元を行うクラスです。
  *
  * ``` php
  * <?php
@@ -23,6 +23,15 @@ class D5_Form
     /**
      * フィールド名をHTML属性に変換します。
      *
+     * フィールド名にはCSSのセレクタ記法を使って要素のIDとクラスを指定できます。
+     * 書き方は以下のとおりです。
+     *
+     * ```
+     * name #id.class.class2
+     * ```
+     * 最初にname属性に設定する名前を指定し、その後ろに""半角スペースを一つ空けて""
+     * #IDや.classを指定します。
+     *
      * @param string $name フィールド名
      * @return array nameキーを含む配列
      */
@@ -31,7 +40,7 @@ class D5_Form
         $attr = array();
 
         // nameの取り出し
-        preg_match('/^([\w-]+?)(?:[\.#]|$)/s', $name, $matched_name);
+        preg_match('/^([\w-]+?)(?: |$)/s', $name, $matched_name);
         isset($matched_name[1]) and $attr['name'] = $matched_name[1];
 
         // IDの取り出し
@@ -40,7 +49,7 @@ class D5_Form
         isset($matched_id[1]) and $attr['id'] = $matched_id[1];
 
         // クラスの取り出し
-        preg_match_all('/\.([a-zA-Z](?:[\w]?)+)/', $name, $matched_classes);
+        preg_match_all('/\.([a-zA-Z](?:[\w-]?)+)/', $name, $matched_classes);
         isset($matched_classes[1]) and $attr['class'] = implode(' ', $matched_classes[1]);
 
         return $attr;
@@ -413,7 +422,7 @@ class D5_Form
         $buf            = array();
         $overrideAttr   = self::parseName($name);
         $values         = (array) self::getValue($overrideAttr['name'], $form);
-        $attr           = is_string($attr) ?
+        $userAttr       = is_string($attr) ?
                             self::parseHTMLAttr($attr)
                             : (array) $attr;
 
@@ -441,13 +450,13 @@ class D5_Form
                 $buf[] = self::buildHTML('option', $viewName, true, $attr);
             }
             else {
-                $attr = array();
+                $attr = array('value' => $value);
                 in_array($value, $values) and $attr['selected'] = 'selected';
                 $buf[] = self::buildHTML('option', $viewName, true, $attr);
             }
         }
 
-        echo self::buildHTML('select', implode('', $buf), true, array_merge($attr, $overrideAttr));
+        echo self::buildHTML('select', implode('', $buf), true, array_merge($userAttr, $overrideAttr));
     }
 
 
