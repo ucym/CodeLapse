@@ -27,10 +27,23 @@ class D5_Form
      * @return array nameキーを含む配列
      */
     private static function parseName($name)
-
     {
-        // TODO CSSセレクタ構文のパース
-        return array('name' => $name);
+        $attr = array();
+
+        // nameの取り出し
+        preg_match('/^([\w-]+?)(?:[\.#]|$)/s', $name, $matched_name);
+        isset($matched_name[1]) and $attr['name'] = $matched_name[1];
+
+        // IDの取り出し
+        // ex: Hit-> #name, #name_input-hoge; No Hit-> #-a, #0aa...
+        preg_match('/#([a-zA-Z](?:[\w-]?)+?)(?:[\.#]|$)/', $name, $matched_id);
+        isset($matched_id[1]) and $attr['id'] = $matched_id[1];
+
+        // クラスの取り出し
+        preg_match_all('/\.([a-zA-Z](?:[\w]?)+)/', $name, $matched_classes);
+        isset($matched_classes[1]) and $attr['class'] = implode(' ', $matched_classes[1]);
+
+        return $attr;
     }
 
 
@@ -48,8 +61,60 @@ class D5_Form
             return $attrStr;
         }
 
+        $attr = array();
+        $str = preg_split("//u", $attrStr, -1, PREG_SPLIT_NO_EMPTY);
+        $chars = count($str);
 
-        // TODO
+        $buf = array('');
+        $key = null;
+        $val = null;
+        $quote = null;
+
+        for ($i = 0; $i < $chars; $i++) {
+            $c = $str[$i];
+
+            switch ($c) {
+                case '=':
+                    if ($quote === null) {
+                        $key = implode('', $buf);
+                        $buf = array('');
+                    }
+
+                    break;
+
+                case '\'':
+                case '"' :
+                    if ($quote === null) {
+                        $quote = $c;
+                    }
+                    else if ($quote === $c) {
+                        $val = implode('', $buf);
+                        $buf = array('');
+                        $quote = null;
+                    }
+                    else {
+                        $buf[] = $c;
+                    }
+
+                    break;
+
+                default:
+                    $buf[] = $c;
+            }
+
+            if ($key !== null and $val !== null) {
+                $attr[$key] = $val;
+                $key = null;
+                $val = null;
+
+                // スペースをチェック
+                if (++$i < $chars and $str[$i] !== ' ') {
+                    throw new Exception('D5_Form HTML属性構文エラー');
+                }
+            }
+        }
+
+        return $attr;
     }
 
 
@@ -81,12 +146,20 @@ class D5_Form
 
 
     /**
+     * HTMLタグを生成します。
      *
+     * @param string    $tag        タグ名
+     * @param string    $inner      （省略可）タグの内部コンテンツ
+     * @param boolean   $close      （省略可）閉じタグをつけるか
+     * @param array     $attributes （省略可）設定する属性。 "属性名" => "値"の連想配列
+     * @return string HTML
      */
     private static function buildHTML($tag, $inner = null, $close = true, array $attributes = array())
     {
         $buf = array('<');
         $buf[] = $tag;
+
+        $attributes = array_reverse($attributes, true);
 
         foreach ($attributes as $attr => $value) {
             $buf[] = ' ';
@@ -131,7 +204,9 @@ class D5_Form
         $overAttr = array_merge($attr, array('type' => $type));
 
         // 属性値を準備
-        $attributes = (array) $userAttr;
+        $attributes = is_string($userAttr) ?
+                            self::parseHTMLAttr($userAttr)
+                            : (array) $userAttr;
 
         // name, id, class, value 属性を取得
         // (id, classは未実装)
@@ -253,7 +328,9 @@ class D5_Form
         $names  = self::parseName($name);
         $value  = self::getValue($names['name'], $form);
 
-        $userAttr = $attr;
+        $userAttr = is_string($attr) ?
+                        self::parseHTMLAttr($attr)
+                        : (array) $attr;
         $attr = array('name' => $names['name']);
 
         echo self::buildHTML('textarea', htmlspecialchars($value), true, array_merge($userAttr, $attr));
@@ -336,6 +413,9 @@ class D5_Form
         $buf            = array();
         $overrideAttr   = self::parseName($name);
         $values         = (array) self::getValue($overrideAttr['name'], $form);
+        $attr           = is_string($attr) ?
+                            self::parseHTMLAttr($attr)
+                            : (array) $attr;
 
         // option要素を構築
         foreach ($selection as $viewName => $value) {
@@ -397,7 +477,10 @@ class D5_Form
      */
     public static function submit($value, $attr = array())
     {
-        $attr = array_merge((array) $attr, array('type' => 'submit'));
+        $attr = is_string($attr) ?
+                    self::parseHTMLAttr($attr)
+                    : (array) $attr;
+        $attr = array_merge($attr, array('type' => 'submit'));
         echo self::buildHTML('input', null, false, $attr);
     }
 }
