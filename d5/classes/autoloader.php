@@ -20,7 +20,7 @@ class D5_Autoloader
     private static $classes = array();
 
     private static $aliases = array();
-    
+
 
     /**
      * クラスファイルが保存されているディレクトリへのパスを登録します。
@@ -52,7 +52,7 @@ class D5_Autoloader
      * @param string $namespace クラス接頭辞名
      * @param string $path 対応するクラスフォルダ
      */
-    public function addNamespace($namespace, $path)
+    public static function addNamespace($namespace, $path)
     {
         if (isset(self::$namespaces[$namespace]) or is_dir($path) === false) {
             return;
