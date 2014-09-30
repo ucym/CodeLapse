@@ -32,3 +32,4 @@ class D5_Core
         self::$instance = new self();
     }
 }
+

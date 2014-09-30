@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <script src="../js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">50</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">7</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1530913669"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1530913669" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/D5_Arr.html">D5_Arr</a></li>
+                                                    <li class="class"><a href="../classes/D5_Autoloader.html">D5_Autoloader</a></li>
+                                                    <li class="class"><a href="../classes/D5_BootstrapBuilder.html">D5_BootstrapBuilder</a></li>
+                                                    <li class="class"><a href="../classes/D5_Calender.html">D5_Calender</a></li>
+                                                    <li class="class"><a href="../classes/D5_Config.html">D5_Config</a></li>
+                                                    <li class="class"><a href="../classes/D5_Cookie.html">D5_Cookie</a></li>
+                                                    <li class="class"><a href="../classes/D5_Core.html">D5_Core</a></li>
+                                                    <li class="class"><a href="../classes/D5_DB.html">D5_DB</a></li>
+                                                    <li class="class"><a href="../classes/D5_DB_Connection.html">D5_DB_Connection</a></li>
+                                                    <li class="class"><a href="../classes/D5_DB_Connection_Mysql.html">D5_DB_Connection_Mysql</a></li>
+                                                    <li class="class"><a href="../classes/D5_DB_Connection_PDO.html">D5_DB_Connection_PDO</a></li>
+                                                    <li class="class"><a href="../classes/D5_DB_CrudModel.html">D5_DB_CrudModel</a></li>
+                                                    <li class="class"><a href="../classes/D5_DB_Resultset.html">D5_DB_Resultset</a></li>
+                                                    <li class="class"><a href="../classes/D5_DB_Resultset_Mysql.html">D5_DB_Resultset_Mysql</a></li>
+                                                    <li class="class"><a href="../classes/D5_DB_Resultset_PDO.html">D5_DB_Resultset_PDO</a></li>
+                                                    <li class="class"><a href="../classes/D5_DBException.html">D5_DBException</a></li>
+                                                    <li class="class"><a href="../classes/D5_File.html">D5_File</a></li>
+                                                    <li class="class"><a href="../classes/D5_Form.html">D5_Form</a></li>
+                                                    <li class="class"><a href="../classes/D5_Input.html">D5_Input</a></li>
+                                                    <li class="class"><a href="../classes/D5_LateBinding.html">D5_LateBinding</a></li>
+                                                    <li class="class"><a href="../classes/D5_Security.html">D5_Security</a></li>
+                                                    <li class="class"><a href="../classes/D5_Session.html">D5_Session</a></li>
+                                                    <li class="class"><a href="../classes/D5_Smarty.html">D5_Smarty</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>D5_File</h1>
+                    <p><em>ファイル操作関数をラップするクラス
+（開いたファイルは自動的にクローズされます。）</em></p>
+                    <p>Example:</p>
+<pre><code>   $file = new D5_File('path/to/open/file');
+   $file-&gt;append('hello world');
+   echo $file-&gt;getContents(); // -&gt; "hello world"</code></pre>
+
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/D5_File.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_getPointer" class="">getPointer()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_lock" class="">lock()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_unlock" class="">unlock()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_getFilename" class="">getFilename()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_clearContents" class="">clearContents()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_putContents" class="">putContents()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_getContents" class="">getContents()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_getContentsAsArray" class="">getContentsAsArray()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_write" class="">write()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_append" class="">append()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_readline" class="">readline()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_tell" class="">tell()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_getPosition" class="">getPosition()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_seek" class="">seek()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_setPosition" class="">setPosition()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_rewind" class="">rewind()</a><br />
+                                                                    <a href="../classes/D5_File.html#method_isEnd" class="">isEnd()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/D5_File.html#constant_SEEK_SET" class="">SEEK_SET</a><br />
+                                                                    <a href="../classes/D5_File.html#constant_SEEK_ADD" class="">SEEK_ADD</a><br />
+                                                                    <a href="../classes/D5_File.html#constant_SEEK_END" class="">SEEK_END</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/D5_File.html#property_filename" class="">$filename</a><br />
+                                                                    <a href="../classes/D5_File.html#property_pointer" class="">$pointer</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/file.html"><div class="path-wrapper">file.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper"></div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\D5_File</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SEEK_SET" name="constant_SEEK_SET" class="anchor"></a>
+            <article id="constant_SEEK_SET" class="constant">
+                <h3 class="">SEEK_SET</h3>
+                <pre class="signature">SEEK_SET</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SEEK_ADD" name="constant_SEEK_ADD" class="anchor"></a>
+            <article id="constant_SEEK_ADD" class="constant">
+                <h3 class="">SEEK_ADD</h3>
+                <pre class="signature">SEEK_ADD</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SEEK_END" name="constant_SEEK_END" class="anchor"></a>
+            <article id="constant_SEEK_END" class="constant">
+                <h3 class="">SEEK_END</h3>
+                <pre class="signature">SEEK_END</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_filename" name="property_filename" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$filename</h3>
+                <pre class="signature">$filename : </pre>
+                <p><em>ファイルパス</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            type
+                        </th>
+                        <td>
+                                                            <p>{string}</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_pointer" name="property_pointer" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$pointer</h3>
+                <pre class="signature">$pointer : </pre>
+                <p><em>ファイルのポインタ</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            type
+                        </th>
+                        <td>
+                                                            <p>{resource}</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(string <span class="argument">$filename</span>, boolean|null <span class="argument">$createfile</span>, string|null <span class="argument">$openMode</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$filename </td>
+                                <td><p>オープンするファイル名を指定します。</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean|null</td>
+                                <td>$createfile </td>
+                                <td><p>(optional) ファイルが存在しない場合に作成するか指定します。</p>
+<pre><code>標準はtrueです。</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|null</td>
+                                <td>$openMode </td>
+                                <td><p>(optional) ファイルのモードを指定します。</p>
+<pre><code>このパラメータを設定した場合 $createfileパラメータの内容は無視されます。</code></pre></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getPointer" name="method_getPointer" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getPointer()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getPointer() : resource</pre>
+                <p><em>より高度な操作のために、このインスタンスのファイルポインタを取得します。</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    resource
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_lock" name="method_lock" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">lock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">lock( <span class="argument">$exclusion</span>) : boolean</pre>
+                <p><em>ファイルをロックします。&lt;br&gt;
+成功した場合にTRUEを、失敗した場合はFALSEを返します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$exclusion </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_unlock" name="method_unlock" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">unlock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">unlock() : \{boolean}</pre>
+                <p><em>ファイルのロックを解除します。&lt;br&gt;
+成功した場合にTRUEを、失敗した場合はFALSEを返します。</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    \{boolean}
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFilename" name="method_getFilename" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFilename()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFilename() : \{string}</pre>
+                <p><em>このインスタンスが担当しているファイルの名前を取得します。</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    \{string}
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_clearContents" name="method_clearContents" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">clearContents()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">clearContents() : boolean</pre>
+                <p><em>ファイルの内容をすべて消去します。</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>成功した場合に TRUE を、失敗した場合に FALSE を返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_putContents" name="method_putContents" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">putContents()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">putContents( <span class="argument">$string</span>) : boolean</pre>
+                <p><em>ファイルにテキストを出力します。&lt;br&gt;
+（それまでのファイルの内容は削除されます。）</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$string </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>成功時に TRUEを、失敗した時に FALSEを返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getContents" name="method_getContents" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getContents()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getContents(integer <span class="argument">$offset</span>, integer <span class="argument">$maxlen</span>) : mixed</pre>
+                <p><em>ファイルの内容をテキストとして取得します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$offset </td>
+                                <td><p>読み込みを開始するオフセット位置</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$maxlen </td>
+                                <td><p>読み込むデータの最大バイト数</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>読み込んだデータを返します。失敗した場合に FALSE を返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://www.php.net/manual/ja/function.file-get-contents.php"><span class="namespace-wrapper">flie_get_contents関数</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getContentsAsArray" name="method_getContentsAsArray" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getContentsAsArray()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getContentsAsArray(boolean <span class="argument">$rmNl</span>, integer <span class="argument">$offset</span>, integer <span class="argument">$maxlen</span>) : mixed</pre>
+                <p><em>ファイルの内容を一行ごとに分割した配列として取得します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$rmNl </td>
+                                <td><p>trueを指定されると行末の改行コードを除去します。</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$offset </td>
+                                <td><p>読み込みを開始するオフセット位置</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$maxlen </td>
+                                <td><p>読み込むデータの最大バイト数</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>読み込んだデータを返します。失敗した場合に FALSE を返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_write" name="method_write" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">write()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">write(string <span class="argument">$string</span>, integer <span class="argument">$length</span>) : mixed</pre>
+                <p><em>ファイルにテキストを書き込みます。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$string </td>
+                                <td><p>書き込む文字列</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$length </td>
+                                <td><p>書き込む長さ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>成功した時に書き込んだバイト数、失敗時に FALSE を返します</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://www.php.net/manual/ja/function.fwrite.php"><span class="namespace-wrapper">fwrite関数</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_append" name="method_append" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">append()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">append(string <span class="argument">$string</span>, integer <span class="argument">$length</span>, boolean <span class="argument">$seektoend</span>)</pre>
+                <p><em>ファイルにテキストを追記します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$string </td>
+                                <td><p>書き込む文字列</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$length </td>
+                                <td><p>書き込む長さ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$seektoend </td>
+                                <td><p>TRUE が指定された場合、ファイルポインタをファイルの終端に移動します。</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_readline" name="method_readline" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">readline()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">readline(integer <span class="argument">$length</span>) : mixed</pre>
+                <p><em>ファイルから一行取得します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$length </td>
+                                <td><p>最大の読み出し長</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>読み込みに成功した時に行の内容を、失敗した時にFALSEを返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://www.php.net/manual/ja/function.fgets.php"><span class="namespace-wrapper">fgets関数</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_tell" name="method_tell" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">tell()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">tell() : mixed</pre>
+                <p><em>現在のファイルポインタの位置を取得します。</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>ファイルポインタの位置を整数値で返します。エラーが起こった場合 FALSE を返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://www.php.net/manual/ja/function.ftell.php"><span class="namespace-wrapper">ftell関数</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getPosition" name="method_getPosition" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getPosition()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getPosition() : mixed</pre>
+                <p><em>tellメソッドの別名</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>ファイルポインタの位置を整数値で返します。エラーが起こった場合 FALSE を返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_seek" name="method_seek" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">seek()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">seek(integer <span class="argument">$offset</span>, integer <span class="argument">$whence</span>) : boolean</pre>
+                <p><em>ファイルポインタを移動します。
+(http://www.php.net/manual/ja/function.fseek.php)</em></p>
+                <p>whenceの値について</p>
+<ul>
+<li>whence の値は以下のようになります。</li>
+<li>File::SEEK_SET - 位置を offset バイト目に設定する</li>
+<li>File::SEEK_ADD - 現在の位置に offset を加えた位置に設定する</li>
+<li>
+<p>File::SEEK_END - ファイル終端に offset を加えた位置に設定する</p>
+</li>
+<li>ファイルの終端から数えた位置に移動するには、$whenceを File::SEEK_END として、負の値をoffsetに渡す方法があります。</li>
+</ul>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$offset </td>
+                                <td><p>ファイルポインタの位置。</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$whence </td>
+                                <td><p>ファイルポインタの位置の計算方法。</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>成功すると TRUE を返し、そうでなければ FALSE を返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setPosition" name="method_setPosition" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setPosition()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setPosition(integer <span class="argument">$offset</span>, integer <span class="argument">$whence</span>) : boolean</pre>
+                <p><em>seekメソッドの別名</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$offset </td>
+                                <td><p>ファイルポインタの位置。</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$whence </td>
+                                <td><p>ファイルポインタの位置の計算方法。</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>成功すると TRUE を返し、そうでなければ FALSE を返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_rewind" name="method_rewind" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">rewind()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">rewind() : boolean</pre>
+                <p><em>ファイルポインタをファイルの先頭へ移動します。</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>成功すると TRUE を返し、そうでなければ FALSE を返します。</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_isEnd" name="method_isEnd" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">isEnd()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isEnd() : boolean</pre>
+                <p><em>ファイルポインタがファイル終端に達しているかどうかを調べます。</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">file.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/file.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on September 30th, 2014 at 11:00.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
