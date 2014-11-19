@@ -2,7 +2,7 @@
 /**
  * ファイル操作関数をラップするクラス
  * （開いたファイルは自動的にクローズされます。）
- *  
+ *
  *    Example:
  *        $file = new D5_File('path/to/open/file');
  *        $file->append('hello world');
@@ -39,14 +39,14 @@ class D5_File
         if ($openMode === null) {
             $openMode = ($createfile === true ? 'c+b' : 'r+b');
         }
-        
-        $this->filename = $filename;
+
+        $this->filename = realpath($filename);
         $this->pointer = fopen($filename, $openMode);
     }
-    
+
     /**
      * @ignore
-     */ 
+     */
     public function __destruct()
     {
         try {
@@ -146,14 +146,14 @@ class D5_File
     public function getContentsAsArray($rmNl = false, $offset = -1, $maxlen = null)
     {
         $content = $this->getContnts();
-        
+
         if ($content === false) {
             return false;
         }
-        
+
         // TODO
         throw new Exception("実装されていません。");
-        
+
         $result = explode("\n", $content);
 
         // 行末の改行コードは除去しない（
@@ -196,7 +196,7 @@ class D5_File
 
     /**
      * ファイルにテキストを追記します。
-     * 
+     *
      * @param string $string  書き込む文字列
      * @param int $length  書き込む長さ
      * @param boolean $seektoend TRUE が指定された場合、ファイルポインタをファイルの終端に移動します。
@@ -212,7 +212,7 @@ class D5_File
         // 元の位置にポインタを移動
         $seektoend !== false and fseek($pt, $_pos);
     }
-    
+
     /**
      * ファイルから一行取得します。
      * @link http://www.php.net/manual/ja/function.fgets.php fgets関数
@@ -255,9 +255,9 @@ class D5_File
      *  -   File::SEEK_SET - 位置を offset バイト目に設定する
      *  -   File::SEEK_ADD - 現在の位置に offset を加えた位置に設定する
      *  -   File::SEEK_END - ファイル終端に offset を加えた位置に設定する
-     * 
+     *
      *  - ファイルの終端から数えた位置に移動するには、$whenceを File::SEEK_END として、負の値をoffsetに渡す方法があります。
-     * 
+     *
      * @param int $offset  ファイルポインタの位置。
      * @param int $whence  ファイルポインタの位置の計算方法。
      * @return boolean  成功すると TRUE を返し、そうでなければ FALSE を返します。
