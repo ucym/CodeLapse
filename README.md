@@ -1,4 +1,4 @@
-# D5 - PHP 5.2.x Library [![Build Status](https://drone.io/github.com/4af52202f/d5/status.png)](https://drone.io/github.com/4af52202f/d5/latest)
+# D5 - PHP 5.2.x Library [![Build Status](https://drone.io/github.com/wn9FHW2nhO/d5/status.png)](https://drone.io/github.com/wn9FHW2nhO/d5/latest)
 
 
 ## How to use
@@ -20,6 +20,9 @@ Do anything...
   - Input
   - Cookie
   - Session
+- Mail wrapper
+    - Support plain text & HTML
+    - Support multiple file attach.
 - Smarty wrapper
 - Late static binding on PHP 5.2.x
   - LateBinding
