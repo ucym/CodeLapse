@@ -220,7 +220,7 @@ abstract class D5_DB_Resultset implements Iterator
     {
         $deformedRows = array();
 
-        foreach ($this as $k => & $row) {
+        foreach ($this as $k => $row) {
             $deformedRows[$k] = self::_deformRow($row, $type);
         }
 
