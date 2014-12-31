@@ -97,6 +97,16 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
         $result = false;
         $stmt = $this->_con->prepare($sql);
 
+        // PDOのexcuteメソッドがクエリ中にないプレースホルダを渡すことを許容していないため
+        // クエリ中に存在しないプレースホルダを事前に削除する
+        if (is_array($params)) {
+            foreach ($params as $k => & $v) {
+                if (is_string($k) and mb_strpos($sql, $k) === -1) {
+                    unset($params[$k]);
+                }
+            }
+        }
+
         $result = is_array($params) ? $stmt->execute($params) : $stmt->execute();
 
         if ($result === false) {
