@@ -117,7 +117,7 @@ class D5_Config
         $namespace = array();
 
         if ($key === null) {
-            return $this->config;
+            return self::$config;
         }
 
         //-- $key から名前空間を抽出する
