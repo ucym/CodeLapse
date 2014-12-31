@@ -120,13 +120,34 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
         // クエリ中に存在しないプレースホルダを事前に削除する
         if (is_array($params)) {
             foreach ($params as $k => & $v) {
-                if (is_string($k) and mb_strpos($sql, $k) === -1) {
-                    unset($params[$k]);
+
+                is_int($k) and $k += 1;
+
+                switch (true) {
+                    case is_string($v) :
+                    case is_float($v) :
+                        $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                        break;
+
+                    case is_bool($v) :
+                        $stmt->bindParam($k, $v, PDO::PARAM_BOOL);
+                        break;
+
+                    case is_int($v) :
+                        $stmt->bindParam($k, $v, PDO::PARAM_INT);
+                        break;
+
+                    case is_null($v) :
+                        $stmt->bindParam($k, $v, PDO::PARAM_NULL);
+                        break;
+
+                    default :
+                        $stmt->bindParam($k, $v, PDO::PARAM_STR);
                 }
             }
         }
 
-        $result = is_array($params) ? $stmt->execute($params) : $stmt->execute();
+        $result = $stmt->execute();
 
         if ($result === false) {
             return false;
