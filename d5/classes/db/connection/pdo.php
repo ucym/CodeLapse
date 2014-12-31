@@ -6,6 +6,8 @@
  */
 class D5_DB_Connection_PDO extends D5_DB_Connection
 {
+    private $lastStatement = null;
+
     /**
      * データベースコネクションを生成します。
      *
@@ -44,7 +46,15 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
      */
     public function errorMessage()
     {
-        $err = $this->_con->errorInfo();
+        if ($this->lastStatement !== null)
+        {
+            $err = $this->lastStatement->errorInfo();
+        }
+
+        if (! isset($err) or $err[2] === null) {
+            $err = $err = $this->_con->errorInfo();
+        }
+
         return $err[2];
     }
 
@@ -57,7 +67,15 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
      */
     public function errorCode()
     {
-        $err = $this->_con->errorInfo();
+        if ($this->lastStatement !== null)
+        {
+            $err = $this->lastStatement->errorInfo();
+        }
+
+        if (! isset($err) or $err[2] === null) {
+            $err = $this->_con->errorInfo();
+        }
+
         return $err[1] !== null ? $err[1] : 0;
     }
 
@@ -96,6 +114,7 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
     {
         $result = false;
         $stmt = $this->_con->prepare($sql);
+        $this->lastStatement = $stmt;
 
         // PDOのexcuteメソッドがクエリ中にないプレースホルダを渡すことを許容していないため
         // クエリ中に存在しないプレースホルダを事前に削除する
