@@ -27,7 +27,7 @@ abstract class D5_DB_Resultset implements Iterator
     private static function & _deformRow(& $row, $type)
     {
         if ($row === false) {
-            return false;
+            return $row;
         }
 
         switch ($type) {
