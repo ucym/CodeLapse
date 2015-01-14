@@ -367,7 +367,7 @@ class D5_Form
                         : (array) $attr;
         $attr = array('name' => $names['name']);
 
-        echo self::buildHTML('textarea', htmlspecialchars($value), true, array_merge($userAttr, $attr));
+        echo self::buildHTML('textarea', htmlspecialchars($value), true, array_merge($userAttr, $names, $attr));
     }
 
 
