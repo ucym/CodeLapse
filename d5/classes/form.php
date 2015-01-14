@@ -276,9 +276,7 @@ class D5_Form
         $overAttr = array_merge($attr, array('type' => $type));
 
         // 属性値を準備
-        $attributes = is_string($userAttr) ?
-                            self::parseHTMLAttr($userAttr)
-                            : (array) $userAttr;
+        $attributes = self::parseHTMLAttr($userAttr);
 
         // name, id, class, value 属性を取得
         $names      = self::parseName($name);
@@ -421,9 +419,7 @@ class D5_Form
         $names  = self::parseName($name);
         $value  = self::getValue($names['name'], $form);
 
-        $userAttr = is_string($attr) ?
-                        self::parseHTMLAttr($attr)
-                        : (array) $attr;
+        $userAttr = self::parseHTMLAttr($attr);
         $attr = array('name' => $names['name']);
 
         echo self::buildHTML('textarea', htmlspecialchars($value), true, array_merge($userAttr, $names, $attr));
@@ -507,9 +503,7 @@ class D5_Form
         $buf            = array();
         $overrideAttr   = self::parseName($name);
         $values         = (array) self::getValue($overrideAttr['name'], $form);
-        $userAttr       = is_string($attr) ?
-                            self::parseHTMLAttr($attr)
-                            : (array) $attr;
+        $userAttr       = self::parseHTMLAttr($attr);
 
         // option要素を構築
         foreach ($selection as $viewName => $value) {
@@ -571,9 +565,7 @@ class D5_Form
      */
     public static function submit($value, $attr = array())
     {
-        $attr = is_string($attr) ?
-                    self::parseHTMLAttr($attr)
-                    : (array) $attr;
+        $attr = self::parseHTMLAttr($attr);
         $attr = array_merge($attr, array('type' => 'submit'));
         echo self::buildHTML('input', null, false, $attr);
     }
