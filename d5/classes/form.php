@@ -278,6 +278,28 @@ class D5_Form
 
 
     /**
+     * フォームの開始タグを出力します。
+     *
+     * @param string|array  $attr   （省略可）HTMLに設定する属性。
+     *                               "属性名" => "値"の連想配列、もしくはHTMLの属性部分の文字列
+     *                               （属性部分の文字列 例: "min='0' max='20'"）
+     */
+    public static function open($attr = array())
+    {
+        echo self::buildHTML('form', null, false, $attr);
+    }
+
+
+    /**
+     * フォームの閉じタグを出力します。
+     */
+    public static function close()
+    {
+        echo '</form>';
+    }
+
+
+    /**
      * 不可視フィールドを生成し、出力します。
      *
      * もし、第３引数でvalue属性が指定されていても
