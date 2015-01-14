@@ -103,12 +103,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">50</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">79</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">7</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">7</span>
                                 </a>
                             </li>
                             <li>
@@ -133,19 +133,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1702859941"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-159168611"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1702859941" class="accordion-body collapse in">
+            <div id="namespace-159168611" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
                                                                                                     <li class="class"><a href="../classes/D5_Arr.html">D5_Arr</a></li>
                                                     <li class="class"><a href="../classes/D5_Autoloader.html">D5_Autoloader</a></li>
-                                                    <li class="class"><a href="../classes/D5_BootstrapBuilder.html">D5_BootstrapBuilder</a></li>
-                                                    <li class="class"><a href="../classes/D5_Calender.html">D5_Calender</a></li>
                                                     <li class="class"><a href="../classes/D5_Config.html">D5_Config</a></li>
+                                                    <li class="class"><a href="../classes/D5_Console.html">D5_Console</a></li>
+                                                    <li class="class"><a href="../classes/D5_Console_Driver.html">D5_Console_Driver</a></li>
                                                     <li class="class"><a href="../classes/D5_Cookie.html">D5_Cookie</a></li>
                                                     <li class="class"><a href="../classes/D5_Core.html">D5_Core</a></li>
                                                     <li class="class"><a href="../classes/D5_DB.html">D5_DB</a></li>
@@ -161,9 +161,13 @@
                                                     <li class="class"><a href="../classes/D5_Form.html">D5_Form</a></li>
                                                     <li class="class"><a href="../classes/D5_Input.html">D5_Input</a></li>
                                                     <li class="class"><a href="../classes/D5_LateBinding.html">D5_LateBinding</a></li>
+                                                    <li class="class"><a href="../classes/D5_Mail.html">D5_Mail</a></li>
                                                     <li class="class"><a href="../classes/D5_Security.html">D5_Security</a></li>
                                                     <li class="class"><a href="../classes/D5_Session.html">D5_Session</a></li>
                                                     <li class="class"><a href="../classes/D5_Smarty.html">D5_Smarty</a></li>
+                                                    <li class="class"><a href="../classes/D5_Upload.html">D5_Upload</a></li>
+                                                    <li class="class"><a href="../classes/D5_Validation.html">D5_Validation</a></li>
+                                                    <li class="class"><a href="../classes/D5_Validation_Rules.html">D5_Validation_Rules</a></li>
                                             </ul>
                 </div>
             </div>
@@ -184,7 +188,60 @@
                     <h1><small>\</small>D5_Form</h1>
                     <p><em>フォームの生成とフォームへの値の復元を行うクラスです。</em></p>
                     <pre><code class="language-php">&lt;?php
-</code></pre>
+
+//-- フォームの開始タグを表示します。
+Form::open('method="post" action="post.php"');
+// あるいは Form::open(array('method' =&gt; 'post', 'action' =&gt; 'post.php'));
+
+//-- フォームの閉じタグを表示します。
+Form::close();
+
+//-- テキストフォームを表示します。(echoやprintは不要です。)
+Form::text('firstname');
+     // =&gt; &lt;input type="text" name="firstname"&gt;
+
+//-- ID名とクラス名を指定してテキストフォームを表示します。
+//   このID、クラス指定はすべてのフィールド生成メソッドで利用可能です。
+//-- （フィールド名とID、クラス名の間にスペースが必要です。）
+Form::text('firstname #input_firstname.form-control.regist-name');
+     // =&gt; &lt;input type="text" name="firstname" id="input_firstname" class="form-control regist-name"&gt;
+
+//-- 属性を指定してテキストフォームを表示します。
+Form::text('firstname', array('required', 'maxlength' =&gt; '10'));
+     // 別の書き方 : Form::text('firstname', 'required maxlength="10"'));
+     // =&gt; &lt;input type="text" name="firstname" required maxlength="10"&gt;
+
+//-- フォームに値を復元させます。
+// フォームに復元させる値を一括設定
+Form::setValue(array(
+     'firstname'     =&gt; 'Boy',
+     'lastname'      =&gt; 'Tom',
+     // 自動的にエスケープされます。
+     'profile'       =&gt; '&lt;script&gt;alert("\'Allo! \'Allo!")&lt;/script&gt;'
+));
+
+Form::text('firstname');
+Form::text('lastname');
+Form::textarea('profile');
+     // =&gt; &lt;input type="text" name="firstname" value="Tom"&gt;
+     // =&gt; &lt;input type="text" name="lastname" value="Boy"&gt;
+     // =&gt; &lt;textarea name="profile"&gt;&amp;lt;script&amp;gt;alert(&amp;quot;\'Allo!\'Allo!&amp;quot;)&amp;lt;/sctipt&amp;gt;&lt;/textarea&gt;
+
+//-- チェックボックスを表示します。
+Form::checkbox('hobby[]', 'Golf');
+Form::checkbox('hobby[]', 'Baseball');
+     // =&gt; &lt;input type="checkbox" name="hobby[]" value="Golf"&gt;
+     // =&gt; &lt;input type="checkbox" name="hobby[]" value="Baseball"&gt;
+
+//-- セレクトボックスを表示します。
+$selections = array('Select' =&gt; array('required', 'selected'), 'male' =&gt; 0, 'female' =&gt; 1);
+Form::select('gender', $selections);
+     // =&gt; (実際の出力は整形されていません)
+     //      &lt;select name="gender"&gt;
+     //          &lt;option required selected&gt;Select&lt;/option&gt;
+     //          &lt;option value="0"&gt;male&lt;/option&gt;
+     //          &lt;option value="1"&gt;female&lt;/option&gt;
+     //      &lt;/select&gt;</code></pre>
 
                     <section id="summary">
                         <h2>Summary</h2>
@@ -203,6 +260,8 @@
                             <section class="span4">
                                                                     <a href="../classes/D5_Form.html#method_setValue" class="">setValue()</a><br />
                                                                     <a href="../classes/D5_Form.html#method_getValue" class="">getValue()</a><br />
+                                                                    <a href="../classes/D5_Form.html#method_open" class="">open()</a><br />
+                                                                    <a href="../classes/D5_Form.html#method_close" class="">close()</a><br />
                                                                     <a href="../classes/D5_Form.html#method_hidden" class="">hidden()</a><br />
                                                                     <a href="../classes/D5_Form.html#method_text" class="">text()</a><br />
                                                                     <a href="../classes/D5_Form.html#method_password" class="">password()</a><br />
@@ -419,6 +478,68 @@ $values = array(
                     string|array|null
                                             &mdash; <p>取得した値</p>
                                                 </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_open" name="method_open" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">open()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">open(string|array <span class="argument">$attr</span>)</pre>
+                <p><em>フォームの開始タグを出力します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|array</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                          "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                          （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_close" name="method_close" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">close()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">close()</pre>
+                <p><em>フォームの閉じタグを出力します。</em></p>
+                
+
+                
+                
+                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -735,8 +856,9 @@ $values = array(
                 <p>第２引数 $selectionは以下の形式でなければなりません。</p>
 <pre><code class="language-php">array(
    '表示名' =&gt; "value属性の値",
-   // 属性を指定する場合は、配列の最初、もしくは、'valu'eキーにvalue属性の値を指定してください。
+   // 属性を指定する場合は、配列の最初、もしくは、'value'キーにvalue属性の値を指定してください。
    // '表示名' =&gt; array("value属性の値", '属性名' =&gt; '値', '属性名2' =&gt; '値2'),
+   // '表示名' =&gt; array('value' =&gt; '値', '属性名2' =&gt; '値2'),
     '表示名2' =&gt; "value属性の値2",
 )</code></pre>
 <p>TODO optgroup</p>
@@ -1136,7 +1258,7 @@ HTMLの属性だけの文字列です。</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on September 30th, 2014 at 11:00.
+                    on January 14th, 2015 at 07:58.
                 </section>
             </section>
         </section>

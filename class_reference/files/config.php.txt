@@ -27,7 +27,7 @@
  *          $pass = Config::get('db.pass');
  *          $con = mysqli_connect($host, $user, $pass);
  *      ?>
- * 
+ *
  * @package D5
  */
 class D5_Config
@@ -112,9 +112,13 @@ class D5_Config
      * @param string|array $key 取得したい設定名
      * @param mixed $default 値が取得できなかった時の初期値
      */
-    public static function get($key, $default = null)
+    public static function get($key = null, $default = null)
     {
         $namespace = array();
+
+        if ($key === null) {
+            return self::$config;
+        }
 
         //-- $key から名前空間を抽出する
         if (is_array($key)) {

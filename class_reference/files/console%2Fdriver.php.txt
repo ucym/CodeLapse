@@ -1,0 +1,9 @@
+<?php
+abstract class D5_Console_Driver
+{
+    /**
+     * コンソールに
+     */
+    public abstract function log($ob);
+}
+
