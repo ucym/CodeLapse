@@ -21,7 +21,7 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
             $this->_con = new PDO('mysql:host=' . $host, $user, $password);
         }
         catch (PDOException $e) {
-            throw new D5_DBException($e->getMessage(), $e->getCode(), $e);
+            throw new D5_DBException($e->getMessage(), $e->getCode());
         }
     }
 
