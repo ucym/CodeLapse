@@ -18,8 +18,10 @@ D5_Autoloader::classAlias(array(
     'Cookie'    => 'D5_Cookie',
     'DB'        => 'D5_DB',
     'File'      => 'D5_File',
+    'Form'      => 'D5_Form',
     'Input'     => 'D5_Input',
     'Mail'      => 'D5_Mail',
+    'Pager'     => 'D5_Pager',
     'Security'  => 'D5_Security',
     'Session'   => 'D5_Session'
 ));

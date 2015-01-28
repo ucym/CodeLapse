@@ -1,0 +1,29 @@
+<?php
+class D5_TestHelper_ObCapture
+{
+    public function __construct()
+    {
+        ob_start();
+    }
+
+    public function e() {
+        return $this;
+    }
+
+    public function end()
+    {
+        return ob_get_clean();
+    }
+}
+
+class D5_TestHelper
+{
+    /**
+     * @return D5_TestHelper_ObCapture
+     */
+    public static function ob()
+    {
+        return new D5_TestHelper_ObCapture();
+    }
+}
+

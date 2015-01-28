@@ -5,6 +5,65 @@
  * ``` php
  * <?php
  *
+ * //-- フォームの開始タグを表示します。
+ * Form::open('method="post" action="post.php"');
+ * // あるいは Form::open(array('method' => 'post', 'action' => 'post.php'));
+ *
+ * //-- フォームの閉じタグを表示します。
+ * Form::close();
+ *
+ *
+ * //-- テキストフォームを表示します。(echoやprintは不要です。)
+ * Form::text('firstname');
+ *      // => <input type="text" name="firstname">
+ *
+ *
+ * //-- ID名とクラス名を指定してテキストフォームを表示します。
+ * //   このID、クラス指定はすべてのフィールド生成メソッドで利用可能です。
+ * //-- （フィールド名とID、クラス名の間にスペースが必要です。）
+ * Form::text('firstname #input_firstname.form-control.regist-name');
+ *      // => <input type="text" name="firstname" id="input_firstname" class="form-control regist-name">
+ *
+ *
+ * //-- 属性を指定してテキストフォームを表示します。
+ * Form::text('firstname', array('required', 'maxlength' => '10'));
+ *      // 別の書き方 : Form::text('firstname', 'required maxlength="10"'));
+ *      // => <input type="text" name="firstname" required maxlength="10">
+ *
+ *
+ * //-- フォームに値を復元させます。
+ * // フォームに復元させる値を一括設定
+ * Form::setValue(array(
+ *      'firstname'     => 'Boy',
+ *      'lastname'      => 'Tom',
+ *      // 自動的にエスケープされます。
+ *      'profile'       => '<script>alert("\'Allo! \'Allo!")</script>'
+ * ));
+ *
+ * Form::text('firstname');
+ * Form::text('lastname');
+ * Form::textarea('profile');
+ *      // => <input type="text" name="firstname" value="Tom">
+ *      // => <input type="text" name="lastname" value="Boy">
+ *      // => <textarea name="profile">&lt;script&gt;alert(&quot;\'Allo!\'Allo!&quot;)&lt;/sctipt&gt;</textarea>
+ *
+ *
+ * //-- チェックボックスを表示します。
+ * Form::checkbox('hobby[]', 'Golf');
+ * Form::checkbox('hobby[]', 'Baseball');
+ *      // => <input type="checkbox" name="hobby[]" value="Golf">
+ *      // => <input type="checkbox" name="hobby[]" value="Baseball">
+ *
+ *
+ * //-- セレクトボックスを表示します。
+ * $selections = array('Select' => array('required', 'selected'), 'male' => 0, 'female' => 1);
+ * Form::select('gender', $selections);
+ *      // => (実際の出力は整形されていません)
+ *      //      <select name="gender">
+ *      //          <option required selected>Select</option>
+ *      //          <option value="0">male</option>
+ *      //          <option value="1">female</option>
+ *      //      </select>
  * ```
  */
 class D5_Form
@@ -217,9 +276,7 @@ class D5_Form
         $overAttr = array_merge($attr, array('type' => $type));
 
         // 属性値を準備
-        $attributes = is_string($userAttr) ?
-                            self::parseHTMLAttr($userAttr)
-                            : (array) $userAttr;
+        $attributes = self::parseHTMLAttr($userAttr);
 
         // name, id, class, value 属性を取得
         $names      = self::parseName($name);
@@ -274,6 +331,28 @@ class D5_Form
     {
         ! is_string($form) and $form = D5_Form::DEFAULT_FORM_NAME;
         return D5_Arr::get(self::$_values, "$form.$field");
+    }
+
+
+    /**
+     * フォームの開始タグを出力します。
+     *
+     * @param string|array  $attr   （省略可）HTMLに設定する属性。
+     *                               "属性名" => "値"の連想配列、もしくはHTMLの属性部分の文字列
+     *                               （属性部分の文字列 例: "min='0' max='20'"）
+     */
+    public static function open($attr = array())
+    {
+        echo self::buildHTML('form', null, false, $attr);
+    }
+
+
+    /**
+     * フォームの閉じタグを出力します。
+     */
+    public static function close()
+    {
+        echo '</form>';
     }
 
 
@@ -340,12 +419,10 @@ class D5_Form
         $names  = self::parseName($name);
         $value  = self::getValue($names['name'], $form);
 
-        $userAttr = is_string($attr) ?
-                        self::parseHTMLAttr($attr)
-                        : (array) $attr;
+        $userAttr = self::parseHTMLAttr($attr);
         $attr = array('name' => $names['name']);
 
-        echo self::buildHTML('textarea', htmlspecialchars($value), true, array_merge($userAttr, $attr));
+        echo self::buildHTML('textarea', htmlspecialchars($value), true, array_merge($userAttr, $names, $attr));
     }
 
 
@@ -400,8 +477,9 @@ class D5_Form
      * ```php
      * array(
      *    '表示名' => "value属性の値",
-     *    // 属性を指定する場合は、配列の最初、もしくは、'valu'eキーにvalue属性の値を指定してください。
+     *    // 属性を指定する場合は、配列の最初、もしくは、'value'キーにvalue属性の値を指定してください。
      *    // '表示名' => array("value属性の値", '属性名' => '値', '属性名2' => '値2'),
+     *    // '表示名' => array('value' => '値', '属性名2' => '値2'),
      *     '表示名2' => "value属性の値2",
      * )
      * ```
@@ -425,9 +503,7 @@ class D5_Form
         $buf            = array();
         $overrideAttr   = self::parseName($name);
         $values         = (array) self::getValue($overrideAttr['name'], $form);
-        $userAttr       = is_string($attr) ?
-                            self::parseHTMLAttr($attr)
-                            : (array) $attr;
+        $userAttr       = self::parseHTMLAttr($attr);
 
         // option要素を構築
         foreach ($selection as $viewName => $value) {
@@ -489,9 +565,7 @@ class D5_Form
      */
     public static function submit($value, $attr = array())
     {
-        $attr = is_string($attr) ?
-                    self::parseHTMLAttr($attr)
-                    : (array) $attr;
+        $attr = self::parseHTMLAttr($attr);
         $attr = array_merge($attr, array('type' => 'submit'));
         echo self::buildHTML('input', null, false, $attr);
     }

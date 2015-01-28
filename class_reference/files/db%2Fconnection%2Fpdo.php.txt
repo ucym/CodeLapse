@@ -6,6 +6,8 @@
  */
 class D5_DB_Connection_PDO extends D5_DB_Connection
 {
+    private $lastStatement = null;
+
     /**
      * データベースコネクションを生成します。
      *
@@ -19,7 +21,7 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
             $this->_con = new PDO('mysql:host=' . $host, $user, $password);
         }
         catch (PDOException $e) {
-            throw new D5_DBException($e->getMessage(), $e->getCode(), $e);
+            throw new D5_DBException($e->getMessage(), $e->getCode());
         }
     }
 
@@ -44,7 +46,15 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
      */
     public function errorMessage()
     {
-        $err = $this->_con->errorInfo();
+        if ($this->lastStatement !== null)
+        {
+            $err = $this->lastStatement->errorInfo();
+        }
+
+        if (! isset($err) or $err[2] === null) {
+            $err = $err = $this->_con->errorInfo();
+        }
+
         return $err[2];
     }
 
@@ -57,7 +67,15 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
      */
     public function errorCode()
     {
-        $err = $this->_con->errorInfo();
+        if ($this->lastStatement !== null)
+        {
+            $err = $this->lastStatement->errorInfo();
+        }
+
+        if (! isset($err) or $err[2] === null) {
+            $err = $this->_con->errorInfo();
+        }
+
         return $err[1] !== null ? $err[1] : 0;
     }
 
@@ -96,8 +114,40 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
     {
         $result = false;
         $stmt = $this->_con->prepare($sql);
+        $this->lastStatement = $stmt;
 
-        $result = is_array($params) ? $stmt->execute($params) : $stmt->execute();
+        // PDOのexcuteメソッドがクエリ中にないプレースホルダを渡すことを許容していないため
+        // クエリ中に存在しないプレースホルダを事前に削除する
+        if (is_array($params)) {
+            foreach ($params as $k => & $v) {
+
+                is_int($k) and $k += 1;
+
+                switch (true) {
+                    case is_string($v) :
+                    case is_float($v) :
+                        $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                        break;
+
+                    case is_bool($v) :
+                        $stmt->bindParam($k, $v, PDO::PARAM_BOOL);
+                        break;
+
+                    case is_int($v) :
+                        $stmt->bindParam($k, $v, PDO::PARAM_INT);
+                        break;
+
+                    case is_null($v) :
+                        $stmt->bindParam($k, $v, PDO::PARAM_NULL);
+                        break;
+
+                    default :
+                        $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                }
+            }
+        }
+
+        $result = $stmt->execute();
 
         if ($result === false) {
             return false;
