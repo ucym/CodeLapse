@@ -21,6 +21,7 @@ D5_Autoloader::classAlias(array(
     'Form'      => 'D5_Form',
     'Input'     => 'D5_Input',
     'Mail'      => 'D5_Mail',
+    'Pager'     => 'D5_Pager',
     'Security'  => 'D5_Security',
     'Session'   => 'D5_Session'
 ));
