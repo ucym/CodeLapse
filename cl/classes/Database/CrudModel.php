@@ -2,7 +2,7 @@
 namespace CodeLapse\Database;
 
 abstract class CrudModel implements
-    ArrayAccess
+    \ArrayAccess
 {
     //----
     //-- 静的メンバ変数・メソッド

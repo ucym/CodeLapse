@@ -4,7 +4,7 @@ namespace CodeLapse;
 /**
  * データベースの例外クラス
  */
-class DBException extends Exception {}
+class DBException extends \Exception {}
 
 /**
  * データベースユーティリティクラス
