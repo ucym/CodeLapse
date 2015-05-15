@@ -102,16 +102,16 @@ class Form
 
         // nameの取り出し
         preg_match('/^([\w-]+?)(?: |$)/s', $name, $matched_name);
-        isset($matched_name[1]) and $attr['name'] = $matched_name[1];
+        isset($matched_name[1]) and ! empty($matched_name[1]) and $attr['name'] = $matched_name[1];
 
         // IDの取り出し
         // ex: Hit-> #name, #name_input-hoge; No Hit-> #-a, #0aa...
         preg_match('/#([a-zA-Z](?:[\w-]?)+?)(?:[\.#]|$)/', $name, $matched_id);
-        isset($matched_id[1]) and $attr['id'] = $matched_id[1];
+        isset($matched_id[1]) and ! empty($matched_id[1]) and $attr['id'] = $matched_id[1];
 
         // クラスの取り出し
         preg_match_all('/\.([a-zA-Z](?:[\w-]?)+)/', $name, $matched_classes);
-        isset($matched_classes[1]) and $attr['class'] = implode(' ', $matched_classes[1]);
+        isset($matched_classes[1]) and ! empty($matched_classes[1]) and $attr['class'] = implode(' ', $matched_classes[1]);
 
         if (! isset($attr['name'])) {
             throw new Exception('Form フィールド名構文エラー、 フィールド名の直後に半角スペースがあるか確認して下さい。');
