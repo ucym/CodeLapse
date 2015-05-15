@@ -20,6 +20,17 @@ class Input {
 
 
     /**
+     * ajaxからのアクセスか調べます。
+     *
+     * @return boolean
+     */
+    public static function isAjax()
+    {
+        return strtolower(D5_Input::server('HTTP_X_REQUESTED_WITH', '')) === 'xmlhttprequest';
+    }
+
+
+    /**
      * POSTパラメータの値を取得します。
      *
      * @param string|null $key (optional) 取得するパラメータ名

@@ -1,0 +1,3 @@
+mysql -u root -e 'create database cl_test;'
+cd cl/test
+phpunit -c phpunit_droneio.xml
