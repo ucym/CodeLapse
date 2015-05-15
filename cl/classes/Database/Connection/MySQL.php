@@ -1,6 +1,8 @@
 <?php
 namespace CodeLapse\Database\Connection;
 
+use \CodeLapse\Database\ResultSet\MySQL as MySQLResultSet;
+
 /**
  * MySQL データベースコネクションラッパークラス
  *
@@ -206,7 +208,7 @@ class MySQL extends \CodeLapse\Database\Connection
         if (is_bool($result)) {
             return $result;
         } else {
-            return new DB_Resultset_Mysql($result);
+            return new MySQLResultSet($result);
         }
     }
 

@@ -1,6 +1,8 @@
 <?php
 namespace CodeLapse\Database\Connection;
 
+use \CodeLapse\Database\ResultSet\PDO as PDOResultSet;
+
 /**
  * PDO データベースコネクションラッパークラス
  *
@@ -155,7 +157,7 @@ class PDO extends \CodeLapse\Database\Connection
             return false;
         }
         else {
-            return new DB_Resultset_PDO($stmt);
+            return new PDOResultSet($stmt);
         }
     }
 
