@@ -118,7 +118,7 @@ class AutoLoader
     public static function regist()
     {
         // 第三引数は PHP 5.3.0以上で有効
-        spl_autoload_register(array('AutoLoader', 'load'), true);//, true);
+        spl_autoload_register(array('\CodeLapse\AutoLoader', 'load'), true);//, true);
     }
 
 
@@ -146,8 +146,7 @@ class AutoLoader
         }
 
         //-- クラスファイルを検索
-        $namespace = explode('_', $class);
-        $clazz = strtolower($class);
+        $namespace = explode('\\', $class);
 
         // 名前空間が登録されていれば、対応パスを検索
         if (isset($namespace[1])) {
@@ -156,13 +155,12 @@ class AutoLoader
 
             if (isset(self::$namespaces[$namespace])) {
                 // 検索中のクラスの名前空間が登録されていれば
-                $classname = explode('_', $clazz);
+                $classname = explode('\\', $class);
                 array_shift($classname);
                 $classname = implode('/', $classname);
 
                 $path = self::$namespaces[$namespace];
                 $path .= $classname . '.php';
-
 
                 if (file_exists($path) and (include $path) !== false and class_exists($class)) {
                     // クラスが見つかれば処理終了
@@ -174,7 +172,7 @@ class AutoLoader
         //-- 登録された読み込みパスから検索
         foreach (self::$loadPath as $path) {
             // クラス名のアンダースコアを'/'に置き換え
-            $path .= str_replace('_', self::DS, $clazz);
+            $path .= str_replace('\\', self::DS, $class);
             $path .= '.php';
 
             if (file_exists($path) and (include $path) !== false and class_exists($class)) {
@@ -182,6 +180,5 @@ class AutoLoader
                 break;
             }
         }
-
     }
 }
