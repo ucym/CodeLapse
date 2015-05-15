@@ -1,6 +1,7 @@
 <?php
 namespace CodeLapse\Database;
 
+use \CodeLapse\DB;
 use \CodeLapse\LateBinding;
 
 abstract class CrudModel implements
