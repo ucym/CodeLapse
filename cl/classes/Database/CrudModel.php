@@ -1,6 +1,8 @@
 <?php
 namespace CodeLapse\Database;
 
+use \CodeLapse\LateBinding;
+
 abstract class CrudModel implements
     \ArrayAccess
 {
@@ -97,7 +99,7 @@ abstract class CrudModel implements
              . 'FROM '.$tableName
              . 'WHERE ');
         */
-        throw new Exception(__CLASS__.'::find はまだ実装されていません。');
+        throw new \Exception(__CLASS__.'::find はまだ実装されていません。');
     }
 
 
@@ -228,7 +230,7 @@ abstract class CrudModel implements
     public function set($name, $value = null)
     {
         if (func_num_args() === 1 and ! is_array($name)) {
-            throw new InvalidArgumentException('setメソッドには必ず設定する値を渡す必要があります。');
+            throw new \InvalidArgumentException('setメソッドには必ず設定する値を渡す必要があります。');
         }
 
         // 第１引数が配列であれば、フィールドごとに分割してメソッドをコールします。
@@ -244,7 +246,7 @@ abstract class CrudModel implements
         $fields = call_user_func(array($class, 'properties'));
 
         if (!in_array($name, $fields)) {
-            throw new OutOfBoundException("$class::_$properties に フィールド $name は定義されていません。");
+            throw new \OutOfBoundException("$class::_$properties に フィールド $name は定義されていません。");
         }
 
         $this->_data[$name] = $value;
@@ -265,7 +267,7 @@ abstract class CrudModel implements
         $fields = call_user_func(array($class, 'properties'));
 
         if (! in_array($name, $fields)) {
-            throw new OutOfBoundException("$class::_$properties に フィールド $name は定義されていません。");
+            throw new \OutOfBoundException("$class::_$properties に フィールド $name は定義されていません。");
         }
 
         return isset($this->_data[$name]) ? $this->_data[$name] : null;
