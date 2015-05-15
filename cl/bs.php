@@ -7,8 +7,8 @@ defined('CL_CLASSES') or define('CL_CLASSES', CL_COREPATH . 'classes' .DS);
 require CL_CLASSES . 'AutoLoader.php';
 
 //-- オートローダを初期化
-\CodeLapse\Autoloader::addNamespace('D5', D5_CLASSES);
-\CodeLapse\Autoloader::addBasePath(D5_CLASSES);
+\CodeLapse\Autoloader::addNamespace('D5', CL_CLASSES);
+\CodeLapse\Autoloader::addBasePath(CL_CLASSES);
 
 // クラスの別名を設定
 \CodeLapse\Autoloader::classAlias(array(
@@ -28,7 +28,7 @@ require CL_CLASSES . 'AutoLoader.php';
 
 // クラスのパスを設定
 \CodeLapse\Autoloader::addClass(array(
-    'Smarty' => D5_THIRDPARTY . 'smarty/Smarty.class.php'
+    'Smarty' => CL_THIRDPARTY . 'smarty/Smarty.class.php'
 ));
 
 // オートローダを登録
