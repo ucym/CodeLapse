@@ -1,6 +1,7 @@
 <?php
 namespace CodeLapse\Database\Connection;
 
+use \CodeLapse\Database\Exception as DBException;
 use \CodeLapse\Database\ResultSet\MySQL as MySQLResultSet;
 
 /**
@@ -182,7 +183,7 @@ class MySQL extends \CodeLapse\Database\Connection
                     $ph_pos = strpos($sql, $key);
 
                     if ($key[0] !== ':') {
-                        throw new InvalidArgumentException("不正なプレースホルダがパラメータに含まれています($key)");
+                        throw new \InvalidArgumentException("不正なプレースホルダがパラメータに含まれています($key)");
                     }
 
                     if ($ph_pos !== false) {

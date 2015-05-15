@@ -2,11 +2,7 @@
 namespace CodeLapse;
 
 use \CodeLapse\Database\Connection;
-
-/**
- * データベースの例外クラス
- */
-class DBException extends \Exception {}
+use \CodeLapse\Database\Exception as DBException;
 
 /**
  * データベースユーティリティクラス
@@ -130,10 +126,10 @@ class DB
         // これより先の処理は続行できない
         if (! class_exists('Config')) {
             if (count(self::$_connections) === 0) {
-                throw new OutOfBoundsException('インスタンスを取得する前に connectメソッドでデータベースへ接続している必要があります。');
+                throw new \OutOfBoundsException('インスタンスを取得する前に connectメソッドでデータベースへ接続している必要があります。');
             }
             else {
-                throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
+                throw new \OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
             }
         }
 
@@ -142,14 +138,14 @@ class DB
         if (array_key_exists($connectionName, $config) === false)
         {
             // 接続設定に指定されたコネクション用の設定がなければ、例外を投げる
-            throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
+            throw new \OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
         }
 
         // 新しいコネクションを生成する
         $conf = $config[$connectionName];
 
         if ($conf === null) {
-            throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
+            throw new \OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
         }
 
         $host   = Arr::get($conf, 'host');
@@ -220,7 +216,7 @@ class DB
 
             return $instance;
         }
-        catch (DB_Exception $e) {
+        catch (DBException $e) {
             throw $e;
         }
     }

@@ -1,6 +1,7 @@
 <?php
 namespace CodeLapse\Database\Connection;
 
+use \CodeLapse\Database\Exception as DBException;
 use \CodeLapse\Database\ResultSet\PDO as PDOResultSet;
 
 /**
@@ -24,7 +25,7 @@ class PDO extends \CodeLapse\Database\Connection
         try {
             $this->_con = new \PDO('mysql:host=' . $host, $user, $password);
         }
-        catch (PDOException $e) {
+        catch (\PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode());
         }
     }
@@ -195,7 +196,7 @@ class PDO extends \CodeLapse\Database\Connection
         try {
             return $this->_con->rollback();
         }
-        catch (PDOException $e) {
+        catch (\PDOException $e) {
             throw new DBException('ロールバックに失敗しました。(' . $e->getMessage() . ')', $e->getCode(), $e);
         }
     }
