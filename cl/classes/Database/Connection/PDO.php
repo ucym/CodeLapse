@@ -20,7 +20,7 @@ class PDO extends \CodeLapse\Database\Connection
     public function __construct($host, $user, $password = null)
     {
         try {
-            $this->_con = new PDO('mysql:host=' . $host, $user, $password);
+            $this->_con = new \PDO('mysql:host=' . $host, $user, $password);
         }
         catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode());
