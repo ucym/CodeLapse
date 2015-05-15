@@ -1,13 +1,12 @@
-# D5 - PHP 5.2.x Library [![Build Status](https://drone.io/github.com/wn9FHW2nhO/d5/status.png)](https://drone.io/github.com/wn9FHW2nhO/d5/latest)
-
+# CodeLapse - PHP 5.2.x Library [![Build Status](https://drone.io/github.com/ucym/CodeLapse/status.png)](https://drone.io/github.com/ucym/CodeLapse/latest)
 
 ## How to use
-1. copy "d5" directory to your project.
-2. write require in d5 using files.
+1. copy "cl" directory to your project.
+2. write require in CodeLapse using files.
 ``` php
 <?php
-// Load d5 bootstrap.
-require 'd5/bs.php';
+// Load CodeLapse bootstrap.
+require 'cl/bs.php';
 
 Do anything...
 ```
