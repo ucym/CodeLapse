@@ -1,10 +1,12 @@
 <?php
+namespace CodeLapse;
+
 /**
  * セキュリティ系ユーティリティクラス
  *
- * @package D5
+ * @package CodeLapse
  */
-class D5_Security
+class Security
 {
     /**
      * 文字列を安全なHTMLへ変換します。

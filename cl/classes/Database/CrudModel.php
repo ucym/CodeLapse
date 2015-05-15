@@ -1,5 +1,7 @@
 <?php
-abstract class D5_DB_CrudModel implements
+namespace CodeLapse\Database;
+
+abstract class CrudModel implements
     ArrayAccess
 {
     //----
@@ -38,7 +40,7 @@ abstract class D5_DB_CrudModel implements
      */
     public static function tableName()
     {
-        $class = D5_LateBinding::getCalledClass();
+        $class = LateBinding::getCalledClass();
         return self::getClassVars($class, '_tableName');
     }
 
@@ -48,7 +50,7 @@ abstract class D5_DB_CrudModel implements
      */
     public static function primaryKey()
     {
-        $class = D5_LateBinding::getCalledClass();
+        $class = LateBinding::getCalledClass();
         return self::getClassVars($class, '_primaryKey');
     }
 
@@ -58,7 +60,7 @@ abstract class D5_DB_CrudModel implements
      */
     public static function properties()
     {
-        $class = D5_LateBinding::getCalledClass();
+        $class = LateBinding::getCalledClass();
         return self::getClassVars($class, '_properties');
     }
 
@@ -74,7 +76,7 @@ abstract class D5_DB_CrudModel implements
     {
         // @TODO
         /*
-        $class      = D5_LateBinding::getCalledClass();
+        $class      = LateBinding::getCalledClass();
         $tableName  =
             DB::quoteIdentifier(
                 call_user_func(array($class, 'tableName')));
@@ -238,7 +240,7 @@ abstract class D5_DB_CrudModel implements
             return $this;
         }
 
-        $class = D5_LateBinding::getCalledClass();
+        $class = LateBinding::getCalledClass();
         $fields = call_user_func(array($class, 'properties'));
 
         if (!in_array($name, $fields)) {
@@ -259,7 +261,7 @@ abstract class D5_DB_CrudModel implements
      */
     public function get($name)
     {
-        $class = D5_LateBinding::getCalledClass();
+        $class = LateBinding::getCalledClass();
         $fields = call_user_func(array($class, 'properties'));
 
         if (! in_array($name, $fields)) {
@@ -298,7 +300,7 @@ abstract class D5_DB_CrudModel implements
      */
     public function save($connection = null)
     {
-        $class = D5_LateBinding::getCalledClass();
+        $class = LateBinding::getCalledClass();
         $primaryKey = call_user_func(array($class, 'primaryKey'));
         $fields = call_user_func(array($class, 'properties'));
 
@@ -325,7 +327,7 @@ abstract class D5_DB_CrudModel implements
     protected function create()
     {
         //-- モデル定義情報を取得
-        $class      = D5_LateBinding::getCalledClass();
+        $class      = LateBinding::getCalledClass();
         $primaryKey = call_user_func(array($class, 'primaryKey'));
         $fields     = call_user_func(array($class, 'properties'));
         $tableName  = call_user_func(array($class, 'tableName'));
@@ -354,7 +356,7 @@ abstract class D5_DB_CrudModel implements
         $result = DB::query($sql, $values);
 
         if ($result === false) {
-            throw new D5_DBException(DB::errorMessage(), DB::errorCode());
+            throw new DBException(DB::errorMessage(), DB::errorCode());
         }
 
         //-- 保存に成功したら主キー値を取得する。
@@ -367,7 +369,7 @@ abstract class D5_DB_CrudModel implements
 
     protected function update()
     {
-        $class = D5_LateBinding::getCalledClass();
+        $class = LateBinding::getCalledClass();
         $primaryKey = call_user_func(array($class, 'primaryKey'));
         $fields = call_user_func(array($class, 'properties'));
 

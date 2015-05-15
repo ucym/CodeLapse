@@ -1,10 +1,12 @@
 <?php
+namespace CodeLapse\Database;
+
 /**
  * データベースコネクション抽象化クラス
  *
- * @package D5\DB
+ * @package CodeLapse\Database
  */
-abstract class D5_DB_Connection
+abstract class Connection
 {
     const TYPE_PDO = 1;
     const TYPE_MYSQL = 2;
@@ -20,7 +22,7 @@ abstract class D5_DB_Connection
      * @param string|null $password (optional) パスワード
      * @param int|null $driver (optional) ドライバの種類。
      *      指定することで利用するドライバを選択できます。
-     * @throw D5_DB_Exception データベースへの接続に失敗した時にスローされます。
+     * @throw DB_Exception データベースへの接続に失敗した時にスローされます。
      */
     public static function connect($host, $user, $password = null, $driver = null) {
         $instance = null;
@@ -31,11 +33,11 @@ abstract class D5_DB_Connection
 
         switch ($driver) {
             case self::TYPE_PDO     :
-                $instance = new D5_DB_Connection_PDO($host, $user, $password);
+                $instance = new DB_Connection_PDO($host, $user, $password);
                 break;
 
             case self::TYPE_MYSQL   :
-                $instance = new D5_DB_Connection_Mysql($host, $user, $password);
+                $instance = new DB_Connection_Mysql($host, $user, $password);
                 break;
         }
 
@@ -106,7 +108,7 @@ abstract class D5_DB_Connection
      *
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
-     * @return D5_DB_Resultset|boolean
+     * @return DB_Resultset|boolean
      */
     public abstract function query($sql, $params = null);
 
@@ -130,10 +132,10 @@ abstract class D5_DB_Connection
     /**
      * トランザクションを中止し、トランザクション中に行った処理をすべて無効化します。
      *
-     * トランザクション中でない時、D5_DB_Exceptionをスローします。
+     * トランザクション中でない時、DB_Exceptionをスローします。
      *
      * @return boolean
-     * @throw D5_DB_Exception
+     * @throw DB_Exception
      */
     public abstract function rollback();
 

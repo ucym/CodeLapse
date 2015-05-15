@@ -1,10 +1,12 @@
 <?php
+namespace CodeLapse\Database\Connection;
+
 /**
  * PDO データベースコネクションラッパークラス
  *
- * @package D5\DB
+ * @package CodeLapse\Database
  */
-class D5_DB_Connection_PDO extends D5_DB_Connection
+class PDO extends \CodeLapse\Database\Connection
 {
     private $lastStatement = null;
 
@@ -21,7 +23,7 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
             $this->_con = new PDO('mysql:host=' . $host, $user, $password);
         }
         catch (PDOException $e) {
-            throw new D5_DBException($e->getMessage(), $e->getCode());
+            throw new DBException($e->getMessage(), $e->getCode());
         }
     }
 
@@ -108,7 +110,7 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
      *
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
-     * @return D5_DB_Resultset|bool
+     * @return DB_Resultset|bool
      */
     public function query($sql, $params = null)
     {
@@ -153,7 +155,7 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
             return false;
         }
         else {
-            return new D5_DB_Resultset_PDO($stmt);
+            return new DB_Resultset_PDO($stmt);
         }
     }
 
@@ -181,10 +183,10 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
     /**
      * トランザクションを中止し、トランザクション中に行った処理をすべて無効化します。
      *
-     * トランザクション中でない時、D5_DBExceptionをスローします。
+     * トランザクション中でない時、DBExceptionをスローします。
      *
      * @return boolean
-     * @throw D5_DBException
+     * @throw DBException
      */
     public function rollback()
     {
@@ -192,7 +194,7 @@ class D5_DB_Connection_PDO extends D5_DB_Connection
             return $this->_con->rollback();
         }
         catch (PDOException $e) {
-            throw new D5_DBException('ロールバックに失敗しました。(' . $e->getMessage() . ')', $e->getCode(), $e);
+            throw new DBException('ロールバックに失敗しました。(' . $e->getMessage() . ')', $e->getCode(), $e);
         }
     }
 

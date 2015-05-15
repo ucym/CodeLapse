@@ -1,10 +1,12 @@
 <?php
+namespace CodeLapse;
+
 /**
  * リクエストに含まれるパラメータを取得します。（POST, GETなど）
  *
- * @package D5
+ * @package CodeLapse
  */
-class D5_Input {
+class Input {
 
     /**
      * リクエストメソッドの種類を取得します。
@@ -26,7 +28,7 @@ class D5_Input {
      */
     public static function post($key = null, $default = null)
     {
-        return D5_Arr::get($_POST, $key, $default);
+        return Arr::get($_POST, $key, $default);
     }
 
 
@@ -39,7 +41,7 @@ class D5_Input {
      */
     public static function get($key = null, $default = null)
     {
-        return D5_Arr::get($_GET, $key, $default);
+        return Arr::get($_GET, $key, $default);
     }
 
 
@@ -52,6 +54,6 @@ class D5_Input {
      */
     public static function server($key = null, $default = null)
     {
-        return D5_Arr::get($_SERVER, $key, $default);
+        return Arr::get($_SERVER, $key, $default);
     }
 }

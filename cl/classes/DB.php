@@ -1,20 +1,22 @@
 <?php
+namespace CodeLapse;
+
 /**
  * データベースの例外クラス
  */
-class D5_DBException extends Exception {}
+class DBException extends Exception {}
 
 /**
  * データベースユーティリティクラス
  *
  * ```php
- * //-- D5(bs.php)を読み込んだ時
- * require 'pathToD5/bootstrap.php';
+ * //-- CodeLapse(bs.php)を読み込んだ時
+ * require 'pathToCodeLapse/bootstrap.php';
  * $result = DB::query('SELECT `somefield` FROM `sometable`');
  *
  * //-- db.phpを単体で読み込んだ時
  * require 'pathToDb/db.php';
- * $con = D5_DB::connect('hostName', 'user', 'password');
+ * $con = DB::connect('hostName', 'user', 'password');
  * $result = $con->query('SOME SQL QUERY');
  * ```
  *
@@ -26,7 +28,7 @@ class D5_DBException extends Exception {}
  * $password = $_POST['password'];
  *
  * // DBと接続する
- * $con = D5_DB::connect('localhost', 'user', 'password');
+ * $con = DB::connect('localhost', 'user', 'password');
  *
  * // クエリを送る
  * // 配列に渡した値が、クエリに埋め込まれていることに注目。
@@ -70,7 +72,7 @@ class D5_DBException extends Exception {}
  *
  * **取得した結果を全件表示する**
  * ```php
- * //-- D5ライブラリ使用中の場合を想定
+ * //-- CodeLapseライブラリ使用中の場合を想定
  * // SQLの実行結果は $result に入っている
  * foreach ($result as $row) {
  *      // $rowに一行分のデータが入ってくる
@@ -83,9 +85,9 @@ class D5_DBException extends Exception {}
  * @todo 実装チェック
  * @todo MySQL関数依存からの脱却
  *
- * @package D5
+ * @package CodeLapse
  */
-class D5_DB
+class DB
 {
     const ERR_CONNECTION_FAILED = 100;
 
@@ -122,9 +124,9 @@ class D5_DB
             return self::$_connections[$connectionName];
         }
 
-        // D5_Configクラスが読み込まれていなければ
+        // Configクラスが読み込まれていなければ
         // これより先の処理は続行できない
-        if (! class_exists('D5_Config')) {
+        if (! class_exists('Config')) {
             if (count(self::$_connections) === 0) {
                 throw new OutOfBoundsException('インスタンスを取得する前に connectメソッドでデータベースへ接続している必要があります。');
             }
@@ -133,7 +135,7 @@ class D5_DB
             }
         }
 
-        $config = D5_Config::get('db', array());
+        $config = Config::get('db', array());
 
         if (array_key_exists($connectionName, $config) === false)
         {
@@ -148,11 +150,11 @@ class D5_DB
             throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
         }
 
-        $host   = D5_Arr::get($conf, 'host');
-        $user   = D5_Arr::get($conf, 'user');
-        $pass   = D5_Arr::get($conf, 'password');
-        $dbname = D5_Arr::get($conf, 'database');
-        $charset = D5_Arr::get($conf, 'charset');
+        $host   = Arr::get($conf, 'host');
+        $user   = Arr::get($conf, 'user');
+        $pass   = Arr::get($conf, 'password');
+        $dbname = Arr::get($conf, 'database');
+        $charset = Arr::get($conf, 'charset');
 
         $con = self::connect($host, $user, $pass, false, $connectionName);
         ! empty($dbname) and $con->useDB($dbname);
@@ -170,9 +172,9 @@ class D5_DB
      *
      * ```php
      * try {
-     *     $con = D5_DB::connect(DB_HOST, DB_USER, DB_PASSWD);
+     *     $con = DB::connect(DB_HOST, DB_USER, DB_PASSWD);
      * }
-     * catch (D5_DB_Exception $e) {
+     * catch (DB_Exception $e) {
      *     // 接続に失敗
      * }
      * ```
@@ -183,8 +185,8 @@ class D5_DB
      * @param null|boolean $newConnection  (optional) 既存のコネクションを使用しないか指定します。
      * @param null|string  $connectionName (optional) コネクションに対する名前。
      *      instanceメソッドでインスタンスを取得する際に指定する名前です。
-     * @return D5_DB_Connection DBConnectionインスタンス
-     * @throw D5_DB_Exception
+     * @return DB_Connection DBConnectionインスタンス
+     * @throw DB_Exception
      *      データベース接続に失敗した時にスローされます。
      */
     public static function connect($host, $user, $passwd = null, $newConnection = false, $connectionName = null)
@@ -205,7 +207,7 @@ class D5_DB
             }
 
             // 新しい接続を生成
-            $instance = D5_DB_Connection::connect($host, $user, $passwd);
+            $instance = DB_Connection::connect($host, $user, $passwd);
 
             $already_exists === false
                 and self::$_connections[$connectionName] = $instance;
@@ -216,7 +218,7 @@ class D5_DB
 
             return $instance;
         }
-        catch (D5_DB_Exception $e) {
+        catch (DB_Exception $e) {
             throw $e;
         }
     }
@@ -277,7 +279,7 @@ class D5_DB
 
 
     /**
-     * 指定したコネクション上でクエリーを実行します。
+     * 指定したコネクション上でクエリーを実行し���す���
      *
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params (optional) クエリに埋め込むパラメータ
@@ -316,11 +318,11 @@ class D5_DB
     /**
      * 指定したコネクション上のトランザクションを中止し、行った処理をすべて無効化します。
      *
-     * トランザクション中でない時、D5_DB_Exceptionをスローします。
+     * トランザクション中でない時、DB_Exceptionをスローします。
      *
      * @param string|null $connection (optional) 接続名。指定されない場合、初期コネクションを利用します。
      * @return boolean
-     * @throw D5_DB_Exception
+     * @throw DB_Exception
      */
     public static function rollback($connection = null)
     {

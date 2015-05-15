@@ -1,4 +1,6 @@
 <?php
+namespace CodeLapse;
+
 /**
  * フォームの生成とフォームへの値の復元を行うクラスです。
  *
@@ -66,7 +68,7 @@
  *      //      </select>
  * ```
  */
-class D5_Form
+class Form
 {
     const DEFAULT_FORM_NAME = 'default';
 
@@ -112,7 +114,7 @@ class D5_Form
         isset($matched_classes[1]) and $attr['class'] = implode(' ', $matched_classes[1]);
 
         if (! isset($attr['name'])) {
-            throw new Exception('D5_Form フィールド名構文エラー、 フィールド名の直後に半角スペースがあるか確認して下さい。');
+            throw new Exception('Form フィールド名構文エラー、 フィールド名の直後に半角スペースがあるか確認して下さい。');
         }
 
         return $attr;
@@ -181,7 +183,7 @@ class D5_Form
 
                 // スペースをチェック
                 if (++$i < $chars and $str[$i] !== ' ') {
-                    throw new Exception('D5_Form HTML属性構文エラー');
+                    throw new Exception('Form HTML属性構文エラー');
                 }
             }
         }
@@ -308,14 +310,14 @@ class D5_Form
      * );
      * ```
      *
-     * この形式に沿わない場合、フィールド生成時に正しく値が復元されません。
+     * この形式に沿わない場合、フィールド生成時に正しく値が復元されません���
      *
      * @param array     $value  フォームに割り当てる初期値が入った配列
      * @param string    $form   (optional) 値を割り当て先グループ名（お好みの名前、省略可）
      */
     public static function setValue(array $value, $form = null)
     {
-        ! is_string($form) and $form = D5_Form::DEFAULT_FORM_NAME;
+        ! is_string($form) and $form = Form::DEFAULT_FORM_NAME;
         self::$_values[$form] = & $value;
     }
 
@@ -329,8 +331,8 @@ class D5_Form
      */
     public static function getValue($field, $form = null)
     {
-        ! is_string($form) and $form = D5_Form::DEFAULT_FORM_NAME;
-        return D5_Arr::get(self::$_values, "$form.$field");
+        ! is_string($form) and $form = Form::DEFAULT_FORM_NAME;
+        return Arr::get(self::$_values, "$form.$field");
     }
 
 
@@ -546,7 +548,7 @@ class D5_Form
      *
      * @param string        $name       フィールドの名前(name属性に設定されます)
      * @param array|string  $attr       （省略可）HTMLに設定する属性。
-     *                                  "属性名" => "値"の連想配列、もしくはHTMLの属性部分の文字列
+     *                                  "属性名" => "値"の連想配列、もしくはHTMLの属性部分の文字���
      *                                  （属性部分の文字列 例: "min='0' max='20'"）
      */
     public static function file($name, $attr = array())

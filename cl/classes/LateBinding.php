@@ -1,5 +1,10 @@
 <?php
-class D5_LateBinding
+namespace CodeLapse;
+
+/**
+ * @deprecated
+ */
+class LateBinding
 {
     /**
      * @see http://stackoverflow.com/a/24571864 This is nice implement of "get_called_class"!

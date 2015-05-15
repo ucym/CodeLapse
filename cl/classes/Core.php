@@ -1,8 +1,10 @@
 <?php
+namespace CodeLapse;
+
 /**
- * D5ライブラリの初期化処理を担うクラス
+ * CodeLapseライブラリの初期化処理を担うクラス
  */
-class D5_Core
+class Core
 {
     private static $instance;
 
@@ -23,7 +25,7 @@ class D5_Core
         }
 
         // コアの設定ファイルを読み込む
-        D5_Config::addLoadPath(D5_COREPATH . 'config/');
+        Config::addLoadPath(COREPATH . 'config/');
 
         // 出力バッファリングを始める
         // （コマンドラインで実行中はバッファリングしない。表示結果が得られなくなってしまうため）

@@ -1,10 +1,12 @@
 <?php
+namespace CodeLapse;
+
 /**
  * ページネーションクラス
  *
  *
  */
-class D5_Pager
+class Pager
 {
     private static $instances = array();
 
@@ -12,7 +14,7 @@ class D5_Pager
     public static function instance($name)
     {
         if (! isset(self::$instances[$name])) {
-            throw new Exception("D5_Pager: $nameというインスタンスは初期化されていません。");
+            throw new Exception("Pager: $nameというインスタンスは初期化されていません。");
         }
 
         return self::$instances[$name];
@@ -31,7 +33,7 @@ class D5_Pager
         $currentPage === 0 and $currentPage = 1;
 
         if ($perPage === 0) {
-            throw new Exception('D5_Pager: １ページあたりの件数を0件にすることはできません。');
+            throw new Exception('Pager: １ページあたりの件数を0件にすることはできません。');
         }
 
         self::$instances[$instance] = new self($currentPage, $allCount, $perPage);

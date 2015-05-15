@@ -1,4 +1,6 @@
 <?php
+namespace CodeLapse;
+
 /**
  * 設定ファイルの読み込み・設定の取得を行います。
  *
@@ -16,7 +18,7 @@
  *
  *      //-- ./app.php
  *      <?php
- *          require 'bs.php'; // D5ライブラリの 'bs.php'を読み込む
+ *          require 'bs.php'; // CodeLapseライブラリの 'bs.php'を読み込む
  *
  *          // 'db'名前空間に設定ファイル(dbconfig.php)を読み込む
  *          Config::load(dirname(__FILE__) . 'dbconfig.php', 'db');
@@ -28,9 +30,9 @@
  *          $con = mysqli_connect($host, $user, $pass);
  *      ?>
  *
- * @package D5
+ * @package CodeLapse
  */
-class D5_Config
+class Config
 {
     /**
      * @var array 読み込まれた設定データ
@@ -44,7 +46,7 @@ class D5_Config
 
     /**
      * 設定ファイルの探索先パスを追加します。
-     * D5_Config::set メソッドで実行時、指定された名前空間が存在しない場合
+     * Config::set メソッドで実行時、指定された名前空間が存在しない場合
      * 登録された探索先パスを探します。
      *
      * @param string $path 探索先パス
@@ -99,7 +101,7 @@ class D5_Config
                     throw new Exception('名前空間が競合しました: ' . $namespace);
                 }
             } else {
-                D5_Arr::set(self::$config, $namespace, $conf);
+                Arr::set(self::$config, $namespace, $conf);
             }
         } else {
             throw new Exception('設定ファイルが読み込めません。(' . $path .')');
@@ -143,6 +145,6 @@ class D5_Config
             }
         }
 
-        return D5_Arr::get(self::$config, $key, $default);
+        return Arr::get(self::$config, $key, $default);
     }
 }

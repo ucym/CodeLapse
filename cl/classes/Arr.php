@@ -1,4 +1,6 @@
 <?php
+namespace CodeLapse;
+
 /**
  * nullセーフな配列操作クラス
  *
@@ -9,7 +11,7 @@
  * <?php
  *  $ar  = array();
  *
- *  D5_Arr::set($ar, 'element.0', 'value'); // クッソ長い
+ *  Arr::set($ar, 'element.0', 'value'); // クッソ長い
  *
  *  Arr::set($ar, 'element.1', 'value'); // It's fuckin cool code.
  * ```
@@ -19,9 +21,9 @@
  * このクラスは Arrクラスとして呼び出すことが可能です。`
  * ```
  *
- * @package D5
+ * @package CodeLapse
  */
-class D5_Arr
+class Arr
 {
     /**
      * 指定された配列から要素を取得します。
@@ -55,7 +57,7 @@ class D5_Arr
             $ar = array();
 
             foreach ($key as $v) {
-                Arr::set($ar, $v, D5_Arr::get($array, $v, $default));
+                Arr::set($ar, $v, Arr::get($array, $v, $default));
             }
 
             return $ar;

@@ -1,4 +1,6 @@
 <?php
+namespace CodeLapse;
+
 /**
  * クラスオートローダ
  *
@@ -7,7 +9,7 @@
  * @link https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md PSR-1
  * @link http://www.infiniteloop.co.jp/docs/psr/psr-1-basic-coding-standard.html PSR-1の日本語訳（非公式）
  */
-class D5_Autoloader
+class AutoLoader
 {
     const DS = DIRECTORY_SEPARATOR;
 
@@ -46,7 +48,7 @@ class D5_Autoloader
      * 名前空間（クラス接頭辞）に対応するパスを登録します。
      *
      * - クラス接頭辞
-     *   "D5_Arr"という名前のクラスの場合、"D5"がクラス接頭辞となります。
+     *   "Arr"という名前のクラスの場合、"CodeLapse\"がクラス接頭辞となります。
      *   （クラス名の中で、一番最初に出てくるアンダースコアまでが接頭辞です）
      *
      * @param string $namespace クラス接頭辞名
@@ -116,7 +118,7 @@ class D5_Autoloader
     public static function regist()
     {
         // 第三引数は PHP 5.3.0以上で有効
-        spl_autoload_register(array('D5_Autoloader', 'load'), true);//, true);
+        spl_autoload_register(array('Autoloader', 'load'), true);//, true);
     }
 
 

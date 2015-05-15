@@ -1,10 +1,12 @@
 <?php
+namespace CodeLapse\Database\Connection;
+
 /**
  * MySQL データベースコネクションラッパークラス
  *
- * @package D5\DB
+ * @package CodeLapse\Database\Connection
  */
-class D5_DB_Connection_Mysql extends D5_DB_Connection
+class MySQL extends \CodeLapse\Database\Connection
 {
 
     /**
@@ -80,7 +82,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
         $this->_con = @mysql_connect($host, $user, $password, $newConnection);
 
         if ($this->_con == false) {
-            throw new D5_DBException('データベースへの接続に失敗しました。(' . mysql_error() . ')', mysql_errno());
+            throw new DBException('データベースへの接続に失敗しました。(' . mysql_error() . ')', mysql_errno());
         }
     }
 
@@ -134,7 +136,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
     public function useDB($dbname)
     {
         if (@ mysql_select_db($dbname, $this->_con) === false) {
-            throw new D5_DBException('データベースの選択に失敗しました。(' . $this->errorMessage() . ')', $this->errorCode());
+            throw new DBException('データベースの選択に失敗しました。(' . $this->errorMessage() . ')', $this->errorCode());
         }
     }
 
@@ -145,7 +147,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
      * @todo 動作確認
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
-     * @return D5_DB_Resultset|bool
+     * @return DB_Resultset|bool
      */
     public function query($sql, $params = null)
     {
@@ -204,7 +206,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
         if (is_bool($result)) {
             return $result;
         } else {
-            return new D5_DB_Resultset_Mysql($result);
+            return new DB_Resultset_Mysql($result);
         }
     }
 
@@ -261,7 +263,7 @@ class D5_DB_Connection_Mysql extends D5_DB_Connection
     public function rollback()
     {
         if ($this->_inTransaction === false) {
-            throw new D5_DBException('トランザクション外でrollbackメソッドが実行されました。');
+            throw new DBException('トランザクション外でrollbackメソッドが実行されました。');
         }
 
         $result = $this->query('ROLLBACK');

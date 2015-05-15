@@ -1,14 +1,16 @@
 <?php
+namespace CodeLapse;
+
 /**
  * ファイル操作関数をラップするクラス
  * （開いたファイルは自動的にクローズされます。）
  *
  *    Example:
- *        $file = new D5_File('path/to/open/file');
+ *        $file = new File('path/to/open/file');
  *        $file->append('hello world');
  *        echo $file->getContents(); // -> "hello world"
  */
-class D5_File
+class File
 {
 
     const SEEK_SET = SEEK_SET;

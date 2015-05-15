@@ -1,4 +1,6 @@
 <?php
+namespace CodeLapse;
+
 /**
  * Smartyラッパークラス
  *
@@ -11,10 +13,10 @@
  * //-- app/b.php
 
  * define('APPPATH', dirname(__FILE__));
- * D5_Config::load(APPPATH . '/config/smarty.php', 'smarty');
+ * Config::load(APPPATH . '/config/smarty.php', 'smarty');
  *
  * // もしくは
- * // D5_Config::addLoadPath(APPPATH . '/config/');
+ * // Config::addLoadPath(APPPATH . '/config/');
  *```
  *
  * ```php
@@ -43,11 +45,11 @@
  * <?php
  * //-- index.php
  *
- * $smarty = D5_Smarty::instance();
+ * $smarty = Smarty::instance();
  * // *do_something*
  *```
  */
-class D5_Smarty
+class Smarty
 {
     //--------
     //-- Static Property, Method
@@ -55,7 +57,7 @@ class D5_Smarty
 
     /**
      * @ignore
-     * @var array(D5_Smarty) 生成したインスタンス
+     * @var array(Smarty) 生成したインスタンス
      */
     private static $instances = array();
 
@@ -85,12 +87,12 @@ class D5_Smarty
 
 
     /**
-     * D5_Smartyのインスタンスを取得します。
+     * Smartyのインスタンスを取得します。
      *
      * @param string $name   (optional) 取得するインスタンスの名前。
      *                       指定されない場合、'null'を使用します。
-     * @param array  $config D5_Smartyをインスタンス化するときの設定
-     * @return D5_Smarty
+     * @param array  $config Smartyをインスタンス化するときの設定
+     * @return Smarty
      */
     public static function instance($name = null, $config = array())
     {
@@ -105,7 +107,7 @@ class D5_Smarty
 
 
     /**
-     * D5_Smartyインスタンス間で共通の変数を設定します。
+     * Smartyインスタンス間で共通の変数を設定します。
      *
      * @param string|array $name   変数名、もしくは、変数名 => 値の連想配列
      * @param mixed        $value  (optional) 設定する値
@@ -115,19 +117,19 @@ class D5_Smarty
     {
         if ($escape !== false) {
             if (is_array($name)) {
-                $key = D5_Arr::mapRecursive($name, array('D5_Smarty', 'escapeHelper'));
+                $key = Arr::mapRecursive($name, array('Smarty', 'escapeHelper'));
             }
             else {
                 $value = self::escapeHelper($value);
             }
         }
 
-        D5_Arr::set(self::$_globalAssignStore, $name, $value);
+        Arr::set(self::$_globalAssignStore, $name, $value);
     }
 
 
     /**
-     * D5_Smartyインスタンスで共通の変数を設定します。
+     * Smartyインスタンスで共通の変数を設定します。
      *
      * setInGlobalと違い、設定する値はエスケープされません。
      *
@@ -136,35 +138,35 @@ class D5_Smarty
      */
     public static function setRawInGlobal($name, $value = null)
     {
-        D5_Arr::set(self::$_globalAssignStore, $name, $value);
+        Arr::set(self::$_globalAssignStore, $name, $value);
     }
 
 
     /**
-     * D5_Smartyインスタンス間で共通の変数を取得します。
+     * Smartyインスタンス間で共通の変数を取得します。
      *
      * @param string $name    変数名
      * @param string $default 値
      */
     public static function getInGlobal($name = null, $default = null)
     {
-        return D5_Arr::get(self::$_globalAssignStore, $name, $default);
+        return Arr::get(self::$_globalAssignStore, $name, $default);
     }
 
 
     /**
-     * D5_Smartyインスタンス間で共通の変数を破棄します。
+     * Smartyインスタンス間で共通の変数を破棄します。
      *
      * @param   string|array $name 破棄する変数名、もしくは破棄する変数名の配列
      */
     public static function clearInGlobal($name)
     {
-        D5_Arr::delete(self::$_globalAssignStore, $name);
+        Arr::delete(self::$_globalAssignStore, $name);
     }
 
 
     /**
-     * D5_Smartyインスタンスで共通の変数をすべて破棄します。
+     * Smartyインスタンスで共通の変数をすべて破棄します。
      */
     public static function clearAllInGlobal()
     {
@@ -197,14 +199,14 @@ class D5_Smarty
         $sm = new Smarty();
 
         // 設定ファイルを読み込む
-        $conf = D5_Config::get('smarty');
+        $conf = Config::get('smarty');
         array_merge($conf, $config);
 
-        $sm->template_dir = D5_Arr::get($conf, 'template_dir') . DS;
-        $sm->compile_dir  = D5_Arr::get($conf, 'compile_dir') . DS;
-        $sm->config_dir   = D5_Arr::get($conf, 'config_dir') . DS;
-        $sm->cache_dir    = D5_Arr::get($conf, 'cache_dir') . DS;
-        $sm->caching      = D5_Arr::get($conf, 'caching', true);
+        $sm->template_dir = Arr::get($conf, 'template_dir') . DS;
+        $sm->compile_dir  = Arr::get($conf, 'compile_dir') . DS;
+        $sm->config_dir   = Arr::get($conf, 'config_dir') . DS;
+        $sm->cache_dir    = Arr::get($conf, 'cache_dir') . DS;
+        $sm->caching      = Arr::get($conf, 'caching', true);
 
         $this->_smarty = $sm;
     }
@@ -215,19 +217,19 @@ class D5_Smarty
      * @param string|array $key テンプレート内の変数名
      * @param mixed $value 割り当てる値 / オブジェクト
      * @param boolean $filtering (optional) 値を自動的エスケープするか。デフォルト値はtrue
-     * @return D5_Smarty 現在のインスタンス
+     * @return Smarty 現在のインスタンス
      */
     public function set($key, $value = null, $filtering = true)
     {
         if ($filtering !== false) {
             if (is_array($key)) {
-                $key = D5_Arr::mapRecursive($key, array('D5_Smarty', 'escapeHelper'));
+                $key = Arr::mapRecursive($key, array('Smarty', 'escapeHelper'));
             } else {
                 $value = self::escapeHelper($value);
             }
         }
 
-        D5_Arr::set($this->_assign, $key, $value);
+        Arr::set($this->_assign, $key, $value);
         return $this;
     }
 
@@ -240,11 +242,11 @@ class D5_Smarty
      * @param string|array $key テンプレート内の変数名
      * @param mixed $value 割り当てる値 / オブジェクト
      * @param boolean $filtering (optional) 値を自動的エスケープするか。デフォルト値はtrue
-     * @return D5_Smarty 現在のインスタンス
+     * @return Smarty 現在のインスタンス
      */
     public function setRaw($key, $value = null)
     {
-        D5_Arr::set($this->_assign, $key, $value);
+        Arr::set($this->_assign, $key, $value);
         return $this;
     }
 
@@ -254,7 +256,7 @@ class D5_Smarty
      *
      * 変数の参照は以下の順序で行われ、値が見つかった時点でその値が返されます。<br>
      * 1. インスタンスに割り当てられた値<br>
-     * 2. D5_Smarty共通変数<br>
+     * 2. Smarty共通変数<br>
      * 3. 渡されたデフォルト値
      *
      * @param string|array $key     取得する変数名、もしくは取得する変数名の配列
@@ -264,7 +266,7 @@ class D5_Smarty
     public function get($key = null, $default = null)
     {
         $global = self::getGlobal($key, $default);
-        return D5_Arr::get($this->_assign, $key, $global);
+        return Arr::get($this->_assign, $key, $global);
     }
 
 
@@ -272,11 +274,11 @@ class D5_Smarty
      * Smartyへ割り当てた値を破棄します。
      *
      * @param string|array $key 破棄する変数名、もしくは、破棄する変数名の配列
-     * @return D5_Smarty 現在のインスタンス
+     * @return Smarty 現在のインスタンス
      */
     public function clear($key)
     {
-        D5_Arr::delete($this->_assign, $key);
+        Arr::delete($this->_assign, $key);
         return $this;
     }
 
@@ -284,7 +286,7 @@ class D5_Smarty
     /**
      * Smartyへ割り当てた値をすべて破棄します。
      *
-     * @return D5_Smarty 現在のインスタンス
+     * @return Smarty 現在のインスタンス
      */
     public function clearAllAssign()
     {

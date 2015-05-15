@@ -1,14 +1,16 @@
 <?php
+namespace CodeLapse;
+
 /**
  * セッション操作を行うクラス。
  *
- * @package D5
+ * @package CodeLapse
  */
-class D5_Session
+class Session
 {
     /**
      * @private
-     * @var D5_Session インスタンス
+     * @var Session インスタンス
      */
     private static $instance;
 
@@ -31,7 +33,7 @@ class D5_Session
     /**
      * Sessionクラスのインスタンスを生成、もしくは取得します。
      * @private
-     * @return D5_Session
+     * @return Session
      * @ignore
      */
     private static function &getInstance()
@@ -93,31 +95,31 @@ class D5_Session
      *
      * @param string|null $name 取得するセッション変数のキー
      * @param mixed|null $default 指定されたキーが存在しない時のデフォルト値
-     * @see D5_Arr::get() D5_Arr::getメソッド
+     * @see Arr::get() Arr::getメソッド
      */
     public static function get($name = null, $default = null)
     {
-        return D5_Arr::get(self::getInstance()->session, $name, $default);
+        return Arr::get(self::getInstance()->session, $name, $default);
     }
 
     /**
      * セッション変数に値を設定します。
      *
      * @param $name
-     * @see D5_Arr::set() D5_Arr::setメソッド
+     * @see Arr::set() Arr::setメソッド
      */
     public static function set($name, $value = null)
     {
-        return D5_Arr::set(self::getInstance()->session, $name, $value);
+        return Arr::set(self::getInstance()->session, $name, $value);
     }
 
     /**
      * @param string|null $name 削除するセッション変数のキー
      *     nullを指定するとセッション変数をクリアします。
-     * @see D5_Arr::delete() D5_Arr::deleteメソッド
+     * @see Arr::delete() Arr::deleteメソッド
      */
     public static function delete($name = null)
     {
-        return D5_Arr::delete(self::getInstance()->session, $name);
+        return Arr::delete(self::getInstance()->session, $name);
     }
 }
