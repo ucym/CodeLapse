@@ -2,6 +2,7 @@
 namespace CodeLapse\Database;
 
 use \CodeLapse\DB;
+use \CodeLapse\Database\Exception as DBException;
 use \CodeLapse\LateBinding;
 
 abstract class CrudModel implements
