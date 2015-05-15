@@ -128,23 +128,23 @@ class PDO extends \CodeLapse\Database\Connection
                 switch (true) {
                     case is_string($v) :
                     case is_float($v) :
-                        $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                        $stmt->bindParam($k, $v, \PDO::PARAM_STR);
                         break;
 
                     case is_bool($v) :
-                        $stmt->bindParam($k, $v, PDO::PARAM_BOOL);
+                        $stmt->bindParam($k, $v, \PDO::PARAM_BOOL);
                         break;
 
                     case is_int($v) :
-                        $stmt->bindParam($k, $v, PDO::PARAM_INT);
+                        $stmt->bindParam($k, $v, \PDO::PARAM_INT);
                         break;
 
                     case is_null($v) :
-                        $stmt->bindParam($k, $v, PDO::PARAM_NULL);
+                        $stmt->bindParam($k, $v, \PDO::PARAM_NULL);
                         break;
 
                     default :
-                        $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                        $stmt->bindParam($k, $v, \PDO::PARAM_STR);
                 }
             }
         }
