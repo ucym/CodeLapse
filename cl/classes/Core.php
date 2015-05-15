@@ -25,7 +25,7 @@ class Core
         }
 
         // コアの設定ファイルを読み込む
-        Config::addLoadPath(COREPATH . 'config/');
+        Config::addLoadPath(CL_COREPATH . 'config/');
 
         // 出力バッファリングを始める
         // （コマンドラインで実行中はバッファリングしない。表示結果が得られなくなってしまうため）
