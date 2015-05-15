@@ -70,7 +70,6 @@ class FormTest extends PHPUnit_Framework_TestCase
         $this->assertContains('type="hidden"', $out);
         $this->assertContains('name="field"', $out);
         $this->assertContains('value="value"', $out);
-        $this->assertContains('value="value"', $out);
         $this->assertStringEndsWith(' />', $out);
     }
 
@@ -81,7 +80,8 @@ class FormTest extends PHPUnit_Framework_TestCase
 
         \CodeLapse\Form::textarea('field');
         $out = ob_get_clean();
-        $this->assertStringStartsWith('<textarea name="field"', $out);
+        $this->assertStringStartsWith('<textarea ', $out);
+        $this->assertContains('name="field"', $out);
 
         // クラスを指定していないのに属性があったりしてはいけない
         $this->assertNotContains('class', $out);
