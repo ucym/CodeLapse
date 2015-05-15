@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="../bs.php">
     <php>
-        <const name="DB_DSN" value="mysql:dbname=d5_test;host=localhost" />
+        <const name="DB_DSN" value="mysql:dbname=\CodeLapse\test;host=localhost" />
         <const name="DB_HOST" value="localhost" />
-        <const name="DB_USER" value="d5_test" />
-        <const name="DB_PASS" value="d5_test" />
-        <const name="DB_NAME" value="d5_test" />
+        <const name="DB_USER" value="\CodeLapse\test" />
+        <const name="DB_PASS" value="\CodeLapse\test" />
+        <const name="DB_NAME" value="\CodeLapse\test" />
     </php>
 
     <testsuites>
