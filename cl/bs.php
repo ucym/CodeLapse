@@ -7,7 +7,7 @@ defined('CL_CLASSES') or define('CL_CLASSES', CL_COREPATH . 'classes' .DS);
 require CL_CLASSES . 'AutoLoader.php';
 
 //-- オートローダを初期化
-\CodeLapse\AutoLoader::addNamespace('D5', CL_CLASSES);
+\CodeLapse\AutoLoader::addNamespace('CodeLapse', CL_CLASSES);
 \CodeLapse\AutoLoader::addBasePath(CL_CLASSES);
 
 // クラスの別名を設定
@@ -35,4 +35,4 @@ require CL_CLASSES . 'AutoLoader.php';
 \CodeLapse\AutoLoader::regist();
 
 // ライブラリ初期化処理
-D5_Core::init();
+\CodeLapse\Core::init();
