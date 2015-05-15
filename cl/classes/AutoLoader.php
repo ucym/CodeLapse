@@ -118,7 +118,7 @@ class AutoLoader
     public static function regist()
     {
         // 第三引数は PHP 5.3.0以上で有効
-        spl_autoload_register(array('Autoloader', 'load'), true);//, true);
+        spl_autoload_register(array('AutoLoader', 'load'), true);//, true);
     }
 
 
