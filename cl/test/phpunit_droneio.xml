@@ -5,14 +5,14 @@
         <const name="DB_HOST" value="127.0.0.1" />
         <const name="DB_USER" value="root" />
         <const name="DB_PASS" value="" />
-        <const name="DB_NAME" value="\CodeLapse\test" />
+        <const name="DB_NAME" value="cl_test" />
     </php>
 
     <testsuites>
         <testsuite name="default">
             <file>src/arr.php</file>
             <file>src/form.php</file>
-            <file>src/pager.php</file>a
+            <file>src/pager.php</file>
             <file>src/latebinding.php</file>
             <file>src/db/crudmodel.php</file>
         </testsuite>
