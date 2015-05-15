@@ -1,19 +1,22 @@
 <?php
-class _\CodeLapse\CrudModel_Dummy extends \CodeLapse\DB_CrudModel
+use \CodeLapse\DB;
+use \CodeLapse\Database\CrudModel;
+
+class CrudModel_Dummy extends CrudModel
 {
     public static $_tableName = 'crud_test';
     public static $_properties = array('id', 'name', 'age');
     public static $_primaryKey = array('id');
 }
 
-class \CodeLapse\DB_CrudModelTest extends PHPUnit_Framework_TestCase
+class CrudModelTest extends PHPUnit_Framework_TestCase
 {
     private static $con;
 
     public static function setUpBeforeClass()
     {
         // テーブルの設定
-        self::$con = \CodeLapse\DB::connect(DB_HOST, DB_USER, DB_PASS, false, 'default');
+        self::$con = DB::connect(DB_HOST, DB_USER, DB_PASS, false, 'default');
         self::$con->useDB(DB_NAME);
 
         $result = self::$con->query(
@@ -28,7 +31,7 @@ class \CodeLapse\DB_CrudModelTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->instance = new _\CodeLapse\CrudModel_Dummy();
+        $this->instance = new CrudModel_Dummy();
     }
 
     /**
@@ -38,7 +41,7 @@ class \CodeLapse\DB_CrudModelTest extends PHPUnit_Framework_TestCase
     {
         $expected = 'crud_test';
         $this->assertEquals(
-            _\CodeLapse\CrudModel_Dummy::tableName(),
+            CrudModel_Dummy::tableName(),
             $expected,
             '::tableNameメソッド 遅延束縛チェック');
     }
@@ -49,9 +52,9 @@ class \CodeLapse\DB_CrudModelTest extends PHPUnit_Framework_TestCase
      */
     public function testProperties()
     {
-        $expected = _\CodeLapse\CrudModel_Dummy::$_properties;
+        $expected = CrudModel_Dummy::$_properties;
         $this->assertEquals(
-            _\CodeLapse\CrudModel_Dummy::properties(),
+            CrudModel_Dummy::properties(),
             $expected,
             '::propertiesメソッド 遅延束縛チェック');
     }
@@ -62,9 +65,9 @@ class \CodeLapse\DB_CrudModelTest extends PHPUnit_Framework_TestCase
      */
     public function testPrimaryKey()
     {
-        $expected = _\CodeLapse\CrudModel_Dummy::$_primaryKey;
+        $expected = CrudModel_Dummy::$_primaryKey;
         $this->assertEquals(
-            _\CodeLapse\CrudModel_Dummy::primaryKey(),
+            CrudModel_Dummy::primaryKey(),
             $expected,
             '::primaryKeyメソッド 遅延束縛チェック');
     }
@@ -72,7 +75,7 @@ class \CodeLapse\DB_CrudModelTest extends PHPUnit_Framework_TestCase
 
     public function testSave()
     {
-        $m = new _\CodeLapse\CrudModel_Dummy();
+        $m = new CrudModel_Dummy();
         $m
             ->set('name', 'steve')
             ->set('age', 24)
@@ -85,6 +88,6 @@ class \CodeLapse\DB_CrudModelTest extends PHPUnit_Framework_TestCase
     public function testFind()
     {
         // @TODO
-        //_\CodeLapse\CrudModel_Dummy::find();
+        //CrudModel_Dummy::find();
     }
 }
