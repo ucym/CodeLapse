@@ -3,9 +3,9 @@
     <php>
         <const name="DB_DSN" value="mysql:dbname=\CodeLapse\test;host=localhost" />
         <const name="DB_HOST" value="localhost" />
-        <const name="DB_USER" value="\CodeLapse\test" />
-        <const name="DB_PASS" value="\CodeLapse\test" />
-        <const name="DB_NAME" value="\CodeLapse\test" />
+        <const name="DB_USER" value="cl_test" />
+        <const name="DB_PASS" value="cl_test" />
+        <const name="DB_NAME" value="cl_test" />
     </php>
 
     <testsuites>
