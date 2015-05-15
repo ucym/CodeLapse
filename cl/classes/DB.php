@@ -1,6 +1,8 @@
 <?php
 namespace CodeLapse;
 
+use \CodeLapse\Database\Connection;
+
 /**
  * データベースの例外クラス
  */
@@ -207,7 +209,7 @@ class DB
             }
 
             // 新しい接続を生成
-            $instance = DB_Connection::connect($host, $user, $passwd);
+            $instance = Connection::connect($host, $user, $passwd);
 
             $already_exists === false
                 and self::$_connections[$connectionName] = $instance;
