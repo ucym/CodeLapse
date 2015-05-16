@@ -9,7 +9,7 @@ namespace CodeLapse\Database;
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-abstract class ResultSet implements Iterator
+abstract class ResultSet implements \Iterator
 {
     const FETCH_BOTH = 1;
     const FETCH_NUM = 2;

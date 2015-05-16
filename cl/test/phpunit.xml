@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="../bs.php">
     <php>
-        <const name="DB_DSN" value="mysql:dbname=\CodeLapse\test;host=localhost" />
+        <const name="DB_DSN" value="mysql:dbname=cl_test;host=localhost" />
         <const name="DB_HOST" value="localhost" />
         <const name="DB_USER" value="cl_test" />
         <const name="DB_PASS" value="cl_test" />
