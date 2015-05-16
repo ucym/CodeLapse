@@ -28,7 +28,9 @@ require CL_CLASSES . 'AutoLoader.php';
 
 // クラスのパスを設定
 \CodeLapse\AutoLoader::addClass(array(
-    'Smarty' => CL_THIRDPARTY . 'smarty/Smarty.class.php'
+    'Smarty' => CL_THIRDPARTY . 'smarty/Smarty.class.php',
+    'PhpQuickProfiler'  => CL_THIRDPARTY . 'phpquickprofiler/phpquickprofiler.php',
+    'Pqp_Console'       => CL_THIRDPARTY . 'phpquickprofiler/console.php'
 ));
 
 // オートローダを登録
