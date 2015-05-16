@@ -6,7 +6,7 @@ namespace CodeLapse\Database\ResultSet;
  *
  * @package CodeLapse\Database\ResultSet
  */
-class MySQL extends \CodeLapse\Database\Resultset
+class MySQL extends \CodeLapse\Database\ResultSet
 {
     protected function & _fetch(& $resultset)
     {

@@ -8,7 +8,7 @@ namespace CodeLapse\Database\ResultSet;
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-class PDO extends \CodeLapse\Database\Resultset
+class PDO extends \CodeLapse\Database\ResultSet
 {
     protected function & _fetch(& $resultset)
     {
