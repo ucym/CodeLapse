@@ -1,0 +1,302 @@
+<?php
+namespace CodeLapse;
+
+/**
+ * ファイル操作関数をラップするクラス
+ * （開いたファイルは自動的にクローズされます。）
+ *
+ *    Example:
+ *        $file = new File('path/to/open/file');
+ *        $file->append('hello world');
+ *        echo $file->getContents(); // -> "hello world"
+ */
+class File
+{
+
+    const SEEK_SET = SEEK_SET;
+    const SEEK_ADD = SEEK_CUR;
+    const SEEK_END = SEEK_END;
+
+    /**
+     * ファイルパス
+     * @type {string}
+     */
+    private $filename = null;
+
+    /**
+     * ファイルのポインタ
+     * @type {resource}
+     */
+    private $pointer = null;
+
+    /**
+     * @param string $filename オープンするファイル名を指定します。
+     * @param boolean|null $createfile (optional) ファイルが存在しない場合に作成するか指定します。
+     *     標準はtrueです。
+     * @param string|null $openMode (optional) ファイルのモードを指定します。
+     *     このパラメータを設定した場合 $createfileパラメータの内容は無視されます。
+     */
+    public function __construct($filename, $createfile = true, $openMode = null)
+    {
+        if ($openMode === null) {
+            $openMode = ($createfile === true ? 'c+b' : 'r+b');
+        }
+
+        $this->filename = realpath($filename);
+        $this->pointer = fopen($filename, $openMode);
+    }
+
+    /**
+     * @ignore
+     */
+    public function __destruct()
+    {
+        try {
+            fclose($this->pointer);
+        } catch (Exception $e) {}
+    }
+
+    /**
+     * より高度な操作のために、このインスタンスのファイルポインタを取得します。
+     * @return resource
+     */
+    public function getPointer()
+    {
+        return $this->pointer;
+    }
+
+    /**
+     * ファイルをロックします。<br>
+     * 成功した場合にTRUEを、失敗した場合はFALSEを返します。
+     * @param boolean trueを指定した時に排他ロックをかけます。 false の時は共有ロックをかけます。
+     * @return boolean
+     */
+    public function lock($exclusion = false)
+    {
+        return flock($this->pointer, $exclusion === false ? LOCK_SH : LOCK_EX);
+    }
+
+    /**
+     * ファイルのロックを解除します。<br>
+     * 成功した場合にTRUEを、失敗した場合はFALSEを返します。
+     * @return {boolean}
+     */
+    public function unlock()
+    {
+        return flock($this->pointer, LOCK_UN);
+    }
+
+    /**
+     * このインスタンスが担当しているファイルの名前を取得します。
+     * @return {string}
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * ファイルの内容をすべて消去します。
+     * @return boolean 成功した場合に TRUE を、失敗した場合に FALSE を返します。
+     */
+    public function clearContents()
+    {
+        return ftruncate($this->pointer, 0);
+    }
+
+    /**
+     * ファイルにテキストを出力します。<br>
+     * （それまでのファイルの内容は削除されます。）
+     * @return boolean 成功時に TRUEを、失敗した時に FALSEを返します。
+     */
+    public function putContents($string)
+    {
+        if (is_array($string))
+        {
+            $string = implode($string, '');
+        }
+
+        $this->clearContents();
+
+        fseek($this->pointer, 0);
+        return $this->write($string) === false ? false : true;
+    }
+
+    /**
+     * ファイルの内容をテキストとして取得します。
+     * @link http://www.php.net/manual/ja/function.file-get-contents.php flie_get_contents関数
+     * @param int $offset 読み込みを開始するオフセット位置
+     * @param int $maxlen 読み込むデータの最大バイト数
+     * @return mixed 読み込んだデータを返します。失敗した場合に FALSE を返します。
+     */
+    public function getContents($offset = -1, $maxlen = null)
+    {
+        $args = array($this->filename, null, null, $offset);
+        $maxlen !== null and ( $args[] = $maxlen);
+
+        return call_user_func_array('file_get_contents', $args);
+        //return file_get_contents($this->_filename, null, null, $offset, $length);
+    }
+
+    /**
+     * ファイルの内容を一行ごとに分割した配列として取得します。
+     * @param boolean $rmNl trueを指定されると行末の改行コードを除去します。
+     * @param int $offset 読み込みを開始するオフセット位置
+     * @param int $maxlen 読み込むデータの最大バイト数
+     * @return mixed 読み込んだデータを返します。失敗した場合に FALSE を返します。
+     */
+    public function getContentsAsArray($rmNl = false, $offset = -1, $maxlen = null)
+    {
+        $content = $this->getContnts();
+
+        if ($content === false) {
+            return false;
+        }
+
+        // TODO
+        throw new Exception("実装されていません。");
+
+        $result = explode("\n", $content);
+
+        // 行末の改行コードは除去しない（
+        foreach ($result as $k => $v) {
+            $result[$k] = rtrim($v);
+        }
+
+        if ($rmNl === false) {
+            return $result;
+        } else {
+            // 改行コードを付加
+            foreach ($result as $k => $v) {
+                $result[$k] = $v . "\r\n";
+            }
+
+            return $result;
+        }
+    }
+
+    /**
+     * ファイルにテキストを書き込みます。
+     * @link http://www.php.net/manual/ja/function.fwrite.php fwrite関数
+     * @param string $string 書き込む文字列
+     * @param int $length 書き込む長さ
+     * @return mixed 成功した時に書き込んだバイト数、失敗時に FALSE を返します
+     */
+    public function write($string, $length = null)
+    {
+        if ($length === null)
+        {
+            return fwrite($this->pointer, $string);
+        }
+        else
+        {
+            return fwrite($this->pointer, $string, $length);
+        }
+    }
+
+    // public function prepend($string, $length = null) {}
+
+    /**
+     * ファイルにテキストを追記します。
+     *
+     * @param string $string  書き込む文字列
+     * @param int $length  書き込む長さ
+     * @param boolean $seektoend TRUE が指定された場合、ファイルポインタをファイルの終端に移動します。
+     */
+    public function append($string, $length = null, $seektoend = false)
+    {
+        $pt = &$this->pointer;
+        $_pos = ftell($this->pointer); // ポインタ位置を保持
+        // ファイルの終端にポインタを移動して書き込み
+        fseek($pt, 0, SEEK_END);
+        $this->write($string, $length);
+
+        // 元の位置にポインタを移動
+        $seektoend !== false and fseek($pt, $_pos);
+    }
+
+    /**
+     * ファイルから一行取得します。
+     * @link http://www.php.net/manual/ja/function.fgets.php fgets関数
+     * @param int $length  最大の読み出し長
+     * @return mixed 読み込みに成功した時に行の内容を、失敗した時にFALSEを返します。
+     */
+    public function readline($length = null)
+    {
+        $arg = array($this->pointer);
+        $length !== null and ( $arg[] = $length);
+
+        return call_user_func_array('fgets', $arg);
+    }
+
+    /**
+     * 現在のファイルポインタの位置を取得します。
+     * @link http://www.php.net/manual/ja/function.ftell.php ftell関数
+     * @return mixed ファイルポインタの位置を整数値で返します。エラーが起こった場合 FALSE を返します。
+     */
+    public function tell()
+    {
+        return ftell($this->pointer);
+    }
+
+    /**
+     * tellメソッドの別名
+     * @return mixed ファイルポインタの位置を整数値で返します。エラーが起こった場合 FALSE を返します。
+     */
+    public function getPosition()
+    {
+        return $this->tell();
+    }
+
+    /**
+     * ファイルポインタを移動します。
+     * (http://www.php.net/manual/ja/function.fseek.php)
+     *
+     * whenceの値について
+     *  - whence の値は以下のようになります。
+     *  -   File::SEEK_SET - 位置を offset バイト目に設定する
+     *  -   File::SEEK_ADD - 現在の位置に offset を加えた位置に設定する
+     *  -   File::SEEK_END - ファイル終端に offset を加えた位置に設定する
+     *
+     *  - ファイルの終端から数えた位置に移動するには、$whenceを File::SEEK_END として、負の値をoffsetに渡す方法があります。
+     *
+     * @param int $offset  ファイルポインタの位置。
+     * @param int $whence  ファイルポインタの位置の計算方法。
+     * @return boolean  成功すると TRUE を返し、そうでなければ FALSE を返します。
+     */
+    public function seek($offset, $whence = self::SEEK_SET)
+    {
+        return fseek($this->pointer, $offset, $whence) === 0 ? true : false;
+    }
+
+    /**
+     * seekメソッドの別名
+     * @param int $offset  ファイルポインタの位置。
+     * @param int $whence  ファイルポインタの位置の計算方法。
+     * @return boolean 成功すると TRUE を返し、そうでなければ FALSE を返します。
+     */
+    public function setPosition($offset, $whence = self::SEEK_SET)
+    {
+        return $this->seek($offset, $whence);
+    }
+
+    /**
+     * ファイルポインタをファイルの先頭へ移動します。
+     * @return boolean 成功すると TRUE を返し、そうでなければ FALSE を返します。
+     */
+    public function rewind()
+    {
+        return $this->seek(0);
+    }
+
+    /**
+     * ファイルポインタがファイル終端に達しているかどうかを調べます。
+     * @return boolean
+     */
+    public function isEnd()
+    {
+        return feof($this->pointer);
+    }
+
+}
+

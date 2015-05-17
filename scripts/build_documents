@@ -1,0 +1,3 @@
+#/usr/bin/env sh
+phpdoc run -d cl/classes -t api_documents
+rm -rf api_documents/phpdoc-cache-*

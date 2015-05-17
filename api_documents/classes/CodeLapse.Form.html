@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="https://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/CodeLapse.html">\CodeLapse</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">74</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">7</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">1</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-632894450"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-632894450" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-500219306"></a>
+                                <a href="../namespaces/CodeLapse.html" style="margin-left: 30px; padding-left: 0">CodeLapse</a>
+            </div>
+            <div id="namespace-500219306" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-594276872"></a>
+                                <a href="../namespaces/CodeLapse.Database.html" style="margin-left: 30px; padding-left: 0">Database</a>
+            </div>
+            <div id="namespace-594276872" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2065063402"></a>
+                                <a href="../namespaces/CodeLapse.Database.Connection.html" style="margin-left: 30px; padding-left: 0">Connection</a>
+            </div>
+            <div id="namespace-2065063402" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/CodeLapse.Database.Connection.MySQL.html">MySQL</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Database.Connection.PDO.html">PDO</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-674141542"></a>
+                                <a href="../namespaces/CodeLapse.Database.ResultSet.html" style="margin-left: 30px; padding-left: 0">ResultSet</a>
+            </div>
+            <div id="namespace-674141542" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/CodeLapse.Database.ResultSet.MySQL.html">MySQL</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Database.ResultSet.PDO.html">PDO</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/CodeLapse.Database.Connection.html">Connection</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Database.CrudModel.html">CrudModel</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Database.Exception.html">Exception</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Database.ResultSet.html">ResultSet</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/CodeLapse.Arr.html">Arr</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.AutoLoader.html">AutoLoader</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Config.html">Config</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Cookie.html">Cookie</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Core.html">Core</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.DB.html">DB</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.File.html">File</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Form.html">Form</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Input.html">Input</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.LateBinding.html">LateBinding</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Mail.html">Mail</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Pager.html">Pager</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Security.html">Security</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Session.html">Session</a></li>
+                                                    <li class="class"><a href="../classes/CodeLapse.Smarty.html">Smarty</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/CodeLapse.html">\CodeLapse</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\CodeLapse</small>Form</h1>
+                    <p><em>フォームの生成とフォームへの値の復元を行うクラスです。</em></p>
+                    <pre><code class="language-php">&lt;?php
+
+//-- フォームの開始タグを表示します。
+Form::open('method="post" action="post.php"');
+// あるいは Form::open(array('method' =&gt; 'post', 'action' =&gt; 'post.php'));
+
+//-- フォームの閉じタグを表示します。
+Form::close();
+
+//-- テキストフォームを表示します。(echoやprintは不要です。)
+Form::text('firstname');
+     // =&gt; &lt;input type="text" name="firstname"&gt;
+
+//-- ID名とクラス名を指定してテキストフォームを表示します。
+//   このID、クラス指定はすべてのフィールド生成メソッドで利用可能です。
+//-- （フィールド名とID、クラス名の間にスペースが必要です。）
+Form::text('firstname #input_firstname.form-control.regist-name');
+     // =&gt; &lt;input type="text" name="firstname" id="input_firstname" class="form-control regist-name"&gt;
+
+//-- 属性を指定してテキストフォームを表示します。
+Form::text('firstname', array('required', 'maxlength' =&gt; '10'));
+     // 別の書き方 : Form::text('firstname', 'required maxlength="10"'));
+     // =&gt; &lt;input type="text" name="firstname" required maxlength="10"&gt;
+
+//-- フォームに値を復元させます。
+// フォームに復元させる値を一括設定
+Form::setValue(array(
+     'firstname'     =&gt; 'Boy',
+     'lastname'      =&gt; 'Tom',
+     // 自動的にエスケープされます。
+     'profile'       =&gt; '&lt;script&gt;alert("\'Allo! \'Allo!")&lt;/script&gt;'
+));
+
+Form::text('firstname');
+Form::text('lastname');
+Form::textarea('profile');
+     // =&gt; &lt;input type="text" name="firstname" value="Tom"&gt;
+     // =&gt; &lt;input type="text" name="lastname" value="Boy"&gt;
+     // =&gt; &lt;textarea name="profile"&gt;&amp;lt;script&amp;gt;alert(&amp;quot;\'Allo!\'Allo!&amp;quot;)&amp;lt;/sctipt&amp;gt;&lt;/textarea&gt;
+
+//-- チェックボックスを表示します。
+Form::checkbox('hobby[]', 'Golf');
+Form::checkbox('hobby[]', 'Baseball');
+     // =&gt; &lt;input type="checkbox" name="hobby[]" value="Golf"&gt;
+     // =&gt; &lt;input type="checkbox" name="hobby[]" value="Baseball"&gt;
+
+//-- セレクトボックスを表示します。
+$selections = array('Select' =&gt; array('required', 'selected'), 'male' =&gt; 0, 'female' =&gt; 1);
+Form::select('gender', $selections);
+     // =&gt; (実際の出力は整形されていません)
+     //      &lt;select name="gender"&gt;
+     //          &lt;option required selected&gt;Select&lt;/option&gt;
+     //          &lt;option value="0"&gt;male&lt;/option&gt;
+     //          &lt;option value="1"&gt;female&lt;/option&gt;
+     //      &lt;/select&gt;</code></pre>
+
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/CodeLapse.Form.html#method_setValue" class="">setValue()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_getValue" class="">getValue()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_open" class="">open()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_close" class="">close()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_hidden" class="">hidden()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_text" class="">text()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_password" class="">password()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_textarea" class="">textarea()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_checkbox" class="">checkbox()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_radio" class="">radio()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_select" class="">select()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_file" class="">file()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_submit" class="">submit()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/CodeLapse.Form.html#constant_DEFAULT_FORM_NAME" class="">DEFAULT_FORM_NAME</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/CodeLapse.Form.html#method_parseName" class="">parseName()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_parseHTMLAttr" class="">parseHTMLAttr()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_mergeByRef" class="">mergeByRef()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_buildHTML" class="">buildHTML()</a><br />
+                                                                    <a href="../classes/CodeLapse.Form.html#method_buildInput" class="">buildInput()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/CodeLapse.Form.html#property__values" class="">$_values</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Form.html"><div class="path-wrapper">Form.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper"></div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\CodeLapse\Form</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_DEFAULT_FORM_NAME" name="constant_DEFAULT_FORM_NAME" class="anchor"></a>
+            <article id="constant_DEFAULT_FORM_NAME" class="constant">
+                <h3 class="">DEFAULT_FORM_NAME</h3>
+                <pre class="signature">DEFAULT_FORM_NAME</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property__values" name="property__values" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$_values</h3>
+                <pre class="signature">$_values : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setValue" name="method_setValue" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setValue()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setValue(array <span class="argument">$value</span>, string <span class="argument">$form</span>)</pre>
+                <p><em>フォームに初期値を割り当てます。</em></p>
+                <p>割り当てる変数は以下のような形式でなければいけません</p>
+<pre><code class="language-php">&lt;?php
+$values = array(
+  'name属性の値' =&gt; 'value属性の値',
+
+  // checkbox, select に対応する値を示すとき
+  // （選択された要素がひとつのみであれば、値はただの文字列でも問題ありません）
+  'checkboxのname属性の値' =&gt; array('選択値1', '選択値2')
+);</code></pre>
+<p>この形式に沿わない場合、フィールド生成時に正しく値が復元されません���</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$value </td>
+                                <td><p>フォームに割り当てる初期値が入った配列</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>(optional) 値を割り当て先グループ名（お好みの名前、省略可）</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getValue" name="method_getValue" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getValue()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getValue(string <span class="argument">$field</span>, string <span class="argument">$form</span>) : string|array|null</pre>
+                <p><em>フォームに割り当てられた値を取得します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$field </td>
+                                <td><p>値を取得したいフィールドの名前</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>(省略可) 値を取得するグループ名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string|array|null
+                                            &mdash; <p>取得した値</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_open" name="method_open" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">open()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">open(string|array <span class="argument">$attr</span>)</pre>
+                <p><em>フォームの開始タグを出力します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|array</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                          "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                          （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_close" name="method_close" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">close()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">close()</pre>
+                <p><em>フォームの閉じタグを出力します。</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_hidden" name="method_hidden" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">hidden()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">hidden(string <span class="argument">$name</span>, string <span class="argument">$value</span>, array|string <span class="argument">$attr</span>, string <span class="argument">$form</span>)</pre>
+                <p><em>不可視フィールドを生成し、出力します。</em></p>
+                <p>もし、第３引数でvalue属性が指定されていても
+第２引数に指定したvalueが優先されます。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>フィールドの名前(name属性に設定されます)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$value </td>
+                                <td><p>value属性に設定する値</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                         "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                         （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>初期値が設定されているグループ名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_text" name="method_text" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">text()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">text(string <span class="argument">$name</span>, array|string <span class="argument">$attr</span>, string <span class="argument">$form</span>)</pre>
+                <p><em>テキストボックスを生成し、出力します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>フィールドの名前(name属性に設定されます)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                         "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                         （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>初期値が設定されているグループ名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_password" name="method_password" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">password()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">password(string <span class="argument">$name</span>, array|string <span class="argument">$attr</span>, string <span class="argument">$form</span>)</pre>
+                <p><em>パスワードフォームを生成し、出力します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>フィールドの名前(name属性に設定されます)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                         "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                         （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>初期値が設定されているグループ名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_textarea" name="method_textarea" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">textarea()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">textarea(string <span class="argument">$name</span>, array|string <span class="argument">$attr</span>, string <span class="argument">$form</span>)</pre>
+                <p><em>テキストエリアを生成し、出力します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>フィールドの名前(name属性に設定されます)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                         "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                         （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>初期値が設定されているグループ名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_checkbox" name="method_checkbox" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">checkbox()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">checkbox(string <span class="argument">$name</span>, string <span class="argument">$value</span>, array|string <span class="argument">$attr</span>, string <span class="argument">$form</span>)</pre>
+                <p><em>チェックボックスを生成し、出力します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>フィールドの名前(name属性に設定されます)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$value </td>
+                                <td><p>value属性に設定する値</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                         "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                         （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>初期値が設定されているグループ名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_radio" name="method_radio" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">radio()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">radio(string <span class="argument">$name</span>, string <span class="argument">$value</span>, array|string <span class="argument">$attr</span>, string <span class="argument">$form</span>)</pre>
+                <p><em>ラジオボタンを生成し、出力します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>フィールドの名前(name属性に設定されます)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$value </td>
+                                <td><p>value属性に設定する値</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                         "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                         （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>初期値が設定されているグループ名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_select" name="method_select" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">select()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">select(string <span class="argument">$name</span>, string <span class="argument">$selection</span>, array|string <span class="argument">$attr</span>, string <span class="argument">$form</span>)</pre>
+                <p><em>セレクトボックスを生成し、出力します。</em></p>
+                <p>第２引数 $selectionは以下の形式でなければなりません。</p>
+<pre><code class="language-php">array(
+   '表示名' =&gt; "value属性の値",
+   // 属性を指定する場合は、配列の最初、もしくは、'value'キーにvalue属性の値を指定してください。
+   // '表示名' =&gt; array("value属性の値", '属性名' =&gt; '値', '属性名2' =&gt; '値2'),
+   // '表示名' =&gt; array('value' =&gt; '値', '属性名2' =&gt; '値2'),
+    '表示名2' =&gt; "value属性の値2",
+)</code></pre>
+<p>TODO optgroup</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>フィールドの名前(name属性に設定されます)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$selection </td>
+                                <td><p>value属性に設定する値</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                             "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                             （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>初期値が設定されているグループ名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_file" name="method_file" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">file()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">file(string <span class="argument">$name</span>, array|string <span class="argument">$attr</span>)</pre>
+                <p><em>ファイルセレクトフォームを生成し、出力します。</em></p>
+                <p><b>入力値の復元はされません。</b></p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>フィールドの名前(name属性に設定されます)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                             "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字���
+                             （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_submit" name="method_submit" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">submit()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">submit(string <span class="argument">$value</span>, array|string <span class="argument">$attr</span>)</pre>
+                <p><em>submitボタンを生成し、出力します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$value </td>
+                                <td><p>表示するテキスト</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|string</td>
+                                <td>$attr </td>
+                                <td><p>（省略可）HTMLに設定する属性。</p>
+<pre><code>                         "属性名" =&gt; "値"の連想配列、もしくはHTMLの属性部分の文字列
+                         （属性部分の文字列 例: "min='0' max='20'"）</code></pre></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_parseName" name="method_parseName" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">parseName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">parseName(string <span class="argument">$name</span>) : array</pre>
+                <p><em>フィールド名をHTML属性に変換します。</em></p>
+                <p>フィールド名にはCSSのセレクタ記法を使って要素のIDとクラスを指定できます。
+書き方は以下のとおりです。</p>
+<pre><code>name #id.class.class2</code></pre>
+<p>最初にname属性に設定する名前を指定し、その後ろに""半角スペースを一つ空けて""</p>
+<h1>IDや.classを指定します。</h1>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>フィールド名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>nameキーを含む配列</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_parseHTMLAttr" name="method_parseHTMLAttr" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">parseHTMLAttr()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">parseHTMLAttr(string <span class="argument">$attrStr</span>)</pre>
+                <p><em>HTML属性文字列をパースし、配列に変換します。</em></p>
+                <p>HTML属性文字列とは "attr='b' attr2='b'"のような、
+HTMLの属性だけの文字列です。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$attrStr </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_mergeByRef" name="method_mergeByRef" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">mergeByRef()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">mergeByRef(array <span class="argument">$mergeIn</span>, array <span class="argument">...$arr</span>)</pre>
+                <p><em>配列を一つにマージします。</em></p>
+                <p>array_merge関数と違うのは、このメソッドが破壊的であるということです。
+このメソッドは最初の引数（マージ先）の参照を受け取り、
+その配列内を直接書き換えます。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$mergeIn </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$arr <small style="color: gray">variadic</small></td>
+                                <td><p>マージする配列（複数）</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildHTML" name="method_buildHTML" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">buildHTML()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildHTML(string <span class="argument">$tag</span>, string <span class="argument">$inner</span>, boolean <span class="argument">$close</span>, array <span class="argument">$attributes</span>) : string</pre>
+                <p><em>HTMLタグを生成します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tag </td>
+                                <td><p>タグ名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$inner </td>
+                                <td><p>（省略可）タグの内部コンテンツ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$close </td>
+                                <td><p>（省略可）閉じタグをつけるか</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$attributes </td>
+                                <td><p>（省略可）設定する属性。 "属性名" => "値"の連想配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>HTML</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_buildInput" name="method_buildInput" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">buildInput()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">buildInput(string <span class="argument">$type</span>, string <span class="argument">$name</span>, array <span class="argument">$attr</span>, string|array <span class="argument">$userAttr</span>, string <span class="argument">$form</span>)</pre>
+                <p><em>input要素を生成します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$type </td>
+                                <td><p>type属性</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>name属性</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$attr </td>
+                                <td><p>(optional) 優先的に設定する属性</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|array</td>
+                                <td>$userAttr </td>
+                                <td><p>(optional) ユーザー定義の属性（上書きされます）</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$form </td>
+                                <td><p>(optional) 値を取り出すグループ名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">Form.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Form.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/CodeLapse.html">\CodeLapse</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on May 17th, 2015 at 15:37.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

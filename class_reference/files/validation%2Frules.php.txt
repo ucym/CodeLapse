@@ -1,9 +1,0 @@
-<?php
-class D5_Validation_Rules
-{
-    public static function _validation_require($value, $inputs)
-    {
-
-    }
-}
-
