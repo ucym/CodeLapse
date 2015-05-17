@@ -1,7 +1,0 @@
-<?php
-class D5_Validation
-{
-    public function addField($name, $rules = array())
-    {}
-}
-
