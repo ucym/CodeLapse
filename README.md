@@ -1,4 +1,5 @@
-# CodeLapse - PHP 5.2.x Library [![Build Status](https://drone.io/github.com/ucym/CodeLapse/status.png)](https://drone.io/github.com/ucym/CodeLapse/latest)
+# CodeLapse [![Build Status](https://drone.io/github.com/ucym/CodeLapse/status.png)](https://drone.io/github.com/ucym/CodeLapse/latest)
+Fast coding for Small-scale PHP projects.
 
 ## How to use
 1. copy "cl" directory to your project.
