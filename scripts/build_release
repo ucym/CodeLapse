@@ -1,0 +1,7 @@
+#/usr/bin/env sh
+if [ ! -e "" ]; then
+    mkdir release
+fi
+
+zip -rq release/CodeLapse.zip cl/ -x cl/test/
+zip -rq release/CodeLapse_document.zip api_documents/
