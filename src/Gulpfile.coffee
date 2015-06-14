@@ -3,6 +3,7 @@ $       = do require "gulp-load-plugins"
 
 bs      = require "browser-sync"
 spawn   = require("child_process").spawn
+path    = require "path"
 
 option  = require "./gulp_config/gulp.coffee"
 
@@ -72,11 +73,16 @@ g.task "stylus", ->
 # Jade Task
 #
 g.task "jade", ->
-    g.src genPaths("", "jade", ["!#{option.sourceDir}/coffee/**/*.jade"])
+    g.src [
+        "#{option.sourceDir}/../**/*.jade"
+        "!#{option.sourceDir}/../**/_*.jade"
+        "!#{option.sourceDir}/../_*/**"
+        "!#{option.sourceDir}/coffee/**/*.jade"
+    ]
         .pipe $.plumber()
         .pipe $.jade()
         .pipe $.prettify()
-        .pipe g.dest("#{option.publishDir}/")
+        .pipe g.dest("#{option.publishDir}/../")
 
 #
 # Image minify Task
@@ -112,7 +118,7 @@ g.task "watch", ->
         g.start ["stylus"]
 
     $.watch [
-        "#{option.sourceDir}/**/*.jade"
+        path.join(option.sourceDir, "../**/*.jade")
         "!#{option.sourceDir}/coffee/**/*.jade"
         "!#{option.sourceDir}/js/**/*.jade"
     ], ->
@@ -129,10 +135,11 @@ g.task "bs", ->
         port    : 3000
         open    : false
         notify  : false
-        files   : "release/**"
         index   : "index.html"
         server  :
-            baseDir : option.publishDir
+            baseDir : option.publishDir + "/../"
+            routes  :
+                "/CodeLapse/"   : option.publishDir + "/../"
 
 #
 # Gulpfile watcher
@@ -165,5 +172,5 @@ g.task "self-watch", ["bs"], ->
 #
 # Define default
 #
-g.task "devel", ["webpack", "sass", "stylus", "jade", "images", "fonts_copy", "css_copy", "watch"]
+g.task "devel", ["webpack", "sass", "stylus", "jade", "images", "vendor_js", "fonts_copy", "css_copy", "watch"]
 g.task "default", ["self-watch"]
