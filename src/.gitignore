@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+nbpproject
+node_modules
+bower_components
+publish
