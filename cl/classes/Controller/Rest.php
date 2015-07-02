@@ -76,6 +76,7 @@ class Rest
     private function processResponse($data)
     {
         if (is_array($data)) {
+            header('Content-Type: application/json');
             return json_encode($data);
         }
         else {
