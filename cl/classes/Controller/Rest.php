@@ -76,6 +76,7 @@ class Rest
     private function processResponse($data)
     {
         if (is_array($data)) {
+            header('Content-Type: application/json');
             return json_encode($data);
         }
         else {
@@ -92,8 +93,12 @@ class Rest
         if (is_callable($handler)) {
             $response = $handler();
         }
-        else if (is_callable($this->unsupportedHandler)) {
-            $response = $this->unsupportedHandler();
+        else {
+            $handler = $this->unsupportedHandler;
+
+            if (is_callable($handler)) {
+                $response = $this->unsupportedHandler();
+            }
         }
 
         if (! empty($response)) {
@@ -103,8 +108,10 @@ class Rest
 
     private function executeExceptionHandler(\Exception $e)
     {
-        if (is_callable($this->exceptionHandler)) {
-            $response = $this->exceptionHandler($e);
+        $handler = $this->exceptionHandler;
+
+        if (is_callable($handler)) {
+            $response = $handler($e);
 
             if (! empty($response)) {
                 return $this->processResponse($response);
