@@ -196,7 +196,7 @@ abstract class ResultSet implements \Iterator
      * @return mixed 指定された形式の配列もしくはオブジェクトを返します。
      *      カーソルが最後の行まで到達した時に falseが返されます。
      */
-    public function fetch($type = DB_Resultset::FETCH_BOTH)
+    public function fetch($type = self::FETCH_BOTH)
     {
         $ret = false;
 
