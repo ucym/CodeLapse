@@ -25,7 +25,8 @@ require CL_CLASSES . 'AutoLoader.php';
     'Pager'     => '\CodeLapse\Pager',
     'Security'  => '\CodeLapse\Security',
     'Session'   => '\CodeLapse\Session',
-    'RestController'    => '\CodeLapse\Controller\Rest'
+    'RestController'    => '\CodeLapse\Controller\Rest',
+    'Upload'    => '\CodeLapse\Upload'
 ));
 
 // クラスのパスを設定
