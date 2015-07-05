@@ -225,6 +225,34 @@ class Arr
         return isset($pt[$index]);
     }
 
+    /**
+     * 渡された配列が連想配列か調べます
+     * @param array     $array      調べる配列
+     * @param string?   $key        (Optional) 調べる要素
+     * @return bool
+     */
+    public static function isAssoc(array & $array, $key = null)
+    {
+        $input = $array;
+
+        if ($key !== null) {
+            $input = Arr::get($input, $key);
+        }
+
+        if (! is_array($input)) {
+            return false;
+        }
+
+        // from FuelPHP Arr::is_assoc
+        $counter = 0;
+        foreach ($input as $key => $unused) {
+            if (! is_int($key) or $key !== $counter++) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * array_map関数の入れ子対応版
