@@ -2,10 +2,26 @@ extends docs/_layout
 
 block docBody
     section
-        h1 CodeLapse Documentation
+        h1.page-header CodeLapse
+            a(href="https://drone.io/github.com/ucym/CodeLapse/latest" style="margin-left:20px")
+                img(src="https://drone.io/github.com/ucym/CodeLapse/status.png" alt="CodeLapse build status")
+        p.
+            CodeLapseは"定形処理できるだけ短く"がコンセプトのPHPライブラリです。<br>
+            PHP開発で頻出する処理をいかに短くするかに重点をおいて開発しています。<br>
+            <br>
+            たとえば、POSTされた値を`undefined index`を起こさないように取得する。<br>
+            セッションを操作する。HTMLのFormに値を復元する。データベースへアクセスする。<br>
+            ページャーを設置する。テンプレートエンジンを使う。<br>
+            <br>
+            CodeLapseはこのようなPHPあるある処理をより短く、かつ手軽に行えるようにしています。<br>
+
+        a.btn.btn-primary(href="https://github.com/ucym/CodeLapse/releases/latest/") Download latest version
+
+        h2.page-header ドキュメント
+
         p
-            | ここではCodeLapseが提供しているクラスの機能について解説されています。<br>
-            | クラス・メソッドの仕様については
+            | ここではCodeLapseが提供しているクラスの概要が記載されています。<br>
+            | クラス・メソッドの詳細な仕様については
             a(href="/CodeLapse/apidocs/namespaces/CodeLapse.html") APIドキュメント
             | をご参照ください。<br>
             br
@@ -20,8 +36,20 @@ block docBody
                     | 全てのクラス、メソッドについては
                     a(href="/CodeLapse/apidocs/namespaces/CodeLapse.html") API Docs
                     | を参照してください。
-        :markdown
-            ``` php
-            <?php
-            require 'path/to/CodeLapse/cl/bs.php';
-            ```
+        
+        
+
+        h2.page-header インストール
+        ol
+            li
+                a(href="https://github.com/ucym/CodeLapse/releases/latest/") CodeLapse
+                | をダウンロードします。(CodeLapse_vX.X.X.zip)
+            li.
+                ダウンロードしたZIPを解凍し、解凍したディレクトリ(<code>cl</code>)を
+                プロジェクトディレクトリにコピーします。
+            li CodeLapseを利用したいスクリプトから<code>cl/bs.php</code>をインクルードします。
+                :markdown
+                    ``` php
+                    <?php require 'path/to/CodeLapse/cl/bs.php';
+                    ```
+            li 終了です！クラスはオートローダにより読み込まれるため、これ以上のインクルードは必要ありません！
