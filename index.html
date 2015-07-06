@@ -36,18 +36,35 @@
         </div>
         <div class="col-xs-9">
           <section>
-            <h1>CodeLapse Documentation</h1>
-            <p>ここではCodeLapseが提供しているクラスの機能について解説されています。
-              <br> クラス・メソッドの仕様については<a href="/CodeLapse/apidocs/namespaces/CodeLapse.html">APIドキュメント</a>をご参照ください。
+            <h1 class="page-header">CodeLapse<a href="https://drone.io/github.com/ucym/CodeLapse/latest" style="margin-left:20px"><img src="https://drone.io/github.com/ucym/CodeLapse/status.png" alt="CodeLapse build status"></a></h1>
+            <p>CodeLapseは"定形処理できるだけ短く"がコンセプトのPHPライブラリです。
+              <br> PHP開発で頻出する処理をいかに短くするかに重点をおいて開発しています。
+              <br>
+              <br> たとえば、POSTされた値を`undefined index`を起こさないように取得する。
+              <br> セッションを操作する。HTMLのFormに値を復元する。データベースへアクセスする。
+              <br> ページャーを設置する。テンプレートエンジンを使う。
+              <br>
+              <br> CodeLapseはこのようなPHPあるある処理をより短く、かつ手軽に行えるようにしています。
+              <br> </p><a href="https://github.com/ucym/CodeLapse/releases/latest/" class="btn btn-primary">Download latest version</a>
+            <h2 class="page-header">ドキュメント</h2>
+            <p>ここではCodeLapseが提供しているクラスの概要が記載されています。
+              <br> クラス・メソッドの詳細な仕様については<a href="/CodeLapse/apidocs/namespaces/CodeLapse.html">APIドキュメント</a>をご参照ください。
               <br>
               <br>なお、このページ内のサンプルコードは全てライブラリのインクルードを省略しています。
               <br> CodeLapseのクラスを利用する際は、必ず<code>cl/bs.php</code>をincludeもしくはrequireするようにしてください。
               <br>
               <div class="well"><i>ドキュメントは現在編集中です。<br>
 全てのクラス、メソッドについては<a href="/CodeLapse/apidocs/namespaces/CodeLapse.html">API Docs</a>を参照してください。</i></div>
-            </p><pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-keyword">require</span> <span class="hljs-string">'path/to/CodeLapse/cl/bs.php'</span>;</span>
-</code></pre> </section>
+            </p>
+            <h2 class="page-header">インストール</h2>
+            <ol>
+              <li><a href="https://github.com/ucym/CodeLapse/releases/latest/">CodeLapse</a>をダウンロードします。(CodeLapse_vX.X.X.zip)</li>
+              <li>ダウンロードしたZIPを解凍し、解凍したディレクトリ(<code>cl</code>)を プロジェクトディレクトリにコピーします。</li>
+              <li>CodeLapseを利用したいスクリプトから<code>cl/bs.php</code>をインクルードします。<pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span> <span class="hljs-keyword">require</span> <span class="hljs-string">'path/to/CodeLapse/cl/bs.php'</span>;</span>
+</code></pre> </li>
+              <li>終了です！クラスはオートローダにより読み込まれるため、これ以上のインクルードは必要ありません！</li>
+            </ol>
+          </section>
         </div>
       </div>
     </div>
