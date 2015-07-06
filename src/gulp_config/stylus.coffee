@@ -3,9 +3,10 @@
 option      = require "./gulp.coffee"
 
 nib         = require "nib"
+bootstrap   = require "bootstrap-styl"
 
 module.exports =
-    use         : [nib()]
+    use         : [nib(), bootstrap()]
     compress    : true
     sourcemap   :
         # inline      : true

@@ -1,11 +1,23 @@
 g       = require "gulp"
 $       = do require "gulp-load-plugins"
+marked  = require "marked"
 
 bs      = require "browser-sync"
 spawn   = require("child_process").spawn
 path    = require "path"
 
 option  = require "./gulp_config/gulp.coffee"
+
+marked.setOptions
+    gfm         : true
+    tables      : true
+    breaks      : false
+    pedantic    : false
+    sanitize    : true
+    smartLists  : true
+    smartypants : false
+    highlight   : (code) ->
+        return require('highlight.js').highlightAuto(code).value
 
 genPaths = (dir, ext, withinDirs = []) ->
     if (ext isnt null or ext isnt "") and ext[0] isnt "."
@@ -137,9 +149,9 @@ g.task "bs", ->
         notify  : false
         index   : "index.html"
         server  :
-            baseDir : option.publishDir + "/../"
+            baseDir : path.join(option.publishDir, "../")
             routes  :
-                "/CodeLapse/"   : option.publishDir + "/../"
+                "/CodeLapse/"   : path.join(option.publishDir, "../")
 
 #
 # Gulpfile watcher
@@ -161,11 +173,22 @@ g.task "self-watch", ["bs"], ->
         proc.kill() if proc?
         proc = spawn command, args, {stdio: 'inherit'}
 
+    throttle = (ms, fn) ->
+        timer = null
+
+        return ->
+            clearTimeout(timer) if timer isnt null
+            timer = setTimeout ->
+                fn()
+                timer = null
+            , ms
+            return
+
     $.watch ["Gulpfile.coffee", "./gulp_config/**"], ->
         spawnChildren()
 
-    $.watch ["#{option.publishDir}/**/*"], ->
-        bs.reload({stream: true})
+    $.watch [path.join(option.publishDir, "../**/*")], throttle 1000, ->
+        bs.reload({stream: false})
 
     spawnChildren()
 

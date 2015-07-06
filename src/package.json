@@ -9,6 +9,7 @@
   "author": "",
   "license": "Public License",
   "dependencies": {
+    "bootstrap-styl": "^4.0.5",
     "browser-sync": "^1.7.0",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.9.2",
@@ -34,5 +35,9 @@
     "nib": "^1.0.4",
     "node-libs-browser": "^0.5.0",
     "webpack": "^1.9.4"
+  },
+  "devDependencies": {
+    "highlight.js": "^8.6.0",
+    "marked": "^0.3.3"
   }
 }
