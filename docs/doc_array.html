@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>CodeLapse\Arr</title>
+    <script src="/CodeLapse/static/js/jquery.min.js"></script>
+    <script src="/CodeLapse/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/CodeLapse/static/css/highlight.github.css">
+    <link rel="stylesheet" href="/CodeLapse/static/css/style.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container"><a href="/CodeLapse/" class="navbar-brand">CodeLapse Docs</a>
+        <div class="navbar-right">
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="/CodeLapse/apidocs/namespaces/CodeLapse.html">API Docs</a></li>
+              <li><a href="https://github.com/ucym/CodeLapse">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="content" class="container">
+      <div class="row">
+        <div class="col-xs-3">
+          <div data-spy="affix" data-offset-top="0" affix class="doc-nav">
+            <ul class="nav">
+              <li><a href="/CodeLapse/">Docs</a></li>
+              <li class="doc-nav-item_label">機能</li>
+              <li><a href="/CodeLapse/docs/doc_array.html">Arr</a><a href="/CodeLapse/docs/doc_form.html">Form</a><a href="/CodeLapse/docs/doc_db.html">Database<span class="text-muted">&nbsp;as DB</span></a><a href="/CodeLapse/docs/doc_request.html">Request<span class="text-muted">&nbsp;as Req</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-xs-9">
+          <article class="doc-body">
+            <h1 class="page-header">Arr<a href="/CodeLapse/apidocs/classes/CodeLapse.Arr.html" class="doc-header_api-link glyphicon glyphicon-link"></a></h1>
+            <p>Arrクラスは安全な配列操作を行うための関数です。</p>
+            <h3 class="page-header"><code>isset</code>を利用した配列要素の存在チェック</h3>
+            <p>以下のコードを見てみましょう。<code>$newMemberName</code>の初期化式が非常に長くなっています。</p><pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-comment">// WebAPIからグループ情報を取得し、あるグループに最近入ったユーザーの名前を表示する</span>
+<span class="hljs-variable">$groupId</span> = Req::post(<span class="hljs-string">'groupId'</span>);
+<span class="hljs-variable">$reqUrl</span> = <span class="hljs-string">'http://someapi-provider.com/group_info/'</span> . <span class="hljs-variable">$groupId</span>;
+
+<span class="hljs-variable">$rawResponse</span> = file_load_contents(<span class="hljs-variable">$reqUrl</span>);
+<span class="hljs-variable">$res</span> = json_decode(<span class="hljs-variable">$rawResponse</span>);
+
+<span class="hljs-comment">// とてもながい</span>
+<span class="hljs-variable">$newMemberName</span> = <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$res</span>[<span class="hljs-string">'newestMember'</span>][<span class="hljs-number">0</span>][<span class="hljs-string">'name'</span>]) ? <span class="hljs-variable">$res</span>[<span class="hljs-string">'newestMember'</span>][<span class="hljs-number">0</span>][<span class="hljs-string">'name'</span>] : <span class="hljs-keyword">null</span>;
+
+<span class="hljs-keyword">if</span> (<span class="hljs-variable">$newestMember</span> !== <span class="hljs-keyword">null</span>) {
+    <span class="hljs-comment">// メンバー名を表示</span>
+    printf(<span class="hljs-string">'最近ジョインしたメンバー: %s'</span>, <span class="hljs-variable">$newMemberName</span>);
+}</span>
+</code></pre>
+            <p><code>$newMemberName</code>の初期化式は<code>Arr::get</code>メソッドを利用すれば短く書くことが出来ます</p><pre><code class="lang-php"><span class="hljs-variable">$newMemberName</span> = <span class="hljs-constant">Arr:</span><span class="hljs-symbol">:get</span>(<span class="hljs-variable">$res</span>, <span class="hljs-string">'newestMember.0.name'</span>);
+</code></pre>
+            <p>この例ではWebAPIの結果を利用しましたが、このようなパターンは<code>$_POST</code>変数などから値を取り出す場合にも有効です。</p><pre><code class="lang-php"><span class="hljs-comment">// 長い</span>
+<span class="hljs-variable">$userId</span> = <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">'user_id'</span>]) ? <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'user_id'</span>] : <span class="hljs-keyword">false</span>;
+
+<span class="hljs-comment">// 短い</span>
+<span class="hljs-variable">$userId</span> = Arr::get(<span class="hljs-variable">$_POST</span>, <span class="hljs-string">'user_id'</span>, <span class="hljs-keyword">false</span>);
+
+<span class="hljs-comment">// この場合、CodeLapseでは`Req::post`メソッドの方が最適です。</span>
+<span class="hljs-variable">$userId</span> = Req::post(<span class="hljs-string">'user_id'</span>, <span class="hljs-keyword">false</span>);
+</code></pre>
+            <h3 class="page-header">API</h3>
+            <ul>
+              <li><a href="/CodeLapse/apidocs/classes/CodeLapse.Arr.html">Arrクラス</a></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

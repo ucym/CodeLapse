@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>CodeLapse\Request</title>
+    <script src="/CodeLapse/static/js/jquery.min.js"></script>
+    <script src="/CodeLapse/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/CodeLapse/static/css/highlight.github.css">
+    <link rel="stylesheet" href="/CodeLapse/static/css/style.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container"><a href="/CodeLapse/" class="navbar-brand">CodeLapse Docs</a>
+        <div class="navbar-right">
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="/CodeLapse/apidocs/namespaces/CodeLapse.html">API Docs</a></li>
+              <li><a href="https://github.com/ucym/CodeLapse">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="content" class="container">
+      <div class="row">
+        <div class="col-xs-3">
+          <div data-spy="affix" data-offset-top="0" affix class="doc-nav">
+            <ul class="nav">
+              <li><a href="/CodeLapse/">Docs</a></li>
+              <li class="doc-nav-item_label">機能</li>
+              <li><a href="/CodeLapse/docs/doc_array.html">Arr</a><a href="/CodeLapse/docs/doc_form.html">Form</a><a href="/CodeLapse/docs/doc_db.html">Database<span class="text-muted">&nbsp;as DB</span></a><a href="/CodeLapse/docs/doc_request.html">Request<span class="text-muted">&nbsp;as Req</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-xs-9">
+          <article>
+            <h1 class="page-header">Request<small class="class-name-alias">as Req</small></h1>
+            <p>ユーザーからの入力に関する操作を担当するクラスです。</p>
+            <h3 class="page-header">GET / POSTなどのパラメータの受け取り</h3><pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-comment">// $_POST['user_name']を取り出します。</span>
+<span class="hljs-variable">$user_name</span> = Req::post(<span class="hljs-string">'user_name'</span>);
+
+<span class="hljs-comment">// $_POST['agree']を取り出します。値がないときは、`false`(第２引数)を返します。</span>
+<span class="hljs-variable">$user_agree</span> = Req::post(<span class="hljs-string">'agree'</span>, <span class="hljs-keyword">false</span>);
+
+
+<span class="hljs-comment">// $_GET['page']を取得します。値がないときは`1`を返します</span>
+<span class="hljs-variable">$page_no</span> = Req::get(<span class="hljs-string">'page'</span>, <span class="hljs-number">1</span>);</span>
+</code></pre>
+            <h3 class="page-header">JSON POSTの受け取り</h3>
+            <p>Backbone.jsのようなJSONをpostするクライアントサイドライブラリに有効です。</p><pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-variable">$body</span> = Req::json();
+
+<span class="hljs-comment">// JSON内の特定の要素を取り出す</span>
+<span class="hljs-variable">$user_name</span> = Req::json(<span class="hljs-string">'user_name'</span>);
+
+<span class="hljs-comment">// 生POSTデータを取得 (`php://input`の内容を取得)</span>
+<span class="hljs-variable">$rawBody</span> = Req::rawBody();</span>
+</code></pre>
+            <h3 class="page-header">API</h3>
+            <ul>
+              <li><a href="/CodeLapse/apidocs/classes/CodeLapse.Input.html">Inputクラス</a></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
