@@ -1,0 +1,21 @@
+extends ../_layout.jade
+
+block content
+    .row
+        .col-xs-3
+            div.doc-nav(data-spy="affix" data-offset-top="0" affix)
+                ul.nav
+                    li
+                        a(href="/CodeLapse/") Docs
+                    
+                    li.doc-nav-item_label 機能
+                    li
+                        a(href="/CodeLapse/docs/doc_array.html") Arr
+                        a(href="/CodeLapse/docs/doc_form.html") Form
+                        a(href="/CodeLapse/docs/doc_db.html") Database
+                            span.text-muted &nbsp;as DB
+                        a(href="/CodeLapse/docs/doc_request.html") Request
+                            span.text-muted &nbsp;as Req
+
+        .col-xs-9
+            block docBody

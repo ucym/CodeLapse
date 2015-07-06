@@ -1,0 +1,85 @@
+extends _layout
+
+block title
+    title CodeLapse\Form
+
+block docBody
+    article
+        h1.page-header Form
+        p.
+            Formクラスはフォームの構築と値復元機能の容易な実装のためのヘルパーです。<br>
+
+
+        h3.page-header サンプル
+        :markdown
+            ```php
+            <?php
+            // 生年月日の選択肢を生成
+            $years = range(2010, 2015);
+            $year_selections = array_combine($years, $years); 
+
+            if (! empty($_POST) and some_validation($_POST) === false) {
+                // POSTパラメータが送信されて検証に失敗した時
+                // フォームに値を復元する
+                Form::setValue($_POST);
+            }
+            ?>
+
+            <?php Form::open('method="post"') ?>
+
+            <dl class="dl-horizontal">
+                <dt><label for="input-firstname">First name</label></dt>
+                <dd><?php Form::text('firstname #input-firstname.form-input') ?></dd>
+
+                <dt><label for="input-lastname">Last name</label></dt>
+                <dd><?php Form::text('lastname #input-lastname.form-input') ?></dd>
+
+                <dt>Birthday</dt>
+                <dd><?php Form::select('birth-year', $year_selections) ?></dd>
+            </dl>
+            
+            <?php Form::close() ?>
+            ```
+            
+        p
+            出力結果
+            :markdown
+                ```html
+                <form method="post">
+                
+                <dl class="dl-horizontal">
+                    <dt><label for="input-firstname">First name</label></dt>
+                    <dd><input type="text" name="firstname" id="input-firstname" class="form-input" /></dd>
+                    
+                    <dt><label for="input-lastname">Last name</label></dt>
+                    <dd><input type="text" name="lastname" id="input-lastname" class="form-input" /></dd>
+                
+                    <dt>Birthday</dt>
+                    <dd>
+                        <select name="birth-year">
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                        </select>
+                    </dd>
+                </dl>
+                
+                </form>
+                ```
+
+        p
+            | サンプルコードでは記述されていませんが、some_validationでの検証処理をパス出来なかった場合<br>
+            | フォームへの値復元を行います。<br>
+            | <br>
+            | 値復元は
+            code Form::setValue($_POST)
+            | の一文で終了し、input、textarea、selectやradio、checkboxへの選択状態や入力値の復元とエスケープ処理が自動的に行われます。
+
+
+        h3.page-header APIドキュメント
+        ul
+            li
+                a(href="/CodeLapse/apidocs/classes/CodeLapse.Form.html") Formクラス

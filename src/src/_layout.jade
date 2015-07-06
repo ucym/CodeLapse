@@ -2,12 +2,29 @@ doctype html
 html
     head
         meta(charset="utf-8")
-            
+
         block title
             title CodeLapse
-            
-        block head
+
+        script(src="/CodeLapse/static/js/jquery.min.js")
+        script(src="/CodeLapse/static/js/bootstrap.min.js")
+
+        link(rel="stylesheet" href="/CodeLapse/static/css/highlight.github.css")
+        //- link(rel="stylesheet" href="/CodeLapse/static/css/bootstrap.min.css")
+        link(rel="stylesheet" href="/CodeLapse/static/css/style.css")
 
     body
-        nav.navbar
-        #container
+        nav.navbar.navbar-inverse.navbar-fixed-top
+            .container
+                a.navbar-brand(href="/CodeLapse/") CodeLapse Docs
+
+                .navbar-right
+                    .collapse.navbar-collapse
+                        ul.nav.navbar-nav
+                            li
+                                a(href="/CodeLapse/apidocs/namespaces/CodeLapse.html") API Docs
+                            li
+                                a(href="https://github.com/ucym/CodeLapse") GitHub
+
+        #content.container
+            block content

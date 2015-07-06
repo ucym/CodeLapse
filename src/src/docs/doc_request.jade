@@ -1,0 +1,48 @@
+extends _layout
+
+block title
+    title CodeLapse\Request
+
+block docBody
+    article
+        h1.page-header Request
+            small.class-name-alias as Req
+        p
+            | ユーザーからの入力に関する操作を担当するクラスです。
+
+
+        h3.page-header GET / POSTなどのパラメータの受け取り
+        :markdown
+            ``` php
+            <?php
+            // $_POST['user_name']を取り出します。
+            $user_name = Req::post('user_name');
+            
+            // $_POST['agree']を取り出します。値がないときは、`false`(第２引数)を返します。
+            $user_agree = Req::post('agree', false);
+            
+            
+            // $_GET['page']を取得します。値がないときは`1`を返します
+            $page_no = Req::get('page', 1);
+            ```
+        
+        h3.page-header JSON POSTの受け取り
+        p
+            | Backbone.jsのようなJSONをpostするクライアントサイドライブラリに有効です。
+        :markdown
+            ``` php
+            <?php
+            $body = Req::json();
+            
+            // JSON内の特定の要素を取り出す
+            $user_name = Req::json('user_name');
+            
+            // 生POSTデータを取得 (`php://input`の内容を取得)
+            $rawBody = Req::rawBody();
+            ```
+    
+    
+        h3.page-header API
+        ul
+            li
+                a(href="/CodeLapse/apidocs/classes/CodeLapse.Input.html") Inputクラス

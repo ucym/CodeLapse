@@ -1,0 +1,27 @@
+extends docs/_layout
+
+block docBody
+    section
+        h1 CodeLapse Documentation
+        p
+            | ここではCodeLapseが提供しているクラスの機能について解説されています。<br>
+            | クラス・メソッドの仕様については
+            a(href="/CodeLapse/apidocs/namespaces/CodeLapse.html") APIドキュメント
+            | をご参照ください。<br>
+            br
+            | なお、このページ内のサンプルコードは全てライブラリのインクルードを省略しています。<br>
+            | CodeLapseのクラスを利用する際は、必ず
+            code cl/bs.php
+            | をincludeもしくはrequireするようにしてください。<br>
+            
+            .well
+                i
+                    | ドキュメントは現在編集中です。<br>
+                    | 全てのクラス、メソッドについては
+                    a(href="/CodeLapse/apidocs/namespaces/CodeLapse.html") API Docs
+                    | を参照してください。
+        :markdown
+            ``` php
+            <?php
+            require 'path/to/CodeLapse/cl/bs.php';
+            ```

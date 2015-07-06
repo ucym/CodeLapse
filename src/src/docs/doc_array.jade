@@ -1,0 +1,71 @@
+extends _layout
+
+block title
+    title CodeLapse\Arr
+
+block docBody
+    article.doc-body
+        h1.page-header Arr
+            a.doc-header_api-link.glyphicon.glyphicon-link(href="/CodeLapse/apidocs/classes/CodeLapse.Arr.html")
+
+        p
+            | Arrクラスは安全な配列操作を行うための関数です。
+
+        h3.page-header
+            code isset
+            | を利用した配列要素の存在チェック
+        p
+            | 以下のコードを見てみましょう。
+            code $newMemberName
+            | の初期化式が非常に長くなっています。
+        :markdown
+            ``` php
+            <?php
+            // WebAPIからグループ情報を取得し、あるグループに最近入ったユーザーの名前を表示する
+            $groupId = Req::post('groupId');
+            $reqUrl = 'http://someapi-provider.com/group_info/' . $groupId;
+            
+            $rawResponse = file_load_contents($reqUrl);
+            $res = json_decode($rawResponse);
+            
+            // とてもながい
+            $newMemberName = isset($res['newestMember'][0]['name']) ? $res['newestMember'][0]['name'] : null;
+            
+            if ($newestMember !== null) {
+                // メンバー名を表示
+                printf('最近ジョインしたメンバー: %s', $newMemberName);
+            }
+            ```
+
+        p
+            code $newMemberName
+            | の初期化式は
+            code Arr::get
+            | メソッドを利用すれば短く書くことが出来ます
+        :markdown
+            ``` php
+            $newMemberName = Arr::get($res, 'newestMember.0.name');
+            ```
+        
+        p
+            | この例ではWebAPIの結果を利用しましたが、このようなパターンは
+            code $_POST
+            | 変数などから値を取り出す場合にも有効です。
+        :markdown
+            ``` php
+            // 長い
+            $userId = isset($_POST['user_id']) ? $_POST['user_id'] : false;
+            
+            // 短い
+            $userId = Arr::get($_POST, 'user_id', false);
+            
+            // この場合、CodeLapseでは`Req::post`メソッドの方が最適です。
+            $userId = Req::post('user_id', false);
+            ```
+            
+    
+    
+        h3.page-header API
+        ul
+            li
+                a(href="/CodeLapse/apidocs/classes/CodeLapse.Arr.html") Arrクラス

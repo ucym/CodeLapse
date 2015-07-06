@@ -1,0 +1,84 @@
+extends ./_layout
+
+block title
+    title CodeLapse\Database
+
+block docBody
+    article
+        h1.page-header Database
+            small.class-name-alias as DB
+        p
+            | DBクラスはデータベースへ接続ヘルパーです。<br>
+            | mysql_*関数, PDOをサポートしており、統一されたインターフェースでデータベースを扱うことができます。
+
+
+        h3.page-header 設定
+        p
+            code /cl/config/db.php
+            | に接続設定を記述します。<br>
+            code default
+            | コネクションがDBクラスで利用する通常のコネクションになります。
+        
+        :markdown
+            ``` php
+            <?php
+            return array(
+                // defaultコネクションの設定
+                'default' => array(
+                    'user'      => 'dbuser',
+                    'password'  => 'dbpass',
+                    'host'      => 'localhost',
+
+                    // ここ以下は設定しなくてもよいですが
+                    // 設定されていた場合、自動的に"use"と"set name"クエリが実行されます。
+                    'database'  => 'dbname',
+                    'charset'   => 'utf8'
+                )
+            )
+            ```
+
+
+        h3.page-header 利用例
+        p
+            | 以下はシンプルなログイン処理の実装例です。<br>
+            code DB::queryメソッド
+            | でプレースホルダが利用できるのを確認できます。
+        
+        :markdown
+            ``` php
+            <?php
+            if (Req::method() === "POST") {
+                $user_id = Req::post('user_id');
+                $password = Req::post('password');
+                
+                // パスワードパッシュを取得する
+                $resultset = DB::query('SELECT `password` FROM `users` WHERE `user_id` = :user_id', array(
+                    ':user_id' => $user_id
+                ));
+                
+                $password_hash = Arr::get($resultset->fetch(), 'password');
+                
+                if (password_verify($password, $password_hash)) {
+                    header('Redirect: hello.php');
+                    exit;
+                }
+                else {
+                    echo 'ユーザー名かパスワードが間違っています。';
+                }
+            }
+            ?>
+            <form method="post">
+                <label>ユーザーID <input type="text" name="user_id" class="form-input" /></label>
+                <label>パスワード <input type="password" name="password" class="form-input" /></label>
+                
+                <button class="btn btn-primary">ログイン</button>
+            </form>
+            ```
+
+
+        h3.page-header API
+        ul
+            li
+                a(href="/CodeLapse/apidocs/classes/CodeLapse.DB.html") DBクラス
+            li
+                a(href="/CodeLapse/apidocs/namespaces/CodeLapse.Database.html") CodeLapse\Database名前空間（DBクラスの処理の移譲先クラス群）
