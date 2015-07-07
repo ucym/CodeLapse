@@ -26,16 +26,26 @@
     <div id="content" class="container">
       <div class="row">
         <div class="col-xs-3">
-          <div data-spy="affix" data-offset-top="0" affix class="doc-nav">
+          <nav data-spy="affix" data-offset-top="0" affix class="doc-nav">
+            <h1><a href="/CodeLapse/">CodeLapse</a></h1>
+            <h2 class="doc-nav_label">Req / Res</h2>
             <ul class="nav">
-              <li><a href="/CodeLapse/">Docs</a></li>
-              <li class="doc-nav-item_label">機能</li>
-              <li><a href="/CodeLapse/docs/doc_array.html">Arr</a><a href="/CodeLapse/docs/doc_form.html">Form</a><a href="/CodeLapse/docs/doc_db.html">Database<span class="text-muted">&nbsp;as DB</span></a><a href="/CodeLapse/docs/doc_request.html">Request<span class="text-muted">&nbsp;as Req</span></a></li>
+              <li><a href="/CodeLapse/docs/doc_request.html">リクエスト<span class="text-muted pull-right">Req</span></a></li>
+              <li><a href="/CodeLapse/docs/doc_session.html">セッション<span class="text-muted pull-right">Session</span></a></li>
             </ul>
-          </div>
+            <h2 class="doc-nav-item_label">ビューヘルパー</h2>
+            <ul class="nav">
+              <li><a href="/CodeLapse/docs/doc_form.html">フォーム生成<span class="text-muted pull-right">Form</span></a></li>
+            </ul>
+            <h2 class="doc-nav-item_label">ヘルバー</h2>
+            <ul class="nav">
+              <li><a href="/CodeLapse/docs/doc_array.html">配列操作<span class="text-muted pull-right">Arr</span></a></li>
+              <li><a href="/CodeLapse/docs/doc_db.html">データベース<span class="text-muted pull-right">DB</span></a></li>
+            </ul>
+          </nav>
         </div>
-        <div class="col-xs-9">
-          <section>
+        <div class="col-xs-9 doc-container">
+          <article class="doc-body">
             <h1 class="page-header">CodeLapse<a href="https://drone.io/github.com/ucym/CodeLapse/latest" style="margin-left:20px"><img src="https://drone.io/github.com/ucym/CodeLapse/status.png" alt="CodeLapse build status"></a></h1>
             <p>CodeLapseは"定形処理をできるだけ短く"がコンセプトのPHPライブラリです。
               <br> PHP開発で頻出する処理をいかに短くするかに重点をおいて開発しています。
@@ -45,7 +55,7 @@
               <br> ページャーを設置する。テンプレートエンジンを使う。
               <br>
               <br> CodeLapseはこのようなPHPあるある処理をより短く、かつ手軽に行えるようにしています。
-              <br> </p><a href="https://github.com/ucym/CodeLapse/releases/latest/" class="btn btn-primary">Download latest version</a>
+              <br> </p><a href="https://github.com/ucym/CodeLapse/releases/latest/" class="btn btn-primary">最新版をダウンロード</a>
             <h2 class="page-header">ドキュメント</h2>
             <p>ここではCodeLapseが提供しているクラスの概要が記載されています。
               <br> クラス・メソッドの詳細な仕様については<a href="/CodeLapse/apidocs/namespaces/CodeLapse.html">APIドキュメント</a>をご参照ください。
@@ -53,10 +63,11 @@
               <br>なお、このページ内のサンプルコードは全てライブラリのインクルードを省略しています。
               <br> CodeLapseのクラスを利用する際は、必ず<code>cl/bs.php</code>をincludeもしくはrequireするようにしてください。
               <br>
-              <div class="well"><i>ドキュメントは現在編集中です。<br>
+              <div class="well well-sm"><i>ドキュメントは現在編集中です。<br>
 全てのクラス、メソッドについては<a href="/CodeLapse/apidocs/namespaces/CodeLapse.html">API Docs</a>を参照してください。</i></div>
             </p>
             <h2 class="page-header">インストール</h2>
+            <p class="well well-sm">CodeLapseを利用するには 5.3.x以上のPHPが必要です。</p>
             <ol>
               <li><a href="https://github.com/ucym/CodeLapse/releases/latest/">CodeLapse</a>をダウンロードします。(CodeLapse_vX.X.X.zip)</li>
               <li>ダウンロードしたZIPを解凍し、解凍したディレクトリ(<code>cl</code>)を プロジェクトディレクトリにコピーします。</li>
@@ -64,7 +75,7 @@
 </code></pre> </li>
               <li>終了です！クラスはオートローダにより読み込まれるため、これ以上のインクルードは必要ありません！</li>
             </ol>
-          </section>
+          </article>
         </div>
       </div>
     </div>

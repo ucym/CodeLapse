@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Req // CodeLapse</title>
+    <title>Session // CodeLapse</title>
     <script src="/CodeLapse/static/js/jquery.min.js"></script>
     <script src="/CodeLapse/static/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/CodeLapse/static/css/highlight.github.css">
@@ -46,32 +46,24 @@
         </div>
         <div class="col-xs-9 doc-container">
           <article class="doc-body">
-            <h1 class="page-header doc-header">リクエスト<small class="class-name">class Req</small><a href="/CodeLapse/apidocs/classes/CodeLapse.Request.html" class="doc-header_api-link glyphicon glyphicon-link"></a></h1>
-            <p>ユーザーからの入力に関する操作を担当するクラスです。</p>
-            <h3 class="page-header">GET / POSTなどのパラメータの受け取り</h3><pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-comment">// $_POST['user_name']を取り出します。</span>
-<span class="hljs-variable">$user_name</span> = Req::post(<span class="hljs-string">'user_name'</span>);
+            <h1 class="page-header doc-header">セッション<small class="class-name">class Session</small><a href="/CodeLapse/apidocs/classes/CodeLapse.Session.html" class="doc-header_api-link glyphicon glyphicon-link"></a></h1>
+            <p>$_SESSION変数の操作を行うクラスです。 </p>
+            <h3 class="page-header">セッション操作の例</h3><pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-comment">// セッションへ値を設定する</span>
+Session::set(<span class="hljs-string">'auth.user_id'</span>, <span class="hljs-variable">$user_id</span>);
 
-<span class="hljs-comment">// $_POST['agree']を取り出します。値がないときは、`false`(第２引数)を返します。</span>
-<span class="hljs-variable">$user_agree</span> = Req::post(<span class="hljs-string">'agree'</span>, <span class="hljs-keyword">false</span>);
+<span class="hljs-comment">// セッションから値を取得する</span>
+<span class="hljs-comment">// （$_SESSION['auth']['user_id']が設定されていない場合、nullを返す）</span>
+<span class="hljs-variable">$user_id</span> = Session::get(<span class="hljs-string">'auth.user_id'</span>);
 
-
-<span class="hljs-comment">// $_GET['page']を取得します。値がないときは`1`を返します</span>
-<span class="hljs-variable">$page_no</span> = Req::get(<span class="hljs-string">'page'</span>, <span class="hljs-number">1</span>);</span>
+<span class="hljs-comment">// （$_SESSION['auth']['user_id']が設定されていない場合、falseを返させる）</span>
+<span class="hljs-variable">$user_id</span> = Session::get(<span class="hljs-string">'auth.user_id'</span>, <span class="hljs-keyword">false</span>);</span>
 </code></pre>
-            <h3 class="page-header">JSON POSTの受け取り</h3>
-            <p>Backbone.jsのようなJSONをpostするクライアントサイドライブラリに有効です。</p><pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-variable">$body</span> = Req::json();
-
-<span class="hljs-comment">// JSON内の特定の要素を取り出す</span>
-<span class="hljs-variable">$user_name</span> = Req::json(<span class="hljs-string">'user_name'</span>);
-
-<span class="hljs-comment">// 生POSTデータを取得 (`php://input`の内容を取得)</span>
-<span class="hljs-variable">$rawBody</span> = Req::rawBody();</span>
-</code></pre>
+            <p>通常、セッションを利用する前には<code>session_start</code>をコールする必要がありますが
+              <br> CodeLapseにおいては、Sessionクラスが自動的に初期化を行います。 </p>
             <h3 class="page-header">API</h3>
             <ul>
-              <li><a href="/CodeLapse/apidocs/classes/CodeLapse.Request.html">Requestクラス</a></li>
+              <li><a href="/CodeLapse/apidocs/classes/CodeLapse.Session.html">Sessionクラス</a></li>
             </ul>
           </article>
         </div>
