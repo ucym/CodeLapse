@@ -3,8 +3,6 @@
 @import "bootstrap"
 
 body
-    padding-bottom 100px
-
     border-bottom 10px solid #222
 
     font-family "Avenir Next", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック", "Yu Gothic", "メイリオ", Meiryo, Osaka, sans-serif;
@@ -14,22 +12,29 @@ body
 .container
     width 960px !important
 
-.navbar
-    .navbar-brand
-        color #e0e0e0
+.navbar .navbar-brand
+    color #fff
 
 .navbar-nav > li
     font-size 14px
 
     & a
-        color #e0e0e0 !important
+        color #fff !important
 
 #content
-    margin-top ($navbar-height + 10px)
+    overflow hidden
+    margin-top $navbar-height
 
 
 .doc-nav
     width 210px
+    padding-top 16px
+
+    h1, h2
+        margin 0
+        padding 5px 15px
+        font-weight normal
+        font-size 14px
 
     & > .nav > li > a
         padding 5px 15px
@@ -38,26 +43,36 @@ body
     li
         cursor pointer
 
+    .doc-nav_label
     .doc-nav-item_label
         font-size 14px
         padding 20px 15px 5px
 
-.class-name-alias::before
-    content ' '
-
-.doc-header_api-link::before
-    content "\e144"
-
-    margin-left 24px
-
-    font-family 'Glyphicons Halflings'
-    font-size 18px
-    vertical-align middle
-    color rgba(#3782c4, .5)
+.doc-container
+    box-shadow 0 0 10px rgba(#000, .2)
 
 .doc-body
-    .page-header
-        margin-top 10px
+    padding-bottom 50px
 
     p
         margin 20px 0 !important
+
+.doc-header
+    font-size 30px
+
+    &_api-link::before
+        content "\e144"
+
+        margin-left 16px
+
+        font-family 'Glyphicons Halflings'
+        font-size 18px
+        vertical-align middle
+        color rgba(#3782c4, .5)
+
+    .class-name
+        margin-left .8em
+        color #777
+
+    .class-name-alias
+        color #bbb

@@ -1,7 +1,7 @@
 extends docs/_layout
 
 block docBody
-    section
+    article.doc-body
         h1.page-header CodeLapse
             a(href="https://drone.io/github.com/ucym/CodeLapse/latest" style="margin-left:20px")
                 img(src="https://drone.io/github.com/ucym/CodeLapse/status.png" alt="CodeLapse build status")
@@ -15,10 +15,9 @@ block docBody
             <br>
             CodeLapseはこのようなPHPあるある処理をより短く、かつ手軽に行えるようにしています。<br>
 
-        a.btn.btn-primary(href="https://github.com/ucym/CodeLapse/releases/latest/") Download latest version
+        a.btn.btn-primary(href="https://github.com/ucym/CodeLapse/releases/latest/") 最新版をダウンロード
 
         h2.page-header ドキュメント
-
         p
             | ここではCodeLapseが提供しているクラスの概要が記載されています。<br>
             | クラス・メソッドの詳細な仕様については
@@ -29,17 +28,19 @@ block docBody
             | CodeLapseのクラスを利用する際は、必ず
             code cl/bs.php
             | をincludeもしくはrequireするようにしてください。<br>
-            
-            .well
+
+            .well.well-sm
                 i
                     | ドキュメントは現在編集中です。<br>
                     | 全てのクラス、メソッドについては
                     a(href="/CodeLapse/apidocs/namespaces/CodeLapse.html") API Docs
                     | を参照してください。
-        
-        
+
+
 
         h2.page-header インストール
+        p.well.well-sm.
+            CodeLapseを利用するには 5.3.x以上のPHPが必要です。
         ol
             li
                 a(href="https://github.com/ucym/CodeLapse/releases/latest/") CodeLapse

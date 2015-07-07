@@ -1,16 +1,16 @@
 extends ./_layout
 
 block title
-    title CodeLapse\Database
+    title DB // CodeLapse
 
 block docBody
-    article
-        h1.page-header Database
-            small.class-name-alias as DB
+    article.doc-body
+        h1.page-header.doc-header データベース
+            small.class-name class DB
             a.doc-header_api-link.glyphicon.glyphicon-link(href="/CodeLapse/apidocs/classes/CodeLapse.DB.html")
         p
             | DBクラスはデータベースへ接続ヘルパーです。<br>
-            | mysql_*関数, PDOをサポートしており、統一されたインターフェースでデータベースを扱うことができます。
+            | <code>mysql_*関数</code>, <code>PDO</code>をサポートしており、統一されたインターフェースでデータベースを扱うことができます。
 
 
         h3.page-header 設定

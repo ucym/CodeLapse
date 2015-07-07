@@ -1,12 +1,12 @@
 extends _layout
 
 block title
-    title CodeLapse\Request
+    title Req // CodeLapse
 
 block docBody
-    article
-        h1.page-header Request
-            small.class-name-alias as Req
+    article.doc-body
+        h1.page-header.doc-header リクエスト
+            small.class-name class Req
             a.doc-header_api-link.glyphicon.glyphicon-link(href="/CodeLapse/apidocs/classes/CodeLapse.Request.html")
             
         p
@@ -47,4 +47,4 @@ block docBody
         h3.page-header API
         ul
             li
-                a(href="/CodeLapse/apidocs/classes/CodeLapse.Input.html") Inputクラス
+                a(href="/CodeLapse/apidocs/classes/CodeLapse.Request.html") Requestクラス

@@ -3,19 +3,47 @@ extends ../_layout.jade
 block content
     .row
         .col-xs-3
-            div.doc-nav(data-spy="affix" data-offset-top="0" affix)
+            nav.doc-nav(data-spy="affix" data-offset-top="0" affix)
+                h1: a(href="/CodeLapse/") CodeLapse
+
+
+                h2.doc-nav_label Req / Res
                 ul.nav
                     li
-                        a(href="/CodeLapse/") Docs
-                    
-                    li.doc-nav-item_label 機能
+                        a(href="/CodeLapse/docs/doc_request.html") リクエスト
+                            span.text-muted.pull-right Req
                     li
-                        a(href="/CodeLapse/docs/doc_array.html") Arr
-                        a(href="/CodeLapse/docs/doc_form.html") Form
-                        a(href="/CodeLapse/docs/doc_db.html") Database
-                            span.text-muted &nbsp;as DB
-                        a(href="/CodeLapse/docs/doc_request.html") Request
-                            span.text-muted &nbsp;as Req
+                        a(href="/CodeLapse/docs/doc_session.html") セッション
+                            span.text-muted.pull-right Session
+                    //- li
+                    //-     a(href="/CodeLapse/docs/doc_cookie.html") クッキー
+                    //-         span.text-muted.pull-right Cookie
 
-        .col-xs-9
+                //- h2.doc-nav_label
+                    //- li.doc-nav-item_label コントローラ
+                    //- li
+                    //-     a(href="/CodeLapse/docs/doc_controller_rest.html") RESTful
+                    //-         span.text-muted.pull-right RestController
+
+                h2.doc-nav-item_label ビューヘルパー
+                ul.nav
+                    li
+                        a(href="/CodeLapse/docs/doc_form.html") フォーム生成
+                            span.text-muted.pull-right Form
+                    
+                    //- li
+                    //-     a.text-muted(href="/CodeLapse/docs/doc_view.html") テンプレート
+                    //-         span.text-muted.pull-right View
+
+
+                h2.doc-nav-item_label ヘルバー
+                ul.nav
+                    li
+                        a(href="/CodeLapse/docs/doc_array.html") 配列操作
+                            span.text-muted.pull-right Arr
+                    li
+                        a(href="/CodeLapse/docs/doc_db.html") データベース
+                            span.text-muted.pull-right DB
+
+        .col-xs-9.doc-container
             block docBody

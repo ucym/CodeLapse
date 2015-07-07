@@ -1,11 +1,12 @@
 extends _layout
 
 block title
-    title CodeLapse\Form
+    title Form // CodeLapse
 
 block docBody
-    article
-        h1.page-header Form
+    article.doc-body
+        h1.page-header.doc-header フォーム生成
+            small.class-name class Form
             a.doc-header_api-link.glyphicon.glyphicon-link(href="/CodeLapse/apidocs/classes/CodeLapse.Form.html")
         p.
             Formクラスはフォームの構築と値復元機能の容易な実装のためのヘルパーです。<br>

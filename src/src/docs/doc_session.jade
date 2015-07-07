@@ -1,0 +1,37 @@
+extends _layout
+
+block title
+    title Session // CodeLapse
+
+block docBody
+    article.doc-body
+        h1.page-header.doc-header セッション
+            small.class-name class Session
+            a.doc-header_api-link.glyphicon.glyphicon-link(href="/CodeLapse/apidocs/classes/CodeLapse.Session.html")
+
+        p.
+            $_SESSION変数の操作を行うクラスです。
+
+        h3.page-header セッション操作の例
+        :markdown
+            ``` php
+            <?php
+            // セッションへ値を設定する
+            Session::set('auth.user_id', $user_id);
+            
+            // セッションから値を取得する
+            // （$_SESSION['auth']['user_id']が設定されていない場合、nullを返す）
+            $user_id = Session::get('auth.user_id');
+            
+            // （$_SESSION['auth']['user_id']が設定されていない場合、falseを返させる）
+            $user_id = Session::get('auth.user_id', false);
+            ```
+        
+        p.
+            通常、セッションを利用する前には<code>session_start</code>をコールする必要がありますが<br>
+            CodeLapseにおいては、Sessionクラスが自動的に初期化を行います。
+    
+        h3.page-header API
+        ul
+            li
+                a(href="/CodeLapse/apidocs/classes/CodeLapse.Session.html") Sessionクラス
