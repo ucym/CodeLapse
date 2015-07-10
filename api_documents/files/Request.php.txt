@@ -1,0 +1,142 @@
+<?php
+namespace CodeLapse;
+
+use CodeLapse\Arr;
+
+/**
+ * リクエストに含まれるパラメータを取得します。（POST, GETなど）
+ * @package CodeLapse
+ */
+class Request
+{
+    static private $processedBody;
+
+    /**
+     * リクエストメソッドを取得します。
+     *
+     * リクエストにX-HTTP-METHOD-OVERRIDEヘッダが含まれている場合
+     * そちらで指定されたメソッドを返します。
+     * @return string   アッパーケースのHTTPメソッド名
+     */
+    public static function method()
+    {
+        return strtoupper(static::server('HTTP_X_HTTP_METHOD_OVERRIDE', $_SERVER['REQUEST_METHOD']));
+    }
+
+
+    /**
+     * リクエストメソッドを取得します。
+     *
+     * 実際に利用されたHTTPメソッド名を返します。
+     * （X-HTTP-METHOD-OVERRIDEヘッダを考慮しません。）
+     * @return string   アッパーケースのHTTPメソッド名
+     */
+    public static function realMethod()
+    {
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
+
+    /**
+     * ajaxからのアクセスか調べます。
+     *
+     * @return boolean
+     */
+    public static function isAjax()
+    {
+        return strtolower(static::server('HTTP_X_REQUESTED_WITH', '')) === 'xmlhttprequest';
+    }
+
+
+    /**
+     * 受信したパラメータの値を取得します。
+     *
+     * @param string|null $key (optional) 取得するパラメータ名
+     * @param mixed|null $default (optional) パラメータが存在しない時のデフォルト値
+     * @return mixed
+     */
+    public static function post($key = null, $default = null)
+    {
+        return Arr::get($_POST, $key, $default);
+    }
+
+
+    /**
+     * QueryStringパラメータ(GETパラメータ)の値を取得します。
+     *
+     * @param string|null   $key            取得するパラメータ名
+     * @param mixed|null    $default        パラメータが存在しない時のデフォルト値
+     * @return mixed
+     */
+    public static function get($key = null, $default = null)
+    {
+        return Arr::get($_GET, $key, $default);
+    }
+
+
+    /**
+     * リクエストボディの生データをJSONとしてパースし
+     * 指定されたキーの値を取得します。
+     *
+     * @param string|null   $key        取得するフィールド名
+     * @param mixed|null    $default    フィールドが存在しなかった場合の初期値
+     * @param mixed
+     */
+    public static function json($key = null, $default = null)
+    {
+        if (empty(static::$processedBody)) {
+            static::$processedBody = json_decode(static::rawBody(), true);
+
+            if (json_last_error() !== 0) {
+                static::$processedBody = array();
+            }
+        }
+
+        return Arr::get(static::$processedBody, $key, $default);
+    }
+
+
+    /**
+     * リクエストの生データを取得します。
+     * @return string|null
+     */
+    public static function rawBody()
+    {
+        $body = file_get_contents('php://input');
+        if ($body !== false) {
+            return $body;
+        }
+    }
+
+    /**
+     * リクエストヘッダを取得します。
+     *
+     * このメソッドは以下の条件下で正しく動作しません。
+     * ・PHP5.4未満
+     * ・PHPがApache モジュールあるいは Netscape/iPlanet/SunONE の NSAPI サーバーモジュールとしてインストールされていない
+     * ・（5.5.7未満の場合）PHPのCLIサーバーで動作している場合
+     * @see http://php.net/manual/ja/function.getallheaders.php
+     * @param string        $name           取得したいヘッダ名
+     * @param mixed?        $default        ヘッダが存在しない場合の初期値
+     * @return string
+     */
+    public static function header($name = null, $default = null)
+    {
+        $headers = getallheaders();
+        return Arr::get($headers, $name, $default);
+    }
+
+
+    /**
+     * $_SERVER変数の値を取得します。
+     *
+     * @param string|null $key (optional) 取得する属性名
+     * @param mixed|null $default (optional)パラメータが存在しない時のデフォルト値
+     * @return mixed
+     */
+    public static function server($key = null, $default = null)
+    {
+        return Arr::get($_SERVER, $key, $default);
+    }
+}
+
