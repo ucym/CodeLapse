@@ -111,8 +111,7 @@ class Pager
 
     private function render($page, $content = null)
     {
-        $content = mb_ereg_replace('/:page/', $page, $content);
-        echo $content;
+        echo preg_replace('/:page/', $page, $content);
     }
 
 

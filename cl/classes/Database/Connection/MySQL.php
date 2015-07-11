@@ -150,7 +150,7 @@ class MySQL extends \CodeLapse\Database\Connection
      * @todo 動作確認
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
-     * @return DB_Resultset|bool
+     * @return CodeLapse\Database\Resultset|bool
      */
     public function query($sql, $params = null)
     {

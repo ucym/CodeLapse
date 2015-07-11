@@ -111,7 +111,7 @@ abstract class Connection
      *
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
-     * @return DB_Resultset|boolean
+     * @return CodeLapse\Database\Resultset|boolean
      */
     public abstract function query($sql, $params = null);
 
