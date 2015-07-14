@@ -15,6 +15,7 @@
             <file>src/pager.php</file>
             <file>src/latebinding.php</file>
             <file>src/db/crudmodel.php</file>
+            <file>src/Upload.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
