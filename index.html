@@ -55,7 +55,7 @@
               <br> ページャーを設置する。テンプレートエンジンを使う。
               <br>
               <br> CodeLapseはこのようなPHPあるある処理をより短く、かつ手軽に行えるようにしています。
-              <br> </p><a href="https://github.com/ucym/CodeLapse/releases/latest/" onclick="mixpanel.track('Go to Latest')" class="btn btn-primary">最新版をダウンロード</a>
+              <br> </p><a href="https://github.com/ucym/CodeLapse/releases/latest/" onclick="mixpanel.track('Go to Latest',{via:'index_cta'})" class="btn btn-primary">最新版をダウンロード</a>
             <h2 class="page-header">ドキュメント</h2>
             <p>ここではCodeLapseが提供しているクラスの概要が記載されています。
               <br> クラス・メソッドの詳細な仕様については<a href="/CodeLapse/apidocs/namespaces/CodeLapse.html">APIドキュメント</a>をご参照ください。
@@ -69,7 +69,7 @@
             <h2 class="page-header">インストール</h2>
             <p class="well well-sm">CodeLapseを利用するには 5.3.x以上のPHPが必要です。</p>
             <ol>
-              <li><a href="https://github.com/ucym/CodeLapse/releases/latest/">CodeLapse</a>をダウンロードします。(CodeLapse_vX.X.X.zip)</li>
+              <li><a href="https://github.com/ucym/CodeLapse/releases/latest/" onclick="mixpanel.track('Go to Latest',{via:'install_section'})">CodeLapse</a>をダウンロードします。(CodeLapse_vX.X.X.zip)</li>
               <li>ダウンロードしたZIPを解凍し、解凍したディレクトリ(<code>cl</code>)を プロジェクトディレクトリにコピーします。</li>
               <li>CodeLapseを利用したいスクリプトから<code>cl/bs.php</code>をインクルードします。<pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span> <span class="hljs-keyword">require</span> <span class="hljs-string">'path/to/CodeLapse/cl/bs.php'</span>;</span>
 </code></pre> </li>
