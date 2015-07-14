@@ -15,7 +15,7 @@ block docBody
             <br>
             CodeLapseはこのようなPHPあるある処理をより短く、かつ手軽に行えるようにしています。<br>
 
-        a.btn.btn-primary(href="https://github.com/ucym/CodeLapse/releases/latest/" onclick="mixpanel.track('Go to Latest')") 最新版をダウンロード
+        a.btn.btn-primary(href="https://github.com/ucym/CodeLapse/releases/latest/" onclick="mixpanel.track('Go to Latest',{via:'index_cta'})") 最新版をダウンロード
 
         h2.page-header ドキュメント
         p
@@ -43,7 +43,7 @@ block docBody
             CodeLapseを利用するには 5.3.x以上のPHPが必要です。
         ol
             li
-                a(href="https://github.com/ucym/CodeLapse/releases/latest/") CodeLapse
+                a(href="https://github.com/ucym/CodeLapse/releases/latest/"  onclick="mixpanel.track('Go to Latest',{via:'install_section'})") CodeLapse
                 | をダウンロードします。(CodeLapse_vX.X.X.zip)
             li.
                 ダウンロードしたZIPを解凍し、解凍したディレクトリ(<code>cl</code>)を
