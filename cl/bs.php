@@ -37,5 +37,9 @@ require CL_CLASSES . 'AutoLoader.php';
 // オートローダを登録
 \CodeLapse\AutoLoader::regist();
 
-// ライブラリ初期化処理
-\CodeLapse\Core::init();
+// 設定ファイルのディレクトリを設定
+Config::addLoadPath(CL_COREPATH . 'config/');
+
+// 出力バッファリングを始める
+// （コマンドラインで実行中はバッファリングしない。表示結果が得られなくなってしまうため）
+PHP_SAPI !== 'cli' and ob_start();
