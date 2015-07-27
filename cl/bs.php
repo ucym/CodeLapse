@@ -5,6 +5,7 @@ defined('CL_THIRDPARTY') or define('CL_THIRDPARTY', CL_COREPATH . 'thirdparty' .
 defined('CL_CLASSES') or define('CL_CLASSES', CL_COREPATH . 'classes' .DS);
 
 require CL_CLASSES . 'AutoLoader.php';
+require CL_COREPATH . 'functions.php';
 
 //-- オートローダを初期化
 \CodeLapse\AutoLoader::addNamespace('CodeLapse', CL_CLASSES);
