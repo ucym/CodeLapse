@@ -1,0 +1,162 @@
+extends _layout
+
+block title
+    title Validator // CodeLapse
+
+block docBody
+    article.doc-body
+        h1.page-header.doc-header 入力値の検証
+            small.class-name class Validator
+            //- a.doc-header_api-link.glyphicon.glyphicon-link(href="/CodeLapse/apidocs/classes/CodeLapse.Validator.html")
+
+        p.
+            Validatorは入力値の検証を行うためのクラスです。
+        
+        h3.page-header サンプル
+        :markdown
+            ``` php
+            <?php // ユーザー登録を行うページ
+            if (Req::method() === 'POST') {
+                // 検証ルールを定義
+                Validator::def()
+                    // 必須入力, 4文字以上・20文字以下
+                    ->rule('name', ['required', 'lengthBetween' => [4, 20]])
+                    
+                    // 必須入力, 4文字以上・20文字以下, アルファベット・数字の文字列
+                    ->rule('user_id', ['required', 'lengthBetween' => [4, 20], 'alphaNum'])
+                    
+                    // 必須入力, メールアドレス形式
+                    ->rule('email', ['required', 'email'])
+                    
+                    // チェックされているか
+                    ->rule('agree', ['accepted']);
+                
+                if (Validator::check($_POST)) { // 入力値が正しいかチェック
+                    
+                    //-- ユーザー登録処理 --//
+                    
+                    header('Location: success.php');
+                    exit;
+                }
+            }
+            ?>
+            <!DOCTYPE html>
+            <html lang="ja">
+            <head>
+                <meta charset="UTF-8">
+                <title>ユーザー登録</title>
+            </head>
+            <body>
+                <form method="post">
+                    <label>
+                        名前: <input type="text" name="name">
+                    </label>
+                    
+                    <label>
+                        ユーザーID: <input type="text" name="user_id">
+                    </label>
+                    
+                    <label>
+                        メールアドレス: <input type="email" name="email">
+                    </label>
+                    
+                    <label>
+                        <input type="checkbox" name="agree"> 利用規約に同意します。
+                    </label>
+                    
+                    <button>登録</button>
+                </form>
+            </body>
+            </html>
+            ```
+        
+        
+        h3.page-header 組み込みの検証ルール
+        :markdown
+            Validatorの実装には [Valitron](https://github.com/vlucas/valitron)を改変したものを使用しています。  
+            現在、Valitron組み込みの以下の検証ルールが利用できます。
+
+        p
+            span.label.label-default.label-list required
+            span.label.label-default.label-list equals
+            span.label.label-default.label-list different
+            span.label.label-default.label-list accepted
+            span.label.label-default.label-list numeric
+            span.label.label-default.label-list integer
+            span.label.label-default.label-list array
+            span.label.label-default.label-list length 
+            span.label.label-default.label-list lengthBetween
+            span.label.label-default.label-list lengthMin
+            span.label.label-default.label-list lengthMax
+            span.label.label-default.label-list min
+            span.label.label-default.label-list max
+            span.label.label-default.label-list in
+            span.label.label-default.label-list notIn
+            span.label.label-default.label-list ip
+            span.label.label-default.label-list email
+            span.label.label-default.label-list url
+            span.label.label-default.label-list urlActive
+            span.label.label-default.label-list alpha
+            span.label.label-default.label-list alphaNum
+            span.label.label-default.label-list slug
+            span.label.label-default.label-list regex
+            span.label.label-default.label-list date
+            span.label.label-default.label-list dateFormat
+            span.label.label-default.label-list dateBefore
+            span.label.label-default.label-list dateAfter
+            span.label.label-default.label-list contains
+            span.label.label-default.label-list creditCard
+            span.label.label-default.label-list instanceOf
+        
+        h3.page-header 検証ルールを追加する
+        :markdown
+            実際に利用する際には、ビルトインの検証ルールだけでは不足があります。  
+            その場合は独自の検証ルールを追加することが出来ます。  
+            
+            以下のサンプルでは入力されたユーザーID、メールアドレスが既に登録されていないか検証するルールを追加する例です。
+            
+            ``` php
+            <?php // app/classes/Validators.php
+            class Validators
+            {
+                public static function validateUnusedUserId($value)
+                {
+                    $rs = DB::query('SELECT `user_id` FROM `users` WHERE `user_id` = ?', array($value));
+                    // fetchした結果がfalseなら該当するユーザーIDはない
+                    // 結果が取得できたら該当ユーザーあり
+                    return !! $rs->fetch();
+                }
+                
+                public static function validateUnusedEmail($value)
+                {
+                    $rs = DB::query('SELECT `email` FROM `users` WHERE `email` = ?', array($value));
+                    return !! $rs->fetch();
+                }
+            }
+            ```
+            
+            ``` php
+            <?php
+            RestController::create()
+            ->whenPost(function () {
+                // 検証ルールを追加する
+                Validator::addRuleClass('Validators');
+                
+                Validator::def()
+                    ->rule('name', ['required', 'lengthMin' => 4, 'lengthMax' => 20])
+                    ->rule('user_id', ['required', 'lengthMin' => 4, 'lengthMax' => 20, 'UnusedUserId'])
+                    ->rule('email', ['required', 'email']);
+                
+                if (Validator::check($_POST) === false) {
+                    return Smarty::display('register.tpl');
+                }
+                
+                // 登録処理
+            })
+            
+            ->whenGet(function () { Smarty::display('register.tpl'); })
+            ->execute();
+            ```
+            
+            `Validator::addRuleClass`は指定されたクラス内の`validate`から始まるメソッドを検証ルールとして追加します。
+            サンプルコード内では`validateUnusedUserIdメソッド`が`UnusedUserId`として登録されています。
