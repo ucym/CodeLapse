@@ -57,9 +57,9 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
     public function testCustomValidation()
     {
         $validator = function ($value) { return true; };
-        Validator::addRule('AlwaysPass', $validator);
+        Validator::addRule('alwaysPass', $validator);
 
-        Validator::def(['name' => ['AlwaysPass']]);
+        Validator::def(['name' => ['alwaysPass']]);
         $this->assertTrue(Validator::check(['name' => '']), 'カスタム検証チェック');
     }
 
@@ -68,8 +68,8 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         Validator::addRuleClass('CustomValidators');
 
         $rules = [
-            'name'          => ['Pass', 'no_empty_value'],
-            'dont write'    => ['IsEmpty']
+            'name'          => ['pass', 'no_empty_value'],
+            'dont write'    => ['isEmpty']
         ];
 
         $validData = [
@@ -85,5 +85,13 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         Validator::def($rules);
         $this->assertTrue(Validator::check($validData), 'スタティックメソッド カスタム検証チェック（正常値）');
         $this->assertFalse(Validator::check($invalidData), 'スタティックメソッド カスタム検証チェック（異常値）');
+    }
+
+    public function testIsCustomRuleNamingByCamelCase()
+    {
+        Validator::addRuleClass('CustomValidators');
+
+        $this->assertTrue(Validator::hasRule('pass'));
+        $this->assertFalse(Validator::hasRule('Pass'));
     }
 }

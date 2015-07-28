@@ -113,7 +113,7 @@ class UploadTest extends PHPUnit_Framework_TestCase
      */
     public function testGet($filename)
     {
-        $this->fileInitSingle()
+        $this->fileInitSingle();
         $file = Upload::get('file');
 
         var_dump($file);
