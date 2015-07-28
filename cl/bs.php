@@ -27,12 +27,15 @@ require CL_COREPATH . 'functions.php';
     'Security'  => '\CodeLapse\Security',
     'Session'   => '\CodeLapse\Session',
     'RestController'    => '\CodeLapse\Controller\Rest',
-    'Upload'    => '\CodeLapse\Upload'
+    'Upload'    => '\CodeLapse\Upload',
+    'Validator' => '\CodeLapse\Validator'
 ));
 
 // クラスのパスを設定
 \CodeLapse\AutoLoader::addClass(array(
-    'Smarty' => CL_THIRDPARTY . 'smarty/Smarty.class.php'
+    'Smarty'        => CL_THIRDPARTY . 'smarty/Smarty.class.php',
+    'CodeLapse\Valitron\Validator'
+                    => CL_THIRDPARTY . 'cl-valitron/src/CodeLapse/Valitron/Validator.php'
 ));
 
 // オートローダを登録
