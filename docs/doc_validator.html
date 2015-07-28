@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Validator // CodeLapse</title>
+    <script src="/CodeLapse/static/js/jquery.min.js"></script>
+    <script src="/CodeLapse/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/CodeLapse/static/css/highlight.github.css">
+    <link rel="stylesheet" href="/CodeLapse/static/css/style.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container"><a href="/CodeLapse/" class="navbar-brand">CodeLapse Docs</a>
+        <div class="navbar-right">
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="/CodeLapse/apidocs/namespaces/CodeLapse.html">API Docs</a></li>
+              <li><a href="https://github.com/ucym/CodeLapse" onclick="mixpanel.track('Go to official',{via:'nav'})">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="content" class="container">
+      <div class="row">
+        <div class="col-xs-3">
+          <nav data-spy="affix" data-offset-top="0" affix class="doc-nav">
+            <h1><a href="/CodeLapse/">CodeLapse</a></h1>
+            <h2 class="doc-nav_label">Req / Res</h2>
+            <ul class="nav">
+              <li><a href="/CodeLapse/docs/doc_request.html">リクエスト<span class="text-muted pull-right">Req</span></a></li>
+              <li><a href="/CodeLapse/docs/doc_session.html">セッション<span class="text-muted pull-right">Session</span></a></li>
+            </ul>
+            <h2 class="doc-nav-item_label">ビューヘルパー</h2>
+            <ul class="nav">
+              <li><a href="/CodeLapse/docs/doc_form.html">フォーム生成<span class="text-muted pull-right">Form</span></a></li>
+            </ul>
+            <h2 class="doc-nav-item_label">ヘルバー</h2>
+            <ul class="nav">
+              <li><a href="/CodeLapse/docs/doc_validator.html">入力値の検証<span class="text-muted pull-right">Validator</span></a></li>
+              <li><a href="/CodeLapse/docs/doc_array.html">配列操作<span class="text-muted pull-right">Arr</span></a></li>
+              <li><a href="/CodeLapse/docs/doc_db.html">データベース<span class="text-muted pull-right">DB</span></a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-xs-9 doc-container">
+          <article class="doc-body">
+            <h1 class="page-header doc-header">入力値の検証<small class="class-name">class Validator</small></h1>
+            <p>Validatorは入力値の検証を行うためのクラスです。 </p>
+            <h3 class="page-header">サンプル</h3><pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span> <span class="hljs-comment">// ユーザー登録を行うページ</span>
+<span class="hljs-keyword">if</span> (Req::method() === <span class="hljs-string">'POST'</span>) {
+    <span class="hljs-comment">// 検証ルールを定義</span>
+    Validator::def()
+        <span class="hljs-comment">// 必須入力, 4文字以上・20文字以下</span>
+        -&gt;rule(<span class="hljs-string">'name'</span>, [<span class="hljs-string">'required'</span>, <span class="hljs-string">'lengthBetween'</span> =&gt; [<span class="hljs-number">4</span>, <span class="hljs-number">20</span>]])
+
+        <span class="hljs-comment">// 必須入力, 4文字以上・20文字以下, アルファベット・数字の文字列</span>
+        -&gt;rule(<span class="hljs-string">'user_id'</span>, [<span class="hljs-string">'required'</span>, <span class="hljs-string">'lengthBetween'</span> =&gt; [<span class="hljs-number">4</span>, <span class="hljs-number">20</span>], <span class="hljs-string">'alphaNum'</span>])
+
+        <span class="hljs-comment">// 必須入力, メールアドレス形式</span>
+        -&gt;rule(<span class="hljs-string">'email'</span>, [<span class="hljs-string">'required'</span>, <span class="hljs-string">'email'</span>])
+
+        <span class="hljs-comment">// チェックされているか</span>
+        -&gt;rule(<span class="hljs-string">'agree'</span>, [<span class="hljs-string">'accepted'</span>]);
+
+    <span class="hljs-keyword">if</span> (Validator::check(<span class="hljs-variable">$_POST</span>)) { <span class="hljs-comment">// 入力値が正しいかチェック</span>
+
+        <span class="hljs-comment">//-- ユーザー登録処理 --//</span>
+
+        header(<span class="hljs-string">'Location: success.php'</span>);
+        <span class="hljs-keyword">exit</span>;
+    }
+}
+<span class="hljs-preprocessor">?&gt;</span></span>
+<span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span> <span class="hljs-attribute">lang</span>=<span class="hljs-value">"ja"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">charset</span>=<span class="hljs-value">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>ユーザー登録<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">method</span>=<span class="hljs-value">"post"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+            名前: <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"name"</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+            ユーザーID: <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"user_id"</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+            メールアドレス: <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"email"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"email"</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"agree"</span>&gt;</span> 利用規約に同意します。
+        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">button</span>&gt;</span>登録<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+            <h3 class="page-header">組み込みの検証ルール</h3>
+            <p>Validatorの実装には <a href="https://github.com/vlucas/valitron">Valitron</a>を改変したものを使用しています。
+              <br>現在、Valitron組み込みの以下の検証ルールが利用できます。</p>
+            <p><span class="label label-default label-list">required</span><span class="label label-default label-list">equals</span><span class="label label-default label-list">different</span><span class="label label-default label-list">accepted</span>
+              <span
+              class="label label-default label-list">numeric</span><span class="label label-default label-list">integer</span><span class="label label-default label-list">array</span><span class="label label-default label-list">length </span><span class="label label-default label-list">lengthBetween</span>
+                <span
+                class="label label-default label-list">lengthMin</span><span class="label label-default label-list">lengthMax</span><span class="label label-default label-list">min</span><span class="label label-default label-list">max</span><span class="label label-default label-list">in</span>
+                  <span
+                  class="label label-default label-list">notIn</span><span class="label label-default label-list">ip</span><span class="label label-default label-list">email</span><span class="label label-default label-list">url</span><span class="label label-default label-list">urlActive</span>
+                    <span
+                    class="label label-default label-list">alpha</span><span class="label label-default label-list">alphaNum</span><span class="label label-default label-list">slug</span><span class="label label-default label-list">regex</span><span class="label label-default label-list">date</span>
+                      <span
+                      class="label label-default label-list">dateFormat</span><span class="label label-default label-list">dateBefore</span><span class="label label-default label-list">dateAfter</span><span class="label label-default label-list">contains</span><span class="label label-default label-list">creditCard</span>
+                        <span
+                        class="label label-default label-list">instanceOf</span>
+            </p>
+            <h3 class="page-header">検証ルールを追加する</h3>
+            <p>実際に利用する際には、ビルトインの検証ルールだけでは不足があります。
+              <br>その場合は独自の検証ルールを追加することが出来ます。 </p>
+            <p>以下のサンプルでは入力されたユーザーID、メールアドレスが既に登録されていないか検証するルールを追加する例です。</p> <pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span> <span class="hljs-comment">// app/classes/Validators.php</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Validators</span>
+</span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">validateUnusedUserId</span><span class="hljs-params">(<span class="hljs-variable">$value</span>)</span>
+    </span>{
+        <span class="hljs-variable">$rs</span> = DB::query(<span class="hljs-string">'SELECT `user_id` FROM `users` WHERE `user_id` = ?'</span>, <span class="hljs-keyword">array</span>(<span class="hljs-variable">$value</span>));
+        <span class="hljs-comment">// fetchした結果がfalseなら該当するユーザーIDはない</span>
+        <span class="hljs-comment">// 結果が取得できたら該当ユーザーあり</span>
+        <span class="hljs-keyword">return</span> !! <span class="hljs-variable">$rs</span>-&gt;fetch();
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">validateUnusedEmail</span><span class="hljs-params">(<span class="hljs-variable">$value</span>)</span>
+    </span>{
+        <span class="hljs-variable">$rs</span> = DB::query(<span class="hljs-string">'SELECT `email` FROM `users` WHERE `email` = ?'</span>, <span class="hljs-keyword">array</span>(<span class="hljs-variable">$value</span>));
+        <span class="hljs-keyword">return</span> !! <span class="hljs-variable">$rs</span>-&gt;fetch();
+    }
+}</span>
+</code></pre> <pre><code class="lang-php"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
+RestController::create()
+-&gt;whenPost(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// 検証ルールを追加する</span>
+    Validator::addRuleClass(<span class="hljs-string">'Validators'</span>);
+
+    Validator::def()
+        -&gt;rule(<span class="hljs-string">'name'</span>, [<span class="hljs-string">'required'</span>, <span class="hljs-string">'lengthMin'</span> =&gt; <span class="hljs-number">4</span>, <span class="hljs-string">'lengthMax'</span> =&gt; <span class="hljs-number">20</span>])
+        -&gt;rule(<span class="hljs-string">'user_id'</span>, [<span class="hljs-string">'required'</span>, <span class="hljs-string">'lengthMin'</span> =&gt; <span class="hljs-number">4</span>, <span class="hljs-string">'lengthMax'</span> =&gt; <span class="hljs-number">20</span>, <span class="hljs-string">'UnusedUserId'</span>])
+        -&gt;rule(<span class="hljs-string">'email'</span>, [<span class="hljs-string">'required'</span>, <span class="hljs-string">'email'</span>]);
+
+    <span class="hljs-keyword">if</span> (Validator::check(<span class="hljs-variable">$_POST</span>) === <span class="hljs-keyword">false</span>) {
+        <span class="hljs-keyword">return</span> Smarty::display(<span class="hljs-string">'register.tpl'</span>);
+    }
+
+    <span class="hljs-comment">// 登録処理</span>
+})
+
+-&gt;whenGet(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{ Smarty::display(<span class="hljs-string">'register.tpl'</span>); })
+-&gt;execute();</span>
+</code></pre>
+            <p><code>Validator::addRuleClass</code>は指定されたクラス内の<code>validate</code>から始まるメソッドを検証ルールとして追加します。 サンプルコード内では<code>validateUnusedUserIdメソッド</code>が<code>UnusedUserId</code>として登録されています。</p>
+          </article>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function(i, s, o, g, r, a, m)
+      {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function()
+        {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('create', 'UA-64825163-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script>
+      (function(f, b)
+      {
+        if (!b.__SV)
+        {
+          var a, e, i, g;
+          window.mixpanel = b;
+          b._i = [];
+          b.init = function(a, e, d)
+          {
+            function f(b, h)
+            {
+              var a = h.split(".");
+              2 == a.length && (b = b[a[0]], h = a[1]);
+              b[h] = function()
+              {
+                b.push([h].concat(Array.prototype.slice.call(arguments, 0)))
+              }
+            }
+            var c = b;
+            "undefined" !== typeof d ? c = b[d] = [] : d = "mixpanel";
+            c.people = c.people || [];
+            c.toString = function(b)
+            {
+              var a = "mixpanel";
+              "mixpanel" !== d && (a += "." + d);
+              b || (a += " (stub)");
+              return a
+            };
+            c.people.toString = function()
+            {
+              return c.toString(1) + ".people (stub)"
+            };
+            i = "disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+            for (g = 0; g < i.length; g++) f(c, i[g]);
+            b._i.push([a, e, d])
+          };
+          b.__SV = 1.2;
+          a = f.createElement("script");
+          a.type = "text/javascript";
+          a.async = !0;
+          a.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";
+          e = f.getElementsByTagName("script")[0];
+          e.parentNode.insertBefore(a, e)
+        }
+      })(document, window.mixpanel || []);
+      mixpanel.init("6190019c214f32ca6bb9f70e6c615c8c");
+    </script>
+  </body>
+
+</html>
