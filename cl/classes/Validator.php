@@ -102,15 +102,16 @@ class Validator
      * クラス、あるいはオブジェクトから検証ルールを登録します。
      *
      * 登録するクラス内の`validate`から始まるメソッドがバリデータとして登録されます。
-     * 検証ルール名はメソッド名の先頭から`validate`, `validate_`を取り除いたものになります。
+     * 検証ルール名はメソッド名の先頭から`validate`, `validate_`を取り除き、
+     * 先頭を小文字にしたものになります。
      *
-     * 例えば、`validateMailUnused`は`MailUnused`として登録され
+     * 例えば、`validateMailUnused`は`mailUnused`として登録され
      * `validate_unused_userid`は`unused_userid`という名前で登録されます。
      *
      * メソッド名の先頭が`jsValidate`プレフィックスから始まり
      * プレフィックス以降の名前が一致する`validate`メソッドがある場合
-     *
      * JavaScript用の検証コード生成メソッドとして登録されます。
+     *
      * 例えば、`validateMailUnused`というメソッドに対して、`jsValidateMailUnused`メソッドが存在する場合
      * クライアントサイド用の検証コードを生成する際に`jsValidateMailUnused`メソッドがコールされます。
      *
@@ -125,7 +126,7 @@ class Validator
             if (strpos($method, 'validate') !== 0) continue;
 
             $methodName = substr($method, 8);
-            $ruleName = ltrim($methodName, '_');
+            $ruleName = lcfirst(ltrim($methodName, '_'));
 
             $jsGenMethodName = 'jsValidate' . $methodName;
             $jsGenMethod = method_exists($class, $jsGenMethodName) ? [$class, $jsGenMethodName] : null;
