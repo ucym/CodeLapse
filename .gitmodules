@@ -1,0 +1,3 @@
+[submodule "cl/thirdparty/cl-valitron"]
+	path = cl/thirdparty/cl-valitron
+	url = git@github.com:ucym/CodeLapse-Valitron.git

@@ -10,12 +10,7 @@
 
     <testsuites>
         <testsuite name="default">
-            <file>src/arr.php</file>
-            <file>src/form.php</file>
-            <file>src/pager.php</file>
-            <file>src/latebinding.php</file>
-            <file>src/db/crudmodel.php</file>
-            <file>src/Upload.php</file>
+            <directory suffix=".php">src/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
