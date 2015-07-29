@@ -8,7 +8,7 @@ use CodeLapse\Config;
 use CodeLapse\Valitron\Validator as Valitron;
 
 /**
- *
+ * 入力値の検証を行うクラス
  */
 class Validator
 {
@@ -78,11 +78,11 @@ class Validator
     /**
      * オリジナルの検証ルールを追加します。
      * @param string        $ruleName       検証ルール名
-     * @param callable      $validator      検証を行う関数
-     *      検証時に`($value, $fieldName, $options)`が渡されます。
-     * @param callable?     $jsGenerator    クライアントサイドの検証を行うJavaScriptコードを返す関数
-     *      コード生成時に`($value, $fieldName, $params)`が渡され、
-     *      生成されたコードは `function (value, fieldName) {` と ` }` でラップされて出力されます。
+     * @param callable      $validator      検証を行う関数<br>
+     *  検証時に`($value, $fieldName, $options)`が渡されます。
+     * @param callable      $jsGenerator    クライアントサイドの検証を行うJavaScriptコードを返す関数<br>
+     *  コード生成時に`($value, $fieldName, $params)`が渡され、<br>
+     *  生成されたコードは `function (value, fieldName) {` と ` }` でラップされて出力されます。
      */
     public static function addRule(
         $ruleName,
