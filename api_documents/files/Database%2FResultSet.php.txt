@@ -23,7 +23,7 @@ abstract class ResultSet implements \Iterator
      * 一行分のデータを指定形式へ変換します。
      *
      * @param array &$row BOTH形式の行データ
-     * @param int $type DB_Resultset::FETCH_* のいずれか
+     * @param int $type Resultset::FETCH_* のいずれか
      * @return array 指定形式へ変換された行データ
      */
     private static function & _deformRow(& $row, $type)
@@ -34,7 +34,7 @@ abstract class ResultSet implements \Iterator
 
         switch ($type) {
 
-            case DB_Resultset::FETCH_ASSOC:
+            case self::FETCH_ASSOC:
                 $deformedRow = array();
 
                 foreach ($row as $k => & $v) {
@@ -44,7 +44,7 @@ abstract class ResultSet implements \Iterator
                 return $deformedRow;
                 break;
 
-            case DB_Resultset::FETCH_NUM  :
+            case self::FETCH_NUM  :
                 $deformedRow = array();
 
                 foreach ($row as $k => & $v) {
@@ -55,7 +55,7 @@ abstract class ResultSet implements \Iterator
                 break;
 
 
-            case DB_Resultset::FETCH_BOTH :
+            case self::FETCH_BOTH :
             default:
                 return $row;
         }
@@ -192,7 +192,7 @@ abstract class ResultSet implements \Iterator
     /**
      * 現在のカーソル位置の次のレコードを取得します。
      * @param int $type (optional) 返されるデータの形式を指定します。
-     *      DB_Resultset::FETCH_*のいずれかを指定します。
+     *      Resultset::FETCH_*のいずれかを指定します。
      * @return mixed 指定された形式の配列もしくはオブジェクトを返します。
      *      カーソルが最後の行まで到達した時に falseが返されます。
      */
@@ -215,7 +215,7 @@ abstract class ResultSet implements \Iterator
      * 結果を全件取得します。
      *
      * @param int $type 返されるデータの種類を指定します。
-     *      DB_Resultset::FETCH_*のいずれかを指定します。
+     *      Resultset::FETCH_*のいずれかを指定します。
      * @return array
      */
     public function & fetchAll($type = self::FETCH_BOTH)
@@ -251,7 +251,7 @@ abstract class ResultSet implements \Iterator
      *
      * **このメソッドは次の行の内容をBOTH形式で返す必要があります。**
      * fetch, fetchAll, currentメソッドのいずれかがコールされ、次の行のデータが必要になったとき
-     * DB_Resultsetクラスからコールされます。
+     * Resultsetクラスからコールされます。
      *
      * このメソッドは一律にBOTH形式のデータを返すことで,
      * 他のメソッドが要求されたフェッチ形式(ASSOC, NUM, etc...)にデータを整形することができます。

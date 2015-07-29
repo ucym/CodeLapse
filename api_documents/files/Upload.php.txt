@@ -38,7 +38,7 @@ class Upload
     {
         $rawFileInfos = Arr::get($_FILES, $name);
         $errors = Arr::get($rawFileInfos, 'error');
-        
+
         if (! is_array($errors)) {
             return [];
         }
