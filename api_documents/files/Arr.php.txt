@@ -1,6 +1,8 @@
 <?php
 namespace CodeLapse;
 
+use CodeLapse\ArrayWrapper;
+
 /**
  * nullセーフな配列操作クラス
  *
@@ -251,6 +253,18 @@ class Arr
             }
         }
         return false;
+    }
+
+
+    public static function wrap(array $array)
+    {
+        return ArrayWrapper::wrap($array);
+    }
+
+
+    public static function wrapWithKey(array $array)
+    {
+        return ArrayWrapper::wrapWithKey($array);
     }
 
 

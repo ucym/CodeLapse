@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1809429149"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-955150166"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1809429149" class="accordion-body collapse in">
+            <div id="namespace-955150166" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1266519967"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-998821215"></a>
                                 <a href="../namespaces/CodeLapse.html" style="margin-left: 30px; padding-left: 0">CodeLapse</a>
             </div>
-            <div id="namespace-1266519967" class="accordion-body collapse ">
+            <div id="namespace-998821215" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1769727302"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1404292159"></a>
                                 <a href="../namespaces/CodeLapse.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
             </div>
-            <div id="namespace-1769727302" class="accordion-body collapse ">
+            <div id="namespace-1404292159" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -180,19 +180,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-413671512"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-242481583"></a>
                                 <a href="../namespaces/CodeLapse.Database.html" style="margin-left: 30px; padding-left: 0">Database</a>
             </div>
-            <div id="namespace-413671512" class="accordion-body collapse ">
+            <div id="namespace-242481583" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1777816686"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-167246977"></a>
                                 <a href="../namespaces/CodeLapse.Database.Connection.html" style="margin-left: 30px; padding-left: 0">Connection</a>
             </div>
-            <div id="namespace-1777816686" class="accordion-body collapse ">
+            <div id="namespace-167246977" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -208,10 +208,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-231801259"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1894166181"></a>
                                 <a href="../namespaces/CodeLapse.Database.ResultSet.html" style="margin-left: 30px; padding-left: 0">ResultSet</a>
             </div>
-            <div id="namespace-231801259" class="accordion-body collapse ">
+            <div id="namespace-1894166181" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -239,10 +239,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1100706736"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-986638742"></a>
                                 <a href="../namespaces/CodeLapse.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
             </div>
-            <div id="namespace-1100706736" class="accordion-body collapse ">
+            <div id="namespace-986638742" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -299,42 +299,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\CodeLapse</small>Smarty</h1>
-                    <p><em>Smartyラッパークラス</em></p>
-                    <p>HTMLの自動エスケープや、グローバル変数の機能が追加されたSmartyのラッパークラスです。<br></p>
-<p>読み込みサンプル</p>
-<pre><code class="language-php">&lt;?php
-//-- app/b.php
-
-define('APPPATH', dirname(__FILE__));
-Config::load(APPPATH . '/config/smarty.php', 'smarty');
-
-// もしくは
-// Config::addLoadPath(APPPATH . '/config/');</code></pre>
-<pre><code class="language-php">&lt;?php
-//-- app/config/smarty.php
-
-return array(
-    // string: テンプレートが保存されているディレクトリ
-    'template_dir' =&gt; APPPATH . '/templates/',
-
-    // string: コンパイル済みテンプレートを保存するディレクトリ
-    'compile_dir' =&gt; APPPATH . '/tmp/smarty/compiled/,
-
-    // string: 設定ファイルが保存されているディレクトリ
-    'config_dir' =&gt; null,
-
-    // string: キャッシュファイルを保存するディレクトリ
-    'cache_dir' =&gt; APPPATH . '/tmp/smarty/cache/,
-
-    // boolean: キャッシュの有効 / 無効
-    'caching' =&gt; true,
-);</code></pre>
-<pre><code class="language-php">&lt;?php
-//-- index.php
-
-$smarty = Smarty::instance();
-// *do_something*</code></pre>
+                    <h1><small>\CodeLapse</small>ArrayWrapper</h1>
+                    <p><em></em></p>
+                    
 
                     <section id="summary">
                         <h2>Summary</h2>
@@ -351,35 +318,54 @@ $smarty = Smarty::instance();
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_escapeHelper" class="">escapeHelper()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_instance" class="">instance()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_setInGlobal" class="">setInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_setRawInGlobal" class="">setRawInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_getInGlobal" class="">getInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_clearInGlobal" class="">clearInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_clearAllInGlobal" class="">clearAllInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method___construct" class="">__construct()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_set" class="">set()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_setRaw" class="">setRaw()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_get" class="">get()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_clear" class="">clear()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_clearAllAssign" class="">clearAllAssign()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_fetch" class="">fetch()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_display" class="">display()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_wrap" class="">wrap()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_wrapWithKey" class="">wrapWithKey()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_current" class="">current()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_key" class="">key()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_next" class="">next()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_rewind" class="">rewind()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_valid" class="">valid()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_offsetExists" class="">offsetExists()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_offsetGet" class="">offsetGet()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_offsetSet" class="">offsetSet()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_offsetUnset" class="">offsetUnset()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_changeFlag" class="">changeFlag()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_get" class="">get()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_toArray" class="">toArray()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_each" class="">each()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_select" class="">select()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_exclude" class="">exclude()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_map" class="">map()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_mapKeyVal" class="">mapKeyVal()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_reduce" class="">reduce()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_applyReduce" class="">applyReduce()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_values" class="">values()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_applyValues" class="">applyValues()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_keys" class="">keys()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_applyKeys" class="">applyKeys()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_reverse" class="">reverse()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_applyReverse" class="">applyReverse()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <em>No constants found</em>
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#constant_WITH_KEY" class="">WITH_KEY</a><br />
                                                             </section>
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <em>No protected methods found</em>
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_applyEach" class="">applyEach()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_applySelect" class="">applySelect()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_applyExclude" class="">applyExclude()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_applyMap" class="">applyMap()</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#method_applyMapKeyVal" class="">applyMapKeyVal()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <em>No protected properties found</em>
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#property_array" class="">$array</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#property_que" class="">$que</a><br />
+                                                                    <a href="../classes/CodeLapse.ArrayWrapper.html#property_flag" class="">$flag</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -390,9 +376,7 @@ $smarty = Smarty::instance();
                                                                     <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/CodeLapse.Smarty.html#property__globalAssignStore" class="">$_globalAssignStore</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#property__assign" class="">$_assign</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#property__smarty" class="">$_smarty</a><br />
+                                                                    <em>No private properties found</em>
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -405,14 +389,17 @@ $smarty = Smarty::instance();
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Smarty.html"><div class="path-wrapper">Smarty.php</div></a></dd>
+                            <dd><a href="../files/ArrayWrapper.html"><div class="path-wrapper">ArrayWrapper.php</div></a></dd>
                                                 <dt>Package</dt>
                             <dd><div class="namespace-wrapper"></div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                    <div class="namespace-wrapper">\CodeLapse\Smarty</div>
+                                                                                                                                                                    <div class="namespace-wrapper">\CodeLapse\ArrayWrapper</div>
                             </dd>
 
+                                                                            <dt>Implements</dt>
+                                                        <dd><a href=""><div class="namespace-wrapper"></div></a></dd>
+                                                                                <dd><a href=""><div class="namespace-wrapper"></div></a></dd>
                         
                         
                         
@@ -425,80 +412,28 @@ $smarty = Smarty::instance();
                 </aside>
             </div>
 
-                        
-                                    <a id="properties" name="properties"></a>
+                                    <a id="constants" name="constants"></a>
             <div class="row-fluid">
                 <div class="span8 content class">
-                    <h2>Properties</h2>
+                    <h2>Constants</h2>
                 </div>
                 <aside class="span4 detailsbar"></aside>
             </div>
 
-                                                                    <div class="row-fluid">
+                                <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property__globalAssignStore" name="property__globalAssignStore" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_globalAssignStore</h3>
-                <pre class="signature">$_globalAssignStore : array</pre>
+            <a id="constant_WITH_KEY" name="constant_WITH_KEY" class="anchor"></a>
+            <article id="constant_WITH_KEY" class="constant">
+                <h3 class="">WITH_KEY</h3>
+                <pre class="signature">WITH_KEY</pre>
                 <p><em></em></p>
                 
-
-                                <h4>Type</h4>
-                array
-                &mdash; グローバル空間に設定された変数名と値を保持します。                            </article>
+            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                         <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__assign" name="property__assign" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_assign</h3>
-                <pre class="signature">$_assign : array</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                &mdash; smartyに割り当てられた値                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__smarty" name="property__smarty" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_smarty</h3>
-                <pre class="signature">$_smarty : \CodeLapse\Smarty</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                &mdash; smartyインスタンス                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -507,6 +442,87 @@ $smarty = Smarty::instance();
     </div>
 
                             
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_array" name="property_array" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$array</h3>
+                <pre class="signature">$array : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_que" name="property_que" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$que</h3>
+                <pre class="signature">$que : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_flag" name="property_flag" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$flag</h3>
+                <pre class="signature">$flag : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -515,33 +531,264 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_escapeHelper" name="method_escapeHelper" class="anchor"></a>
+            <a id="method_wrap" name="method_wrap" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">escapeHelper()</h3>
+                <h3 class="public ">wrap()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">escapeHelper(string|mixed <span class="argument">$str</span>) : mixed</pre>
-                <p><em>与えられた文字列を安全なHTML文字列に変換します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">wrap(array <span class="argument">$array</span>)</pre>
+                <p><em></em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string|mixed</td>
-                                <td>$str </td>
-                                <td><p>エスケープする文字列。</p>
-<pre><code>                   文字列でない場合はエスケープ処理は行われず、無視されます。</code></pre></td>
+                                <td>array</td>
+                                <td>$array </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_wrapWithKey" name="method_wrapWithKey" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">wrapWithKey()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">wrapWithKey(array <span class="argument">$array</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$array </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_current" name="method_current" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">current()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">current() : mixed</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_key" name="method_key" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">key()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">key() : scalar</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    scalar
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_next" name="method_next" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">next()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">next()</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_rewind" name="method_rewind" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">rewind()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">rewind()</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_valid" name="method_valid" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">valid()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">valid() : boolean</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_offsetExists" name="method_offsetExists" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">offsetExists()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">offsetExists(mixed <span class="argument">$offset</span>) : boolean</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$offset </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_offsetGet" name="method_offsetGet" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">offsetGet()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">offsetGet(mixed <span class="argument">$offset</span>) : mixed</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$offset </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
                     mixed
-                                            &mdash; <p>安全なHTML文字列、もしくは与えられたオブジェクト</p>
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -553,110 +800,24 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_instance" name="method_instance" class="anchor"></a>
+            <a id="method_offsetSet" name="method_offsetSet" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">instance()</h3>
+                <h3 class="public ">offsetSet()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">instance(string <span class="argument">$name</span>, array <span class="argument">$config</span>) : \CodeLapse\Smarty</pre>
-                <p><em>Smartyのインスタンスを取得します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">offsetSet(mixed <span class="argument">$offset</span>, mixed <span class="argument">$value</span>)</pre>
+                <p><em></em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string</td>
-                                <td>$name </td>
-                                <td><p>(optional) 取得するインスタンスの名前。</p>
-<pre><code>                  指定されない場合、'null'を使用します。</code></pre></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$config </td>
-                                <td><p>Smartyをインスタンス化するときの設定</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setInGlobal" name="method_setInGlobal" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setInGlobal()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setInGlobal(string|array <span class="argument">$name</span>, mixed <span class="argument">$value</span>, boolean <span class="argument">$escape</span>)</pre>
-                <p><em>Smartyインスタンス間で共通の変数を設定します。</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$name </td>
-                                <td><p>変数名、もしくは、変数名 => 値の連想配列</p></td>
+                                <td>mixed</td>
+                                <td>$offset </td>
+                                <td></td>
                             </tr>
                                                     <tr>
                                 <td>mixed</td>
                                 <td>$value </td>
-                                <td><p>(optional) 設定する値</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$escape </td>
-                                <td><p>(optional)  エスケープを行うかを指定します。デフォルトはtrueです。</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setRawInGlobal" name="method_setRawInGlobal" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setRawInGlobal()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setRawInGlobal(string|array <span class="argument">$name</span>,  <span class="argument">$value</span>)</pre>
-                <p><em>Smartyインスタンスで共通の変数を設定します。</em></p>
-                <p>setInGlobalと違い、設定する値はエスケープされません。</p>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$name </td>
-                                <td><p>変数名、もしくは、変数名 => 値の連想配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td></td>
-                                <td>$value </td>
                                 <td></td>
                             </tr>
                                             </table>
@@ -666,7 +827,6 @@ $smarty = Smarty::instance();
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -678,25 +838,20 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_getInGlobal" name="method_getInGlobal" class="anchor"></a>
+            <a id="method_offsetUnset" name="method_offsetUnset" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">getInGlobal()</h3>
+                <h3 class="public ">offsetUnset()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getInGlobal(string <span class="argument">$name</span>, string <span class="argument">$default</span>)</pre>
-                <p><em>Smartyインスタンス間で共通の変数を取得します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">offsetUnset(mixed <span class="argument">$offset</span>)</pre>
+                <p><em></em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string</td>
-                                <td>$name </td>
-                                <td><p>変数名</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$default </td>
-                                <td><p>値</p></td>
+                                <td>mixed</td>
+                                <td>$offset </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
@@ -705,67 +860,6 @@ $smarty = Smarty::instance();
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_clearInGlobal" name="method_clearInGlobal" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">clearInGlobal()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">clearInGlobal(string|array <span class="argument">$name</span>)</pre>
-                <p><em>Smartyインスタンス間で共通の変数を破棄します。</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$name </td>
-                                <td><p>破棄する変数名、もしくは破棄する変数名の配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_clearAllInGlobal" name="method_clearAllInGlobal" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">clearAllInGlobal()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">clearAllInGlobal()</pre>
-                <p><em>Smartyインスタンスで共通の変数をすべて破棄します。</em></p>
-                
-
-                
-                
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -781,7 +875,7 @@ $smarty = Smarty::instance();
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(array <span class="argument">$config</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">__construct(array <span class="argument">$array</span>,  <span class="argument">$flag</span>)</pre>
                 <p><em></em></p>
                 
 
@@ -789,8 +883,13 @@ $smarty = Smarty::instance();
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>array</td>
-                                <td>$config </td>
-                                <td><p>Smartyの設定</p></td>
+                                <td>$array </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$flag </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
@@ -810,79 +909,25 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_set" name="method_set" class="anchor"></a>
+            <a id="method_changeFlag" name="method_changeFlag" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">set()</h3>
+                <h3 class="public ">changeFlag()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">set(string|array <span class="argument">$key</span>, mixed <span class="argument">$value</span>, boolean <span class="argument">$filtering</span>) : \CodeLapse\Smarty</pre>
-                <p><em>Smartyに値を割り当てます。</em></p>
+                <pre class="signature" style="margin-right: 54px;">changeFlag( <span class="argument">$flag</span>)</pre>
+                <p><em></em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string|array</td>
-                                <td>$key </td>
-                                <td><p>テンプレート内の変数名</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$value </td>
-                                <td><p>割り当てる値 / オブジェクト</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$filtering </td>
-                                <td><p>(optional) 値を自動的エスケープするか。デフォルト値はtrue</p></td>
+                                <td></td>
+                                <td>$flag </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
                 
-                                    <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                                            &mdash; <p>現在のインスタンス</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setRaw" name="method_setRaw" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setRaw()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setRaw(string|array <span class="argument">$key</span>, mixed <span class="argument">$value</span>) : \CodeLapse\Smarty</pre>
-                <p><em>Smartyに値を割り当てます。</em></p>
-                <p>setメソッドとは違い、割り当てた値は<em>エスケープされません。</em></p>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$key </td>
-                                <td><p>テンプレート内の変数名</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$value </td>
-                                <td><p>割り当てる値 / オブジェクト</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                                            &mdash; <p>現在のインスタンス</p>
-                                                </article>
+                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -901,138 +946,10 @@ $smarty = Smarty::instance();
             <article class="method">
                 <h3 class="public ">get()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get(string|array <span class="argument">$key</span>, mixed <span class="argument">$default</span>) : mixed</pre>
-                <p><em>Smartyへ割り当てた値を参照します。</em></p>
-                <p>変数の参照は以下の順序で行われ、値が見つかった時点でその値が返されます。<br></p>
-<ol>
-<li>インスタンスに割り当てられた値<br></li>
-<li>Smarty共通変数<br></li>
-<li>渡されたデフォルト値</li>
-</ol>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$key </td>
-                                <td><p>取得する変数名、もしくは取得する変数名の配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$default </td>
-                                <td><p>値が設定されていなかった時の初期値</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    mixed
-                                            &mdash; <p>取得した値か、変数名 => 値 の連想配列</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_clear" name="method_clear" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">clear()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">clear(string|array <span class="argument">$key</span>) : \CodeLapse\Smarty</pre>
-                <p><em>Smartyへ割り当てた値を破棄します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">get()</pre>
+                <p><em></em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$key </td>
-                                <td><p>破棄する変数名、もしくは、破棄する変数名の配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                                            &mdash; <p>現在のインスタンス</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_clearAllAssign" name="method_clearAllAssign" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">clearAllAssign()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">clearAllAssign() : \CodeLapse\Smarty</pre>
-                <p><em>Smartyへ割り当てた値をすべて破棄します。</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                                            &mdash; <p>現在のインスタンス</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_fetch" name="method_fetch" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">fetch()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">fetch(string <span class="argument">$template</span>, string|null <span class="argument">$cache_id</span>, string|null <span class="argument">$compile_id</span>)</pre>
-                <p><em>Smartyの実行結果を取得します。</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$template </td>
-                                <td><p>使用するテンプレート</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$cache_id </td>
-                                <td><p>(optional) キャッシュID</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$compile_id </td>
-                                <td><p>(optional) コンパイルファイルID</p></td>
-                            </tr>
-                                            </table>
                 
                 
                             </article>
@@ -1043,44 +960,52 @@ $smarty = Smarty::instance();
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            returns
-                        </th>
-                        <td>
-                                                                                            <p>string テンプレートをコンパイル結果</p>
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_display" name="method_display" class="anchor"></a>
+            <a id="method_toArray" name="method_toArray" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">display()</h3>
+                <h3 class="public ">toArray()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">display(string <span class="argument">$template</span>, string|null <span class="argument">$cache_id</span>, string|null <span class="argument">$compile_id</span>)</pre>
-                <p><em>Smartyの実行結果を出力（表示）します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">toArray()</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_each" name="method_each" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">each()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">each(callable <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string</td>
-                                <td>$template </td>
-                                <td><p>使用するテンプレート</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$cache_id </td>
-                                <td><p>(optional) キャッシュID</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$compile_id </td>
-                                <td><p>(optional) コンパイルファイルID</p></td>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
@@ -1098,16 +1023,547 @@ $smarty = Smarty::instance();
         </aside>
     </div>
 
-                                                                    </div>
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_select" name="method_select" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">select()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">select(callable <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_exclude" name="method_exclude" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">exclude()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">exclude(callable <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_map" name="method_map" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">map()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">map(callable <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_mapKeyVal" name="method_mapKeyVal" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">mapKeyVal()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">mapKeyVal(callable <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_reduce" name="method_reduce" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">reduce()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">reduce(callable <span class="argument">$fn</span>,  <span class="argument">$memo</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$memo </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_applyReduce" name="method_applyReduce" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">applyReduce()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">applyReduce(callable <span class="argument">$fn</span>,  <span class="argument">$memo</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$memo </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_values" name="method_values" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">values()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">values()</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_applyValues" name="method_applyValues" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">applyValues()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">applyValues()</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_keys" name="method_keys" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">keys()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">keys()</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_applyKeys" name="method_applyKeys" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">applyKeys()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">applyKeys()</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_reverse" name="method_reverse" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">reverse()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">reverse()</pre>
+                <p><em></em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_applyReverse" name="method_applyReverse" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">applyReverse()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">applyReverse( <span class="argument">$preserveKeys</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$preserveKeys </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_applyEach" name="method_applyEach" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">applyEach()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">applyEach(callable <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_applySelect" name="method_applySelect" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">applySelect()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">applySelect(callable <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_applyExclude" name="method_applyExclude" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">applyExclude()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">applyExclude(callable <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_applyMap" name="method_applyMap" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">applyMap()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">applyMap(callable <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_applyMapKeyVal" name="method_applyMapKeyVal" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">applyMapKeyVal()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">applyMapKeyVal(\CodeLapse\callble <span class="argument">$fn</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\CodeLapse\callble</td>
+                                <td>$fn </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">Smarty.php</h3>
+            <h3 id="source-view-label">ArrayWrapper.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Smarty.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/ArrayWrapper.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 

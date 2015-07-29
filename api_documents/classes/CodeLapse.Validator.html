@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1809429149"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-245804937"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1809429149" class="accordion-body collapse in">
+            <div id="namespace-245804937" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1266519967"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2062745704"></a>
                                 <a href="../namespaces/CodeLapse.html" style="margin-left: 30px; padding-left: 0">CodeLapse</a>
             </div>
-            <div id="namespace-1266519967" class="accordion-body collapse ">
+            <div id="namespace-2062745704" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1769727302"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1936625369"></a>
                                 <a href="../namespaces/CodeLapse.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
             </div>
-            <div id="namespace-1769727302" class="accordion-body collapse ">
+            <div id="namespace-1936625369" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -180,19 +180,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-413671512"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-46944045"></a>
                                 <a href="../namespaces/CodeLapse.Database.html" style="margin-left: 30px; padding-left: 0">Database</a>
             </div>
-            <div id="namespace-413671512" class="accordion-body collapse ">
+            <div id="namespace-46944045" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1777816686"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1205297715"></a>
                                 <a href="../namespaces/CodeLapse.Database.Connection.html" style="margin-left: 30px; padding-left: 0">Connection</a>
             </div>
-            <div id="namespace-1777816686" class="accordion-body collapse ">
+            <div id="namespace-1205297715" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -208,10 +208,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-231801259"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1416441376"></a>
                                 <a href="../namespaces/CodeLapse.Database.ResultSet.html" style="margin-left: 30px; padding-left: 0">ResultSet</a>
             </div>
-            <div id="namespace-231801259" class="accordion-body collapse ">
+            <div id="namespace-1416441376" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -239,10 +239,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1100706736"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1134895527"></a>
                                 <a href="../namespaces/CodeLapse.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
             </div>
-            <div id="namespace-1100706736" class="accordion-body collapse ">
+            <div id="namespace-1134895527" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -299,42 +299,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\CodeLapse</small>Smarty</h1>
-                    <p><em>Smartyラッパークラス</em></p>
-                    <p>HTMLの自動エスケープや、グローバル変数の機能が追加されたSmartyのラッパークラスです。<br></p>
-<p>読み込みサンプル</p>
-<pre><code class="language-php">&lt;?php
-//-- app/b.php
-
-define('APPPATH', dirname(__FILE__));
-Config::load(APPPATH . '/config/smarty.php', 'smarty');
-
-// もしくは
-// Config::addLoadPath(APPPATH . '/config/');</code></pre>
-<pre><code class="language-php">&lt;?php
-//-- app/config/smarty.php
-
-return array(
-    // string: テンプレートが保存されているディレクトリ
-    'template_dir' =&gt; APPPATH . '/templates/',
-
-    // string: コンパイル済みテンプレートを保存するディレクトリ
-    'compile_dir' =&gt; APPPATH . '/tmp/smarty/compiled/,
-
-    // string: 設定ファイルが保存されているディレクトリ
-    'config_dir' =&gt; null,
-
-    // string: キャッシュファイルを保存するディレクトリ
-    'cache_dir' =&gt; APPPATH . '/tmp/smarty/cache/,
-
-    // boolean: キャッシュの有効 / 無効
-    'caching' =&gt; true,
-);</code></pre>
-<pre><code class="language-php">&lt;?php
-//-- index.php
-
-$smarty = Smarty::instance();
-// *do_something*</code></pre>
+                    <h1><small>\CodeLapse</small>Validator</h1>
+                    <p><em>入力値の検証を行うクラス</em></p>
+                    
 
                     <section id="summary">
                         <h2>Summary</h2>
@@ -351,27 +318,28 @@ $smarty = Smarty::instance();
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_escapeHelper" class="">escapeHelper()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_instance" class="">instance()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_setInGlobal" class="">setInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_setRawInGlobal" class="">setRawInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_getInGlobal" class="">getInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_clearInGlobal" class="">clearInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_clearAllInGlobal" class="">clearAllInGlobal()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method___construct" class="">__construct()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_set" class="">set()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_setRaw" class="">setRaw()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_get" class="">get()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_clear" class="">clear()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_clearAllAssign" class="">clearAllAssign()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_fetch" class="">fetch()</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#method_display" class="">display()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_getInstance" class="">getInstance()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_def" class="">def()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_define" class="">define()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_addRule" class="">addRule()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_addRuleClass" class="">addRuleClass()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_hasRule" class="">hasRule()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_check" class="">check()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_errors" class="">errors()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_js" class="">js()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_reset" class="">reset()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_driver" class="">driver()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_rule" class="">rule()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_rules" class="">rules()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_getErrors" class="">getErrors()</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#method_execute" class="">execute()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <em>No constants found</em>
+                                                                    <a href="../classes/CodeLapse.Validator.html#constant_DEFAULT_FIELDSET_NAME" class="">DEFAULT_FIELDSET_NAME</a><br />
                                                             </section>
                         </section>
                         <section class="row-fluid protected">
@@ -379,7 +347,11 @@ $smarty = Smarty::instance();
                                                                     <em>No protected methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <em>No protected properties found</em>
+                                                                    <a href="../classes/CodeLapse.Validator.html#property_instances" class="">$instances</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#property_customRules" class="">$customRules</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#property_validator" class="">$validator</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#property_fieldSet" class="">$fieldSet</a><br />
+                                                                    <a href="../classes/CodeLapse.Validator.html#property_config" class="">$config</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -390,9 +362,7 @@ $smarty = Smarty::instance();
                                                                     <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/CodeLapse.Smarty.html#property__globalAssignStore" class="">$_globalAssignStore</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#property__assign" class="">$_assign</a><br />
-                                                                    <a href="../classes/CodeLapse.Smarty.html#property__smarty" class="">$_smarty</a><br />
+                                                                    <em>No private properties found</em>
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -405,12 +375,12 @@ $smarty = Smarty::instance();
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Smarty.html"><div class="path-wrapper">Smarty.php</div></a></dd>
+                            <dd><a href="../files/Validator.html"><div class="path-wrapper">Validator.php</div></a></dd>
                                                 <dt>Package</dt>
                             <dd><div class="namespace-wrapper"></div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                    <div class="namespace-wrapper">\CodeLapse\Smarty</div>
+                                                                                                                                                                    <div class="namespace-wrapper">\CodeLapse\Validator</div>
                             </dd>
 
                         
@@ -425,80 +395,28 @@ $smarty = Smarty::instance();
                 </aside>
             </div>
 
-                        
-                                    <a id="properties" name="properties"></a>
+                                    <a id="constants" name="constants"></a>
             <div class="row-fluid">
                 <div class="span8 content class">
-                    <h2>Properties</h2>
+                    <h2>Constants</h2>
                 </div>
                 <aside class="span4 detailsbar"></aside>
             </div>
 
-                                                                    <div class="row-fluid">
+                                <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property__globalAssignStore" name="property__globalAssignStore" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_globalAssignStore</h3>
-                <pre class="signature">$_globalAssignStore : array</pre>
+            <a id="constant_DEFAULT_FIELDSET_NAME" name="constant_DEFAULT_FIELDSET_NAME" class="anchor"></a>
+            <article id="constant_DEFAULT_FIELDSET_NAME" class="constant">
+                <h3 class="">DEFAULT_FIELDSET_NAME</h3>
+                <pre class="signature">DEFAULT_FIELDSET_NAME</pre>
                 <p><em></em></p>
                 
-
-                                <h4>Type</h4>
-                array
-                &mdash; グローバル空間に設定された変数名と値を保持します。                            </article>
+            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                         <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__assign" name="property__assign" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_assign</h3>
-                <pre class="signature">$_assign : array</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                &mdash; smartyに割り当てられた値                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__smarty" name="property__smarty" class="anchor"></a>
-            <article class="property">
-                <h3 class="private ">$_smarty</h3>
-                <pre class="signature">$_smarty : \CodeLapse\Smarty</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                &mdash; smartyインスタンス                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -507,6 +425,135 @@ $smarty = Smarty::instance();
     </div>
 
                             
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_instances" name="property_instances" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$instances</h3>
+                <pre class="signature">$instances : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_customRules" name="property_customRules" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$customRules</h3>
+                <pre class="signature">$customRules : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_validator" name="property_validator" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$validator</h3>
+                <pre class="signature">$validator : \CodeLapse\CodeLapse\Valitron\Validator</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                \CodeLapse\CodeLapse\Valitron\Validator
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_fieldSet" name="property_fieldSet" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$fieldSet</h3>
+                <pre class="signature">$fieldSet : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_config" name="property_config" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$config</h3>
+                <pre class="signature">$config : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -515,28 +562,76 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_escapeHelper" name="method_escapeHelper" class="anchor"></a>
+            <a id="method_getInstance" name="method_getInstance" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">escapeHelper()</h3>
+                <h3 class="public ">getInstance()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">escapeHelper(string|mixed <span class="argument">$str</span>) : mixed</pre>
-                <p><em>与えられた文字列を安全なHTML文字列に変換します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">getInstance( <span class="argument">$name</span>,  <span class="argument">$errorOnNull</span>)</pre>
+                <p><em></em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string|mixed</td>
-                                <td>$str </td>
-                                <td><p>エスケープする文字列。</p>
-<pre><code>                   文字列でない場合はエスケープ処理は行われず、無視されます。</code></pre></td>
+                                <td></td>
+                                <td>$name </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$errorOnNull </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_def" name="method_def" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">def()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">def(string|array <span class="argument">$fieldSet</span>, \CodeLapse\string? <span class="argument">$fieldSetName</span>,  <span class="argument">$config</span>) : static</pre>
+                <p><em>検証ルールの定義を始めます。
+この関数はdefineメソッドの別名です。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|array</td>
+                                <td>$fieldSet </td>
+                                <td><p>検証ルールの配列、もしくはフィールドセット名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\CodeLapse\string?</td>
+                                <td>$fieldSetName </td>
+                                <td><p>フィールドセット名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$config </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    mixed
-                                            &mdash; <p>安全なHTML文字列、もしくは与えられたオブジェクト</p>
+                    static
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -553,32 +648,204 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_instance" name="method_instance" class="anchor"></a>
+            <a id="method_define" name="method_define" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">instance()</h3>
+                <h3 class="public ">define()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">instance(string <span class="argument">$name</span>, array <span class="argument">$config</span>) : \CodeLapse\Smarty</pre>
-                <p><em>Smartyのインスタンスを取得します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">define(string|array <span class="argument">$fieldSet</span>, \CodeLapse\string? <span class="argument">$fieldSetName</span>,  <span class="argument">$config</span>) : static</pre>
+                <p><em>検証ルールの定義を始めます。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|array</td>
+                                <td>$fieldSet </td>
+                                <td><p>検証ルールの配列、もしくはフィールドセット名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\CodeLapse\string?</td>
+                                <td>$fieldSetName </td>
+                                <td><p>フィールドセット名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$config </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    static
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addRule" name="method_addRule" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addRule()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addRule(string <span class="argument">$ruleName</span>, callable <span class="argument">$validator</span>, callable <span class="argument">$jsGenerator</span>)</pre>
+                <p><em>オリジナルの検証ルールを追加します。</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$name </td>
-                                <td><p>(optional) 取得するインスタンスの名前。</p>
-<pre><code>                  指定されない場合、'null'を使用します。</code></pre></td>
+                                <td>$ruleName </td>
+                                <td><p>検証ルール名</p></td>
                             </tr>
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$validator </td>
+                                <td><p>検証を行う関数<br>
+検証時に<code>($value, $fieldName, $options)</code>が渡されます。</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$jsGenerator </td>
+                                <td><p>クライアントサイドの検証を行うJavaScriptコードを返す関数<br>
+コード生成時に<code>($value, $fieldName, $params)</code>が渡され、<br>
+生成されたコードは <code>function (value, fieldName) {</code> と <code>}</code> でラップされて出力されます。</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addRuleClass" name="method_addRuleClass" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addRuleClass()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addRuleClass(string|object <span class="argument">$class</span>)</pre>
+                <p><em>クラス、あるいはオブジェクトから検証ルールを登録します。</em></p>
+                <p>登録するクラス内の<code>validate</code>から始まるメソッドがバリデータとして登録されます。
+検証ルール名はメソッド名の先頭から<code>validate</code>, <code>validate_</code>を取り除き、
+先頭を小文字にしたものになります。</p>
+<p>例えば、<code>validateMailUnused</code>は<code>mailUnused</code>として登録され
+<code>validate_unused_userid</code>は<code>unused_userid</code>という名前で登録されます。</p>
+<p>メソッド名の先頭が<code>jsValidate</code>プレフィックスから始まり
+プレフィックス以降の名前が一致する<code>validate</code>メソッドがある場合
+JavaScript用の検証コード生成メソッドとして登録されます。</p>
+<p>例えば、<code>validateMailUnused</code>というメソッドに対して、<code>jsValidateMailUnused</code>メソッドが存在する場合
+クライアントサイド用の検証コードを生成する際に<code>jsValidateMailUnused</code>メソッドがコールされます。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|object</td>
+                                <td>$class </td>
+                                <td><p>完全修飾クラス名、もしくはインスタンスオブジェクト</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_hasRule" name="method_hasRule" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">hasRule()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">hasRule(string <span class="argument">$rule</span>) : boolean</pre>
+                <p><em>指定された名前の検証ルールが登録されているか調べます。
+（テスト用メソッド）</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$rule </td>
+                                <td><p>ルール名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_check" name="method_check" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">check()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">check(array <span class="argument">$data</span>,  <span class="argument">$fieldSet</span>) : boolean</pre>
+                <p><em>値の検証を行います。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>array</td>
-                                <td>$config </td>
-                                <td><p>Smartyをインスタンス化するときの設定</p></td>
+                                <td>$data </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$fieldSet </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
+                    boolean
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -595,108 +862,64 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_setInGlobal" name="method_setInGlobal" class="anchor"></a>
+            <a id="method_errors" name="method_errors" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">setInGlobal()</h3>
+                <h3 class="public ">errors()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setInGlobal(string|array <span class="argument">$name</span>, mixed <span class="argument">$value</span>, boolean <span class="argument">$escape</span>)</pre>
-                <p><em>Smartyインスタンス間で共通の変数を設定します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">errors(string <span class="argument">$fieldName</span>, string <span class="argument">$fieldSet</span>)</pre>
+                <p><em></em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string|array</td>
-                                <td>$name </td>
-                                <td><p>変数名、もしくは、変数名 => 値の連想配列</p></td>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td></td>
                             </tr>
                                                     <tr>
-                                <td>mixed</td>
-                                <td>$value </td>
-                                <td><p>(optional) 設定する値</p></td>
+                                <td>string</td>
+                                <td>$fieldSet </td>
+                                <td><p>フィールドセット名</p></td>
                             </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_js" name="method_js" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">js()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">js(boolean <span class="argument">$wrapScript</span>, string <span class="argument">$fieldSetName</span>)</pre>
+                <p><em>クライアントサイド検証用のJavaScriptコードを生成します。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>boolean</td>
-                                <td>$escape </td>
-                                <td><p>(optional)  エスケープを行うかを指定します。デフォルトはtrueです。</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setRawInGlobal" name="method_setRawInGlobal" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setRawInGlobal()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setRawInGlobal(string|array <span class="argument">$name</span>,  <span class="argument">$value</span>)</pre>
-                <p><em>Smartyインスタンスで共通の変数を設定します。</em></p>
-                <p>setInGlobalと違い、設定する値はエスケープされません。</p>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$name </td>
-                                <td><p>変数名、もしくは、変数名 => 値の連想配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td></td>
-                                <td>$value </td>
-                                <td></td>
-                            </tr>
-                                            </table>
-                
-                
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_getInGlobal" name="method_getInGlobal" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">getInGlobal()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getInGlobal(string <span class="argument">$name</span>, string <span class="argument">$default</span>)</pre>
-                <p><em>Smartyインスタンス間で共通の変数を取得します。</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$name </td>
-                                <td><p>変数名</p></td>
+                                <td>$wrapScript </td>
+                                <td><p>生成されたコードをscriptタグで囲むか</p></td>
                             </tr>
                                                     <tr>
                                 <td>string</td>
-                                <td>$default </td>
-                                <td><p>値</p></td>
+                                <td>$fieldSetName </td>
+                                <td><p>フィールドセット名</p></td>
                             </tr>
                                             </table>
                 
@@ -717,46 +940,13 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_clearInGlobal" name="method_clearInGlobal" class="anchor"></a>
+            <a id="method_reset" name="method_reset" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">clearInGlobal()</h3>
+                <h3 class="public ">reset()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">clearInGlobal(string|array <span class="argument">$name</span>)</pre>
-                <p><em>Smartyインスタンス間で共通の変数を破棄します。</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$name </td>
-                                <td><p>破棄する変数名、もしくは破棄する変数名の配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_clearAllInGlobal" name="method_clearAllInGlobal" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">clearAllInGlobal()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">clearAllInGlobal()</pre>
-                <p><em>Smartyインスタンスで共通の変数をすべて破棄します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">reset()</pre>
+                <p><em>カスタムルールとデフォルトインスタンスを初期化します。
+（テスト用メソッド）</em></p>
                 
 
                 
@@ -781,7 +971,7 @@ $smarty = Smarty::instance();
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(array <span class="argument">$config</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">__construct(array <span class="argument">$fieldSet</span>, array <span class="argument">$config</span>)</pre>
                 <p><em></em></p>
                 
 
@@ -789,8 +979,13 @@ $smarty = Smarty::instance();
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>array</td>
+                                <td>$fieldSet </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
                                 <td>$config </td>
-                                <td><p>Smartyの設定</p></td>
+                                <td></td>
                             </tr>
                                             </table>
                 
@@ -810,38 +1005,17 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_set" name="method_set" class="anchor"></a>
+            <a id="method_driver" name="method_driver" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">set()</h3>
+                <h3 class="public ">driver()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">set(string|array <span class="argument">$key</span>, mixed <span class="argument">$value</span>, boolean <span class="argument">$filtering</span>) : \CodeLapse\Smarty</pre>
-                <p><em>Smartyに値を割り当てます。</em></p>
+                <pre class="signature" style="margin-right: 54px;">driver()</pre>
+                <p><em></em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$key </td>
-                                <td><p>テンプレート内の変数名</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$value </td>
-                                <td><p>割り当てる値 / オブジェクト</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$filtering </td>
-                                <td><p>(optional) 値を自動的エスケープするか。デフォルト値はtrue</p></td>
-                            </tr>
-                                            </table>
                 
                 
-                                    <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                                            &mdash; <p>現在のインスタンス</p>
-                                                </article>
+                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -856,186 +1030,32 @@ $smarty = Smarty::instance();
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_setRaw" name="method_setRaw" class="anchor"></a>
+            <a id="method_rule" name="method_rule" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">setRaw()</h3>
+                <h3 class="public ">rule()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setRaw(string|array <span class="argument">$key</span>, mixed <span class="argument">$value</span>) : \CodeLapse\Smarty</pre>
-                <p><em>Smartyに値を割り当てます。</em></p>
-                <p>setメソッドとは違い、割り当てた値は<em>エスケープされません。</em></p>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$key </td>
-                                <td><p>テンプレート内の変数名</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$value </td>
-                                <td><p>割り当てる値 / オブジェクト</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                                            &mdash; <p>現在のインスタンス</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_get" name="method_get" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">get()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get(string|array <span class="argument">$key</span>, mixed <span class="argument">$default</span>) : mixed</pre>
-                <p><em>Smartyへ割り当てた値を参照します。</em></p>
-                <p>変数の参照は以下の順序で行われ、値が見つかった時点でその値が返されます。<br></p>
-<ol>
-<li>インスタンスに割り当てられた値<br></li>
-<li>Smarty共通変数<br></li>
-<li>渡されたデフォルト値</li>
-</ol>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$key </td>
-                                <td><p>取得する変数名、もしくは取得する変数名の配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$default </td>
-                                <td><p>値が設定されていなかった時の初期値</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    mixed
-                                            &mdash; <p>取得した値か、変数名 => 値 の連想配列</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_clear" name="method_clear" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">clear()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">clear(string|array <span class="argument">$key</span>) : \CodeLapse\Smarty</pre>
-                <p><em>Smartyへ割り当てた値を破棄します。</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$key </td>
-                                <td><p>破棄する変数名、もしくは、破棄する変数名の配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                                            &mdash; <p>現在のインスタンス</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_clearAllAssign" name="method_clearAllAssign" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">clearAllAssign()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">clearAllAssign() : \CodeLapse\Smarty</pre>
-                <p><em>Smartyへ割り当てた値をすべて破棄します。</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    <a href="../classes/CodeLapse.Smarty.html">\CodeLapse\Smarty</a>
-                                            &mdash; <p>現在のインスタンス</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_fetch" name="method_fetch" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">fetch()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">fetch(string <span class="argument">$template</span>, string|null <span class="argument">$cache_id</span>, string|null <span class="argument">$compile_id</span>)</pre>
-                <p><em>Smartyの実行結果を取得します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">rule(string <span class="argument">$fieldName</span>, array <span class="argument">$rules</span>) : $this</pre>
+                <p><em>フィールドに対する検証ルールを設定します。</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$template </td>
-                                <td><p>使用するテンプレート</p></td>
+                                <td>$fieldName </td>
+                                <td><p>検証するフィールド名</p></td>
                             </tr>
                                                     <tr>
-                                <td>string|null</td>
-                                <td>$cache_id </td>
-                                <td><p>(optional) キャッシュID</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$compile_id </td>
-                                <td><p>(optional) コンパイルファイルID</p></td>
+                                <td>array</td>
+                                <td>$rules </td>
+                                <td><p>検証ルールのリスト</p></td>
                             </tr>
                                             </table>
                 
                 
-                            </article>
+                                    <h4>Returns</h4>
+                    $this
+                                                </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -1043,49 +1063,104 @@ $smarty = Smarty::instance();
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            returns
-                        </th>
-                        <td>
-                                                                                            <p>string テンプレートをコンパイル結果</p>
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_display" name="method_display" class="anchor"></a>
+            <a id="method_rules" name="method_rules" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">display()</h3>
+                <h3 class="public ">rules()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">display(string <span class="argument">$template</span>, string|null <span class="argument">$cache_id</span>, string|null <span class="argument">$compile_id</span>)</pre>
-                <p><em>Smartyの実行結果を出力（表示）します。</em></p>
+                <pre class="signature" style="margin-right: 54px;">rules(array <span class="argument">$fieldSet</span>) : $this</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$fieldSet </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getErrors" name="method_getErrors" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getErrors()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getErrors(string <span class="argument">$fieldName</span>) : string|boolean</pre>
+                <p><em>検出したエラーのメッセージを取得します。</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$template </td>
-                                <td><p>使用するテンプレート</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$cache_id </td>
-                                <td><p>(optional) キャッシュID</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$compile_id </td>
-                                <td><p>(optional) コンパイルファイルID</p></td>
+                                <td>$fieldName </td>
+                                <td><p>(optional) フィールド名</p></td>
                             </tr>
                                             </table>
                 
                 
-                            </article>
+                                    <h4>Returns</h4>
+                    string|boolean
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_execute" name="method_execute" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">execute()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">execute(array <span class="argument">$data</span>) : boolean</pre>
+                <p><em>値の検証を行います。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>検査するデータ（"fieldName" => "value"形式の連想配列）</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                                </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -1104,10 +1179,10 @@ $smarty = Smarty::instance();
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">Smarty.php</h3>
+            <h3 id="source-view-label">Validator.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Smarty.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Validator.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
