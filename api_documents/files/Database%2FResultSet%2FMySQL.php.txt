@@ -1,12 +1,14 @@
 <?php
 namespace CodeLapse\Database\ResultSet;
 
+use CodeLapse\Database\ResultSet;
+
 /**
  * MySQL関数用 データベース 結果オブジェクト
  *
  * @package CodeLapse\Database\ResultSet
  */
-class MySQL extends \CodeLapse\Database\ResultSet
+class MySQL extends ResultSet
 {
     protected function & _fetch(& $resultset)
     {
