@@ -1,6 +1,9 @@
 <?php
 namespace CodeLapse;
 
+use \OutOfBoundsException;
+use \CodeLapse\Arr;
+use \CodeLapse\Config;
 use \CodeLapse\Database\Connection;
 use \CodeLapse\Database\Exception as DBException;
 
@@ -89,14 +92,14 @@ class DB
         if (array_key_exists($connectionName, $config) === false)
         {
             // 接続設定に指定されたコネクション用の設定がなければ、例外を投げる
-            throw new \OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
+            throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
         }
 
         // 新しいコネクションを生成する
         $conf = $config[$connectionName];
 
         if ($conf === null) {
-            throw new \OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
+            throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
         }
 
         $host   = Arr::get($conf, 'host');
