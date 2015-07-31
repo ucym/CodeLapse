@@ -2,7 +2,7 @@
 namespace CodeLapse\Database\Connection;
 
 use InvalidArgumentException;
-use PDO;
+use PDO as PHPPDO;
 use PDOException;
 use CodeLapse\Database\Connection;
 use CodeLapse\Database\DBException;
@@ -28,7 +28,7 @@ class PDO extends Connection
     public function __construct($host, $user, $password = null)
     {
         try {
-            $this->_con = new PDO('mysql:host=' . $host, $user, $password);
+            $this->_con = new PHPPDO('mysql:host=' . $host, $user, $password);
         }
         catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode());
@@ -147,23 +147,23 @@ class PDO extends Connection
                     switch (true) {
                         case is_string($v) :
                         case is_float($v) :
-                            $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
                             break;
 
                         case is_bool($v) :
-                            $stmt->bindParam($k, $v, PDO::PARAM_BOOL);
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_BOOL);
                             break;
 
                         case is_int($v) :
-                            $stmt->bindParam($k, $v, PDO::PARAM_INT);
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_INT);
                             break;
 
                         case is_null($v) :
-                            $stmt->bindParam($k, $v, PDO::PARAM_NULL);
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_NULL);
                             break;
 
                         default :
-                            $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
                     }
                 }
             }
