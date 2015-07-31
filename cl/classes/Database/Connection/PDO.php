@@ -131,48 +131,54 @@ class PDO extends Connection
      */
     public function query($sql, $params = null)
     {
-        $result = false;
-        $stmt = $this->_con->prepare($sql);
-        $this->lastStatement = $stmt;
+        try {
+            $result = false;
+            $stmt = $this->_con->prepare($sql);
+            $this->lastStatement = $stmt;
 
-        // PDOのexcuteメソッドがクエリ中にないプレースホルダを渡すことを許容していないため
-        // クエリ中に存在しないプレースホルダを事前に削除する
-        if (is_array($params)) {
-            foreach ($params as $k => & $v) {
+            // PDOのexcuteメソッドがクエリ中にないプレースホルダを渡すことを許容していないため
+            // クエリ中に存在しないプレースホルダを事前に削除する
+            if (is_array($params)) {
 
-                is_int($k) and $k += 1;
+                foreach ($params as $k => & $v) {
 
-                switch (true) {
-                    case is_string($v) :
-                    case is_float($v) :
-                        $stmt->bindParam($k, $v, PDO::PARAM_STR);
-                        break;
+                    is_int($k) and $k += 1;
 
-                    case is_bool($v) :
-                        $stmt->bindParam($k, $v, PDO::PARAM_BOOL);
-                        break;
+                    switch (true) {
+                        case is_string($v) :
+                        case is_float($v) :
+                            $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                            break;
 
-                    case is_int($v) :
-                        $stmt->bindParam($k, $v, PDO::PARAM_INT);
-                        break;
+                        case is_bool($v) :
+                            $stmt->bindParam($k, $v, PDO::PARAM_BOOL);
+                            break;
 
-                    case is_null($v) :
-                        $stmt->bindParam($k, $v, PDO::PARAM_NULL);
-                        break;
+                        case is_int($v) :
+                            $stmt->bindParam($k, $v, PDO::PARAM_INT);
+                            break;
 
-                    default :
-                        $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                        case is_null($v) :
+                            $stmt->bindParam($k, $v, PDO::PARAM_NULL);
+                            break;
+
+                        default :
+                            $stmt->bindParam($k, $v, PDO::PARAM_STR);
+                    }
                 }
             }
+
+            $result = $stmt->execute();
+
+            if ($result === false) {
+                throw new DBException($this->errorMessage(), $this->errorCode());
+            }
+
+            return new PDOResultSet($stmt);
         }
-
-        $result = $stmt->execute();
-
-        if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+        catch (PDOException $e) {
+            throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
-
-        return new PDOResultSet($stmt);
     }
 
 
