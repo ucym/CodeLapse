@@ -1,50 +1,20 @@
 <?php
 namespace CodeLapse;
 
+use \OutOfBoundsException;
+use \CodeLapse\Arr;
+use \CodeLapse\Config;
 use \CodeLapse\Database\Connection;
-use \CodeLapse\Database\Exception as DBException;
+use \CodeLapse\Database\DBException;
 
 /**
  * データベースユーティリティクラス
  *
  * ```php
- * //-- CodeLapse(bs.php)を読み込んだ時
- * require 'pathToCodeLapse/bootstrap.php';
  * $result = DB::query('SELECT `somefield` FROM `sometable`');
- *
- * //-- db.phpを単体で読み込んだ時
- * require 'pathToDb/db.php';
- * $con = DB::connect('hostName', 'user', 'password');
- * $result = $con->query('SOME SQL QUERY');
  * ```
  *
  * ### データベース接続からSQL送信までの流れ
- * #### db.php を単体で読み込んだ時
- * ```php
- * // （例: userid => lzm, password => wox#a'zlp）
- * $userid = $_POST['userid'];
- * $password = $_POST['password'];
- *
- * // DBと接続する
- * $con = DB::connect('localhost', 'user', 'password');
- *
- * // クエリを送る
- * // 配列に渡した値が、クエリに埋め込まれていることに注目。
- * // （送信されるクエリ: SELECT * FROM Users WHERE userid = 'lzm' AND password = 'wox#a\'zlp'）
- * $result = $con->query(
- *      'SELECT * FROM Users WHERE userid = :id AND password = :pass',
- *      array(':id' => $userid, ':pass' => $password)
- * );
- *
- * if ($result->fetch() !== false) {
- *      echo 'ログイン成功';
- * } else {
- *      echo 'ログイン失敗';
- * }
- *
- * ```
- *
- * #### bootstrap.phpを取り込んだ時
  * ```php
  * //!! （事前に "config/db.php"を設定しておく必要があります。）
  *
@@ -70,18 +40,15 @@ use \CodeLapse\Database\Exception as DBException;
  *
  * **取得した結果を全件表示する**
  * ```php
- * //-- CodeLapseライブラリ使用中の場合を想定
  * // SQLの実行結果は $result に入っている
  * foreach ($result as $row) {
  *      // $rowに一行分のデータが入ってくる
  *      print_r($row);
  * }
  *
+ * // あるいは`fetchAll`メソッドを使う事もできます。
+ * print_r($result->fetchAll());
  * ```
- *
- * @todo コメント書く
- * @todo 実装チェック
- * @todo MySQL関数依存からの脱却
  *
  * @package CodeLapse
  */
@@ -108,10 +75,8 @@ class DB
      * Configクラスを利用して、"db"名前空間に接続設定を読み込んでください。<br>
      *
      * @param string|null $connectionName (オプション) 取得する接続名
-     * @throw OutOfBoundsException
+     * @throws OutOfBoundsException
      *      dbconfig.phpに記述されていないコネクション名が指定された時にスローされます。
-     * @throw InvalidArgumentException
-     *      単体ライブラリとして利用しているときに、ホスト名とユーザー名が指定されない時に発生します。
      */
     public static function instance($connectionName = null)
     {
@@ -122,30 +87,19 @@ class DB
             return self::$_connections[$connectionName];
         }
 
-        // Configクラスが読み込まれていなければ
-        // これより先の処理は続行できない
-        if (! class_exists('Config')) {
-            if (count(self::$_connections) === 0) {
-                throw new \OutOfBoundsException('インスタンスを取得する前に connectメソッドでデータベースへ接続している必要があります。');
-            }
-            else {
-                throw new \OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
-            }
-        }
-
         $config = Config::get('db', array());
 
         if (array_key_exists($connectionName, $config) === false)
         {
             // 接続設定に指定されたコネクション用の設定がなければ、例外を投げる
-            throw new \OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
+            throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
         }
 
         // 新しいコネクションを生成する
         $conf = $config[$connectionName];
 
         if ($conf === null) {
-            throw new \OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
+            throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
         }
 
         $host   = Arr::get($conf, 'host');
@@ -184,7 +138,7 @@ class DB
      * @param null|string  $connectionName (optional) コネクションに対する名前。
      *      instanceメソッドでインスタンスを取得する際に指定する名前です。
      * @return DB_Connection DBConnectionインスタンス
-     * @throw DB_Exception
+     * @throws DB_Exception
      *      データベース接続に失敗した時にスローされます。
      */
     public static function connect($host, $user, $passwd = null, $newConnection = false, $connectionName = null)
@@ -320,7 +274,7 @@ class DB
      *
      * @param string|null $connection (optional) 接続名。指定されない場合、初期コネクションを利用します。
      * @return boolean
-     * @throw DB_Exception
+     * @throws DB_Exception
      */
     public static function rollback($connection = null)
     {

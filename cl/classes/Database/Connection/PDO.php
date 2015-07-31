@@ -1,15 +1,19 @@
 <?php
 namespace CodeLapse\Database\Connection;
 
-use \CodeLapse\Database\Exception as DBException;
-use \CodeLapse\Database\ResultSet\PDO as PDOResultSet;
+use InvalidArgumentException;
+use PDO as PHPPDO;
+use PDOException;
+use CodeLapse\Database\Connection;
+use CodeLapse\Database\DBException;
+use CodeLapse\Database\ResultSet\PDO as PDOResultSet;
 
 /**
  * PDO データベースコネクションラッパークラス
  *
  * @package CodeLapse\Database
  */
-class PDO extends \CodeLapse\Database\Connection
+class PDO extends Connection
 {
     private $lastStatement = null;
 
@@ -19,13 +23,14 @@ class PDO extends \CodeLapse\Database\Connection
      * @param string $host ホスト名
      * @param string $user ユーザー名
      * @param string|null $password (optional) パスワード
+     * @throws CodeLapse\Database\DBException
      */
     public function __construct($host, $user, $password = null)
     {
         try {
-            $this->_con = new \PDO('mysql:host=' . $host, $user, $password);
+            $this->_con = new PHPPDO('mysql:host=' . $host, $user, $password);
         }
-        catch (\PDOException $e) {
+        catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode());
         }
     }
@@ -89,22 +94,30 @@ class PDO extends \CodeLapse\Database\Connection
      * 使用するデータベースを指定します。
      *
      * @param string $db_name 使用するデータベース名
-     * @return bool
+     * @throws CodeLapse\Database\DBException
      */
     public function useDB($dbname)
     {
-        return !! $this->query('USE ' . $dbname);
+        $result = $this->query('USE ' . $dbname);
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
     }
 
 
     /**
      * コネクションで使用する文字コードを設定します。
      * @param string $charset 文字コード
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public function setCharset($charset)
     {
-        return !! $this->query('SET NAMES ?', (array) $charset);
+        $result = $this->query('SET NAMES ?', (array) $charset);
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
     }
 
 
@@ -114,72 +127,86 @@ class PDO extends \CodeLapse\Database\Connection
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
      * @return CodeLapse\Database\Resultset|bool
+     * @throws CodeLapse\Database\DBException
      */
     public function query($sql, $params = null)
     {
-        $result = false;
-        $stmt = $this->_con->prepare($sql);
-        $this->lastStatement = $stmt;
+        try {
+            $result = false;
+            $stmt = $this->_con->prepare($sql);
+            $this->lastStatement = $stmt;
 
-        // PDOのexcuteメソッドがクエリ中にないプレースホルダを渡すことを許容していないため
-        // クエリ中に存在しないプレースホルダを事前に削除する
-        if (is_array($params)) {
-            foreach ($params as $k => & $v) {
+            // PDOのexcuteメソッドがクエリ中にないプレースホルダを渡すことを許容していないため
+            // クエリ中に存在しないプレースホルダを事前に削除する
+            if (is_array($params)) {
 
-                is_int($k) and $k += 1;
+                foreach ($params as $k => & $v) {
 
-                switch (true) {
-                    case is_string($v) :
-                    case is_float($v) :
-                        $stmt->bindParam($k, $v, \PDO::PARAM_STR);
-                        break;
+                    is_int($k) and $k += 1;
 
-                    case is_bool($v) :
-                        $stmt->bindParam($k, $v, \PDO::PARAM_BOOL);
-                        break;
+                    switch (true) {
+                        case is_string($v) :
+                        case is_float($v) :
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
+                            break;
 
-                    case is_int($v) :
-                        $stmt->bindParam($k, $v, \PDO::PARAM_INT);
-                        break;
+                        case is_bool($v) :
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_BOOL);
+                            break;
 
-                    case is_null($v) :
-                        $stmt->bindParam($k, $v, \PDO::PARAM_NULL);
-                        break;
+                        case is_int($v) :
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_INT);
+                            break;
 
-                    default :
-                        $stmt->bindParam($k, $v, \PDO::PARAM_STR);
+                        case is_null($v) :
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_NULL);
+                            break;
+
+                        default :
+                            $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
+                    }
                 }
             }
-        }
 
-        $result = $stmt->execute();
+            $result = $stmt->execute();
 
-        if ($result === false) {
-            return false;
-        }
-        else {
+            if ($result === false) {
+                throw new DBException($this->errorMessage(), $this->errorCode());
+            }
+
             return new PDOResultSet($stmt);
+        }
+        catch (PDOException $e) {
+            throw new DBException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
 
     /**
      * トランザクションを開始します。
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public function startTransaction()
     {
-        return $this->_con->beginTransaction();
+        $result = $this->_con->beginTransaction();
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
     }
 
 
     /**
      * トランザクションを終了し、実行結果をコミットします。
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public function commit()
     {
-        return $this->_con->commit();
+        $result = $this->_con->commit();
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
     }
 
 
@@ -188,15 +215,18 @@ class PDO extends \CodeLapse\Database\Connection
      *
      * トランザクション中でない時、DBExceptionをスローします。
      *
-     * @return boolean
-     * @throw DBException
+     * @throws CodeLapse\Database\DBException
      */
     public function rollback()
     {
         try {
-            return $this->_con->rollback();
+            $result = $this->_con->rollback();
+
+            if ($result === false) {
+                throw new DBException($this->errorMessage(), $this->errorCode());
+            }
         }
-        catch (\PDOException $e) {
+        catch (PDOException $e) {
             throw new DBException('ロールバックに失敗しました。(' . $e->getMessage() . ')', $e->getCode(), $e);
         }
     }
@@ -216,10 +246,18 @@ class PDO extends \CodeLapse\Database\Connection
      * 最後に挿入された行のID、もしくはシーケンス値を返します。
      *
      * @param string $name (optional) シーケンスオブジェクト名
+     * @return int
+     * @throws CodeLapse\Database\DBException
      */
     public function lastInsertId($name = null)
     {
-        return $this->_con->lastInsertId($name);
+        $result = $this->_con->lastInsertId($name);
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
+
+        return $result;
     }
 
 
@@ -228,10 +266,17 @@ class PDO extends \CodeLapse\Database\Connection
      *
      * @param string $string 文字列
      * @return string SQLの値として適切な形式に整形された文字列
+     * @throws CodeLapse\Database\DBException
      */
     public function quote($string)
     {
-        return $this->_con->quote($string);
+        $result = $this->_con->quote($string);
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
+
+        return $result;
     }
 
 
