@@ -72,7 +72,7 @@ class DB
      * Configクラスを利用して、"db"名前空間に接続設定を読み込んでください。<br>
      *
      * @param string|null $connectionName (オプション) 取得する接続名
-     * @throw OutOfBoundsException
+     * @throws OutOfBoundsException
      *      dbconfig.phpに記述されていないコネクション名が指定された時にスローされます。
      */
     public static function instance($connectionName = null)
@@ -135,7 +135,7 @@ class DB
      * @param null|string  $connectionName (optional) コネクションに対する名前。
      *      instanceメソッドでインスタンスを取得する際に指定する名前です。
      * @return DB_Connection DBConnectionインスタンス
-     * @throw DB_Exception
+     * @throws DB_Exception
      *      データベース接続に失敗した時にスローされます。
      */
     public static function connect($host, $user, $passwd = null, $newConnection = false, $connectionName = null)
@@ -271,7 +271,7 @@ class DB
      *
      * @param string|null $connection (optional) 接続名。指定されない場合、初期コネクションを利用します。
      * @return boolean
-     * @throw DB_Exception
+     * @throws DB_Exception
      */
     public static function rollback($connection = null)
     {

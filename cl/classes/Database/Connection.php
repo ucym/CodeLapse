@@ -25,7 +25,7 @@ abstract class Connection
      * @param string|null $password (optional) パスワード
      * @param int|null $driver (optional) ドライバの種類。
      *      指定することで利用するドライバを選択できます。
-     * @throw DB_Exception データベースへの接続に失敗した時にスローされます。
+     * @throws DB_Exception データベースへの接続に失敗した時にスローされます。
      */
     public static function connect($host, $user, $password = null, $driver = null) {
         $instance = null;
@@ -138,7 +138,7 @@ abstract class Connection
      * トランザクション中でない時、DB_Exceptionをスローします。
      *
      * @return boolean
-     * @throw DB_Exception
+     * @throws DB_Exception
      */
     public abstract function rollback();
 

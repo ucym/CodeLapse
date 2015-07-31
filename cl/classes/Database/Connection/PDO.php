@@ -189,7 +189,7 @@ class PDO extends \CodeLapse\Database\Connection
      * トランザクション中でない時、DBExceptionをスローします。
      *
      * @return boolean
-     * @throw DBException
+     * @throws DBException
      */
     public function rollback()
     {
