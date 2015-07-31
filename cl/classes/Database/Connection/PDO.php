@@ -251,7 +251,7 @@ class PDO extends Connection
      */
     public function lastInsertId($name = null)
     {
-        $retsult = $this->_con->lastInsertId($name);
+        $result = $this->_con->lastInsertId($name);
 
         if ($result === false) {
             throw new DBException($this->errorMessage(), $this->errorCode());
