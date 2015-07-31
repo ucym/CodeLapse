@@ -1,15 +1,17 @@
 <?php
 namespace CodeLapse\Database\Connection;
 
-use \CodeLapse\Database\DBException;
-use \CodeLapse\Database\ResultSet\MySQL as MySQLResultSet;
+use InvalidArgumentException;
+use CodeLapse\Database\Connection;
+use CodeLapse\Database\DBException;
+use CodeLapse\Database\ResultSet\MySQL as MySQLResultSet;
 
 /**
  * MySQL データベースコネクションラッパークラス
  *
  * @package CodeLapse\Database\Connection
  */
-class MySQL extends \CodeLapse\Database\Connection
+class MySQL extends Connection
 {
 
     /**
@@ -79,6 +81,7 @@ class MySQL extends \CodeLapse\Database\Connection
      * @param string $user ユーザー名
      * @param string|null $password パスワード
      * @param boolean|null $newConnection (optional) 新規コネクションを生成するか
+     * @throws CodeLapse\Database\DBException
      */
     public function __construct($host, $user, $password = null)
     {
@@ -135,6 +138,7 @@ class MySQL extends \CodeLapse\Database\Connection
      * 使用するデータベースを指定します。
      *
      * @param string $db_name 使用するデータベース名
+     * @throws CodeLapse\Database\DBException
      */
     public function useDB($dbname)
     {
@@ -151,6 +155,7 @@ class MySQL extends \CodeLapse\Database\Connection
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
      * @return CodeLapse\Database\Resultset|bool
+     * @throws CodeLapse\Database\DBException
      */
     public function query($sql, $params = null)
     {
@@ -183,11 +188,10 @@ class MySQL extends \CodeLapse\Database\Connection
                     $ph_pos = strpos($sql, $key);
 
                     if ($key[0] !== ':') {
-                        throw new \InvalidArgumentException("不正なプレースホルダがパラメータに含まれています($key)");
+                        throw new InvalidArgumentException("不正なプレースホルダがパラメータに含まれています($key)");
                     }
 
                     if ($ph_pos !== false) {
-
                         if (is_string($value)) {
                             $value = sprintf('\'%s\'', mysql_real_escape_string($value, $this->_con));
                         } else if (is_bool($value)) {
@@ -206,9 +210,13 @@ class MySQL extends \CodeLapse\Database\Connection
 
         $result = mysql_query($sql, $this->_con);
 
-        if (is_bool($result)) {
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
+        else if ($result === true) {
             return $result;
-        } else {
+        }
+        else {
             return new MySQLResultSet($result);
         }
     }
@@ -217,17 +225,21 @@ class MySQL extends \CodeLapse\Database\Connection
     /**
      * コネクションで使用する文字コードを設定します。
      * @param string $charset 文字コード
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public function setCharset($charset)
     {
-        return mysql_set_charset($charset, $this->_con);
+        $result = mysql_set_charset($charset, $this->_con);
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
     }
 
 
     /**
      * トランザクションを開始します。
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public function startTransaction()
     {
@@ -235,14 +247,12 @@ class MySQL extends \CodeLapse\Database\Connection
 
         // トランザクションの開始に成功したら状態を変更する
         $result and $this->_inTransaction = true;
-
-        return $result;
     }
 
 
     /**
      * トランザクションを終了し、実行結果をコミットします。
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public function commit()
     {
@@ -254,14 +264,12 @@ class MySQL extends \CodeLapse\Database\Connection
 
         // コミットが完了したら状態を変更する
         $result and $this->_inTransaction = false;
-
-        return $result;
     }
 
 
     /**
      * トランザクションを中止し、行った処理をすべて無効化します。
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public function rollback()
     {
@@ -273,8 +281,6 @@ class MySQL extends \CodeLapse\Database\Connection
 
         // ロールバックが成功したら状態を切り替える
         $result and $this->_inTransaction = false;
-
-        return $result;
     }
 
 
@@ -290,12 +296,19 @@ class MySQL extends \CodeLapse\Database\Connection
 
     /**
      * 最後に挿入された行のID、もしくはシーケンス値を返します。
-     *
      * @param string $name (optional) シーケンスオブジェクト名
+     * @return int
+     * @throws CodeLapse\Database\DBException
      */
     public function lastInsertId($name = null)
     {
-        return mysql_insert_id($this->_con);
+        $result = mysql_insert_id($this->_con);
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
+
+        return $result;
     }
 
 
@@ -304,10 +317,17 @@ class MySQL extends \CodeLapse\Database\Connection
      *
      * @param string $string 文字列
      * @return string SQLの値として適切な形式に整形された文字列
+     * @throws CodeLapse\Database\DBException
      */
     public function quote($string)
     {
-        return sprintf('\'%s\'', mysql_real_escape_string($string, $this->_con));
+        $result = mysql_real_escape_string($string, $this->_con);
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
+
+        return sprintf('\'%s\'', $result);
     }
 
 
