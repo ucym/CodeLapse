@@ -1,7 +1,7 @@
 <?php
 namespace CodeLapse\Database\Connection;
 
-use \CodeLapse\Database\Exception as DBException;
+use \CodeLapse\Database\DBException;
 use \CodeLapse\Database\ResultSet\MySQL as MySQLResultSet;
 
 /**

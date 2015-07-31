@@ -5,7 +5,7 @@ use \OutOfBoundsException;
 use \CodeLapse\Arr;
 use \CodeLapse\Config;
 use \CodeLapse\Database\Connection;
-use \CodeLapse\Database\Exception as DBException;
+use \CodeLapse\Database\DBException;
 
 /**
  * データベースユーティリティクラス
