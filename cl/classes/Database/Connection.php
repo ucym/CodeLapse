@@ -25,7 +25,7 @@ abstract class Connection
      * @param string|null $password (optional) パスワード
      * @param int|null $driver (optional) ドライバの種類。
      *      指定することで利用するドライバを選択できます。
-     * @throw DB_Exception データベースへの接続に失敗した時にスローされます。
+     * @throws CodeLapse\Database\DBException
      */
     public static function connect($host, $user, $password = null, $driver = null) {
         $instance = null;
@@ -54,6 +54,7 @@ abstract class Connection
      * @param string $host ホスト名
      * @param string $user ユーザー名
      * @param string|null $password (optional) パスワード
+     * @throws CodeLapse\Database\DBException
      */
     public abstract function __construct($host, $user, $password = null);
 
@@ -92,7 +93,7 @@ abstract class Connection
      * 使用するデータベースを指定します。
      *
      * @param string $db_name 使用するデータベース名
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public abstract function useDB($dbname);
 
@@ -101,7 +102,7 @@ abstract class Connection
      * コネクションで使用する文字コードを設定します。
      *
      * @param string $charset 文字コード
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public abstract function setCharset($charset);
 
@@ -112,6 +113,7 @@ abstract class Connection
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
      * @return CodeLapse\Database\Resultset|boolean
+     * @throws CodeLapse\Database\DBException
      */
     public abstract function query($sql, $params = null);
 
@@ -119,7 +121,7 @@ abstract class Connection
     /**
      * トランザクションを開始します。
      *
-     * @return boolean
+     * @throws CodeLapse\Database\DBException
      */
     public abstract function startTransaction();
 
@@ -127,7 +129,7 @@ abstract class Connection
     /**
      * トランザクションを終了し、実行結果をコミットします。
      *
-     * @return boolean
+     *  @throws CodeLapse\Database\DBException
      */
     public abstract function commit();
 
@@ -138,7 +140,7 @@ abstract class Connection
      * トランザクション中でない時、DB_Exceptionをスローします。
      *
      * @return boolean
-     * @throw DB_Exception
+     * @throws CodeLapse\Database\DBException
      */
     public abstract function rollback();
 
@@ -155,6 +157,7 @@ abstract class Connection
      * 最後に挿入された行のID、もしくはシーケンス値を返します。
      *
      * @param string $name (optional) シーケンスオブジェクト名
+     * @throws CodeLapse\Database\DBException
      */
     public abstract function lastInsertId($name = null);
 
@@ -164,6 +167,7 @@ abstract class Connection
      *
      * @param string $string 文字列
      * @return string SQLの値として適切な形式に整形された文字列
+     * @throws CodeLapse\Database\DBException
      */
     public abstract function quote($string);
 
