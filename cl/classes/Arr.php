@@ -202,12 +202,7 @@ class Arr
      */
     public static function has(array & $array, $key)
     {
-        if (is_numeric($key)) {
-            // keyが数値ならindexが存在するかチェックして適切な値を返す
-            return isset($array[$key]);
-        }
-
-        if (isset($array[$key])) {
+        if (array_key_exists($key, $array)) {
             return true;
         }
 
@@ -224,7 +219,7 @@ class Arr
             }
         }
 
-        return isset($pt[$index]);
+        return array_key_exists($index, $pt);
     }
 
     /**
