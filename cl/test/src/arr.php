@@ -101,9 +101,60 @@ class ArrTest extends PHPUnit_Framework_TestCase
      * @covers \CodeLapse\Arr::delete
      * @dataProvider provider_personInfo
      */
-    public function testDelete($arr)
+    public function testDelete($person)
     {
+        // Simple
+        $deletion1 = $person;
+        Arr::delete($deletion1, 'name');
+        $this->assertFalse(array_key_exists('name', $deletion1), 'Arr::delete 1');
 
+        // Nested
+        $deletion2 = $person;
+        Arr::delete($deletion2, 'location.coutry');
+        $this->assertTrue(array_key_exists('location', $deletion2), 'Arr::delete 2-1');
+        $this->assertFalse(array_key_exists('country', $deletion2), 'Arr::delete 2-2');
+
+        // Multiple deletion with Simple & Nested
+        $deletion3 = $person;
+        Arr::delete($deletion3, array('location.country', 'tags'));
+        $this->assertTrue(array_key_exists('location', $deletion3), 'Arr::delete 3-1');
+        $this->assertFalse(array_key_exists('country', $deletion3['location']), 'Arr::delete 3-2');
+        $this->assertFalse(array_key_exists('tags', $deletion3), 'Arr::delete 3-3');
+
+        // Delete non exists key
+        $deletion4 = $person;
+        Arr::delete($deletion4, array('noExists', 'deep.noExists'));
+        $this->assertTrue(empty(Arr::diffRecursive($deletion4, $person)), 'Arr::delete 4');
+
+        Arr::delete($deletion4, 'name');
+        $this->assertFalse(empty(Arr::diffRecursive($deletion4, $person)), 'Arr::delete 5');
+    }
+
+    /**
+     * @covers \CodeLapse\Arr::except
+     * @dataProvider provider_personInfo
+     */
+    public function testExcept($person)
+    {
+        $original = $person;
+
+        // Simple except
+        $excepted1 = Arr::except($person, 'location');
+        $this->assertFalse(array_key_exists('location', $excepted1), 'Arr::except 1');
+
+        // Deep except
+        $excepted2 = Arr::except($person, 'location.country');
+        $this->assertTrue(array_key_exists('location', $excepted2), 'Arr::except 2-1');
+        $this->assertFalse(array_key_exists('country', $excepted2['location']), 'Arr::except 2-2');
+
+        // Multiple simple & deep except
+        $excepted3 = Arr::except($person, ['tags', 'location.country']);
+        $this->assertFalse(array_key_exists('tags', $excepted3), 'Arr::except 3-1');
+        $this->assertTrue(array_key_exists('location', $excepted3), 'Arr::except 3-2');
+        $this->assertFalse(array_key_exists('country', $excepted3['location']), 'Arr::except 3-3');
+
+        // Check non-destructive except
+        $this->assertEmpty(Arr::diffRecursive($original, $person), 'ARR::except 4');
     }
 
     public function testMapRecursive()

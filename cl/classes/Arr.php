@@ -228,6 +228,25 @@ class Arr
     }
 
     /**
+     * 配列から指定されたキーを除いた配列を生成します。
+     *
+     * ```php
+     * $user = ['id' => 't0m1137', 'password' => 'somepasshash'];
+     * $safeUser = Arr::except($user, 'password');
+     * echo json_encode($safeUser); // => {"id":"t0m1137"}
+     * ```
+     *
+     * @param $array        $array          要素を取り除く配列
+     * @param string|array  $exceptKeys     除外するキーの配列
+     * @return array
+     */
+    public static function except(array $array, $exceptKeys)
+    {
+        Arr::delete($array, $exceptKeys);
+        return $array;
+    }
+
+    /**
      * 渡された配列が連想配列か調べます
      * @param array     $array      調べる配列
      * @param string?   $key        (Optional) 調べる要素
@@ -253,6 +272,51 @@ class Arr
             }
         }
         return false;
+    }
+
+    /**
+     * $array1の中で$array2の中に含まれない要素を返します。
+     */
+    public static function diffRecursive(array $array1, array $array2)
+    {
+        // Thanks: http://stackoverflow.com/questions/3876435/recursive-array-diff
+        $diff = array();
+
+        foreach ($array1 as $key => $value)
+        {
+            // key unmatched but a value in array, it's not diff.
+            if (array_key_exists($key, $array2) === false) {
+                if (in_array($value, $array2, true)) {
+                    continue;
+                }
+
+                // key unmatch and value not in array, it's diff.
+                $diff[$key] = $value;
+                continue;
+            }
+
+            // match key and value then not diff
+            if ($value === $array2[$key]) {
+                continue;
+            }
+
+            if (is_array($value))
+            {
+                if (is_array($array2[$key])) {
+                    $arrayDiff = Arr::diffRecursive($value, $array2[$key]);
+                    if (count($arrayDiff) !== 0)
+                    {
+                        $diff[$key] = $arrayDiff;
+                    }
+                }
+
+                continue;
+            }
+
+            $diff[$key] = $value;
+        }
+
+        return $diff;
     }
 
 
