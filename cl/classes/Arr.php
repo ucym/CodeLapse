@@ -202,11 +202,6 @@ class Arr
      */
     public static function has(array & $array, $key)
     {
-        if (is_numeric($key)) {
-            // keyが数値ならindexが存在するかチェックして適切な値を返す
-            return array_key_exists($key, $array);
-        }
-
         if (array_key_exists($key, $array)) {
             return true;
         }
