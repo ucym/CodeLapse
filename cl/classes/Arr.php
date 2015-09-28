@@ -255,6 +255,51 @@ class Arr
         return false;
     }
 
+    /**
+     * $array1の中で$array2の中に含まれない要素を返します。
+     */
+    public static function diffRecursive(array $array1, array $array2)
+    {
+        // Thanks: http://stackoverflow.com/questions/3876435/recursive-array-diff
+        $diff = array();
+
+        foreach ($array1 as $key => $value)
+        {
+            // key unmatched but a value in array, it's not diff.
+            if (array_key_exists($key, $array2) === false) {
+                if (in_array($value, $array2, true)) {
+                    continue;
+                }
+
+                // key unmatch and value not in array, it's diff.
+                $diff[$key] = $value;
+                continue;
+            }
+
+            // match key and value then not diff
+            if ($value === $array2[$key]) {
+                continue;
+            }
+
+            if (is_array($value))
+            {
+                if (is_array($array2[$key])) {
+                    $arrayDiff = Arr::diffRecursive($value, $array2[$key]);
+                    if (count($arrayDiff) !== 0)
+                    {
+                        $diff[$key] = $arrayDiff;
+                    }
+                }
+
+                continue;
+            }
+
+            $diff[$key] = $value;
+        }
+
+        return $diff;
+    }
+
 
     public static function wrap(array $array)
     {
