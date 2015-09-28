@@ -228,6 +228,25 @@ class Arr
     }
 
     /**
+     * 配列から指定されたキーを除いた配列を生成します。
+     *
+     * ```php
+     * $user = ['id' => 't0m1137', 'password' => 'somepasshash'];
+     * $safeUser = Arr::except($user, 'password');
+     * echo json_encode($safeUser); // => {"id":"t0m1137"}
+     * ```
+     *
+     * @param $array        $array          要素を取り除く配列
+     * @param string|array  $exceptKeys     除外するキーの配列
+     * @return array
+     */
+    public static function except(array $array, $exceptKeys)
+    {
+        Arr::delete($array, $exceptKeys);
+        return $array;
+    }
+
+    /**
      * 渡された配列が連想配列か調べます
      * @param array     $array      調べる配列
      * @param string?   $key        (Optional) 調べる要素

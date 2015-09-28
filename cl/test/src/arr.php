@@ -130,6 +130,33 @@ class ArrTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(empty(Arr::diffRecursive($deletion4, $person)), 'Arr::delete 5');
     }
 
+    /**
+     * @covers \CodeLapse\Arr::except
+     * @dataProvider provider_personInfo
+     */
+    public function testExcept($person)
+    {
+        $original = $person;
+
+        // Simple except
+        $excepted1 = Arr::except($person, 'location');
+        $this->assertFalse(array_key_exists('location', $excepted1), 'Arr::except 1');
+
+        // Deep except
+        $excepted2 = Arr::except($person, 'location.country');
+        $this->assertTrue(array_key_exists('location', $excepted2), 'Arr::except 2-1');
+        $this->assertFalse(array_key_exists('country', $excepted2['location']), 'Arr::except 2-2');
+
+        // Multiple simple & deep except
+        $excepted3 = Arr::except($person, ['tags', 'location.country']);
+        $this->assertFalse(array_key_exists('tags', $excepted3), 'Arr::except 3-1');
+        $this->assertTrue(array_key_exists('location', $excepted3), 'Arr::except 3-2');
+        $this->assertFalse(array_key_exists('country', $excepted3['location']), 'Arr::except 3-3');
+
+        // Check non-destructive except
+        $this->assertEmpty(Arr::diffRecursive($original, $person), 'ARR::except 4');
+    }
+
     public function testMapRecursive()
     {
 
