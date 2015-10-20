@@ -156,7 +156,7 @@ class Rest
         $this->crossOriginAccepted = true;
 
         $origins === null and $origins = '*';
-        $this->allowedOrigins = $origins;
+        $this->acceptedOrigins = $origins;
 
         return $this;
     }
