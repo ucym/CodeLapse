@@ -189,6 +189,22 @@ abstract class ResultSet implements \Iterator
         return $this->_result;
     }
 
+
+    /**
+     * 次のレコードがあるか調べます。
+     * @return boolean
+     */
+    public function hasNext()
+    {
+        $record = $this->fetch();
+
+        if ($record !== false) {
+            --$this->_cursor;
+        }
+
+        return $record !== false;
+    }
+
     /**
      * 現在のカーソル位置の次のレコードを取得します。
      * @param int $type (optional) 返されるデータの形式を指定します。
