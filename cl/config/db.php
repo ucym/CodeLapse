@@ -13,4 +13,14 @@ return array(
         'charset'   => ''
     ),
     */
+    'default' => array(
+        'user'      => 'user',
+        'password'  => 'password',
+        'host'      => 'hostname',
+
+        // ここ以下は設定しなくてもよいですが
+        // 設定されていた場合、自動的に"use"と"set name"クエリが実行されます。
+        'database'  => '',
+        'charset'   => ''
+    )
 );
