@@ -199,7 +199,7 @@ abstract class ResultSet implements \Iterator
         $record = $this->fetch();
 
         if ($record !== false) {
-            --$this->_itr_index;
+            --$this->_cursor;
         }
 
         return $record !== false;
