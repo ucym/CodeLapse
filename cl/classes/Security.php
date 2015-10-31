@@ -19,24 +19,24 @@ class Security
         $config = array_merge(Config::get('security'), $config);
 
 
-        list($useHtmlEntities, $flags, $encoding, $doubleEncode) = array_values(
+        list($useHtmlEntities, $flags, $encoding, $noDoubleEncode) = array_values(
             Arr::get($config, 
                 array(
                     'useHtmlEntities',
                     'flags',
                     'encoding',
-                    'doubleEncode',
+                    'noDoubleEncode',
                 )
             )
         );
 
         if($useHtmlEntities)
         {
-            $value = htmlentities($value, $flags, $encoding, $doubleEncode);
+            $value = htmlentities($value, $flags, $encoding, !$noDoubleEncode);
         }
         else
         {
-            $value = htmlspecialchars($value, $flags, $encoding, $doubleEncode);
+            $value = htmlspecialchars($value, $flags, $encoding, !$noDoubleEncode);
         }
 
         $stripslashes and ($value = stripslashes($value));
