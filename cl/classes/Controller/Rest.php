@@ -57,7 +57,7 @@ class CL_Controller_Rest
      */
     public static function create()
     {
-        return new static();
+        return new self();
     }
 
     private $crossOriginAccepted = false;
