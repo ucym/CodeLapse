@@ -8,36 +8,36 @@ require CL_CLASSES . 'AutoLoader.php';
 require CL_COREPATH . 'functions.php';
 
 //-- オートローダを初期化
-\CodeLapse\AutoLoader::addNamespace('CodeLapse', CL_CLASSES);
-\CodeLapse\AutoLoader::addBasePath(CL_CLASSES);
+CL_AutoLoader::addNamespace('CL', CL_CLASSES);
+CL_AutoLoader::addBasePath(CL_CLASSES);
 
 // クラスの別名を設定
-\CodeLapse\AutoLoader::classAlias(array(
-    'Arr'       => '\CodeLapse\Arr',
-    'Config'    => '\CodeLapse\Config',
-    'Cookie'    => '\CodeLapse\Cookie',
-    'DB'        => '\CodeLapse\DB',
-    'File'      => '\CodeLapse\File',
-    'Form'      => '\CodeLapse\Form',
-    'Req'       => '\CodeLapse\Request',
-    'Mail'      => '\CodeLapse\Mail',
-    'Pager'     => '\CodeLapse\Pager',
-    'Security'  => '\CodeLapse\Security',
-    'Session'   => '\CodeLapse\Session',
-    'RestController'    => '\CodeLapse\Controller\Rest',
-    'Upload'    => '\CodeLapse\Upload',
-    'Validator' => '\CodeLapse\Validator'
+CL_AutoLoader::classAlias(array(
+    'Arr'       => 'CL_Arr',
+    'Config'    => 'CL_Config',
+    'Cookie'    => 'CL_Cookie',
+    'DB'        => 'CL_DB',
+    'File'      => 'CL_File',
+    'Form'      => 'CL_Form',
+    'Req'       => 'CL_Request',
+    'Mail'      => 'CL_Mail',
+    'Pager'     => 'CL_Pager',
+    'Security'  => 'CL_Security',
+    'Session'   => 'CL_Session',
+    'RestController'    => 'CL_Controller\Rest',
+    'Upload'    => 'CL_Upload',
+    'Validator' => 'CL_Validator'
 ));
 
 // クラスのパスを設定
-\CodeLapse\AutoLoader::addClass(array(
+CL_AutoLoader::addClass(array(
     'Smarty'        => CL_THIRDPARTY . 'smarty/Smarty.class.php',
     'CodeLapse\Valitron\Validator'
                     => CL_THIRDPARTY . 'cl-valitron/src/CodeLapse/Valitron/Validator.php'
 ));
 
 // オートローダを登録
-\CodeLapse\AutoLoader::regist();
+CL_AutoLoader::regist();
 
 // 設定ファイルのディレクトリを設定
 Config::addLoadPath(CL_COREPATH . 'config/');
