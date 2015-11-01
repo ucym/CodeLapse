@@ -1,5 +1,5 @@
 <?php
-use \CodeLapse\Arr;
+use CL_Arr as Arr;
 
 class ArrTest extends PHPUnit_Framework_TestCase
 {

@@ -1,5 +1,5 @@
 <?php
-use CodeLapse\Upload;
+use CL_Upload as Upload;
 
 /**
  * - 正規のアップロードファイルではないのでsaveToメソッドの動作確認ができない

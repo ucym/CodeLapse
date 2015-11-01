@@ -1,6 +1,6 @@
 <?php
-use \CodeLapse\DB;
-use \CodeLapse\Database\CrudModel;
+use CL_DB as DB;
+use CL_Database_CrudModel as CrudModel;
 
 class CrudModel_Dummy extends CrudModel
 {

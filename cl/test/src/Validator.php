@@ -1,5 +1,6 @@
 <?php
-use CodeLapse\Validator;
+/*
+use CL_Validator as Validator;
 
 class CustomValidators
 {
@@ -95,3 +96,4 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(Validator::hasRule('Pass'));
     }
 }
+*/

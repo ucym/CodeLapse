@@ -1,4 +1,6 @@
 <?php
+use CL_Form as Form;
+
 class FormTest extends PHPUnit_Framework_TestCase
 {
     public function test_get_setValue()
@@ -8,7 +10,7 @@ class FormTest extends PHPUnit_Framework_TestCase
             'ジャパン' => 'japan',
             'ジャポン' => 'japon',
         );
-        \CodeLapse\Form::setValue(array(
+        Form::setValue(array(
             'name'  => 'unit',
             'sex'   => 'male',
             'states'=> 'japan'
@@ -17,26 +19,26 @@ class FormTest extends PHPUnit_Framework_TestCase
 
         // value属性が設定されていなければならない
         ob_start();
-        \CodeLapse\Form::text('name');
+        Form::text('name');
         $this->assertContains('value="unit"', ob_get_clean());
 
 
         // checked属性が設定されていなければならない
         ob_start();
-        \CodeLapse\Form::radio('sex', 'male');
+        Form::radio('sex', 'male');
         $this->assertContains('checked="checked"', ob_get_clean());
 
 
         // checked属性が設定されていてはならない
         ob_start();
-        \CodeLapse\Form::radio('sex', 'female');
+        Form::radio('sex', 'female');
         $this->assertNotContains('checked', ob_get_clean());
 
 
         // 値が一致する項目が選択されていなければいけない
         // また、一致していない項目が選択されていてはいけない
         ob_start();
-        \CodeLapse\Form::select('states', $list);
+        Form::select('states', $list);
         $out = ob_get_clean();
         $this->assertContains('<option selected="selected" value="japan">', $out);
         $this->assertNotContains('<option selected="selected" value="japon">', $out);
@@ -45,7 +47,7 @@ class FormTest extends PHPUnit_Framework_TestCase
     public function test_parseName()
     {
         ob_start();
-        \CodeLapse\Form::text('field #text-field.form-control', 'value');
+        Form::text('field #text-field.form-control', 'value');
         $out = ob_get_clean();
 
         $this->assertContains('class="form-control"', $out);
@@ -54,7 +56,7 @@ class FormTest extends PHPUnit_Framework_TestCase
         //-- エラー処理
         // 数字からはじまる不正なID/クラスを無視するかテストする
         ob_start();
-        \CodeLapse\Form::text('field #1text.1form-control.valid', 'value');
+        Form::text('field #1text.1form-control.valid', 'value');
         $out = ob_get_clean();
         $this->assertContains('class="valid"', $out);
         $this->assertNotContains('1form-control', $out);
@@ -64,7 +66,7 @@ class FormTest extends PHPUnit_Framework_TestCase
     public function test_hidden()
     {
         ob_start();
-        \CodeLapse\Form::hidden('field', 'value');
+        Form::hidden('field', 'value');
         $out = ob_get_clean();
         $this->assertStringStartsWith('<input ', $out);
         $this->assertContains('type="hidden"', $out);
@@ -78,7 +80,7 @@ class FormTest extends PHPUnit_Framework_TestCase
     {
         ob_start();
 
-        \CodeLapse\Form::textarea('field');
+        Form::textarea('field');
         $out = ob_get_clean();
         $this->assertStringStartsWith('<textarea ', $out);
         $this->assertContains('name="field"', $out);

@@ -1,5 +1,5 @@
 <?php
-use \CodeLapse\Pager;
+use CL_Pager as Pager;
 
 class PagerTest extends PHPUnit_Framework_TestCase
 {

@@ -1,5 +1,5 @@
 <?php
-use \CodeLapse\Security;
+use CL_Security as Security;
 
 class SecurityTest extends PHPUnit_Framework_TestCase
 {

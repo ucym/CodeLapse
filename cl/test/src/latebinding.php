@@ -1,5 +1,5 @@
 <?php
-use \CodeLapse\LateBinding;
+use CL_LateBinding as LateBinding;
 
 class LateBindingTest extends PHPUnit_Framework_TestCase
 {
