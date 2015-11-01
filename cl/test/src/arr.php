@@ -127,7 +127,7 @@ class ArrTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(empty(Arr::diffRecursive($deletion4, $person)), 'Arr::delete 4');
 
         Arr::delete($deletion4, 'name');
-        $this->assertFalse(empty(Arr::diffRecursive($deletion4, $person)), 'Arr::delete 5');
+        $this->assertFalse(empty(Arr::diffRecursive($person, $deletion4)), 'Arr::delete 5');
     }
 
     /**
