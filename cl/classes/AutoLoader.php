@@ -46,7 +46,7 @@ class CL_AutoLoader
      * 名前空間（クラス接頭辞）に対応するパスを登録します。
      *
      * - クラス接頭辞
-     *   "Arr"という名前のクラスの場合、"CodeLapse\"がクラス接頭辞となります。
+     *   "Arr"という名前のクラスの場合、"CL_"がクラス接頭辞となります。
      *   （クラス名の中で、一番最初に出てくるアンダースコアまでが接頭辞です）
      *
      * @param string $namespace クラス接頭辞名
@@ -116,7 +116,7 @@ class CL_AutoLoader
     public static function regist()
     {
         // 第三引数は PHP 5.3.0以上で有効
-        spl_autoload_register(array('\CodeLapse\AutoLoader', 'load'), true);//, true);
+        spl_autoload_register(array('CL_AutoLoader', 'load'), true);//, true);
     }
 
 
@@ -144,7 +144,7 @@ class CL_AutoLoader
         }
 
         //-- クラスファイルを検索
-        $namespace = explode('\\', $class);
+        $namespace = explode('_', $class);
 
         // 名前空間が登録されていれば、対応パスを検索
         if (isset($namespace[1])) {
@@ -153,7 +153,7 @@ class CL_AutoLoader
 
             if (isset(self::$namespaces[$namespace])) {
                 // 検索中のクラスの名前空間が登録されていれば
-                $classname = explode('\\', $class);
+                $classname = explode('_', $class);
                 array_shift($classname);
                 $classname = implode('/', $classname);
 
@@ -170,7 +170,7 @@ class CL_AutoLoader
         //-- 登録された読み込みパスから検索
         foreach (self::$loadPath as $path) {
             // クラス名のアンダースコアを'/'に置き換え
-            $path .= str_replace('\\', self::DS, $class);
+            $path .= str_replace('_', self::DS, $class);
             $path .= '.php';
 
             if (file_exists($path) and (include $path) !== false and class_exists($class)) {
