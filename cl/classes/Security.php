@@ -1,6 +1,4 @@
 <?php
-namespace CodeLapse;
-
 /**
  * セキュリティ系ユーティリティクラス
  *

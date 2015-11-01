@@ -31,11 +31,11 @@ abstract class CL_Database_Connection
 
         switch ($driver) {
             case self::TYPE_PDO     :
-                $instance = new CL_Database_Connection_PDOConnection($host, $user, $password);
+                $instance = new CL_Database_Connection_PDO($host, $user, $password);
                 break;
 
             case self::TYPE_MYSQL   :
-                $instance = new CL_Database_Connection_MySQLConnection($host, $user, $password);
+                $instance = new CL_Database_Connection_MySQL($host, $user, $password);
                 break;
         }
 
