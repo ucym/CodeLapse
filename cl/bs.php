@@ -21,7 +21,6 @@ require CL_COREPATH . 'functions.php';
     'File'      => '\CodeLapse\File',
     'Form'      => '\CodeLapse\Form',
     'Req'       => '\CodeLapse\Request',
-    /* deprecated */ 'Input'     => '\CodeLapse\Input',
     'Mail'      => '\CodeLapse\Mail',
     'Pager'     => '\CodeLapse\Pager',
     'Security'  => '\CodeLapse\Security',
