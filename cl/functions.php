@@ -8,7 +8,7 @@
  */
 function _get($key, $default = null)
 {
-    return \CodeLapse\Request::get($key, $default);
+    return CL_Request::get($key, $default);
 }
 
 /**
@@ -20,5 +20,5 @@ function _get($key, $default = null)
  */
 function _post($key, $default = null)
 {
-    return \CodeLapse\Request::post($key, $default);
+    return CL_Request::post($key, $default);
 }

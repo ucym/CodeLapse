@@ -1,13 +1,8 @@
 <?php
-namespace CodeLapse;
-
-use ArrayAccess;
-use Iterator;
-
 /**
  *
  */
-class ArrayWrapper
+class CL_ArrayWrapper
     implements ArrayAccess, Iterator
 {
     const WITH_KEY = 1;
@@ -21,12 +16,12 @@ class ArrayWrapper
 
     public static function wrap(array $array = array())
     {
-        return new static($array);
+        return new self($array);
     }
 
     public static function wrapWithKey(array $array = array())
     {
-        return new static($array, static::WITH_KEY);
+        return new self($array, self::WITH_KEY);
     }
 
     //
@@ -159,17 +154,17 @@ class ArrayWrapper
 
 
 
-    public function each(callable $fn)
+    public function each($fn)
     {
         $this->que[] = array('applyEach', $fn);
         return $this;
     }
 
-    protected function applyEach(callable $fn)
+    protected function applyEach($fn)
     {
         reset($this->array);
 
-        if ($this->flag & static::WITH_KEY) {
+        if ($this->flag & self::WITH_KEY) {
             foreach ($this->array as $key => $value) {
                 $fn($value, $key);
             }
@@ -185,18 +180,18 @@ class ArrayWrapper
 
 
 
-    public function select(callable $fn)
+    public function select($fn)
     {
         $this->que[] = array('applySelect', $fn);
         return $this;
     }
 
-    protected function applySelect(callable $fn)
+    protected function applySelect($fn)
     {
         reset($this->array);
         $newArray = array();
 
-        if ($this->flag & static::WITH_KEY) {
+        if ($this->flag & self::WITH_KEY) {
             foreach ($this->array as $key => $value) {
                 $fn($value, $key) === true and $newArray[$key] = $value;
             }
@@ -213,18 +208,18 @@ class ArrayWrapper
 
 
 
-    public function exclude(callable $fn)
+    public function exclude($fn)
     {
         $this->que[] = array('applyExclude', $fn);
         return $this;
     }
 
-    protected function applyExclude(callable $fn)
+    protected function applyExclude($fn)
     {
         reset($this->array);
         $newArray = array();
 
-        if ($this->flag & static::WITH_KEY) {
+        if ($this->flag & self::WITH_KEY) {
             foreach ($this->array as $key => $value) {
                 $fn($value, $key) !== true and $newArray[$key] = $value;
             }
@@ -241,18 +236,18 @@ class ArrayWrapper
 
 
 
-    public function map(callable $fn)
+    public function map($fn)
     {
         $this->que[] = array('applyMap', $fn);
         return $this;
     }
 
-    protected function applyMap(callable $fn)
+    protected function applyMap($fn)
     {
         reset($this->array);
         $newArray = array();
 
-        if ($this->flag & static::WITH_KEY) {
+        if ($this->flag & self::WITH_KEY) {
             foreach ($this->array as $key => $value) {
                 $newArray[$key] = $fn($value, $key);
             }
@@ -269,7 +264,7 @@ class ArrayWrapper
 
 
 
-    public function mapKeyVal(callable $fn)
+    public function mapKeyVal($fn)
     {
         $this->que[] = array('applyMapKeyVal', $fn);
         return $this;
@@ -280,7 +275,7 @@ class ArrayWrapper
         reset($this->array);
         $newArray = array();
 
-        if ($this->flag & static::WITH_KEY) {
+        if ($this->flag & self::WITH_KEY) {
             foreach ($this->array as $key => $value) {
                 $newArray[$key] = $fn($value, $key);
             }
@@ -297,15 +292,15 @@ class ArrayWrapper
 
 
 
-    public function reduce(callable $fn, $memo = null)
+    public function reduce($fn, $memo = null)
     {
         $this->que[] = array('applyReduce', $fn, $memo);
         return $this;
     }
 
-    public function applyReduce(callable $fn, $memo)
+    protected function applyReduce($fn, $memo)
     {
-        if ($this->flag & static::WITH_KEY) {
+        if ($this->flag & self::WITH_KEY) {
             foreach ($this->array as $key => $value) {
                 $memo = $fn($memo, $value, $key);
             }
@@ -321,13 +316,13 @@ class ArrayWrapper
 
 
 
-    public function values()
+    protected function values()
     {
         $this->que[] = array('applyValues');
         return $this;
     }
 
-    public function applyValues()
+    protected function applyValues()
     {
         $this->array = array_values($this->array);
         return $this;
@@ -341,7 +336,7 @@ class ArrayWrapper
         return $this;
     }
 
-    public function applyKeys()
+    protected function applyKeys()
     {
         $this->array = array_keys($this->array);
         return $this;
@@ -355,7 +350,7 @@ class ArrayWrapper
         return $this;
     }
 
-    public function applyReverse($preserveKeys)
+    protected function applyReverse($preserveKeys)
     {
         $this->array = array_reverse($this->array, $preserveKeys);
         return $this;

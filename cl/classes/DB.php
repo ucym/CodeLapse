@@ -1,12 +1,4 @@
 <?php
-namespace CodeLapse;
-
-use \OutOfBoundsException;
-use \CodeLapse\Arr;
-use \CodeLapse\Config;
-use \CodeLapse\Database\Connection;
-use \CodeLapse\Database\DBException;
-
 /**
  * データベースユーティリティクラス
  *
@@ -52,7 +44,7 @@ use \CodeLapse\Database\DBException;
  *
  * @package CodeLapse
  */
-class DB
+class CL_DB
 {
     const ERR_CONNECTION_FAILED = 100;
 
@@ -87,7 +79,7 @@ class DB
             return self::$_connections[$connectionName];
         }
 
-        $config = Config::get('db', array());
+        $config = CL_Config::get('db', array());
 
         if (array_key_exists($connectionName, $config) === false)
         {
@@ -102,11 +94,11 @@ class DB
             throw new OutOfBoundsException('定義されていないコネクションが要求されました。(接続名: ' .$connectionName . ')');
         }
 
-        $host   = Arr::get($conf, 'host');
-        $user   = Arr::get($conf, 'user');
-        $pass   = Arr::get($conf, 'password');
-        $dbname = Arr::get($conf, 'database');
-        $charset = Arr::get($conf, 'charset');
+        $host   = CL_Arr::get($conf, 'host');
+        $user   = CL_Arr::get($conf, 'user');
+        $pass   = CL_Arr::get($conf, 'password');
+        $dbname = CL_Arr::get($conf, 'database');
+        $charset = CL_Arr::get($conf, 'charset');
 
         $con = self::connect($host, $user, $pass, false, $connectionName);
         ! empty($dbname) and $con->useDB($dbname);
@@ -159,7 +151,7 @@ class DB
             }
 
             // 新しい接続を生成
-            $instance = Connection::connect($host, $user, $passwd);
+            $instance = CL_Database_Connection::connect($host, $user, $passwd);
 
             $already_exists === false
                 and self::$_connections[$connectionName] = $instance;
@@ -170,7 +162,7 @@ class DB
 
             return $instance;
         }
-        catch (DBException $e) {
+        catch (CL_Database_DBException $e) {
             throw $e;
         }
     }

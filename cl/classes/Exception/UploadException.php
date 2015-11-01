@@ -1,4 +1,2 @@
 <?php
-namespace CodeLapse\Exception;
-
-class UploadException extends \Exception {}
+class CL_Exception_Upload extends Exception {}

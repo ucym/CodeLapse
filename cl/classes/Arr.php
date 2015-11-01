@@ -1,8 +1,4 @@
 <?php
-namespace CodeLapse;
-
-use CodeLapse\ArrayWrapper;
-
 /**
  * nullセーフな配列操作クラス
  *
@@ -13,9 +9,9 @@ use CodeLapse\ArrayWrapper;
  * <?php
  *  $ar  = array();
  *
- *  Arr::set($ar, 'element.0', 'value'); // クッソ長い
+ *  CL_Arr::set($ar, 'element.0', 'value'); // クッソ長い
  *
- *  Arr::set($ar, 'element.1', 'value'); // It's fuckin cool code.
+ *  CL_Arr::set($ar, 'element.1', 'value'); // It's fuckin cool code.
  * ```
  *
  *
@@ -25,7 +21,7 @@ use CodeLapse\ArrayWrapper;
  *
  * @package CodeLapse
  */
-class Arr
+class CL_Arr
 {
     /**
      * 指定された配列から要素を取得します。
@@ -37,18 +33,18 @@ class Arr
      *
      * 指定された要素を取得できない場合は$defaultに指定された値を返します。
      *
-     *        $value = Arr::get($array, "deep.deep.index"); // これは
+     *        $value = CL_Arr::get($array, "deep.deep.index"); // これは
      *        $value = $array["deep"]["deep"]["index"]; // これと同じことです。
      *
      *        // しかし $array["deep"]["deep"]["index"]が存在しなければ後者はエラーを発しますが
-     *        // Arr::get()ではnullが返され、エラーは起きません。
+     *        // CL_Arr::get()ではnullが返され、エラーは起きません。
      *
      * @param array $array 操作する配列
      * @param mixed|null $key 取得するインデックス
      * @param mixed|null $default 初期値。デフォルト値はnull
      * @return mixed
      */
-    public static function get(Array $array, $key = null, $default = null)
+    public static function get(array $array, $key = null, $default = null)
     {
         if ($key === null) {
             // keyがnullなら配列をそのまま返す
@@ -59,7 +55,7 @@ class Arr
             $ar = array();
 
             foreach ($key as $v) {
-                Arr::set($ar, $v, Arr::get($array, $v, $default));
+                CL_Arr::set($ar, $v, CL_Arr::get($array, $v, $default));
             }
 
             return $ar;
@@ -105,18 +101,18 @@ class Arr
      *         );
      *
      *         // $user["detail"]["age"]を12に変更します。
-     *         Arr::set($user, "detail.age", 12);
+     *         CL_Arr::set($user, "detail.age", 12);
      *
      *         // 新しい階層を自動で生成します。
      *         // すでにインデックスが存在している場合、その値が上書きされることに注意してください。
      *         // このサンプルでは $user["name"]を配列にしています。
-     *         Arr::set($user, array("name.first" => "John", "name.last" => "Discors"));
+     *         CL_Arr::set($user, array("name.first" => "John", "name.last" => "Discors"));
      *
      * @param Array &$array
      * @param string|array $key
      * @param mixed|null $value
      */
-    public static function set(Array &$array, $key, $value = null)
+    public static function set(array &$array, $key, $value = null)
     {
         if (is_array($key)) {
             // keyが配列の時、$arrayに$keyの内容を統合
@@ -154,24 +150,24 @@ class Arr
      *         );
      *
      *         // $user["age"]を削除
-     *         Arr::delete($user, "age");
+     *         CL_Arr::delete($user, "age");
      *
      * @param Array $array 操作対象の配列
      * @param string $key 削除するインデックス
      */
-    public static function delete(Array &$array, $key = null)
+    public static function delete(array &$array, $key = null)
     {
         if (empty($key)) {
             $keys = array_keys($array);
             foreach ($keys as $k) {
-                Arr::delete($array, $k);
+                CL_Arr::delete($array, $k);
             }
             return;
         }
 
         if (is_array($key)) {
             foreach ($key as $k) {
-                Arr::delete($array, $k);
+                CL_Arr::delete($array, $k);
             }
             return;
         }
@@ -200,7 +196,7 @@ class Arr
      * @param string    $key    調べるキー
      * @return boolean
      */
-    public static function has(array & $array, $key)
+    public static function has(array $array, $key)
     {
         if (array_key_exists($key, $array)) {
             return true;
@@ -227,7 +223,7 @@ class Arr
      *
      * ```php
      * $user = ['id' => 't0m1137', 'password' => 'somepasshash'];
-     * $safeUser = Arr::except($user, 'password');
+     * $safeUser = CL_Arr::except($user, 'password');
      * echo json_encode($safeUser); // => {"id":"t0m1137"}
      * ```
      *
@@ -237,7 +233,7 @@ class Arr
      */
     public static function except(array $array, $exceptKeys)
     {
-        Arr::delete($array, $exceptKeys);
+        CL_Arr::delete($array, $exceptKeys);
         return $array;
     }
 
@@ -252,14 +248,14 @@ class Arr
         $input = $array;
 
         if ($key !== null) {
-            $input = Arr::get($input, $key);
+            $input = CL_Arr::get($input, $key);
         }
 
         if (! is_array($input)) {
             return false;
         }
 
-        // from FuelPHP Arr::is_assoc
+        // from FuelPHP CL_Arr::is_assoc
         $counter = 0;
         foreach ($input as $key => $unused) {
             if (! is_int($key) or $key !== $counter++) {
@@ -298,7 +294,7 @@ class Arr
             if (is_array($value))
             {
                 if (is_array($array2[$key])) {
-                    $arrayDiff = Arr::diffRecursive($value, $array2[$key]);
+                    $arrayDiff = CL_Arr::diffRecursive($value, $array2[$key]);
                     if (count($arrayDiff) !== 0)
                     {
                         $diff[$key] = $arrayDiff;
@@ -317,13 +313,13 @@ class Arr
 
     public static function wrap(array $array)
     {
-        return ArrayWrapper::wrap($array);
+        return CL_ArrayWrapper::wrap($array);
     }
 
 
     public static function wrapWithKey(array $array)
     {
-        return ArrayWrapper::wrapWithKey($array);
+        return CL_ArrayWrapper::wrapWithKey($array);
     }
 
 
@@ -333,7 +329,7 @@ class Arr
      * @param array $array 操作するの配列
      * @param callable $fn 配列を処理する関数
      */
-    public static function mapRecursive(Array & $array, $fn)
+    public static function mapRecursive(array & $array, $fn)
     {
         foreach ($array as $k => & $v) {
             if (is_array($array[$k])) {

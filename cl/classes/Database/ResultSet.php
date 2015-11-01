@@ -1,6 +1,4 @@
 <?php
-namespace CodeLapse\Database;
-
 /**
  * データベースの結果セットラッパー。
  * ドライバーはこのクラスの"_fetch"メソッドのみを実装する必要があります。
@@ -9,7 +7,7 @@ namespace CodeLapse\Database;
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-abstract class ResultSet implements \Iterator
+abstract class CL_Database_ResultSet implements \Iterator
 {
     const FETCH_BOTH = 1;
     const FETCH_NUM = 2;

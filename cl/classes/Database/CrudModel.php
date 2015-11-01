@@ -1,12 +1,6 @@
 <?php
-namespace CodeLapse\Database;
-
-use \CodeLapse\DB;
-use \CodeLapse\Database\DBException;
-use \CodeLapse\LateBinding;
-
-abstract class CrudModel implements
-    \ArrayAccess
+abstract class CL_Database_CrudModel implements
+    ArrayAccess
 {
     //----
     //-- 静的メンバ変数・メソッド
@@ -44,7 +38,7 @@ abstract class CrudModel implements
      */
     public static function tableName()
     {
-        $class = LateBinding::getCalledClass();
+        $class = CL_LateBinding::getCalledClass();
         return self::getClassVars($class, '_tableName');
     }
 
@@ -54,7 +48,7 @@ abstract class CrudModel implements
      */
     public static function primaryKey()
     {
-        $class = LateBinding::getCalledClass();
+        $class = CL_LateBinding::getCalledClass();
         return self::getClassVars($class, '_primaryKey');
     }
 
@@ -64,7 +58,7 @@ abstract class CrudModel implements
      */
     public static function properties()
     {
-        $class = LateBinding::getCalledClass();
+        $class = CL_LateBinding::getCalledClass();
         return self::getClassVars($class, '_properties');
     }
 
@@ -80,9 +74,9 @@ abstract class CrudModel implements
     {
         // @TODO
         /*
-        $class      = LateBinding::getCalledClass();
+        $class      = CL_LateBinding::getCalledClass();
         $tableName  =
-            DB::quoteIdentifier(
+            CL_DB::quoteIdentifier(
                 call_user_func(array($class, 'tableName')));
         $primaryKey = call_user_func(array($class, 'primaryKey'));
 
@@ -96,12 +90,12 @@ abstract class CrudModel implements
         }
 
 
-        DB::query(
+        CL_DB::query(
             'SELECT * '
              . 'FROM '.$tableName
              . 'WHERE ');
         */
-        throw new \Exception(__CLASS__.'::find はまだ実装されていません。');
+        throw new Exception(__CLASS__.'::find はまだ実装されていません。');
     }
 
 
@@ -232,7 +226,7 @@ abstract class CrudModel implements
     public function set($name, $value = null)
     {
         if (func_num_args() === 1 and ! is_array($name)) {
-            throw new \InvalidArgumentException('setメソッドには必ず設定する値を渡す必要があります。');
+            throw new InvalidArgumentException('setメソッドには必ず設定する値を渡す必要があります。');
         }
 
         // 第１引数が配列であれば、フィールドごとに分割してメソッドをコールします。
@@ -244,11 +238,11 @@ abstract class CrudModel implements
             return $this;
         }
 
-        $class = LateBinding::getCalledClass();
+        $class = CL_LateBinding::getCalledClass();
         $fields = call_user_func(array($class, 'properties'));
 
         if (!in_array($name, $fields)) {
-            throw new \OutOfBoundException("$class::_$properties に フィールド $name は定義されていません。");
+            throw new OutOfBoundException("$class::_$properties に フィールド $name は定義されていません。");
         }
 
         $this->_data[$name] = $value;
@@ -265,11 +259,11 @@ abstract class CrudModel implements
      */
     public function get($name)
     {
-        $class = LateBinding::getCalledClass();
+        $class = CL_LateBinding::getCalledClass();
         $fields = call_user_func(array($class, 'properties'));
 
         if (! in_array($name, $fields)) {
-            throw new \OutOfBoundException("$class::_$properties に フィールド $name は定義されていません。");
+            throw new OutOfBoundException("$class::_$properties に フィールド $name は定義されていません。");
         }
 
         return isset($this->_data[$name]) ? $this->_data[$name] : null;
@@ -304,7 +298,7 @@ abstract class CrudModel implements
      */
     public function save($connection = null)
     {
-        $class = LateBinding::getCalledClass();
+        $class = CL_LateBinding::getCalledClass();
         $primaryKey = call_user_func(array($class, 'primaryKey'));
         $fields = call_user_func(array($class, 'properties'));
 
@@ -314,7 +308,7 @@ abstract class CrudModel implements
 
         $this->isNew() ? $this->create() : $this->update();
 
-        //$result = DB::query($sql, $this->_data, );
+        //$result = CL_DB::query($sql, $this->_data, );
 
         if ($this->isNew()) {
             $this->_originalData = $this->_data;
@@ -331,7 +325,7 @@ abstract class CrudModel implements
     protected function create()
     {
         //-- モデル定義情報を取得
-        $class      = LateBinding::getCalledClass();
+        $class      = CL_LateBinding::getCalledClass();
         $primaryKey = call_user_func(array($class, 'primaryKey'));
         $fields     = call_user_func(array($class, 'properties'));
         $tableName  = call_user_func(array($class, 'tableName'));
@@ -343,29 +337,29 @@ abstract class CrudModel implements
 
         //-- SQLに埋め込む値を構築
         foreach ($fields as $f) {
-            $quotedFields[] = DB::quoteIdentifier($f);
+            $quotedFields[] = CL_DB::quoteIdentifier($f);
             $placeholders[] = ':' . $f;
             $values[":$f"] = $this->get($f);
         }
 
 
         //-- SQLを構築
-        $sql = 'INSERT INTO ' . DB::quoteIdentifier($tableName) . ' (';
+        $sql = 'INSERT INTO ' . CL_DB::quoteIdentifier($tableName) . ' (';
         $sql .= implode(', ', $quotedFields);
         $sql .= ') VALUES (';
         $sql .= implode(', ', $placeholders);
         $sql .= ')';
 
         //-- 実行
-        $result = DB::query($sql, $values);
+        $result = CL_DB::query($sql, $values);
 
         if ($result === false) {
-            throw new DBException(DB::errorMessage(), DB::errorCode());
+            throw new CL_Database_DBException(CL_DB::errorMessage(), CL_DB::errorCode());
         }
 
         //-- 保存に成功したら主キー値を取得する。
         if (count($primaryKey) === 1 and $result !== false) {
-            $id = DB::lastInsertId();
+            $id = CL_DB::lastInsertId();
 
             $id !== false and $this->_data[$primaryKey[0]] = $id;
         }
@@ -373,28 +367,28 @@ abstract class CrudModel implements
 
     protected function update()
     {
-        $class = LateBinding::getCalledClass();
+        $class = CL_LateBinding::getCalledClass();
         $primaryKey = call_user_func(array($class, 'primaryKey'));
         $fields = call_user_func(array($class, 'properties'));
 
         $field_holderPair = array();
         foreach ($fields as $f) {
             if (in_array($f, $primaryKey)) continue;
-            $field_holderPair[] = sprintf('%s = :%s', DB::quoteIdentifier($f), $f);
+            $field_holderPair[] = sprintf('%s = :%s', CL_DB::quoteIdentifier($f), $f);
         }
 
         $condition = array();
         foreach ($primaryKey as $pk) {
-            $condition[] = sprintf('%s = :%s', DB::quoteIdentifier($pk), $pk);
+            $condition[] = sprintf('%s = :%s', CL_DB::quoteIdentifier($pk), $pk);
         }
 
-        $sql = 'UPDATE ' . DB::quoteIdentifier($this->tableName()) . ' ';
+        $sql = 'UPDATE ' . CL_DB::quoteIdentifier($this->tableName()) . ' ';
         $sql .= 'SET ';
         $sql .= implode(',', $field_holderPair) . ' ';
         $sql .= 'WHERE ';
         $sql .= implode(' AND ', $condition);
 
-        $result = DB::query($sql, $this->_data);
+        $result = CL_DB::query($sql, $this->_data);
 
         if ($result === false or $result !== 1) {}
     }

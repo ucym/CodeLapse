@@ -1,17 +1,10 @@
 <?php
-namespace CodeLapse\Database\Connection;
-
-use InvalidArgumentException;
-use CodeLapse\Database\Connection;
-use CodeLapse\Database\DBException;
-use CodeLapse\Database\ResultSet\MySQL as MySQLResultSet;
-
 /**
  * MySQL データベースコネクションラッパークラス
  *
  * @package CodeLapse\Database\Connection
  */
-class MySQL extends Connection
+class CL_Database_Connection_MySQL extends CL_Database_Connection
 {
 
     /**
@@ -88,7 +81,7 @@ class MySQL extends Connection
         $this->_con = @mysql_connect($host, $user, $password, $newConnection);
 
         if ($this->_con == false) {
-            throw new DBException('データベースへの接続に失敗しました。(' . mysql_error() . ')', mysql_errno());
+            throw new CL_Database_DBException('データベースへの接続に失敗しました。(' . mysql_error() . ')', mysql_errno());
         }
     }
 
@@ -143,7 +136,7 @@ class MySQL extends Connection
     public function useDB($dbname)
     {
         if (@ mysql_select_db($dbname, $this->_con) === false) {
-            throw new DBException('データベースの選択に失敗しました。(' . $this->errorMessage() . ')', $this->errorCode());
+            throw new CL_Database_DBException('データベースの選択に失敗しました。(' . $this->errorMessage() . ')', $this->errorCode());
         }
     }
 
@@ -211,13 +204,13 @@ class MySQL extends Connection
         $result = mysql_query($sql, $this->_con);
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
         else if ($result === true) {
             return $result;
         }
         else {
-            return new MySQLResultSet($result);
+            return new CL_Database_ResultSet_MySQL($result);
         }
     }
 
@@ -232,7 +225,7 @@ class MySQL extends Connection
         $result = mysql_set_charset($charset, $this->_con);
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
     }
 
@@ -274,7 +267,7 @@ class MySQL extends Connection
     public function rollback()
     {
         if ($this->_inTransaction === false) {
-            throw new DBException('トランザクション外でrollbackメソッドが実行されました。');
+            throw new CL_Database_DBException('トランザクション外でrollbackメソッドが実行されました。');
         }
 
         $result = $this->query('ROLLBACK');
@@ -305,7 +298,7 @@ class MySQL extends Connection
         $result = mysql_insert_id($this->_con);
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
 
         return $result;
@@ -324,7 +317,7 @@ class MySQL extends Connection
         $result = mysql_real_escape_string($string, $this->_con);
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
 
         return sprintf('\'%s\'', $result);

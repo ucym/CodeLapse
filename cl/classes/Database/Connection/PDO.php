@@ -1,19 +1,10 @@
 <?php
-namespace CodeLapse\Database\Connection;
-
-use InvalidArgumentException;
-use PDO as PHPPDO;
-use PDOException;
-use CodeLapse\Database\Connection;
-use CodeLapse\Database\DBException;
-use CodeLapse\Database\ResultSet\PDO as PDOResultSet;
-
 /**
  * PDO データベースコネクションラッパークラス
  *
  * @package CodeLapse\Database
  */
-class PDO extends Connection
+class CL_Database_Connection_PDO extends CL_Database_Connection
 {
     private $lastStatement = null;
 
@@ -28,10 +19,10 @@ class PDO extends Connection
     public function __construct($host, $user, $password = null)
     {
         try {
-            $this->_con = new PHPPDO('mysql:host=' . $host, $user, $password);
+            $this->_con = new PDO('mysql:host=' . $host, $user, $password);
         }
         catch (PDOException $e) {
-            throw new DBException($e->getMessage(), $e->getCode());
+            throw new CL_Database_DBException($e->getMessage(), $e->getCode());
         }
     }
 
@@ -101,7 +92,7 @@ class PDO extends Connection
         $result = $this->query('USE ' . $dbname);
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
     }
 
@@ -116,7 +107,7 @@ class PDO extends Connection
         $result = $this->query('SET NAMES ?', (array) $charset);
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
     }
 
@@ -147,23 +138,23 @@ class PDO extends Connection
                     switch (true) {
                         case is_string($v) :
                         case is_float($v) :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
+                            $stmt->bindParam($k, $v, PDO::PARAM_STR);
                             break;
 
                         case is_bool($v) :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_BOOL);
+                            $stmt->bindParam($k, $v, PDO::PARAM_BOOL);
                             break;
 
                         case is_int($v) :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_INT);
+                            $stmt->bindParam($k, $v, PDO::PARAM_INT);
                             break;
 
                         case is_null($v) :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_NULL);
+                            $stmt->bindParam($k, $v, PDO::PARAM_NULL);
                             break;
 
                         default :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
+                            $stmt->bindParam($k, $v, PDO::PARAM_STR);
                     }
                 }
             }
@@ -171,13 +162,13 @@ class PDO extends Connection
             $result = $stmt->execute();
 
             if ($result === false) {
-                throw new DBException($this->errorMessage(), $this->errorCode());
+                throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
             }
 
-            return new PDOResultSet($stmt);
+            return new CL_Database_ResultSet_PDO($stmt);
         }
         catch (PDOException $e) {
-            throw new DBException($e->getMessage(), $e->getCode(), $e);
+            throw new CL_Database_DBException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -191,7 +182,7 @@ class PDO extends Connection
         $result = $this->_con->beginTransaction();
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
     }
 
@@ -205,7 +196,7 @@ class PDO extends Connection
         $result = $this->_con->commit();
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
     }
 
@@ -223,11 +214,11 @@ class PDO extends Connection
             $result = $this->_con->rollback();
 
             if ($result === false) {
-                throw new DBException($this->errorMessage(), $this->errorCode());
+                throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
             }
         }
         catch (PDOException $e) {
-            throw new DBException('ロールバックに失敗しました。(' . $e->getMessage() . ')', $e->getCode(), $e);
+            throw new CL_Database_DBException('ロールバックに失敗しました。(' . $e->getMessage() . ')', $e->getCode(), $e);
         }
     }
 
@@ -254,7 +245,7 @@ class PDO extends Connection
         $result = $this->_con->lastInsertId($name);
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
 
         return $result;
@@ -273,7 +264,7 @@ class PDO extends Connection
         $result = $this->_con->quote($string);
 
         if ($result === false) {
-            throw new DBException($this->errorMessage(), $this->errorCode());
+            throw new CL_Database_DBException($this->errorMessage(), $this->errorCode());
         }
 
         return $result;

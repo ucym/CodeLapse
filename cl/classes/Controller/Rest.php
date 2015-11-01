@@ -1,10 +1,4 @@
 <?php
-namespace CodeLapse\Controller;
-
-use CodeLapse\Arr;
-use CodeLapse\Input;
-use CodeLapse\Request;
-
 /**
  * RESTful APIを簡略に用意するためのクラスです。
  *
@@ -17,7 +11,7 @@ use CodeLapse\Request;
  * CodeLapse\Controller\Rest::create()
  * ->whenGet(function () {
  *     // GETメソッドでアクセスされた時のコールバック
- *     $group_id = Input::get('id');
+ *     $group_id = Req::get('id');
  *     $rs = DB::query('SELECT * FROM `groups` WHERE `group_id` = ?', array($group_id));
  *     return array(
  *         'result'     => true,
@@ -27,7 +21,7 @@ use CodeLapse\Request;
  *
  * ->whenPost(function () {
  *     // POSTメソッドでアクセスされた時のコールバック
- *     list($group_name, $group_leader) = Input::post(array('group_name', 'leader_id'));
+ *     list($group_name, $group_leader) = Req::post(array('group_name', 'leader_id'));
  *     $result = DB::query('INSERT INTO `groups`(`name`, `leader_id`) VALUES (?, ?)', array(
  *         $group_name, $group_leader
  *     ));
@@ -54,7 +48,7 @@ use CodeLapse\Request;
  *
  * @package CodeLapse\Controller
  */
-class Rest
+class CL_Controller_Rest
 {
     /**
      * Restのインスタンスを生成します。
@@ -86,8 +80,8 @@ class Rest
 
     private function executeHandler()
     {
-        $method     = Input::method();
-        $handler    = Arr::get($this->handlers, $method);
+        $method     = CL_Request::method();
+        $handler    = CL_Arr::get($this->handlers, $method);
         $response   = null;
 
         if (is_callable($handler)) {

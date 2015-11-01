@@ -1,12 +1,10 @@
 <?php
-namespace CodeLapse;
-
 /**
  * ページネーションクラス
  *
  *
  */
-class Pager
+class CL_Pager
 {
     private static $instances = array();
 

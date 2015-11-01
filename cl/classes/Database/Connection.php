@@ -1,15 +1,10 @@
 <?php
-namespace CodeLapse\Database;
-
-use \CodeLapse\Database\Connection\MySQL as MySQLConnection;
-use \CodeLapse\Database\Connection\PDO as PDOConnection;
-
 /**
  * データベースコネクション抽象化クラス
  *
  * @package CodeLapse\Database
  */
-abstract class Connection
+abstract class CL_Database_Connection
 {
     const TYPE_PDO = 1;
     const TYPE_MYSQL = 2;
@@ -36,11 +31,11 @@ abstract class Connection
 
         switch ($driver) {
             case self::TYPE_PDO     :
-                $instance = new PDOConnection($host, $user, $password);
+                $instance = new CL_Database_Connection_PDOConnection($host, $user, $password);
                 break;
 
             case self::TYPE_MYSQL   :
-                $instance = new MySQLConnection($host, $user, $password);
+                $instance = new CL_Database_Connection_MySQLConnection($host, $user, $password);
                 break;
         }
 

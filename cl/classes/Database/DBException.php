@@ -1,8 +1,6 @@
 <?php
-namespace CodeLapse\Database;
-
 /**
  * データベースの例外クラス
  *
  */
-class DBException extends Exception {}
+class CL_Database_DBException extends Exception {}

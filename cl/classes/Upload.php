@@ -1,10 +1,5 @@
 <?php
-namespace CodeLapse;
-
-use CodeLapse\Arr;
-use CodeLapse\Exception\UploadException;
-
-class Upload
+class CL_Upload
 {
     protected static $finfo;
 
@@ -36,8 +31,8 @@ class Upload
      */
     public static function getArrayFiles($name)
     {
-        $rawFileInfos = Arr::get($_FILES, $name);
-        $errors = Arr::get($rawFileInfos, 'error');
+        $rawFileInfos = CL_Arr::get($_FILES, $name);
+        $errors = CL_Arr::get($rawFileInfos, 'error');
 
         if (! is_array($errors)) {
             return [];
@@ -46,7 +41,7 @@ class Upload
         $files = [];
         foreach ($rawFileInfos as $attr => $values) {
             foreach ($values as $index => $value) {
-                Arr::set($files, "$index.$attr", $value);
+                CL_Arr::set($files, "$index.$attr", $value);
             }
         }
 
@@ -65,7 +60,7 @@ class Upload
      */
     public static function get($name)
     {
-        $file = Arr::get($_FILES, $name);
+        $file = CL_Arr::get($_FILES, $name);
         if (! self::validFile($file)) { return; }
 
         return new self($file);
@@ -141,7 +136,7 @@ class Upload
             UPLOAD_ERR_EXTENSION    => 'UPLOAD_ERR_EXTENSION'
         );
 
-        throw new UploadException($humanizeError[$err], $err);
+        throw new CL_Exception_Upload($humanizeError[$err], $err);
     }
 
     /**

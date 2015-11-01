@@ -1,25 +1,23 @@
 <?php
-namespace CodeLapse;
-
 /**
  * Mail用の例外クラス
  * @ignore
  */
-class Mail_Exception extends Exception {}
+class CL_Mail_Exception extends Exception {}
 
 
 /**
  * 不正なメールアドレスが渡された時の例外クラス
  * @ignore
  */
-class Mail_InvalidSubjectException extends Mail_Exception {}
+class CL_Mail_InvalidSubjectException extends CL_Mail_Exception {}
 
 
 /**
  * 不正な添付ファイルが指定された時の例外クラス
  * @ignore
  */
-class Mail_AttachFailedException extends Mail_Exception {}
+class CL_Mail_AttachFailedException extends CL_Mail_Exception {}
 
 
 /**
@@ -29,7 +27,7 @@ class Mail_AttachFailedException extends Mail_Exception {}
  * @TODO 半角文字の取り扱いについて調査
  * @TODO メール送信フック機能（ロギング用）の実装について
  */
-class Mail
+class CL_Mail
 {
     private $from;
 
@@ -78,7 +76,7 @@ class Mail
     public function __construct($config = array())
     {
         if (is_string($config)) {
-            $config = Config::get('mail');
+            $config = CL_Config::get('mail');
         }
 
         $config = array_merge(array(
@@ -104,7 +102,7 @@ class Mail
      *
      * @param array|string  $values     検証する文字列もしくは、文字列の配列
      * @param string        $errorMsg   エラーメッセージ
-     * @throws Mail_Exception
+     * @throws CL_Mail_Exception
      * @return array(string)
      */
     private function validAddresses($values, $errorMsg)
@@ -117,7 +115,7 @@ class Mail
         }
 
         if ($noInvalid === false) {
-            throw new Mail_Exception('不正なメールアドレスが渡されました。 ('.$errorMsg.')');
+            throw new CL_Mail_Exception('不正なメールアドレスが渡されました。 ('.$errorMsg.')');
         }
 
         return $addresses;
@@ -139,7 +137,7 @@ class Mail
      *
      * @param string  $address    有効なメールアドレス
      * @return Mail
-     * @throws Mail_Exception
+     * @throws CL_Mail_Exception
      * @TODO Add second arguments ($from_name)
      */
     public function from($from)
@@ -159,7 +157,7 @@ class Mail
      * @param string|array  $to
      *      有効なメールアドレスか、メールアドレスの配列
      * @return Mail
-     * @throws Mail_Exception
+     * @throws CL_Mail_Exception
      */
     public function to($to)
     {
@@ -174,7 +172,7 @@ class Mail
      * @param string|array  $cc
      *      有効なメールアドレスか、メールアドレスの配列
      * @return Mail
-     * @throws Mail_Exception
+     * @throws CL_Mail_Exception
      */
     public function cc($cc)
     {
@@ -189,7 +187,7 @@ class Mail
      * @param string|array  $bcc
      *      有効なメールアドレスか、メールアドレスの配列
      * @return Mail
-     * @throws Mail_Exception
+     * @throws CL_Mail_Exception
      */
     public function bcc($bcc)
     {
@@ -206,12 +204,12 @@ class Mail
      *
      * @param string    $subject    件名
      * @return Mail
-     * @throws Mail_InvalidSubjectException
+     * @throws CL_Mail_InvalidSubjectException
      */
     public function subject($subject)
     {
         if (preg_match('/\r|\n|\r\n/', $subject) === 1) {
-            throw new Mail_InvalidSubjectException('件名に改行が含まれています。');
+            throw new CL_Mail_InvalidSubjectException('件名に改行が含まれています。');
         }
 
         $this->subject = $subject;
@@ -289,7 +287,7 @@ class Mail
 
         // 存在チェック
         if (! file_exists($filePath)) {
-            throw new Mail_AttachFailedException("添付されたファイルが存在しません。");
+            throw new CL_Mail_AttachFailedException("添付されたファイルが存在しません。");
         }
 
         // 添付時のファイル名を決定してリストに追加
@@ -301,8 +299,8 @@ class Mail
 
 
     // send the mail.
-    // if address list contains invalid address, or No exists file attached, throw Mail_Exception
-    // if mail submit failed, throw Mail_Exception
+    // if address list contains invalid address, or No exists file attached, throw CL_Mail_Exception
+    // if mail submit failed, throw CL_Mail_Exception
     /**
      * メールを送信します。
      *
@@ -318,7 +316,7 @@ class Mail
         );
 
         if ($result === false) {
-            throw new Mail_Exception("メールの送信に失敗しました。");
+            throw new CL_Mail_Exception("メールの送信に失敗しました。");
         }
     }
 
@@ -461,7 +459,7 @@ class Mail
             $attachName = mb_encode_mimeheader($attach[1], 'ISO-2022-JP', 'B');
 
             if (! file_exists($file)) {
-                throw new Mail_AttachFailedException('添付されたファイルが存在しません。');
+                throw new CL_Mail_AttachFailedException('添付されたファイルが存在しません。');
             }
 
             $body .= "\n";

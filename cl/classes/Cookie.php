@@ -1,6 +1,4 @@
 <?php
-namespace CodeLapse;
-
 /**
  * クッキーの読み書きを行うクラス
  *
@@ -8,7 +6,7 @@ namespace CodeLapse;
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-class Cookie
+class CL_Cookie
 {
     const T_MINUTES = 60;   // 60
     const T_HOUR = 3600;    // 60 * 60

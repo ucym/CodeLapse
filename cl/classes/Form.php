@@ -1,6 +1,4 @@
 <?php
-namespace CodeLapse;
-
 /**
  * フォームの生成とフォームへの値の復元を行うクラスです。
  *
@@ -68,7 +66,7 @@ namespace CodeLapse;
  *      //      </select>
  * ```
  */
-class Form
+class CL_Form
 {
     const DEFAULT_FORM_NAME = 'default';
 
@@ -332,7 +330,7 @@ class Form
     public static function getValue($field, $form = null)
     {
         ! is_string($form) and $form = Form::DEFAULT_FORM_NAME;
-        return Arr::get(self::$_values, "$form.$field");
+        return CL_Arr::get(self::$_values, "$form.$field");
     }
 
 

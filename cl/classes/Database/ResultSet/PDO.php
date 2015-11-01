@@ -1,8 +1,4 @@
 <?php
-namespace CodeLapse\Database\ResultSet;
-
-use CodeLapse\Database\ResultSet;
-
 /**
  * PDO用 データベース 結果オブジェクト
  *
@@ -10,7 +6,7 @@ use CodeLapse\Database\ResultSet;
  * @since PHP 5.2.17
  * @version 1.0.0
  */
-class PDO extends ResultSet
+class CL_Database_ResultSet_PDO extends CL_Database_ResultSet
 {
     protected function & _fetch(& $resultset)
     {

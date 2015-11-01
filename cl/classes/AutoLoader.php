@@ -1,6 +1,4 @@
 <?php
-namespace CodeLapse;
-
 /**
  * クラスオートローダ
  *
@@ -9,7 +7,7 @@ namespace CodeLapse;
  * @link https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md PSR-1
  * @link http://www.infiniteloop.co.jp/docs/psr/psr-1-basic-coding-standard.html PSR-1の日本語訳（非公式）
  */
-class AutoLoader
+class CL_AutoLoader
 {
     const DS = DIRECTORY_SEPARATOR;
 

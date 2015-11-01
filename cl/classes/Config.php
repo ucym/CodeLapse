@@ -1,6 +1,4 @@
 <?php
-namespace CodeLapse;
-
 /**
  * 設定ファイルの読み込み・設定の取得を行います。
  *
@@ -32,7 +30,7 @@ namespace CodeLapse;
  *
  * @package CodeLapse
  */
-class Config
+class CL_Config
 {
     /**
      * @var array 読み込まれた設定データ
@@ -101,7 +99,7 @@ class Config
                     throw new Exception('名前空間が競合しました: ' . $namespace);
                 }
             } else {
-                Arr::set(self::$config, $namespace, $conf);
+                CL_Arr::set(self::$config, $namespace, $conf);
             }
         } else {
             throw new Exception('設定ファイルが読み込めません。(' . $path .')');
@@ -145,6 +143,6 @@ class Config
             }
         }
 
-        return Arr::get(self::$config, $key, $default);
+        return CL_Arr::get(self::$config, $key, $default);
     }
 }

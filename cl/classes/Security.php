@@ -6,7 +6,7 @@ namespace CodeLapse;
  *
  * @package CodeLapse
  */
-class Security
+class CL_Security
 {
     /**
      * 文字列を安全なHTMLへ変換します。
@@ -16,11 +16,11 @@ class Security
      */
     public static function safeHtml($value, $stripslashes = false, $config = array())
     {
-        $config = array_merge(Config::get('security'), $config);
+        $config = array_merge(CL_Config::get('security'), $config);
 
 
         list($useHtmlEntities, $flags, $encoding, $noDoubleEncode) = array_values(
-            Arr::get($config, 
+            CL_Arr::get($config,
                 array(
                     'useHtmlEntities',
                     'flags',

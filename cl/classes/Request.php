@@ -7,7 +7,7 @@ use CodeLapse\Arr;
  * リクエストに含まれるパラメータを取得します。（POST, GETなど）
  * @package CodeLapse
  */
-class Request
+class CL_Request
 {
     static private $processedBody;
 
@@ -57,7 +57,7 @@ class Request
      */
     public static function post($key = null, $default = null)
     {
-        return Arr::get($_POST, $key, $default);
+        return CL_Arr::get($_POST, $key, $default);
     }
 
 
@@ -70,7 +70,7 @@ class Request
      */
     public static function get($key = null, $default = null)
     {
-        return Arr::get($_GET, $key, $default);
+        return CL_Arr::get($_GET, $key, $default);
     }
 
 
@@ -92,7 +92,7 @@ class Request
             }
         }
 
-        return Arr::get(static::$processedBody, $key, $default);
+        return CL_Arr::get(static::$processedBody, $key, $default);
     }
 
 
@@ -123,7 +123,7 @@ class Request
     public static function header($name = null, $default = null)
     {
         $headers = getallheaders();
-        return Arr::get($headers, $name, $default);
+        return CL_Arr::get($headers, $name, $default);
     }
 
 
@@ -136,6 +136,6 @@ class Request
      */
     public static function server($key = null, $default = null)
     {
-        return Arr::get($_SERVER, $key, $default);
+        return CL_Arr::get($_SERVER, $key, $default);
     }
 }

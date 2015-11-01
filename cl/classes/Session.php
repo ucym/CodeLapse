@@ -1,12 +1,10 @@
 <?php
-namespace CodeLapse;
-
 /**
  * セッション操作を行うクラス。
  *
  * @package CodeLapse
  */
-class Session
+class CL_Session
 {
     /**
      * @private
@@ -36,7 +34,7 @@ class Session
      * @return Session
      * @ignore
      */
-    private static function &getInstance()
+    private static function getInstance()
     {
         if (isset(self::$instance) === false)
         {
@@ -95,31 +93,31 @@ class Session
      *
      * @param string|null $name 取得するセッション変数のキー
      * @param mixed|null $default 指定されたキーが存在しない時のデフォルト値
-     * @see Arr::get() Arr::getメソッド
+     * @see CL_Arr::get() CL_Arr::getメソッド
      */
     public static function get($name = null, $default = null)
     {
-        return Arr::get(self::getInstance()->session, $name, $default);
+        return CL_Arr::get(self::getInstance()->session, $name, $default);
     }
 
     /**
      * セッション変数に値を設定します。
      *
      * @param $name
-     * @see Arr::set() Arr::setメソッド
+     * @see CL_Arr::set() CL_Arr::setメソッド
      */
     public static function set($name, $value = null)
     {
-        return Arr::set(self::getInstance()->session, $name, $value);
+        return CL_Arr::set(self::getInstance()->session, $name, $value);
     }
 
     /**
      * @param string|null $name 削除するセッション変数のキー
      *     nullを指定するとセッション変数をクリアします。
-     * @see Arr::delete() Arr::deleteメソッド
+     * @see CL_Arr::delete() CL_Arr::deleteメソッド
      */
     public static function delete($name = null)
     {
-        return Arr::delete(self::getInstance()->session, $name);
+        return CL_Arr::delete(self::getInstance()->session, $name);
     }
 }

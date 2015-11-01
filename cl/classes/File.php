@@ -1,6 +1,4 @@
 <?php
-namespace CodeLapse;
-
 /**
  * ファイル操作関数をラップするクラス
  * （開いたファイルは自動的にクローズされます。）
@@ -10,7 +8,7 @@ namespace CodeLapse;
  *        $file->append('hello world');
  *        echo $file->getContents(); // -> "hello world"
  */
-class File
+class CL_File
 {
 
     const SEEK_SET = SEEK_SET;

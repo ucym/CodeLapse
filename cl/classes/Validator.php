@@ -1,16 +1,9 @@
 <?php
-namespace CodeLapse;
-
-use \Exception;
-
-use CodeLapse\Arr;
-use CodeLapse\Config;
-use CodeLapse\Valitron\Validator as Valitron;
-
 /**
  * 入力値の検証を行うクラス
+ * ※ PHP5.2では動作しません。
  */
-class Validator
+class CL_Validator
 {
     const DEFAULT_FIELDSET_NAME = 'default';
 
@@ -28,7 +21,7 @@ class Validator
     public static function getInstance($name = null, $errorOnNull = false)
     {
         $name === null and $name = static::DEFAULT_FIELDSET_NAME;
-        $instance = Arr::get(static::$instances, $name);
+        $instance = CL_Arr::get(static::$instances, $name);
 
         if ($errorOnNull and $instance === null) {
             throw new OutOfRangeException('フィールドセット('.$fieldSet.')が設定されていません。');
@@ -71,7 +64,7 @@ class Validator
 
         $fieldSetName === null and $fieldSetName = static::DEFAULT_FIELDSET_NAME;
 
-        return static::$instances[$fieldSetName] = new static($fieldSet, $config);
+        return static::$instances[$fieldSetName] = new self($fieldSet, $config);
     }
 
 
@@ -89,7 +82,7 @@ class Validator
         callable $validator,
         callable $jsGenerator = null
     ) {
-        Valitron::addRule($ruleName, $validator);
+        CL_Valitron::addRule($ruleName, $validator);
 
         static::$customRules[$ruleName] = [
             'validator'     => $validator,
@@ -158,7 +151,7 @@ class Validator
             $instance = static::getInstance($fieldSet, true);
         }
         else if (is_array($fieldSet)) {
-            $instance = new static($fieldSet);
+            $instance = self($fieldSet);
         }
         else {
             $instance = static::getInstance($fieldSet, true);
@@ -231,11 +224,11 @@ class Validator
      */
     public function __construct(array $fieldSet = null, array $config = array())
     {
-        $this->config = array_merge(Config::get('validator'), $config);
+        $this->config = array_merge(CL_Config::get('validator'), $config);
 
-        list($lang, $langDir) = array_values(Arr::get($this->config, ['lang', 'langDir']));
+        list($lang, $langDir) = array_values(CL_Arr::get($this->config, ['lang', 'langDir']));
 
-        $this->validator = new Valitron(null, null, $lang, $langDir);
+        $this->validator = new CL_Valitron(null, null, $lang, $langDir);
         is_array($fieldSet) and $this->rules($fieldSet);
     }
 
@@ -256,7 +249,7 @@ class Validator
     {
         $fieldLabelPair = explode(':', $fieldName, 2);
         $field = $fieldLabelPair[0];
-        $label = Arr::get($fieldLabelPair, '1', $field);
+        $label = CL_Arr::get($fieldLabelPair, '1', $field);
 
         $this->fieldSet[$field] = [
             'label'     => $label,

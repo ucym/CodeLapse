@@ -49,7 +49,7 @@ namespace CodeLapse;
  * // *do_something*
  *```
  */
-class Smarty
+class CL_Smarty
 {
     //--------
     //-- Static Property, Method
@@ -117,14 +117,14 @@ class Smarty
     {
         if ($escape !== false) {
             if (is_array($name)) {
-                $key = Arr::mapRecursive($name, array('Smarty', 'escapeHelper'));
+                $key = CL_Arr::mapRecursive($name, array('Smarty', 'escapeHelper'));
             }
             else {
                 $value = self::escapeHelper($value);
             }
         }
 
-        Arr::set(self::$_globalAssignStore, $name, $value);
+        CL_Arr::set(self::$_globalAssignStore, $name, $value);
     }
 
 
@@ -138,7 +138,7 @@ class Smarty
      */
     public static function setRawInGlobal($name, $value = null)
     {
-        Arr::set(self::$_globalAssignStore, $name, $value);
+        CL_Arr::set(self::$_globalAssignStore, $name, $value);
     }
 
 
@@ -150,7 +150,7 @@ class Smarty
      */
     public static function getInGlobal($name = null, $default = null)
     {
-        return Arr::get(self::$_globalAssignStore, $name, $default);
+        return CL_Arr::get(self::$_globalAssignStore, $name, $default);
     }
 
 
@@ -161,7 +161,7 @@ class Smarty
      */
     public static function clearInGlobal($name)
     {
-        Arr::delete(self::$_globalAssignStore, $name);
+        CL_Arr::delete(self::$_globalAssignStore, $name);
     }
 
 
@@ -199,14 +199,14 @@ class Smarty
         $sm = new Smarty();
 
         // 設定ファイルを読み込む
-        $conf = Config::get('smarty');
+        $conf = CL_Config::get('smarty');
         array_merge($conf, $config);
 
-        $sm->template_dir = Arr::get($conf, 'template_dir') . DS;
-        $sm->compile_dir  = Arr::get($conf, 'compile_dir') . DS;
-        $sm->config_dir   = Arr::get($conf, 'config_dir') . DS;
-        $sm->cache_dir    = Arr::get($conf, 'cache_dir') . DS;
-        $sm->caching      = Arr::get($conf, 'caching', true);
+        $sm->template_dir = CL_Arr::get($conf, 'template_dir') . DS;
+        $sm->compile_dir  = CL_Arr::get($conf, 'compile_dir') . DS;
+        $sm->config_dir   = CL_Arr::get($conf, 'config_dir') . DS;
+        $sm->cache_dir    = CL_Arr::get($conf, 'cache_dir') . DS;
+        $sm->caching      = CL_Arr::get($conf, 'caching', true);
 
         $this->_smarty = $sm;
     }
@@ -223,13 +223,13 @@ class Smarty
     {
         if ($filtering !== false) {
             if (is_array($key)) {
-                $key = Arr::mapRecursive($key, array('Smarty', 'escapeHelper'));
+                $key = CL_Arr::mapRecursive($key, array('Smarty', 'escapeHelper'));
             } else {
                 $value = self::escapeHelper($value);
             }
         }
 
-        Arr::set($this->_assign, $key, $value);
+        CL_Arr::set($this->_assign, $key, $value);
         return $this;
     }
 
@@ -246,7 +246,7 @@ class Smarty
      */
     public function setRaw($key, $value = null)
     {
-        Arr::set($this->_assign, $key, $value);
+        CL_Arr::set($this->_assign, $key, $value);
         return $this;
     }
 
@@ -266,7 +266,7 @@ class Smarty
     public function get($key = null, $default = null)
     {
         $global = self::getGlobal($key, $default);
-        return Arr::get($this->_assign, $key, $global);
+        return CL_Arr::get($this->_assign, $key, $global);
     }
 
 
@@ -278,7 +278,7 @@ class Smarty
      */
     public function clear($key)
     {
-        Arr::delete($this->_assign, $key);
+        CL_Arr::delete($this->_assign, $key);
         return $this;
     }
 
