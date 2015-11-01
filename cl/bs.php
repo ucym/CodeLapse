@@ -14,7 +14,6 @@ require CL_COREPATH . 'functions.php';
 // クラスの別名を設定
 \CodeLapse\AutoLoader::classAlias(array(
     'Arr'       => '\CodeLapse\Arr',
-    'Calendar'  => '\CodeLapse\Calendar',
     'Config'    => '\CodeLapse\Config',
     'Cookie'    => '\CodeLapse\Cookie',
     'DB'        => '\CodeLapse\DB',
