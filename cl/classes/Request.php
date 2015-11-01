@@ -20,7 +20,7 @@ class CL_Request
      */
     public static function method()
     {
-        return strtoupper(static::server('HTTP_X_HTTP_METHOD_OVERRIDE', $_SERVER['REQUEST_METHOD']));
+        return strtoupper(self::server('HTTP_X_HTTP_METHOD_OVERRIDE', $_SERVER['REQUEST_METHOD']));
     }
 
 
@@ -44,7 +44,7 @@ class CL_Request
      */
     public static function isAjax()
     {
-        return strtolower(static::server('HTTP_X_REQUESTED_WITH', '')) === 'xmlhttprequest';
+        return strtolower(self::server('HTTP_X_REQUESTED_WITH', '')) === 'xmlhttprequest';
     }
 
 
@@ -84,15 +84,15 @@ class CL_Request
      */
     public static function json($key = null, $default = null)
     {
-        if (empty(static::$processedBody)) {
-            static::$processedBody = json_decode(static::rawBody(), true);
+        if (empty(self::$processedBody)) {
+            self::$processedBody = json_decode(self::rawBody(), true);
 
             if (json_last_error() !== 0) {
-                static::$processedBody = array();
+                self::$processedBody = array();
             }
         }
 
-        return CL_Arr::get(static::$processedBody, $key, $default);
+        return CL_Arr::get(self::$processedBody, $key, $default);
     }
 
 

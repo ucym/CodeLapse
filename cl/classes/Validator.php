@@ -20,8 +20,8 @@ class CL_Validator
 
     public static function getInstance($name = null, $errorOnNull = false)
     {
-        $name === null and $name = static::DEFAULT_FIELDSET_NAME;
-        $instance = CL_Arr::get(static::$instances, $name);
+        $name === null and $name = self::DEFAULT_FIELDSET_NAME;
+        $instance = CL_Arr::get(self::$instances, $name);
 
         if ($errorOnNull and $instance === null) {
             throw new OutOfRangeException('フィールドセット('.$fieldSet.')が設定されていません。');
@@ -40,7 +40,7 @@ class CL_Validator
      */
     public static function def($fieldSet = null, $fieldSetName = null, $config = array())
     {
-        return static::define($fieldSet, $fieldSetName, $config);
+        return self::define($fieldSet, $fieldSetName, $config);
     }
 
 
@@ -62,9 +62,9 @@ class CL_Validator
             // When arguments is (array $rules, string $fieldSetName = null)
         }
 
-        $fieldSetName === null and $fieldSetName = static::DEFAULT_FIELDSET_NAME;
+        $fieldSetName === null and $fieldSetName = self::DEFAULT_FIELDSET_NAME;
 
-        return static::$instances[$fieldSetName] = new self($fieldSet, $config);
+        return self::$instances[$fieldSetName] = new self($fieldSet, $config);
     }
 
 
@@ -84,7 +84,7 @@ class CL_Validator
     ) {
         CL_Valitron::addRule($ruleName, $validator);
 
-        static::$customRules[$ruleName] = [
+        self::$customRules[$ruleName] = [
             'validator'     => $validator,
             'jsGenerator'   => $jsGenerator
         ];
@@ -124,7 +124,7 @@ class CL_Validator
             $jsGenMethodName = 'jsValidate' . $methodName;
             $jsGenMethod = method_exists($class, $jsGenMethodName) ? [$class, $jsGenMethodName] : null;
 
-            static::addRule($ruleName, [$class, $method], $jsGenMethod);
+            self::addRule($ruleName, [$class, $method], $jsGenMethod);
         }
     }
 
@@ -137,7 +137,7 @@ class CL_Validator
      */
     public static function hasRule($rule)
     {
-        return isset(static::$customRules[$rule]);
+        return isset(self::$customRules[$rule]);
     }
 
 
@@ -148,13 +148,13 @@ class CL_Validator
     public static function check(array $data, $fieldSet = null)
     {
         if (is_string($fieldSet)) {
-            $instance = static::getInstance($fieldSet, true);
+            $instance = self::getInstance($fieldSet, true);
         }
         else if (is_array($fieldSet)) {
             $instance = self($fieldSet);
         }
         else {
-            $instance = static::getInstance($fieldSet, true);
+            $instance = self::getInstance($fieldSet, true);
         }
 
         return $instance->execute($data);
@@ -167,7 +167,7 @@ class CL_Validator
      */
     public static function errors($fieldName = null, $fieldSet = null)
     {
-        $instance = static::getInstance($fieldSet, true);
+        $instance = self::getInstance($fieldSet, true);
         return $instance->getErrors($fieldName);
     }
 
@@ -179,7 +179,7 @@ class CL_Validator
      */
     public static function js($wrapScript = false, $fieldSetName = null)
     {
-        $instance = static::getInstance($fieldSetName, true);
+        $instance = self::getInstance($fieldSetName, true);
         // TODO
         // return $instance->buildJSValidator();
     }
@@ -191,8 +191,8 @@ class CL_Validator
      */
     public static function reset()
     {
-        static::$instances[static::DEFAULT_FIELDSET_NAME] = null;
-        static::$customRules = array();
+        self::$instances[self::DEFAULT_FIELDSET_NAME] = null;
+        self::$customRules = array();
     }
 
 
