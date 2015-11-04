@@ -2,3 +2,5 @@
 .DS_Store
 /class_reference/phpdoc-cache*
 /release/
+vendor
+composer.lock

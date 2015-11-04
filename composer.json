@@ -1,0 +1,17 @@
+{
+    "name": "ragg/codelapse",
+    "description": "Fast coding for Small-scale PHP projects.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ragg",
+            "email": "ragg.devpr@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-0": {
+            "CodeLapse\\": "./cl/classes/"
+        }
+    }
+}
