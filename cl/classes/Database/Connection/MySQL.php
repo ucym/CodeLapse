@@ -21,7 +21,7 @@ class MySQL extends Connection
      * @param string|array $string 入力文字列
      * @param string $replacement
      */
-    private static function mb_substr_replace($string, $replacement, $start, $length = null)
+    protected static function mb_substr_replace($string, $replacement, $start, $length = null)
     {
         if (is_array($string)) {
             $num = count($string);
@@ -149,9 +149,65 @@ class MySQL extends Connection
 
 
     /**
+     * SQL内のプレースホルダを渡されたパラメータをクオートしたものに置き換えます。
+     * @param string $sql
+     * @param array $params
+     * @return string
+     */
+    protected function bindParamaters($sql, array $params)
+    {
+        foreach ($params as $key => $value) {
+            // キーが数値ならば、SQL中の 疑問符プレースホルダを探す
+            if (is_int($key)) {
+                $ph_pos = mb_strpos($sql, '?');
+
+                if ($ph_pos !== false) {
+
+                    if (is_string($value)) {
+                        $value = sprintf('\'%s\'', mysql_real_escape_string($value, $this->_con));
+                    } else if (is_bool($value)) {
+                        $value = $value ? 'TRUE' : 'FALSE';
+                    } else if (is_null($value)) {
+                        $value = 'NULL';
+                    }
+
+                    $sql = self::mb_substr_replace($sql, $value, $ph_pos, 1);
+                }
+
+                continue;
+            }
+
+            // キーが文字列ならば、SQL文中の :**プレースホルダを探す。
+            if (is_string($key)) {
+                $ph_pos = strpos($sql, $key);
+
+                if ($key[0] !== ':') {
+                    throw new InvalidArgumentException("不正なプレースホルダがパラメータに含まれています($key)");
+                }
+
+                if ($ph_pos !== false) {
+                    if (is_string($value)) {
+                        $value = sprintf('\'%s\'', mysql_real_escape_string($value, $this->_con));
+                    } else if (is_bool($value)) {
+                        $value = $value ? 'TRUE' : 'FALSE';
+                    } else if (is_null($value)) {
+                        $value = 'NULL';
+                    }
+
+                    $sql = self::mb_substr_replace($key, $value, $sql);
+                }
+
+                continue;
+            }
+        }
+
+        return $sql;
+    }
+
+
+    /**
      * クエリーを実行します。
      *
-     * @todo 動作確認
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params クエリに埋め込むパラメータ
      * @return CodeLapse\Database\Resultset|bool
@@ -161,51 +217,7 @@ class MySQL extends Connection
     {
         if (is_array($params)) {
             //-- パラメータが設定されていれば埋め込む
-            foreach ($params as $key => $value) {
-
-                // キーが数値ならば、SQL中の 疑問符プレースホルダを探す
-                if (is_int($key)) {
-                    $ph_pos = mb_strpos($sql, '?');
-
-                    if ($ph_pos !== false) {
-
-                        if (is_string($value)) {
-                            $value = sprintf('\'%s\'', mysql_real_escape_string($value, $this->_con));
-                        } else if (is_bool($value)) {
-                            $value = $value ? 'TRUE' : 'FALSE';
-                        } else if (is_null($value)) {
-                            $value = 'NULL';
-                        }
-
-                        $sql = substr_replace($sql, $value, $ph_pos, 1);
-                    }
-
-                    continue;
-                }
-
-                // キーが文字列ならば、SQL文中の :**プレースホルダを探す。
-                if (is_string($key)) {
-                    $ph_pos = strpos($sql, $key);
-
-                    if ($key[0] !== ':') {
-                        throw new InvalidArgumentException("不正なプレースホルダがパラメータに含まれています($key)");
-                    }
-
-                    if ($ph_pos !== false) {
-                        if (is_string($value)) {
-                            $value = sprintf('\'%s\'', mysql_real_escape_string($value, $this->_con));
-                        } else if (is_bool($value)) {
-                            $value = $value ? 'TRUE' : 'FALSE';
-                        } else if (is_null($value)) {
-                            $value = 'NULL';
-                        }
-
-                        $sql = str_replace($key, $value, $sql);
-                    }
-
-                    continue;
-                }
-            }
+            $sql = $this->bindParamaters($sql, $params);
         }
 
         $result = mysql_query($sql, $this->_con);
@@ -218,6 +230,31 @@ class MySQL extends Connection
         }
         else {
             return new MySQLResultSet($result);
+        }
+    }
+
+
+    /**
+     * UPDATE, DELETEなどの変更系クエリを実行し、作用した行数を返します。
+     * @param string $sql
+     * @param array|null $params クエリに埋め込むパラメータ
+     * @return int
+     * @throws CodeLapse\Database\DBException
+     */
+    public function exec($sql, $params = null)
+    {
+        if (is_array($params)) {
+            //-- パラメータが設定されていれば埋め込む
+            $sql = $this->bindParamaters($sql, $params);
+        }
+
+        $result = mysql_query($sql, $this->_con);
+
+        if ($result === false) {
+            throw new DBException($this->errorMessage(), $this->errorCode());
+        }
+        else if ($result === true) {
+            return mysql_affected_rows($this->_con);
         }
     }
 

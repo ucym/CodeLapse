@@ -119,6 +119,16 @@ abstract class Connection
 
 
     /**
+     * UPDATE, DELETEなどの変更系クエリを実行し、作用した行数を返します。
+     * @param string $sql
+     * @param array|null $params クエリに埋め込むパラメータ
+     * @return int
+     * @throws CodeLapse\Database\DBException
+     */
+    public abstract function exec($sql, $param = null);
+
+
+    /**
      * トランザクションを開始します。
      *
      * @throws CodeLapse\Database\DBException

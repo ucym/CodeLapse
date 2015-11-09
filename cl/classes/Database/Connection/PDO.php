@@ -3,6 +3,7 @@ namespace CodeLapse\Database\Connection;
 
 use InvalidArgumentException;
 use PDO as PHPPDO;
+use PDOStatement;
 use PDOException;
 use CodeLapse\Database\Connection;
 use CodeLapse\Database\DBException;
@@ -16,6 +17,66 @@ use CodeLapse\Database\ResultSet\PDO as PDOResultSet;
 class PDO extends Connection
 {
     private $lastStatement = null;
+
+
+    /**
+     * SQL内で利用されていないプレースホルダを除外したパラメータの配列を返します。
+     * @param string $sql
+     * @param array $params
+     * @return array
+     */
+    protected static function removeUnusedPlaceHolder($sql, array $params)
+    {
+        $existPlaceholders = [];
+
+        foreach ($params as $k => $v) {
+            $pattern = '/'.preg_quote($k, '/').'(?: |$)/';
+
+            // 返り値がfalsyなら除外
+            if (preg_match($pattern, $sql) == 0) continue;
+
+            $existPlaceholders[$k] = $v;
+        }
+
+        return $existPlaceholders;
+    }
+
+
+    /**
+     * ステートメントに配列で指定された変数を割り当てます。
+     * @param PDOStatement $stmt
+     * @param array $params
+     */
+    protected static function bindParamaters(PDOStatement $stmt, array $params)
+    {
+        foreach ($params as $k => & $v) {
+
+            is_int($k) and $k += 1;
+
+            switch (true) {
+                case is_string($v) :
+                case is_float($v) :
+                    $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
+                    break;
+
+                case is_bool($v) :
+                    $stmt->bindParam($k, $v, PHPPDO::PARAM_BOOL);
+                    break;
+
+                case is_int($v) :
+                    $stmt->bindParam($k, $v, PHPPDO::PARAM_INT);
+                    break;
+
+                case is_null($v) :
+                    $stmt->bindParam($k, $v, PHPPDO::PARAM_NULL);
+                    break;
+
+                default :
+                    $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
+            }
+        }
+    }
+
 
     /**
      * データベースコネクションを生成します。
@@ -139,33 +200,8 @@ class PDO extends Connection
             // PDOのexcuteメソッドがクエリ中にないプレースホルダを渡すことを許容していないため
             // クエリ中に存在しないプレースホルダを事前に削除する
             if (is_array($params)) {
-
-                foreach ($params as $k => & $v) {
-
-                    is_int($k) and $k += 1;
-
-                    switch (true) {
-                        case is_string($v) :
-                        case is_float($v) :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
-                            break;
-
-                        case is_bool($v) :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_BOOL);
-                            break;
-
-                        case is_int($v) :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_INT);
-                            break;
-
-                        case is_null($v) :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_NULL);
-                            break;
-
-                        default :
-                            $stmt->bindParam($k, $v, PHPPDO::PARAM_STR);
-                    }
-                }
+                $existParams = self::removeUnusedPlaceHolder($sql, $params);
+                self::bindParamaters($stmt, $existParams);
             }
 
             $result = $stmt->execute();
@@ -175,6 +211,41 @@ class PDO extends Connection
             }
 
             return new PDOResultSet($stmt);
+        }
+        catch (PDOException $e) {
+            throw new DBException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+
+    /**
+     * UPDATE, DELETEなどの変更系クエリを実行し、作用した行数を返します。
+     * @param string $sql
+     * @param array|null $params クエリに埋め込むパラメータ
+     * @return int
+     * @throws CodeLapse\Database\DBException
+     */
+    public function exec($sql, $params = null)
+    {
+        try {
+            $result = false;
+            $stmt = $this->_con->prepare($sql);
+            $this->lastStatement = $stmt;
+
+            // PDOのexcuteメソッドがクエリ中にないプレースホルダを渡すことを許容していないため
+            // クエリ中に存在しないプレースホルダを事前に削除する
+            if (is_array($params)) {
+                $existParams = self::removeUnusedPlaceHolder($sql, $params);
+                self::bindParamaters($stmt, $existParams);
+            }
+
+            $result = $stmt->execute();
+
+            if ($result === false) {
+                throw new DBException($this->errorMessage(), $this->errorCode());
+            }
+
+            return $result->rowCount();
         }
         catch (PDOException $e) {
             throw new DBException($e->getMessage(), $e->getCode(), $e);

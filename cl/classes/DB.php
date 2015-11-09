@@ -231,7 +231,7 @@ class DB
 
 
     /**
-     * 指定したコネクション上でクエリーを実行し���す���
+     * 指定したコネクション上でクエリーを実行します。
      *
      * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
      * @param array|null $params (optional) クエリに埋め込むパラメータ
@@ -240,6 +240,19 @@ class DB
     public static function query($sql, $params = null, $connection = null)
     {
         return self::instance($connection)->query($sql, $params);
+    }
+
+
+    /**
+     * 指定したコネクション上でUPDATE、DELETEなどの変更系クエリーを実行し、作用した行数を返します。
+     *
+     * @param string $sql クエリ。"?"、":name"を埋め込み、パラメータを後から指定することが可能です。
+     * @param array|null $params (optional) クエリに埋め込むパラメータ
+     * @param string|null $connection (optional) 接続名。指定されない場合、初期コネクションを利用します。
+     */
+    public static function exec($sql, $params = null, $connection = null)
+    {
+        return self::instance($connection)->exec($sql, $params);
     }
 
 
