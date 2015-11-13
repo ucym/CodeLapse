@@ -24,7 +24,7 @@ CL_AutoLoader::classAlias(array(
     'Pager'     => 'CL_Pager',
     'Security'  => 'CL_Security',
     'Session'   => 'CL_Session',
-    'RestController'    => 'CL_Controller\Rest',
+    'RestController'    => 'CL_Controller_Rest',
     'Upload'    => 'CL_Upload',
     'Validator' => 'CL_Validator'
 ));
