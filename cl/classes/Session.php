@@ -62,6 +62,8 @@ class Session
      */
     public static function destroy()
     {
+        unset($_SESSION);
+        self::$instance = null;
         return session_destroy();
     }
 
