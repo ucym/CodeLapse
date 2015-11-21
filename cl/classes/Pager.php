@@ -2,7 +2,47 @@
 /**
  * ページネーションクラス
  *
+ * ```php
+ * <?php
+ * $allItemCount = 100;             // 表示する全件数
+ * $displayItemsPerPage = 30;       // １ページに表示する件数
+ * $currentPage = $_POST['page'];   // 現在のページ番号(1〜)
  *
+ * Pager::init($currentPage, $allItemCountm $displayItemsPerPage);
+ * ?>
+ *
+ * <div class="pager">
+ * <?php
+ *      // 前のページがあればリンクを表示
+ *      //（第１引数の文字列内の`:page`が前のページ番号に置き換えられます。）
+ *      Pager::hasPrev('<a class="pager_page" href="?page=:page">&lt;&lt;</a>');
+ * ?>
+ *
+ * <?php
+ *      // 現在のページの前後5ページを表示
+ *      // （第１引数の文字列内の`:page`が各ページ番号に置き換えられます。）
+ *      Pager::relateRange(5, '<a class="pager_page" href="?page=:page">&lt;&lt;</a>');
+ * ?>
+ *
+ * <?php
+ *      // 次のページがあればリンクを表示
+ *      // （第１引数の文字列内の`:page`が次のページ番号に置き換えられます。）
+ *      Pager::hasNext('<a class="pager_page" href="?page=:page">&lt;&lt;</a>');
+ * ?>
+ * </div>
+ *
+ * <?php
+ *      // hasPrev, hasNext メソッドは前後のページあるかどうかを booleanで返します。
+ *      // 以下の様な長いHTMLを表示する際にはこちらを使うことが出来ます。
+ * ?>
+ * <?php if (Pager::hasPrev()) { ?>
+ * <div class="pager__prev">
+ *      <a class="pager_page" href="?page=:page">
+ *          <span class="fa fa-angle-left"></span>
+ *      </a>
+ * </div>
+ * <?php } ?>
+ * ```
  */
 class CL_Pager
 {
