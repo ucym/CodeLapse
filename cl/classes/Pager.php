@@ -132,7 +132,7 @@ class CL_Pager
         $perPage = $this->perPage;
         $allCount = $this->allCount;
 
-        $hasNext = (($currentPage + 1) * $perPage) <= $allCount;
+        $hasNext = ($currentPage + 1) <= $this->_pages();
 
         if ($content !== null and $hasNext) {
             $this->render($currentPage + 1, $content);
