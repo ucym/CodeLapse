@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-285912141"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1808386053"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-285912141" class="accordion-body collapse in">
+            <div id="namespace-1808386053" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-203374348"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1802081225"></a>
                                 <a href="../namespaces/CodeLapse.html" style="margin-left: 30px; padding-left: 0">CodeLapse</a>
             </div>
-            <div id="namespace-203374348" class="accordion-body collapse ">
+            <div id="namespace-1802081225" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1699963354"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1816301358"></a>
                                 <a href="../namespaces/CodeLapse.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
             </div>
-            <div id="namespace-1699963354" class="accordion-body collapse ">
+            <div id="namespace-1816301358" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -180,19 +180,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-127283499"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1679992327"></a>
                                 <a href="../namespaces/CodeLapse.Database.html" style="margin-left: 30px; padding-left: 0">Database</a>
             </div>
-            <div id="namespace-127283499" class="accordion-body collapse ">
+            <div id="namespace-1679992327" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2102809970"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1341412007"></a>
                                 <a href="../namespaces/CodeLapse.Database.Connection.html" style="margin-left: 30px; padding-left: 0">Connection</a>
             </div>
-            <div id="namespace-2102809970" class="accordion-body collapse ">
+            <div id="namespace-1341412007" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -208,10 +208,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1811432491"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1027398833"></a>
                                 <a href="../namespaces/CodeLapse.Database.ResultSet.html" style="margin-left: 30px; padding-left: 0">ResultSet</a>
             </div>
-            <div id="namespace-1811432491" class="accordion-body collapse ">
+            <div id="namespace-1027398833" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -240,10 +240,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2082916821"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1218036544"></a>
                                 <a href="../namespaces/CodeLapse.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
             </div>
-            <div id="namespace-2082916821" class="accordion-body collapse ">
+            <div id="namespace-1218036544" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -392,7 +392,7 @@
             <article class="method">
                 <h3 class="public ">safeHtml()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">safeHtml(string <span class="argument">$value</span>, boolean <span class="argument">$stripslashes</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">safeHtml(string <span class="argument">$value</span>, boolean <span class="argument">$stripslashes</span>, array <span class="argument">$config</span>)</pre>
                 <p><em>文字列を安全なHTMLへ変換します。</em></p>
                 
 
@@ -407,6 +407,11 @@
                                 <td>boolean</td>
                                 <td>$stripslashes </td>
                                 <td><p>(optional) stripslashesを適用するか指定します。標準はfalseです。</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$config </td>
+                                <td><p>(optional) コンフィグを指定します。指定されていない場合はconfig/security.phpの値が適用されます。</p></td>
                             </tr>
                                             </table>
                 
@@ -516,7 +521,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 20th, 2015 at 18:29.
+                    on November 21st, 2015 at 14:05.
                 </section>
             </section>
         </section>

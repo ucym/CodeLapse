@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-991758291"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1981206889"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-991758291" class="accordion-body collapse in">
+            <div id="namespace-1981206889" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1257115500"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1449806356"></a>
                                 <a href="../namespaces/CodeLapse.html" style="margin-left: 30px; padding-left: 0">CodeLapse</a>
             </div>
-            <div id="namespace-1257115500" class="accordion-body collapse ">
+            <div id="namespace-1449806356" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-597446476"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1797758616"></a>
                                 <a href="../namespaces/CodeLapse.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
             </div>
-            <div id="namespace-597446476" class="accordion-body collapse ">
+            <div id="namespace-1797758616" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -180,19 +180,19 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1412646582"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-257553099"></a>
                                 <a href="../namespaces/CodeLapse.Database.html" style="margin-left: 30px; padding-left: 0">Database</a>
             </div>
-            <div id="namespace-1412646582" class="accordion-body collapse ">
+            <div id="namespace-257553099" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-840234213"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-987397670"></a>
                                 <a href="../namespaces/CodeLapse.Database.Connection.html" style="margin-left: 30px; padding-left: 0">Connection</a>
             </div>
-            <div id="namespace-840234213" class="accordion-body collapse ">
+            <div id="namespace-987397670" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -208,10 +208,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1237784620"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-380988867"></a>
                                 <a href="../namespaces/CodeLapse.Database.ResultSet.html" style="margin-left: 30px; padding-left: 0">ResultSet</a>
             </div>
-            <div id="namespace-1237784620" class="accordion-body collapse ">
+            <div id="namespace-380988867" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -240,10 +240,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1684477081"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-744505690"></a>
                                 <a href="../namespaces/CodeLapse.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
             </div>
-            <div id="namespace-1684477081" class="accordion-body collapse ">
+            <div id="namespace-744505690" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -302,7 +302,45 @@
 
                     <h1><small>\CodeLapse</small>Pager</h1>
                     <p><em>ページネーションクラス</em></p>
-                    
+                    <pre><code class="language-php">&lt;?php
+$allItemCount = 100;             // 表示する全件数
+$displayItemsPerPage = 30;       // １ページに表示する件数
+$currentPage = $_POST['page'];   // 現在のページ番号(1〜)
+
+Pager::init($currentPage, $allItemCountm $displayItemsPerPage);
+?&gt;
+
+&lt;div class="pager"&gt;
+&lt;?php
+     // 前のページがあればリンクを表示
+     //（第１引数の文字列内の`:page`が前のページ番号に置き換えられます。）
+     Pager::hasPrev('&lt;a class="pager_page" href="?page=:page"&gt;&amp;lt;&amp;lt;&lt;/a&gt;');
+?&gt;
+
+&lt;?php
+     // 現在のページの前後5ページを表示
+     // （第１引数の文字列内の`:page`が各ページ番号に置き換えられます。）
+     Pager::relateRange(5, '&lt;a class="pager_page" href="?page=:page"&gt;&amp;lt;&amp;lt;&lt;/a&gt;');
+?&gt;
+
+&lt;?php
+     // 次のページがあればリンクを表示
+     // （第１引数の文字列内の`:page`が次のページ番号に置き換えられます。）
+     Pager::hasNext('&lt;a class="pager_page" href="?page=:page"&gt;&amp;lt;&amp;lt;&lt;/a&gt;');
+?&gt;
+&lt;/div&gt;
+
+&lt;?php
+     // hasPrev, hasNext メソッドは前後のページあるかどうかを booleanで返します。
+     // 以下の様な長いHTMLを表示する際にはこちらを使うことが出来ます。
+?&gt;
+&lt;?php if (Pager::hasPrev()) { ?&gt;
+&lt;div class="pager__prev"&gt;
+     &lt;a class="pager_page" href="?page=:page"&gt;
+         &lt;span class="fa fa-angle-left"&gt;&lt;/span&gt;
+     &lt;/a&gt;
+&lt;/div&gt;
+&lt;?php } ?&gt;</code></pre>
 
                     <section id="summary">
                         <h2>Summary</h2>
@@ -1011,7 +1049,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 20th, 2015 at 18:29.
+                    on November 21st, 2015 at 14:05.
                 </section>
             </section>
         </section>

@@ -12,10 +12,33 @@ class Security
      * 文字列を安全なHTMLへ変換します。
      * @param string $value エスケープする文字列
      * @param boolean $stripslashes (optional) stripslashesを適用するか指定します。標準はfalseです。
+     * @param array $config (optional) コンフィグを指定します。指定されていない場合はconfig/security.phpの値が適用されます。
      */
-    public static function safeHtml($value, $stripslashes = false)
+    public static function safeHtml($value, $stripslashes = false, $config = array())
     {
-        $value = htmlspecialchars($value);
+        $config = array_merge(Config::get('security'), $config);
+
+
+        list($useHtmlEntities, $flags, $encoding, $noDoubleEncode) = array_values(
+            Arr::get($config, 
+                array(
+                    'useHtmlEntities',
+                    'flags',
+                    'encoding',
+                    'noDoubleEncode',
+                )
+            )
+        );
+
+        if($useHtmlEntities)
+        {
+            $value = htmlentities($value, $flags, $encoding, !$noDoubleEncode);
+        }
+        else
+        {
+            $value = htmlspecialchars($value, $flags, $encoding, !$noDoubleEncode);
+        }
+
         $stripslashes and ($value = stripslashes($value));
         return $value;
     }
